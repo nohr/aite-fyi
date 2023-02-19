@@ -1,0 +1,144 @@
+import { useEffect, useRef } from "react";
+import { useModelStore } from "state/common/model";
+
+export function useGesture() {
+  const results = useModelStore((state) => state.results);
+  const select = useRef(false);
+  const grab = useRef(false);
+  const zoom = useRef(false);
+  const distx = useRef(0);
+  const disty = useRef(0);
+  const threshold = {
+    pinch: 0.05,
+    peace: 0.07,
+    point: 0.35,
+    depth: -0.08,
+    zoom_max: 0.5,
+    zoom_min: 0.3,
+  };
+
+  useEffect(() => {
+    if (!results || !results.multiHandLandmarks[0]) return;
+
+    // ! first check for two hands
+    // * zoom gesture - for zooming
+    if (results.multiHandLandmarks[1]) {
+      const { "8": index_tip_1 } = results.multiHandLandmarks[0];
+      const { "8": index_tip_2 } = results.multiHandLandmarks[1];
+      if (!index_tip_1 || !index_tip_2) return;
+
+      const distance = Math.sqrt(
+        Math.pow(index_tip_1.x - index_tip_2.x, 2) +
+          Math.pow(index_tip_1.y - index_tip_2.y, 2)
+      );
+
+      // map distance value to a range of 0 to 1
+      // console.log(distance);
+
+      // zoom if the distance is less than the threshold
+      if (
+        distance <= threshold.zoom_max &&
+        distance >= threshold.zoom_min &&
+        index_tip_1.z < threshold.depth &&
+        index_tip_2.z < threshold.depth
+      ) {
+        const mapped = Math.fround(Math.min(Math.max(distance, 0), 1)) * 2;
+        //  prepare for zooming out
+        zoom.current = true;
+        document.body.style.scale = mapped.toString();
+      }
+    } else {
+      // ! only one hand is detected
+      const {
+        "4": thumb_tip,
+        "8": index_tip,
+        "12": middle_tip,
+        "16": ring_tip,
+        "20": pinky_tip,
+      } = results.multiHandLandmarks[0];
+      if (!index_tip || !thumb_tip || !middle_tip || !ring_tip || !pinky_tip)
+        return;
+
+      // * pinch gesture - for selection
+      const distance = Math.sqrt(
+        Math.pow(index_tip.x - thumb_tip.x, 2) +
+          Math.pow(index_tip.y - thumb_tip.y, 2)
+      );
+      // select if pinched and reset if released
+      if (distance < threshold.pinch) select.current = true;
+      else select.current = false;
+
+      // * grab gesture - for navigation
+      // get the distance between the index tip and the middle finger tip
+      const index_distance = Math.sqrt(
+        Math.pow(index_tip.x - middle_tip.x, 2) +
+          Math.pow(index_tip.y - middle_tip.y, 2)
+      );
+
+      // get the distance between the index tip and the thumb tip
+      const thumb_distance = Math.sqrt(
+        Math.pow(index_tip.x - thumb_tip.x, 2) +
+          Math.pow(index_tip.y - thumb_tip.y, 2)
+      );
+
+      //  grab if pointed and reset if released
+      if (
+        index_distance > threshold.point &&
+        thumb_distance > 0.2 &&
+        index_tip.z < threshold.depth
+      )
+        grab.current = true;
+      else grab.current = false;
+
+      // Handle release
+      if (!grab.current) {
+        // console.log("release");
+        distx.current = 0;
+        disty.current = 0;
+        return;
+      }
+
+      // the position of the pinch relative to the body at any given time
+      const startX = Math.floor(
+        window.scrollX + window.innerWidth * index_tip.x
+      );
+      const startY = Math.floor(
+        window.scrollY + window.innerHeight * index_tip.y
+      );
+
+      if (distx.current === 0) {
+        distx.current = startX;
+        return;
+      }
+      if (disty.current === 0) {
+        disty.current = startY;
+        return;
+      }
+
+      const scrollX = distx.current - startX;
+      const scrollY = disty.current - startY;
+
+      const scroll = () => {
+        // console.log("grab");
+        window.scrollBy({
+          left: scrollX * 1.5,
+          top: scrollY * 1.5,
+        });
+      };
+
+      // todo debounce the scroll event to reduce jitter
+      // const debounce = (func: any, wait: number) => {
+
+      scroll();
+    }
+  }, [
+    results,
+    threshold.point,
+    threshold.pinch,
+    threshold.depth,
+    threshold.zoom_max,
+    threshold.zoom_min,
+  ]);
+
+  return { select, grab, zoom };
+}

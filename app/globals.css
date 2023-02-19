@@ -10,8 +10,12 @@
 
 html,
 body {
-  max-width: 100vw;
-  overflow-x: hidden;
+  width: -moz-fit-content;
+  width: fit-content;
+  overflow-x: scroll;
+  cursor: grab;
+  /* scroll-snap-type: proximity; */
+  /* scroll-behavior: smooth; */
 }
 
 a {
