@@ -1,6 +1,6 @@
 export { Section } from "./Section";
 export { SplashScreen } from "./SplashScreen";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Fade({
   children,
@@ -10,17 +10,17 @@ export default function Fade({
   truthy: boolean;
 }) {
   return (
-    <>
+    <AnimatePresence>
       {truthy ? (
         <motion.div
           initial={{ opacity: 1 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.5, ease: "circOut" }}
         >
           {children}
         </motion.div>
       ) : null}
-    </>
+    </AnimatePresence>
   );
 }

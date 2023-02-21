@@ -4,7 +4,16 @@ import "./globals.css";
 import React, { useEffect } from "react";
 import Cursor from "./(cursor)/Cursor";
 import { SplashScreen } from "./(ui)";
-import { About, Home, Work, Work3 } from "./(routes)";
+import {
+  About,
+  About2,
+  Home,
+  Page2,
+  Page3,
+  Work,
+  Work2,
+  Work3,
+} from "./(routes)";
 
 export default function RootLayout({
   children,
@@ -27,25 +36,23 @@ export default function RootLayout({
         {children}
         <Cursor />
         {/* pages */}
-        <div className="pages">
+        <div className="pages snap-both">
           <div className="flex h-screen w-max flex-row flex-nowrap ">
-            <Home />
+            <Page2 />
             <About />
             <Work />
           </div>
           <div className="flex h-screen w-max flex-row flex-nowrap ">
-            <About />
-            {/* real home */}
+            <About2 />
             <Home />
-            <Work />
+            <Work2 />
           </div>
           <div className="flex h-screen w-max flex-row flex-nowrap ">
-            <Home />
-            <About />
+            <Page3 />
+            <About2 />
             <Work3 />
           </div>
         </div>
-        {/* handlers */}
       </body>
     </html>
   );

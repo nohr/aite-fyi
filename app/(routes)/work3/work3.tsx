@@ -1,10 +1,9 @@
-"use client";
 import { Section } from "../../(ui)/Section";
 
 export function Work3() {
   return (
     <Section id="work3">
-      <h1 className="text-4xl font-bold">Work</h1>
+      <h1 className="text-4xl font-bold">Work3</h1>
       <p>
         work page Lorem, ipsum dolor sit amet consectetur adipisicing elit.
         Natus explicabo, veritatis minus corporis unde, nulla voluptas quaerat

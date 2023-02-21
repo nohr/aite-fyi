@@ -1,9 +1,9 @@
 import { Section } from "../../(ui)/Section";
 
-export function About() {
+export function About2() {
   return (
-    <Section id="about">
-      <h1 className="text-4xl font-bold">About</h1>
+    <Section id="about2">
+      <h1 className="text-4xl font-bold">About2</h1>
       <p>
         about page Lorem, ipsum dolor sit amet consectetur adipisicing elit.
         Natus explicabo, veritatis minus corporis unde, nulla voluptas quaerat
