@@ -42,7 +42,7 @@ export default function Cursor() {
   return (
     <>
       <Camera />
-      <Canvas />
+      {/* <Canvas /> */}
       {results &&
         results.multiHandLandmarks.map(
           (hand: { x: number; y: number; z: number }[], index: number) => (

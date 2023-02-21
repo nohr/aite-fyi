@@ -17,15 +17,15 @@ export default function Camera() {
   }, [get_input]);
 
   // handle focus and blur events
-  // useEffect(() => {
-  //   if (!motion) return;
-  //   window.addEventListener("focus", start_input);
-  //   window.addEventListener("blur", stop_input);
-  //   return () => {
-  //     window.removeEventListener("focus", start_input);
-  //     window.removeEventListener("blur", stop_input);
-  //   };
-  // }, [motion, start_input, stop_input]);
+  useEffect(() => {
+    if (!motion) return;
+    window.addEventListener("focus", start_input);
+    window.addEventListener("blur", stop_input);
+    return () => {
+      window.removeEventListener("focus", start_input);
+      window.removeEventListener("blur", stop_input);
+    };
+  }, [motion, start_input, stop_input]);
 
   return (
     <>
