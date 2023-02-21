@@ -4,16 +4,7 @@ import "./globals.css";
 import React, { useEffect } from "react";
 import Cursor from "./(cursor)/Cursor";
 import { SplashScreen } from "./(ui)";
-import {
-  About,
-  About2,
-  Home,
-  Page2,
-  Page3,
-  Work,
-  Work2,
-  Work3,
-} from "./(routes)";
+import World from "./(world)/World";
 
 export default function RootLayout({
   children,
@@ -31,28 +22,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head />
-      <body className="flex h-full w-max flex-col overflow-y-scroll text-red-500">
+      <body className="flex h-full w-max flex-col overflow-y-scroll bg-zinc-300 text-red-500 dark:bg-black">
         <SplashScreen />
         {children}
         <Cursor />
-        {/* pages */}
-        <div className="pages snap-both">
-          <div className="flex h-screen w-max flex-row flex-nowrap ">
-            <Page2 />
-            <About />
-            <Work />
-          </div>
-          <div className="flex h-screen w-max flex-row flex-nowrap ">
-            <About2 />
-            <Home />
-            <Work2 />
-          </div>
-          <div className="flex h-screen w-max flex-row flex-nowrap ">
-            <Page3 />
-            <About2 />
-            <Work3 />
-          </div>
-        </div>
+        {/* map */}
+        <World />
       </body>
     </html>
   );

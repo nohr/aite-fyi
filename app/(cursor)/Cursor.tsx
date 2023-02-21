@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useModelStore } from "state/app/(cursor)/model";
 import { useUIStore } from "../(ui)/ui";
 import Camera from "./Camera";
-import Canvas from "./Canvas";
+// import Canvas from "./Canvas";
 import Hand from "./Hand";
 import { useGesture } from "./useGesture";
 

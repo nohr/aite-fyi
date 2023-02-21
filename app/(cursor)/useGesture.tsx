@@ -46,7 +46,7 @@ export function useGesture(cursor: boolean) {
         const mapped = Math.fround(Math.min(Math.max(distance, 0), 1)) * 2;
         //  prepare for zooming out
         zoom.current = true;
-        const array = document.querySelector("div.pages") as HTMLElement;
+        const array = document.querySelector("div.world") as HTMLElement;
         if (!array) return;
         array.style.scale = `${mapped}`;
       } else zoom.current = false;
