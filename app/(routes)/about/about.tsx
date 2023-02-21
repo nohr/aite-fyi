@@ -1,10 +1,8 @@
 "use client";
 
-import useInView from "../(hooks)/useInView";
-import Section from "../(ml)/(misc)/Section";
+import { Section } from "../../(ui)/Section";
 
-export default function About() {
-  useInView("/about");
+export function About() {
   return (
     <Section id="about">
       <h1 className="text-4xl font-bold">About</h1>

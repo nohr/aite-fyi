@@ -1,12 +1,10 @@
 "use client";
 
-import useInView from "../(hooks)/useInView";
-import Section from "../(ml)/(misc)/Section";
+import { Section } from "../../(ui)/Section";
 
-export default function Work3() {
-  useInView("/work3");
+export function Work() {
   return (
-    <Section id="work3">
+    <Section id="work">
       <h1 className="text-4xl font-bold">Work</h1>
       <p>
         work page Lorem, ipsum dolor sit amet consectetur adipisicing elit.

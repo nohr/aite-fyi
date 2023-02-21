@@ -82,7 +82,7 @@ export const useModelStore = create<ModelProps>()((set, get) => ({
           minDetectionConfidence: 0.95,
           minTrackingConfidence: 0.95,
         });
-        // Use `Mediapipe` utils to get camera - lower resolution = higher fps
+        // Use `MediaPipe` utils to get camera - lower resolution = higher fps
         set(() => ({
           camera: new Camera(get().input as HTMLVideoElement, {
             onFrame: async () => {
