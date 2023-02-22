@@ -143,6 +143,8 @@ export function useGesture(cursor: boolean) {
     // todo add a threshold to prevent scrolling when the hand is not moving
     // ? return the same value if the distance is less than the threshold
 
+    console.log(distx.current, disty.current);
+
     const scroll = () =>
       window.scrollBy({
         left: scrollX * 1.5,

@@ -1,4 +1,14 @@
-import { About, About2, Home, Page2, Page3, Work, Work2, Work3 } from ".";
+import {
+  About,
+  About2,
+  About3,
+  Home,
+  Page2,
+  Page3,
+  Work,
+  Work2,
+  Work3,
+} from ".";
 export default function World() {
   return (
     <div className="world">
@@ -14,7 +24,7 @@ export default function World() {
       </div>
       <div className="flex h-screen w-max flex-row flex-nowrap ">
         <Page3 />
-        <About2 />
+        <About3 />
         <Work3 />
       </div>
     </div>

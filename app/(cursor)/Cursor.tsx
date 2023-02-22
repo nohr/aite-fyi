@@ -22,6 +22,7 @@ export default function Cursor() {
   useEffect(() => {
     if (!motion && input) stop_input();
     if (!motion && hands) return;
+    setStatus("loading model");
     start_input();
 
     if (!hands) return;
@@ -32,6 +33,12 @@ export default function Cursor() {
     if (!results) return;
     setStatus("");
   }, [results, setStatus]);
+
+  // handle cursor hide/show
+  useEffect(() => {
+    if (cursor) document.body.style.cursor = "none";
+    else document.body.style.cursor = "auto";
+  }, [cursor]);
 
   const {
     select: { current: select },

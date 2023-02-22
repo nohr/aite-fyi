@@ -7,7 +7,7 @@ const UIStore = (set: any, get: any): UIProps => ({
   setMotion() {
     set((state: any) => ({ motion: !state.motion }));
   },
-  status: "loading model",
+  status: "",
   setStatus(status: UIProps["status"]): void {
     // clearTimeout(time);
     // console.log(status);
