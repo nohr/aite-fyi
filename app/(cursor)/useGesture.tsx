@@ -1,11 +1,13 @@
 import { useEffect, useRef } from "react";
-import { useModelStore } from "state/app/(cursor)/model";
+import { useCursorStore } from "./useCursorStore";
+import { useModelStore } from "./useModelStore";
 
 export function useGesture(cursor: boolean) {
   const results = useModelStore((state) => state.results);
   const select = useRef(false);
   // const confirm = useRef(false);
-  const drag = useRef(false);
+  const drag = useCursorStore((state) => state.drag);
+  const setDrag = useCursorStore((state) => state.setDrag);
   const zoom = useRef(false);
   const distx = useRef(0);
   const disty = useRef(0);
@@ -46,7 +48,7 @@ export function useGesture(cursor: boolean) {
         const mapped = Math.fround(Math.min(Math.max(distance, 0), 1)) * 2;
         //  prepare for zooming out
         zoom.current = true;
-        const array = document.querySelector("div.world") as HTMLElement;
+        const array = document.querySelector("div#world") as HTMLElement;
         if (!array) return;
         array.style.scale = `${mapped}`;
       } else zoom.current = false;
@@ -110,11 +112,11 @@ export function useGesture(cursor: boolean) {
       thumb_distance > 0.2 &&
       index_tip.z < threshold.depth
     )
-      drag.current = true;
-    else drag.current = false;
+      setDrag(true);
+    else setDrag(false);
 
     // Handle release
-    if (!drag.current) {
+    if (!drag) {
       // console.log("release");
       distx.current = 0;
       disty.current = 0;
@@ -143,7 +145,7 @@ export function useGesture(cursor: boolean) {
     // todo add a threshold to prevent scrolling when the hand is not moving
     // ? return the same value if the distance is less than the threshold
 
-    console.log(distx.current, disty.current);
+    // console.log(distx.current, disty.current);
 
     const scroll = () =>
       window.scrollBy({

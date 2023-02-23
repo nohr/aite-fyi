@@ -1,8 +1,8 @@
 "use client";
 
+import { useUIStore } from "(ui)";
 import { useEffect } from "react";
-import { useModelStore } from "state/app/(cursor)/model";
-import { useUIStore } from "state/app/(ui)/ui";
+import { useModelStore } from "./useModelStore";
 
 export default function Canvas() {
   const canvas = useModelStore((state) => state.canvas);

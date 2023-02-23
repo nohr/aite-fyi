@@ -13,7 +13,6 @@ body {
   width: -moz-fit-content;
   width: fit-content;
   overflow-x: scroll;
-  cursor: grab;
   /* scroll-snap-type: proximity; */
   /* scroll-behavior: smooth; */
 }

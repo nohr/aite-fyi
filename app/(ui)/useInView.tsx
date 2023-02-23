@@ -1,15 +1,21 @@
 "use client";
 
+import { useWorldStore } from "(world)/useWorldStore";
 import { useRouter, usePathname } from "next/navigation";
 import { useEffect } from "react";
+import { useUIStore } from "./useUIStore";
 
-export default function useInView(route: string) {
+export function useInView(route: string) {
+  const world_scale = useWorldStore((state) => state.world_scale);
+  const grab = useUIStore((state) => state.grab);
   const router = useRouter();
   const pathname = usePathname() ?? "/";
+  // console.log(world_scale);
 
   // change the route to the page when in view
   useEffect(() => {
-    // console.log(pathname.split("/")[1] || "home");
+    // disable if world element has a scale less than 1
+    if (world_scale < 0.99) return;
 
     // scroll to the element with the id of the current pathname
     const el = document.getElementById(pathname.split("/")[1] || "home");
@@ -21,10 +27,18 @@ export default function useInView(route: string) {
         block: "start",
         inline: "nearest",
       });
+      const worldWrap = document.getElementById("worldWrap");
+      const worldSpinner = document.getElementById("worldSpinner");
+      if (!worldWrap || !worldSpinner) return;
+      worldWrap.style.opacity = "1";
+      worldSpinner.style.opacity = "0";
     }
-  }, [pathname]);
+  }, [pathname, world_scale]);
 
   useEffect(() => {
+    // disable if world element has a scale less than 1
+    if (world_scale < 0.99) return;
+
     const id = route.split("/")[1];
     const page = document.getElementById(id);
     // use intersection observer to check if the element is in view
@@ -34,6 +48,9 @@ export default function useInView(route: string) {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
+            console.log("in view", entry.target.id);
+
+            if (grab) return;
             count++; // increment count when element is in view
             // set a delay of 500 milliseconds
             setTimeout(() => {
@@ -54,11 +71,11 @@ export default function useInView(route: string) {
       }
     );
 
-    // add scroll listener to the window and observe the element
+    // todo: disable when zoom has changed
     if (page) observer.observe(page);
 
     return () => {
       if (page) observer.unobserve(page);
     };
-  }, [route, router]);
+  }, [grab, route, router, world_scale]);
 }

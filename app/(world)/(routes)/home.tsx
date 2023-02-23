@@ -1,5 +1,5 @@
-import { Section } from "../(ui)/Section";
 // import Trigger from "../(ml)/Trigger";
+import { Section } from "(ui)";
 
 export function Home() {
   return (

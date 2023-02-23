@@ -1,9 +1,9 @@
-import { Section } from "../../(ui)/Section";
+import { Section } from "../../Section";
 
-export function Work3() {
+export function Work2() {
   return (
-    <Section id="work3">
-      <h1 className="text-4xl font-bold">Work3</h1>
+    <Section id="work2">
+      <h1 className="text-4xl font-bold">Work2</h1>
       <p>
         work page Lorem, ipsum dolor sit amet consectetur adipisicing elit.
         Natus explicabo, veritatis minus corporis unde, nulla voluptas quaerat

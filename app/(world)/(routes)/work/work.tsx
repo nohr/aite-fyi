@@ -1,4 +1,4 @@
-import { Section } from "../../(ui)/Section";
+import { Section } from "../../Section";
 
 export function Work() {
   return (

@@ -39,6 +39,12 @@ interface ModelProps {
 }
 
 interface UIProps {
+  grab: boolean;
+  /**
+   * Toggles the grab state from minimap scrolling.
+   * @type {() => void}
+   * */
+  setGrab: (bool: boolean) => void;
   motion: boolean;
   setMotion: () => void;
   status: string | JSX.Element;
@@ -52,12 +58,23 @@ interface UIProps {
   //   setTheme: (theme: "light" | "dark") => void;
 }
 
+interface CursorProps {
+  zoom: boolean;
+  setZoom: (bool?: boolean) => void;
+  drag: boolean;
+  /**
+   * Toggles the drag state from physical pointing gesture.
+   * @type {() => void}
+   * */
+  setDrag: (bool?: boolean) => void;
+  select: boolean;
+  setSelect: (bool?: boolean) => void;
+  confirm: boolean;
+  setConfirm: (bool?: boolean) => void;
+}
+
 // cursor props
 type HandProps = {
   hand: { x: number; y: number; z: number }[];
   side: string;
-  drag: boolean;
-  select: boolean;
-  zoom: boolean;
-  setCursor: React.Dispatch<React.SetStateAction<boolean>>;
 };

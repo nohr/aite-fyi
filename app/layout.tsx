@@ -1,11 +1,8 @@
-"use client";
-
 import "./globals.css";
-import React, { useEffect } from "react";
-import Cursor from "./(cursor)/Cursor";
-import { SplashScreen } from "./(ui)";
-import World from "./(world)/World";
-import Nav from "./(ui)/nav";
+import React from "react";
+import Cursor from "(cursor)";
+import { SplashScreen, Nav } from "(ui)";
+import World from "(world)";
 
 export default function RootLayout({
   children,
@@ -13,13 +10,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className=" bg-white dark:bg-black">
       <head />
-      <body className="hidebar flex h-full w-max flex-col overflow-y-scroll bg-zinc-300 text-red-500 dark:bg-black">
+      <body className="hidebar flex h-full w-max flex-col overflow-y-scroll text-red-500 ">
         <SplashScreen />
-        <Nav />
+        {/* <Nav /> */}
         {children}
-        <Cursor />
+        {/* <Cursor /> */}
         <World />
       </body>
     </html>

@@ -1,8 +1,8 @@
 import Link from "next/link";
 
-export default function Nav() {
+export function Nav() {
   return (
-    <div className="fixed bottom-2 z-[100] flex w-full flex-row flex-nowrap justify-between p-4">
+    <div className="fixed top-2 z-[100] flex w-full flex-row flex-nowrap justify-between p-4">
       <Link href="/">Home</Link>
       <Link href="/page2">Page2</Link>
       <Link href="/page3">Page3</Link>

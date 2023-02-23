@@ -1,8 +1,9 @@
-import { useEffect } from "react";
+"use client";
+// import { useEffect } from "react";
 import { VscLoading } from "react-icons/vsc";
-import { useUIStore } from "state/app/(ui)/ui";
-import Fade from "./index";
-import { useModelStore } from "../(cursor)/model";
+import { useUIStore } from "(ui)";
+import { Fade } from ".";
+// import { useModelStore } from "../(cursor)/useModelStore";
 
 export function SplashScreen() {
   const status = useUIStore((state) => state.status);

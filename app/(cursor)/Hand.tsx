@@ -13,16 +13,15 @@ import {
   useGLTF,
 } from "@react-three/drei";
 import { VscLoading } from "react-icons/vsc";
+import { useCursor } from "./useCursor";
+import { useGesture } from "./useGesture";
 useGLTF.preload("/models/Cartoon+hands.gltf");
 
-export default function Hand({
-  hand,
-  side,
-  drag,
-  select,
-  zoom,
-  setCursor,
-}: HandProps) {
+export default function Hand({ hand, side }: HandProps) {
+  const { cursor, setCursor } = useCursor();
+
+  const { select, drag, zoom } = useGesture(cursor);
+
   useEffect(() => {
     return () => {
       setCursor(false);

@@ -1,4 +1,6 @@
-import useInView from "./useInView";
+"use client";
+
+import { useInView } from "(ui)";
 
 export function Section(props?: any) {
   const { children } = props;

@@ -1,3 +1,5 @@
+"use client";
+
 import {
   About,
   About2,
@@ -8,25 +10,52 @@ import {
   Work,
   Work2,
   Work3,
-} from ".";
+} from "(routes)";
+import { VscLoading } from "react-icons/vsc";
+import { Minimap } from "./Minimap";
+import { useWorld } from "./useWorld";
+import { useWorldStore } from "./useWorldStore";
+
 export default function World() {
+  const { world, wrapper, screen } = useWorld();
+  const world_scale = useWorldStore((state) => state.world_scale);
+
   return (
-    <div className="world">
-      <div className="flex h-screen w-max flex-row flex-nowrap ">
-        <Page2 />
-        <About />
-        <Work />
+    <>
+      {/* loading spinner */}
+      <div
+        id="worldSpinner"
+        className=" pointer-events-none fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform transition-opacity delay-1000"
+      >
+        <VscLoading className="h-16 animate-spin" />
       </div>
-      <div className="flex h-screen w-max flex-row flex-nowrap ">
-        <About2 />
-        <Home />
-        <Work2 />
+      {/* world wrap */}
+      <div
+        id="worldWrap"
+        style={{ opacity: 0 }}
+        className=" transition-opacity delay-1000"
+      >
+        {/* minimap */}
+        <Minimap wrapper={wrapper} screen={screen} world={world} />
+        {/* actual world area*/}
+        <div id="world" ref={world} style={{ scale: `${world_scale}` }}>
+          <div className="flex h-screen w-max flex-row flex-nowrap ">
+            <Page2 />
+            <About />
+            <Work />
+          </div>
+          <div className="flex h-screen w-max flex-row flex-nowrap ">
+            <About2 />
+            <Home />
+            <Work2 />
+          </div>
+          <div className="flex h-screen w-max flex-row flex-nowrap ">
+            <Page3 />
+            <About3 />
+            <Work3 />
+          </div>
+        </div>
       </div>
-      <div className="flex h-screen w-max flex-row flex-nowrap ">
-        <Page3 />
-        <About3 />
-        <Work3 />
-      </div>
-    </div>
+    </>
   );
 }

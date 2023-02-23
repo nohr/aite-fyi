@@ -1,6 +1,6 @@
 "use client";
 
-import { useUIStore } from "state/app/(ui)/ui";
+import { useUIStore } from "(ui)";
 
 export default function Trigger() {
   const setMotion = useUIStore((state) => state.setMotion);
