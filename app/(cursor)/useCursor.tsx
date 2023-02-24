@@ -33,6 +33,10 @@ export function useCursor() {
   useEffect(() => {
     if (cursor) document.body.style.cursor = "none";
     else document.body.style.cursor = "auto";
+
+    return () => {
+      document.body.style.cursor = "auto";
+    };
   }, [cursor]);
 
   return { cursor, setCursor, results };

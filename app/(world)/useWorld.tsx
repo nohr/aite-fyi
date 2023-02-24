@@ -1,82 +1,146 @@
-import { useUIStore } from "(ui)";
-import { useEffect, useRef } from "react";
+import { animate, useMotionValue } from "framer-motion";
+import { useCallback, useEffect, useRef } from "react";
 import { useWorldStore } from "./useWorldStore";
+
+const throttle = (func: (...args: any[]) => any, delay = 2000) => {
+  let lastTime = 0;
+
+  return (...args: any) => {
+    const now = new Date().getTime();
+    if (now - lastTime < delay) return;
+    lastTime = now;
+    func(...args);
+  };
+};
 
 // Handle world transforms
 export function useWorld() {
-  const grab = useUIStore((state) => state.grab);
   const wrapper = useRef<HTMLDivElement | null>(null);
   const screen = useRef<HTMLDivElement | null>(null);
   const world = useRef<HTMLDivElement | null>(null);
   const setWorld = useWorldStore((state) => state.setWorld);
-  const setWorldScale = useWorldStore((state) => state.setWorldScale);
+  const zoom = useWorldStore((state) => state.zoom);
+  const setZoom = useWorldStore((state) => state.setZoom);
   const world_height = useWorldStore((state) => state.world_height);
   const world_width = useWorldStore((state) => state.world_width);
+  const scale = useMotionValue(1);
 
-  // resize the screen when the world scale changes
+  // * handle zoom gesture
+  useEffect(() => {
+    if (zoom) {
+      animate(scale, 0.3355, {
+        duration: 0.5,
+        onUpdate: (latest) => {
+          // console.log(latest);
+        },
+      });
+      // disable scroll
+      document.documentElement.style.overflow = "hidden";
+    }
+    if (!zoom) {
+      animate(scale, 1, {
+        duration: 0.5,
+        onUpdate: (latest) => {
+          // console.log(latest);
+        },
+      });
+      // enable scroll
+      document.documentElement.style.overflow = "auto";
+    }
+  }, [scale, world_height, world_width, zoom]);
+
+  // * handle minimap zoom
+  useEffect(() => {
+    if (!screen.current) return;
+    screen.current.addEventListener("dblclick", () => setZoom(!zoom));
+    screen.current.onmousedown = (e) => e.button === 1 && setZoom(!zoom);
+  }, [screen, setZoom, zoom]);
+
+  const scaleScreen = useCallback(
+    function (value = 1) {
+      if (!screen.current) return;
+      screen.current.style.height = `${
+        ((window.innerHeight / world_height) * 100) / value
+      }%`;
+      screen.current.style.width = `${
+        ((window.innerWidth / world_width) * 100) / value
+      }%`;
+    },
+    [screen, world_height, world_width]
+  );
 
   useEffect(() => {
+    scaleScreen();
+  }, [scaleScreen]);
+
+  useEffect(() => {
+    scale.on("change", (value) => {
+      scaleScreen(value);
+    });
+  }, [scale, scaleScreen]);
+
+  // * handle world scale
+  useEffect(() => {
     const handleScale = (e: WheelEvent | KeyboardEvent) => {
+      e.preventDefault();
       if (!screen.current || !wrapper.current || !world.current || !e.ctrlKey)
         return;
-      e.preventDefault();
       // get scroll delta
       const deltaY = (e as WheelEvent).deltaY;
+      if (deltaY > 0) setZoom(true);
+      if (deltaY < 0) setZoom(false);
 
-      // throttle the scroll delta to every 3s
-      // if (Date.now() - lastScrollTime.current < 3000) return;
-
-      // // get the world scale
-      // const scale = world.current.style.scale;
-      // // const newScale =
-      // //   Math.round((parseFloat(scale) - deltaY * 0.01 + Number.EPSILON) * 100) /
-      // //   100;
-      // const newScale = parseFloat(scale) - deltaY * 0.01;
-      // // scale the world 😈
-      // // if the scale is decreasing, animate the world scale to 0.4
-      // if (newScale < 0.4 && newScale > 1) {
-      //   world.current.style.transformOrigin = "50% 50%";
-      //   setWorldScale(0.4);
-      //   return;
-      // }
-      // setWorldScale(newScale);
-
-      // // resize the screen
-      // screen.current.style.transformOrigin = "50% 50%";
-      // screen.current.style.height = `${
-      //   ((window.innerHeight / world_height) * 100) / parseFloat(scale) - 8
-      // }%`;
-      // screen.current.style.width = `${
-      //   ((window.innerWidth / world_width) * 100) / parseFloat(scale) - 8
-      // }%`;
       // // resize the html element to the size of the world
       // const html = document.documentElement;
       // html.style.height = `${world_height * newScale}px`;
       // html.style.width = `${world_width * newScale}px`;
     };
 
-    window.addEventListener("wheel", handleScale, { passive: false });
-    return () => window.removeEventListener("wheel", handleScale);
-  }, [setWorld, setWorldScale, world, world_height, world_width]);
+    window.addEventListener("wheel", throttle(handleScale), { passive: false });
+    window.addEventListener("gesturechange", (e) => e.preventDefault());
+    return () => {
+      window.removeEventListener("wheel", throttle(handleScale));
+      window.removeEventListener("gesturechange", (e) => e.preventDefault());
+    };
+  }, [scale, setZoom, world_height, world_width]);
 
-  // update map on window resize
+  // * update world on window resize
   useEffect(() => {
     const handleResize = () => {
       // get world size
-      if (!world.current || !wrapper.current || !screen.current || grab) return;
+      if (!world.current) return;
 
       const { width, height } = world.current.getBoundingClientRect();
       setWorld(height, width);
-      const height_ = (window.innerHeight / height) * 100;
-      const width_ = (window.innerWidth / width) * 100;
-      screen.current.style.height = `${height_}%`;
-      screen.current.style.width = `${width_}%`;
     };
     handleResize();
     wrapper.current?.offsetParent?.classList.add("opacity-100");
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, [grab, setWorld, world]);
+  }, [setWorld, world]);
 
-  return { world, wrapper, screen };
+  // * update transform origin on scroll
+  useEffect(() => {
+    function onScroll() {
+      const x = window.scrollX;
+      const y = window.scrollY;
+      const xPercent = x / (world_width - window.innerWidth);
+      const yPercent = y / (world_height - window.innerHeight);
+      const origin = `${xPercent * 100}% ${yPercent * 100}%`;
+      if (world.current) world.current.style.transformOrigin = origin;
+      // console.log(origin);
+
+      if (screen.current) {
+        // console.dir(screen.current);
+        screen.current.style.transformOrigin = origin;
+        screen.current.style.translate = "translate(0%, 0%)";
+      }
+    }
+    onScroll();
+
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [world_height, world_width]);
+
+  return { world, wrapper, screen, scale };
 }

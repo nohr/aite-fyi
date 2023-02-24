@@ -5,7 +5,7 @@ import {
   useScroll,
   useTransform,
 } from "framer-motion";
-import { PointerEvent, useEffect } from "react";
+import { PointerEvent } from "react";
 import { useWorldStore } from "./useWorldStore";
 
 export function Minimap({
@@ -19,37 +19,29 @@ export function Minimap({
 }) {
   const grab = useUIStore((state) => state.grab);
   const setGrab = useUIStore((state) => state.setGrab);
-  const modifier = useWorldStore((state) => state.modifier);
+  const zoom = useWorldStore((state) => state.zoom);
   const world_height = useWorldStore((state) => state.world_height);
   const world_width = useWorldStore((state) => state.world_width);
   const wrapper_height = useWorldStore((state) => state.wrapper_height);
   const wrapper_width = useWorldStore((state) => state.wrapper_width);
-  const screen_height = useWorldStore((state) => state.screen_height);
-  const screen_width = useWorldStore((state) => state.screen_width);
-
-  // console.log(screen_height(), screen_width());
 
   const dragControls = useDragControls();
-
   const { scrollX, scrollY } = useScroll();
   const translateY = useTransform(
     scrollY,
     [0, world_height],
-    [0, wrapper_height()]
+    [0, zoom || grab ? 0 : wrapper_height()]
   );
   const translateX = useTransform(
     scrollX,
     [0, world_width],
-    [0, wrapper_width()]
+    [0, zoom || grab ? 0 : wrapper_width()]
   );
-
-  let mx = 0;
-  let my = 0;
 
   return (
     <div
-      className={`fixed bottom-4 right-4 isolate z-40 overflow-hidden rounded-md border-[1px] border-current
-      bg-white  opacity-0 shadow-md transition-opacity delay-200 hover:opacity-100 dark:bg-black`}
+      className={`fixed bottom-4 right-4 isolate z-40 select-none overflow-hidden rounded-md border-[1px]
+      border-current  bg-white opacity-0 shadow-md transition-opacity delay-200 hover:opacity-100 dark:bg-black`}
     >
       <motion.div
         ref={wrapper}
@@ -58,6 +50,7 @@ export function Minimap({
           height: wrapper_height(),
           width: wrapper_width(),
         }}
+        // ! bug: sends screen out of frame
         // onPointerDown={(event: PointerEvent<Element> | PointerEvent) =>
         //   dragControls.start(event, { snapToCursor: true })
         // }
@@ -68,9 +61,9 @@ export function Minimap({
             setGrab(true);
             // update window scroll position
             if (!screen.current || !world.current) return;
-            mx = info.delta.x;
-            my = info.delta.y;
-            // ! this is the problem: scrolls the minimap
+            const mx = info.delta.x;
+            const my = info.delta.y;
+            // ! bug: scrolls the minimap
             window.scrollBy({
               left: mx,
               top: my,
@@ -80,6 +73,7 @@ export function Minimap({
             translateY,
             translateX,
           }}
+          dragListener={!zoom}
           onDragStart={() => setGrab(true)}
           onDragEnd={() => setGrab(false)}
           dragConstraints={wrapper}
@@ -90,15 +84,13 @@ export function Minimap({
           whileHover={{ cursor: "grab" }}
           whileTap={{
             scale: 0.9,
-            transformOrigin: "50% 50%",
           }}
           whileDrag={{
             cursor: "grabbing",
             scale: 0.9,
-            transformOrigin: "50% 50%",
           }}
           ref={screen}
-          className="absolute origin-top-left touch-none rounded-md border-[1px] border-current shadow-md transition-shadow hover:shadow-xl"
+          className="absolute origin-center touch-none rounded-md border-[1px] border-current shadow-md transition-shadow hover:shadow-xl"
         >
           {/* lines */}
           <div className="pointer-events-none absolute bottom-full left-1/2 h-60 w-[1px] bg-current"></div>

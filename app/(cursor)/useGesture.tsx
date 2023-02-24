@@ -1,3 +1,4 @@
+import { useWorldStore } from "(world)/useWorldStore";
 import { useEffect, useRef } from "react";
 import { useCursorStore } from "./useCursorStore";
 import { useModelStore } from "./useModelStore";
@@ -8,7 +9,7 @@ export function useGesture(cursor: boolean) {
   // const confirm = useRef(false);
   const drag = useCursorStore((state) => state.drag);
   const setDrag = useCursorStore((state) => state.setDrag);
-  const zoom = useRef(false);
+  const zooming = useRef(false);
   const distx = useRef(0);
   const disty = useRef(0);
   const threshold = {
@@ -19,6 +20,7 @@ export function useGesture(cursor: boolean) {
     zoom_max: 0.65,
     zoom_min: 0.3,
   };
+  const zoom = useWorldStore((state) => state.zoom);
 
   // * zoom gesture - for zooming
   useEffect(() => {
@@ -46,12 +48,15 @@ export function useGesture(cursor: boolean) {
         index_tip_2.z < threshold.depth
       ) {
         const mapped = Math.fround(Math.min(Math.max(distance, 0), 1)) * 2;
-        //  prepare for zooming out
-        zoom.current = true;
-        const array = document.querySelector("div#world") as HTMLElement;
-        if (!array) return;
-        array.style.scale = `${mapped}`;
-      } else zoom.current = false;
+        console.log(mapped);
+        // todo: trigger zoom state
+        // ? manually zoom
+        //   //  prepare for zooming out
+        zooming.current = true;
+        //   const array = document.querySelector("div#world") as HTMLElement;
+        //   if (!array) return;
+        //   array.style.scale = `${mapped}`;
+      } else zooming.current = false;
     }
   }, [
     cursor,
@@ -155,7 +160,16 @@ export function useGesture(cursor: boolean) {
     // const debounce = (func: any, wait: number) => {
 
     scroll();
-  }, [results, threshold.point, threshold.pinch, threshold.depth, cursor]);
+  }, [
+    results,
+    threshold.point,
+    threshold.pinch,
+    threshold.depth,
+    cursor,
+    setDrag,
+    drag,
+    zoom,
+  ]);
 
-  return { select, drag, zoom };
+  return { select, drag, zooming };
 }

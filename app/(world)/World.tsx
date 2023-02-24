@@ -14,18 +14,17 @@ import {
 import { VscLoading } from "react-icons/vsc";
 import { Minimap } from "./Minimap";
 import { useWorld } from "./useWorld";
-import { useWorldStore } from "./useWorldStore";
+import { motion } from "framer-motion";
 
 export default function World() {
-  const { world, wrapper, screen } = useWorld();
-  const world_scale = useWorldStore((state) => state.world_scale);
+  const { world, wrapper, screen, scale } = useWorld();
 
   return (
     <>
       {/* loading spinner */}
       <div
         id="worldSpinner"
-        className=" pointer-events-none fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform transition-opacity delay-1000"
+        className=" pointer-events-none fixed top-1/2 left-1/2  -translate-x-1/2 -translate-y-1/2 transform transition-opacity delay-1000"
       >
         <VscLoading className="h-16 animate-spin" />
       </div>
@@ -38,7 +37,12 @@ export default function World() {
         {/* minimap */}
         <Minimap wrapper={wrapper} screen={screen} world={world} />
         {/* actual world area*/}
-        <div id="world" ref={world} style={{ scale: `${world_scale}` }}>
+        <motion.div
+          id="world"
+          ref={world}
+          style={{ scale }}
+          className="top-0 left-0 origin-top-left"
+        >
           <div className="flex h-screen w-max flex-row flex-nowrap ">
             <Page2 />
             <About />
@@ -54,7 +58,7 @@ export default function World() {
             <About3 />
             <Work3 />
           </div>
-        </div>
+        </motion.div>
       </div>
     </>
   );

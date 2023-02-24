@@ -12,6 +12,7 @@ html,
 body {
   width: -moz-fit-content;
   width: fit-content;
+  height: dvh;
   overflow-x: scroll;
   /* scroll-snap-type: proximity; */
   /* scroll-behavior: smooth; */

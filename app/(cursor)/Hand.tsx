@@ -20,7 +20,11 @@ useGLTF.preload("/models/Cartoon+hands.gltf");
 export default function Hand({ hand, side }: HandProps) {
   const { cursor, setCursor } = useCursor();
 
-  const { select, drag, zoom } = useGesture(cursor);
+  const {
+    select: { current: select },
+    drag,
+    zooming: { current: zooming },
+  } = useGesture(cursor);
 
   useEffect(() => {
     return () => {
@@ -37,7 +41,13 @@ export default function Hand({ hand, side }: HandProps) {
 
   const material = new THREE.MeshStandardMaterial({
     flatShading: true,
-    color: drag ? "#ff0000" : select ? "#00ff00" : zoom ? "#0000ff" : "#ffffff",
+    color: drag
+      ? "#ff0000"
+      : select
+      ? "#00ff00"
+      : zooming
+      ? "#0000ff"
+      : "#ffffff",
     roughness: 0.5,
     metalness: 0.5,
   });

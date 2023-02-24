@@ -23,7 +23,7 @@ export function SplashScreen() {
   return (
     <Fade truthy={status !== ""}>
       <div
-        className={`fixed flex h-screen w-screen items-center bg-current p-4`}
+        className={`fixed z-[100] flex h-screen w-screen items-center bg-current p-4`}
       >
         <div className=" inline-flex gap-x-2 text-white dark:text-black">
           <VscLoading className="h-6 animate-spin" />
