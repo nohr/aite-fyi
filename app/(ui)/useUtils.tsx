@@ -21,11 +21,16 @@ export function useUtils() {
 }
 
 export function useTimeout(callback: () => void, delay: number) {
+  const callbackRef = useRef(callback);
   const timeout = useRef<ReturnType<typeof setTimeout>>();
 
+  useEffect(() => {
+    callbackRef.current = callback;
+  }, [callback]);
+
   const set = useCallback(() => {
-    timeout.current = setTimeout(callback, delay);
-  }, [callback, delay]);
+    timeout.current = setTimeout(callbackRef.current, delay);
+  }, [delay]);
 
   const clear = useCallback(() => {
     timeout.current && clearTimeout(timeout.current);
@@ -34,9 +39,14 @@ export function useTimeout(callback: () => void, delay: number) {
   useEffect(() => {
     set();
     return clear;
-  }, [callback, delay, set, clear]);
+  }, [delay, set, clear]);
 
-  return { set, clear };
+  const reset = useCallback(() => {
+    clear();
+    set();
+  }, [clear, set]);
+
+  return { reset, clear };
 }
 
 export function useRouteChange() {

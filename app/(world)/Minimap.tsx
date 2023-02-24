@@ -69,7 +69,7 @@ export function Minimap({
             const mx = info.delta.x;
             const my = info.delta.y;
             // ! bug: scrolls the minimap
-            window.scrollBy({
+            document.documentElement.scrollBy({
               left: mx,
               top: my,
             });

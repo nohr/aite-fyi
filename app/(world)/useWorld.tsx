@@ -1,5 +1,4 @@
-import { useUIStore, useUtils } from "(ui)";
-import { useTimeout } from "(ui)/useUtils";
+import { useUtils, useTimeout } from "(ui)";
 import { animate, useMotionValue } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef } from "react";
@@ -13,23 +12,39 @@ export function useWorld() {
   const world = useRef<HTMLDivElement | null>(null);
   const setWorld = useWorldStore((state) => state.setWorld);
   const zoom = useWorldStore((state) => state.zoom);
-  const rotate = useWorldStore((state) => state.rotate);
   const setZoom = useWorldStore((state) => state.setZoom);
   const setRotate = useWorldStore((state) => state.setRotate);
   const world_height = useWorldStore((state) => state.world_height);
   const world_width = useWorldStore((state) => state.world_width);
-  const routing = useUIStore((state) => state.routing);
   const pathname = usePathname();
   const scale = useMotionValue(1);
   const rotateX = useMotionValue(0);
   const rotateY = useMotionValue(0);
 
   // * if the alt key is held down, rotate the world with the mouse
-  useEffect(() => {
-    const handleRotate = (e: MouseEvent) => {
-      if (!world.current || !e.altKey) return;
+  const resetRotation = useCallback(() => {
+    setRotate(false);
+    animate(rotateX, 0, {
+      duration: 0.1,
+    });
+    animate(rotateY, 0, {
+      duration: 0.1,
+    });
+  }, [setRotate, rotateX, rotateY]);
+
+  const { reset, clear } = useTimeout(() => resetRotation(), 1500);
+
+  const handleRotate = useCallback(
+    (e: MouseEvent) => {
+      if (!world.current) return;
+      if (!e.altKey) {
+        clear();
+        resetRotation();
+        return;
+      }
+      reset();
+      // handle rotation logic
       setRotate(true);
-      setZoom(true);
       const { clientX, clientY } = e;
       const { width, height } = world.current.getBoundingClientRect();
       let x = (clientX / (width / 0.332)) * 150;
@@ -38,35 +53,85 @@ export function useWorld() {
       if (x < -75) x = -75;
       if (y > 75) y = 75;
       if (y < -75) y = -75;
-      animate(rotateX, -y, { duration: 0.1 });
-      animate(rotateY, x, { duration: 0.1 });
-      // world.current.style.transformOrigin = `${clientX}px ${clientY}px`;
-    };
-    const handleRotateEnd = () => {
-      if (!world.current) return;
-      setRotate(false);
-      setZoom(false);
-      animate(rotateX, 0, { duration: 0.1 });
-      animate(rotateY, 0, { duration: 0.1 });
-    };
+      animate(rotateX, -y, {
+        duration: 0.1,
+      });
+      animate(rotateY, x, {
+        duration: 0.1,
+      }); // world.current.style.transformOrigin = `${clientX}px ${clientY}px`;
+    },
+    [reset, setRotate, rotateX, rotateY, clear, resetRotation]
+  );
+
+  useEffect(() => {
     document.addEventListener("mousemove", handleRotate);
-    document.addEventListener("keyup", handleRotateEnd);
-    return () => {
-      document.removeEventListener("mousemove", handleRotate);
-      document.removeEventListener("keyup", handleRotateEnd);
-    };
-  }, [rotateX, rotateY, setRotate, setZoom, world]);
+  }, [handleRotate]);
 
-  // * handle zoom gesture
+  // * handle world zoom
   // !bug - zooming on  middle row returns lower than expected
+  // ?pinch trigger
 
+  const handlePinch = useCallback(
+    (e: WheelEvent | KeyboardEvent) => {
+      e.preventDefault();
+      if (!screen.current || !wrapper.current || !world.current) return;
+
+      if (e.ctrlKey) {
+        const { deltaY } = e as WheelEvent;
+        if (deltaY > 0) setZoom(true);
+        if (deltaY < 0) setZoom(false);
+      }
+    },
+    [setZoom]
+  );
+
+  useEffect(() => {
+    window.addEventListener("wheel", throttle(handlePinch), {
+      passive: false,
+    });
+    window.addEventListener("gesturechange", (e) => e.preventDefault());
+    return () => {
+      window.removeEventListener("wheel", throttle(handlePinch));
+      window.removeEventListener("gesturechange", (e) => e.preventDefault());
+    };
+  }, [throttle, handlePinch]);
+
+  // ?keyboard trigger
+  const ScaleUp = useCallback(
+    (e: KeyboardEvent) => {
+      if (!e.altKey || !world.current) return;
+      e.preventDefault();
+      setZoom(true);
+    },
+    [setZoom]
+  );
+
+  const ScaleDown = useCallback(
+    (e: KeyboardEvent) => {
+      if (!world.current) return;
+      e.preventDefault();
+      setZoom(false);
+    },
+    [setZoom]
+  );
+
+  useEffect(() => {
+    // event listeners for key release
+    document.addEventListener("keydown", ScaleUp);
+    document.addEventListener("keyup", ScaleDown);
+
+    return () => {
+      console.log("remove");
+      document.removeEventListener("keydown", ScaleUp);
+      document.removeEventListener("keyup", ScaleDown);
+    };
+  }, [ScaleUp, ScaleDown]);
+
+  // * handle zoom animation
   useEffect(() => {
     if (zoom) {
       animate(scale, 0.332, {
         duration: 0.5,
-        onUpdate: (latest) => {
-          // console.log(latest);
-        },
       });
       // disable scroll
       document.documentElement.style.overflow = "hidden";
@@ -74,9 +139,6 @@ export function useWorld() {
     if (!zoom) {
       animate(scale, 1, {
         duration: 0.5,
-        onUpdate: (latest) => {
-          // console.log(latest);
-        },
       });
       // enable scroll
       document.documentElement.style.overflow = "auto";
@@ -124,22 +186,6 @@ export function useWorld() {
     });
   }, [scale, scaleScreen]);
 
-  // * handle world zoom
-  useEffect(() => {
-    const handleScale = (e: WheelEvent | KeyboardEvent) => {
-      e.preventDefault();
-      if (!screen.current || !wrapper.current || !world.current || !e.ctrlKey)
-        return;
-      // get scroll delta
-      const deltaY = (e as WheelEvent).deltaY;
-      if (deltaY > 0) setZoom(true);
-      if (deltaY < 0) setZoom(false);
-    };
-
-    window.addEventListener("wheel", throttle(handleScale), { passive: false });
-    window.addEventListener("gesturechange", (e) => e.preventDefault());
-  }, [setZoom, throttle]);
-
   // * update world on window resize
   useEffect(() => {
     const handleResize = () => {
@@ -154,29 +200,6 @@ export function useWorld() {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, [setWorld, world]);
-
-  // * handle transformOrigin on mouse movement
-  // useEffect(() => {
-  //   if (!world.current || !zoom || rotate) return;
-  //   const worldNow = world.current;
-  //   let transformOrigin = "0% 0%";
-  //   const handleMove = () => {
-  //     // get the mouse position
-  //     const { clientX, clientY } = window.event as MouseEvent;
-  //     // get the percentage of the mouse position relative to the screen
-  //     const x = (clientX / window.innerWidth) * 100;
-  //     const y = (clientY / window.innerHeight) * 100;
-  //     // update the transform origin
-  //     transformOrigin = `${x}% ${y}%`;
-  //   };
-
-  //   document.addEventListener("mousemove", throttle(handleMove, 100), {
-  //     passive: false,
-  //   });
-  //   return () => {
-  //     document.removeEventListener("mousemove", throttle(handleMove, 100));
-  //   };
-  // }, [rotate, throttle, zoom]);
 
   // * update transform origin on scroll
   useEffect(() => {

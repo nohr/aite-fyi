@@ -22,9 +22,9 @@ import { useEffect } from "react";
 export default function World() {
   const { world, wrapper, screen, scale, rotateX, rotateY } = useWorld();
   const willChange = useWillChange();
-  useEffect(() => {
-    console.log(world.current?.style.transformOrigin);
-  });
+  // useEffect(() => {
+  //   console.log(world.current?.style.transformOrigin);
+  // });
 
   return (
     <>
