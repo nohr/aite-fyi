@@ -3,7 +3,7 @@ export { About2 } from "./about2/about2";
 export { About3 } from "./about3/about3";
 export { Page2 } from "./page2/page2";
 export { Page3 } from "./page3/page3";
-export { Home } from "./home";
+export { Home } from "./home/home";
 export { Work } from "./work/work";
 export { Work2 } from "./work2/work2";
 export { Work3 } from "./work3/work3";

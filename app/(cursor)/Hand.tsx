@@ -52,6 +52,8 @@ export default function Hand({ hand, side }: HandProps) {
     metalness: 0.5,
   });
 
+  // todo update the mouse position with the cursor position
+
   // * handle rotation
   const offsetX = Math.floor(window.innerWidth * hand[8].x);
   const offsetY = Math.floor(window.innerHeight * hand[8].y);
@@ -71,13 +73,21 @@ export default function Hand({ hand, side }: HandProps) {
 
   //   console.log(x_angle);
 
+  // get the element below the cursor
+  const element = document.elementFromPoint(offsetX, offsetY);
+  // log the element if it is a link
+  if (element?.tagName === "A") {
+    console.log(element);
+  }
+
   return (
     <Canvas
       shadows
-      dpr={[1, 2]}
+      dpr={[1, 1]}
       frameloop="demand"
+      id="Hand"
       style={{ left: offsetX - 56, top: offsetY - 56 }}
-      className=" !fixed z-50 !h-28 !w-28 !origin-center"
+      className=" !fixed z-50 !h-20 !w-20 !origin-center"
     >
       <Suspense fallback={<Spinner />}>
         {/* <ambientLight intensity={1} color={"#ffffff"} /> */}

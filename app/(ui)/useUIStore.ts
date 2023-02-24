@@ -30,6 +30,10 @@ export const useUIStore = create<UIProps>()(
       //   setTheme(theme: UIProps["theme"]) {
       //     set(() => ({ theme }));
       //   },
+      routing: false,
+      setRouting(routing = !get().routing) {
+        set(() => ({ routing }));
+      },
     }),
     {
       name: "ui",

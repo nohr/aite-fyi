@@ -1,34 +1,68 @@
+import { useUIStore, useUtils } from "(ui)";
+import { useTimeout } from "(ui)/useUtils";
 import { animate, useMotionValue } from "framer-motion";
+import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef } from "react";
 import { useWorldStore } from "./useWorldStore";
 
-const throttle = (func: (...args: any[]) => any, delay = 2000) => {
-  let lastTime = 0;
-
-  return (...args: any) => {
-    const now = new Date().getTime();
-    if (now - lastTime < delay) return;
-    lastTime = now;
-    func(...args);
-  };
-};
-
 // Handle world transforms
 export function useWorld() {
+  const { throttle } = useUtils();
   const wrapper = useRef<HTMLDivElement | null>(null);
   const screen = useRef<HTMLDivElement | null>(null);
   const world = useRef<HTMLDivElement | null>(null);
   const setWorld = useWorldStore((state) => state.setWorld);
   const zoom = useWorldStore((state) => state.zoom);
+  const rotate = useWorldStore((state) => state.rotate);
   const setZoom = useWorldStore((state) => state.setZoom);
+  const setRotate = useWorldStore((state) => state.setRotate);
   const world_height = useWorldStore((state) => state.world_height);
   const world_width = useWorldStore((state) => state.world_width);
+  const routing = useUIStore((state) => state.routing);
+  const pathname = usePathname();
   const scale = useMotionValue(1);
+  const rotateX = useMotionValue(0);
+  const rotateY = useMotionValue(0);
+
+  // * if the alt key is held down, rotate the world with the mouse
+  useEffect(() => {
+    const handleRotate = (e: MouseEvent) => {
+      if (!world.current || !e.altKey) return;
+      setRotate(true);
+      setZoom(true);
+      const { clientX, clientY } = e;
+      const { width, height } = world.current.getBoundingClientRect();
+      let x = (clientX / (width / 0.332)) * 150;
+      let y = (clientY / (height / 0.332)) * 150;
+      if (x > 75) x = 75;
+      if (x < -75) x = -75;
+      if (y > 75) y = 75;
+      if (y < -75) y = -75;
+      animate(rotateX, -y, { duration: 0.1 });
+      animate(rotateY, x, { duration: 0.1 });
+      // world.current.style.transformOrigin = `${clientX}px ${clientY}px`;
+    };
+    const handleRotateEnd = () => {
+      if (!world.current) return;
+      setRotate(false);
+      setZoom(false);
+      animate(rotateX, 0, { duration: 0.1 });
+      animate(rotateY, 0, { duration: 0.1 });
+    };
+    document.addEventListener("mousemove", handleRotate);
+    document.addEventListener("keyup", handleRotateEnd);
+    return () => {
+      document.removeEventListener("mousemove", handleRotate);
+      document.removeEventListener("keyup", handleRotateEnd);
+    };
+  }, [rotateX, rotateY, setRotate, setZoom, world]);
 
   // * handle zoom gesture
+  // !bug - zooming on  middle row returns lower than expected
+
   useEffect(() => {
     if (zoom) {
-      animate(scale, 0.3355, {
+      animate(scale, 0.332, {
         duration: 0.5,
         onUpdate: (latest) => {
           // console.log(latest);
@@ -47,7 +81,20 @@ export function useWorld() {
       // enable scroll
       document.documentElement.style.overflow = "auto";
     }
-  }, [scale, world_height, world_width, zoom]);
+    const worldNow = world.current;
+    return () => {
+      if (!worldNow) return;
+      if (pathname === null) return;
+      const element = document.getElementById(pathname);
+      if (element === null) return;
+      //  scroll to the element
+      element.scrollIntoView({ behavior: "smooth" });
+      // change the transform origin to the center of the element
+      worldNow.style.transformOrigin = `${
+        element.offsetLeft + element.offsetWidth / 2
+      }px ${element.offsetTop + element.offsetHeight / 2}px`;
+    };
+  }, [scale, world_height, world_width, zoom, pathname]);
 
   // * handle minimap zoom
   useEffect(() => {
@@ -71,15 +118,13 @@ export function useWorld() {
 
   useEffect(() => {
     scaleScreen();
-  }, [scaleScreen]);
 
-  useEffect(() => {
     scale.on("change", (value) => {
       scaleScreen(value);
     });
   }, [scale, scaleScreen]);
 
-  // * handle world scale
+  // * handle world zoom
   useEffect(() => {
     const handleScale = (e: WheelEvent | KeyboardEvent) => {
       e.preventDefault();
@@ -89,20 +134,11 @@ export function useWorld() {
       const deltaY = (e as WheelEvent).deltaY;
       if (deltaY > 0) setZoom(true);
       if (deltaY < 0) setZoom(false);
-
-      // // resize the html element to the size of the world
-      // const html = document.documentElement;
-      // html.style.height = `${world_height * newScale}px`;
-      // html.style.width = `${world_width * newScale}px`;
     };
 
     window.addEventListener("wheel", throttle(handleScale), { passive: false });
     window.addEventListener("gesturechange", (e) => e.preventDefault());
-    return () => {
-      window.removeEventListener("wheel", throttle(handleScale));
-      window.removeEventListener("gesturechange", (e) => e.preventDefault());
-    };
-  }, [scale, setZoom, world_height, world_width]);
+  }, [setZoom, throttle]);
 
   // * update world on window resize
   useEffect(() => {
@@ -119,28 +155,50 @@ export function useWorld() {
     return () => window.removeEventListener("resize", handleResize);
   }, [setWorld, world]);
 
+  // * handle transformOrigin on mouse movement
+  // useEffect(() => {
+  //   if (!world.current || !zoom || rotate) return;
+  //   const worldNow = world.current;
+  //   let transformOrigin = "0% 0%";
+  //   const handleMove = () => {
+  //     // get the mouse position
+  //     const { clientX, clientY } = window.event as MouseEvent;
+  //     // get the percentage of the mouse position relative to the screen
+  //     const x = (clientX / window.innerWidth) * 100;
+  //     const y = (clientY / window.innerHeight) * 100;
+  //     // update the transform origin
+  //     transformOrigin = `${x}% ${y}%`;
+  //   };
+
+  //   document.addEventListener("mousemove", throttle(handleMove, 100), {
+  //     passive: false,
+  //   });
+  //   return () => {
+  //     document.removeEventListener("mousemove", throttle(handleMove, 100));
+  //   };
+  // }, [rotate, throttle, zoom]);
+
   // * update transform origin on scroll
   useEffect(() => {
     function onScroll() {
+      if (zoom) return;
       const x = window.scrollX;
       const y = window.scrollY;
       const xPercent = x / (world_width - window.innerWidth);
       const yPercent = y / (world_height - window.innerHeight);
       const origin = `${xPercent * 100}% ${yPercent * 100}%`;
       if (world.current) world.current.style.transformOrigin = origin;
-      // console.log(origin);
+      // console.log("scroll", origin);
 
-      if (screen.current) {
-        // console.dir(screen.current);
-        screen.current.style.transformOrigin = origin;
-        screen.current.style.translate = "translate(0%, 0%)";
-      }
+      if (!screen.current) return;
+      screen.current.style.transformOrigin = origin;
+      screen.current.style.translate = "translate(0%, 0%)";
     }
     onScroll();
 
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
-  }, [world_height, world_width]);
+  }, [world_height, world_width, zoom]);
 
-  return { world, wrapper, screen, scale };
+  return { world, wrapper, screen, scale, rotateX, rotateY };
 }

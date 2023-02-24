@@ -4,6 +4,7 @@ import { Hands, HAND_CONNECTIONS } from "@mediapipe/hands";
 import { create } from "zustand";
 
 export const useModelStore = create<ModelProps>()((set, get) => ({
+  resolution: { width: 640, height: 360 },
   camera: null,
   hands: undefined,
   kill_hands: () => {
@@ -58,8 +59,8 @@ export const useModelStore = create<ModelProps>()((set, get) => ({
       .getUserMedia({
         audio: false,
         video: {
-          width: 1280,
-          height: 720,
+          width: get().resolution.width,
+          height: get().resolution.height,
           facingMode: `${get().selfie ? "user" : "environment"}`,
         },
       })

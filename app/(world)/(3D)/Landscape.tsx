@@ -8,28 +8,32 @@ export function Landscape() {
   const world_width = useWorldStore((state) => state.world_width);
 
   return (
-    <Canvas
-      gl={{
-        alpha: false,
-        antialias: false,
-        logarithmicDepthBuffer: true,
-        stencil: false,
-        depth: true,
-        powerPreference: "high-performance",
-        premultipliedAlpha: false,
-        preserveDrawingBuffer: false,
-        failIfMajorPerformanceCaveat: false,
-      }}
-      style={{ height: world_height, width: world_width }}
-      className="!absolute !top-0 !left-0 -z-10 !m-0 !h-full !w-full"
-    >
-      <ambientLight intensity={0.5} />
-      <spotLight position={[10, 15, 10]} angle={0.3} />
-      <pointLight position={[-10, -15, -10]} />
-      <fog attach="fog" args={["white", 5, 15]} />
-      <Box position={[-1.2, 0, 0]} />
-      <Box position={[1.2, 0, 0]} />
-    </Canvas>
+    <div className="!absolute !top-0 !left-0 -z-10 !m-0 !h-full !w-full">
+      <Canvas
+        gl={{
+          alpha: true,
+          antialias: false,
+          logarithmicDepthBuffer: true,
+          stencil: false,
+          powerPreference: "high-performance",
+        }}
+        camera={{
+          position: [0, 5, 0],
+          fov: 75,
+          aspect: world_width / world_height,
+          //   type: "PerspectiveCamera",
+        }}
+        style={{ height: world_height, width: world_width }}
+        id="Landscape"
+      >
+        <ambientLight intensity={0.5} />
+        <spotLight position={[10, 15, 10]} angle={0.3} />
+        <pointLight position={[-10, -15, -10]} />
+        <fog attach="fog" args={["white", 5, 15]} />
+        <Box position={[-1.2, 0, 0]} />
+        <Box position={[1.2, 0, 0]} />
+      </Canvas>
+    </div>
   );
 }
 

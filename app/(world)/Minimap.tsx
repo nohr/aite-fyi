@@ -1,21 +1,26 @@
 import { useUIStore } from "(ui)";
 import {
   motion,
+  MotionValue,
   useDragControls,
   useScroll,
   useTransform,
+  useWillChange,
 } from "framer-motion";
-import { PointerEvent } from "react";
 import { useWorldStore } from "./useWorldStore";
 
 export function Minimap({
   wrapper,
   screen,
   world,
+  rotateX,
+  rotateY,
 }: {
   wrapper: React.RefObject<HTMLDivElement>;
   screen: React.RefObject<HTMLDivElement>;
   world: React.RefObject<HTMLDivElement>;
+  rotateX: MotionValue<number>;
+  rotateY: MotionValue<number>;
 }) {
   const grab = useUIStore((state) => state.grab);
   const setGrab = useUIStore((state) => state.setGrab);
@@ -24,7 +29,7 @@ export function Minimap({
   const world_width = useWorldStore((state) => state.world_width);
   const wrapper_height = useWorldStore((state) => state.wrapper_height);
   const wrapper_width = useWorldStore((state) => state.wrapper_width);
-
+  const willChange = useWillChange();
   const dragControls = useDragControls();
   const { scrollX, scrollY } = useScroll();
   const translateY = useTransform(
@@ -70,6 +75,9 @@ export function Minimap({
             });
           }}
           style={{
+            willChange,
+            rotateX,
+            rotateY,
             translateY,
             translateX,
           }}

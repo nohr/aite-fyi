@@ -7,15 +7,15 @@ import { useUIStore } from "./useUIStore";
 
 export function useInView(route: string) {
   const zoom = useWorldStore((state) => state.zoom);
-  const grab = useUIStore((state) => state.grab);
+  const rotate = useWorldStore((state) => state.rotate);
+  const routing = useUIStore((state) => state.routing);
   const router = useRouter();
   const pathname = usePathname() ?? "/";
   const observer = useRef<IntersectionObserver | null>(null);
 
   // change the route to the page when in view
   useEffect(() => {
-    if (zoom) return;
-
+    if (zoom || rotate) return;
     // scroll to the element with the id of the current pathname
     const el = document.getElementById(pathname.split("/")[1] || "home");
     if (el) {
@@ -30,17 +30,17 @@ export function useInView(route: string) {
       worldWrap.style.opacity = "1";
       worldSpinner.style.opacity = "0";
     }
-  }, [pathname, zoom]);
+  }, [pathname, rotate, zoom]);
 
+  // use intersection observer to check if the element is in view
   useEffect(() => {
-    // use intersection observer to check if the element is in view
     // initialize count variable
     let count = 0;
     observer.current = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            if (grab) return;
+            if (routing) return;
             count++; // increment count when element is in view
             // set a delay of 500 milliseconds
             setTimeout(() => {
@@ -60,6 +60,6 @@ export function useInView(route: string) {
         threshold: 0.3,
       }
     );
-  }, [grab, route, router, zoom]);
+  }, [route, router, routing, zoom]);
   return observer;
 }

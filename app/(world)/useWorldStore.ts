@@ -18,6 +18,10 @@ export const useWorldStore = create<WorldProps>()((set, get) => ({
   setZoom(zoom) {
     set(() => ({ zoom }));
   },
+  rotate: false,
+  setRotate(rotate) {
+    set(() => ({ rotate }));
+  },
 }));
 
 interface WorldProps {
@@ -32,4 +36,6 @@ interface WorldProps {
   setScreen: (screen_height: number, screen_width: number) => void;
   zoom: boolean;
   setZoom: (zoom?: boolean) => void;
+  rotate: boolean;
+  setRotate: (rotate?: boolean) => void;
 }

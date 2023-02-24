@@ -8,7 +8,7 @@ export default function Camera() {
   const get_input = useModelStore((state) => state.get_input);
   const start_input = useModelStore((state) => state.start_input);
   const stop_input = useModelStore((state) => state.stop_input);
-  const setStatus = useUIStore((state) => state.setStatus);
+  const resolution = useModelStore((state) => state.resolution);
   const selfie = useModelStore((state) => state.selfie);
   const motion = useUIStore((state) => state.motion);
 
@@ -30,8 +30,8 @@ export default function Camera() {
   return (
     <>
       <video
-        width="1280"
-        height="720"
+        width={`${resolution.width}`}
+        height={`${resolution.height}`}
         className={`input_video absolute top-0 -z-10 hidden  h-full w-full border-[1px] border-red-500 opacity-0 ${
           !selfie ? "-scale-x-100" : " scale-x-100"
         } `}

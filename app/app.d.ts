@@ -1,5 +1,6 @@
 // zustand state props
 interface ModelProps {
+  resolution: { width: number; height: number };
   /**
    * The camera instance.
    * @type {Camera}
@@ -44,7 +45,7 @@ interface UIProps {
    * Toggles the grab state from minimap scrolling.
    * @type {() => void}
    * */
-  setGrab: (bool: boolean) => void;
+  setGrab: (grab: boolean) => void;
   motion: boolean;
   setMotion: () => void;
   status: string | JSX.Element;
@@ -56,6 +57,8 @@ interface UIProps {
   setStatus: (status: string | JSX.Element) => void;
   //   theme: "light" | "dark";
   //   setTheme: (theme: "light" | "dark") => void;
+  routing: boolean;
+  setRouting: (routing?: boolean) => void;
 }
 
 interface CursorProps {
