@@ -15,6 +15,7 @@ import { VscLoading } from "react-icons/vsc";
 import { Minimap } from "./Minimap";
 import { useWorld } from "./useWorld";
 import { motion } from "framer-motion";
+import { Landscape } from "./(3D)/Landscape";
 
 export default function World() {
   const { world, wrapper, screen, scale } = useWorld();
@@ -41,7 +42,7 @@ export default function World() {
           id="world"
           ref={world}
           style={{ scale }}
-          className="top-0 left-0 origin-top-left"
+          className="relative top-0 left-0 isolate origin-top-left"
         >
           <div className="flex h-screen w-max flex-row flex-nowrap ">
             <Page2 />
@@ -58,6 +59,7 @@ export default function World() {
             <About3 />
             <Work3 />
           </div>
+          <Landscape />
         </motion.div>
       </div>
     </>
