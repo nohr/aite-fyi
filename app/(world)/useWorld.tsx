@@ -121,7 +121,6 @@ export function useWorld() {
     document.addEventListener("keyup", ScaleDown);
 
     return () => {
-      console.log("remove");
       document.removeEventListener("keydown", ScaleUp);
       document.removeEventListener("keyup", ScaleDown);
     };
@@ -130,7 +129,7 @@ export function useWorld() {
   // * handle zoom animation
   useEffect(() => {
     if (zoom) {
-      animate(scale, 0.332, {
+      animate(scale, window.innerHeight / document.body.clientHeight, {
         duration: 0.5,
       });
       // disable scroll

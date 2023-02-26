@@ -23,7 +23,8 @@ export default function World() {
   const { world, wrapper, screen, scale, rotateX, rotateY } = useWorld();
   const willChange = useWillChange();
   // useEffect(() => {
-  //   console.log(world.current?.style.transformOrigin);
+  //   if (world.current)
+  //     console.log(window.innerHeight / world.current.clientHeight);
   // });
 
   return (
@@ -57,6 +58,7 @@ export default function World() {
             scale,
             rotateX,
             rotateY,
+            rotateZ: 0,
             willChange,
           }}
           className="relative top-0 left-0 isolate origin-top-left rounded-xl border-2 border-current"
@@ -76,9 +78,9 @@ export default function World() {
             <About3 />
             <Work3 />
           </div>
-          {/* 3D world */}
-          {/* <Landscape /> */}
         </motion.div>
+        {/* 3D world */}
+        <Landscape scale={scale} rotateX={rotateX} rotateY={rotateY} />
       </div>
       {/* <Stats /> */}
     </>
