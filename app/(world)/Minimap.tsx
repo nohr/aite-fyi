@@ -2,7 +2,7 @@ import { useUIStore } from "(ui)";
 import {
   motion,
   MotionValue,
-  useDragControls,
+  // useDragControls,
   useScroll,
   useTransform,
   useWillChange,
@@ -30,17 +30,17 @@ export function Minimap({
   const wrapper_height = useWorldStore((state) => state.wrapper_height);
   const wrapper_width = useWorldStore((state) => state.wrapper_width);
   const willChange = useWillChange();
-  const dragControls = useDragControls();
+  // const dragControls = useDragControls();
   const { scrollX, scrollY } = useScroll();
   const translateY = useTransform(
     scrollY,
     [0, world_height],
-    [0, zoom || grab ? 0 : wrapper_height()]
+    [0, zoom ? 0 : wrapper_height()]
   );
   const translateX = useTransform(
     scrollX,
     [0, world_width],
-    [0, zoom || grab ? 0 : wrapper_width()]
+    [0, zoom ? 0 : wrapper_width()]
   );
 
   return (
@@ -64,15 +64,15 @@ export function Minimap({
           drag
           onDrag={(event, info) => {
             setGrab(true);
-            // update window scroll position
-            if (!screen.current || !world.current) return;
-            const mx = info.delta.x;
-            const my = info.delta.y;
-            // ! bug: scrolls the minimap
-            document.documentElement.scrollBy({
-              left: mx,
-              top: my,
-            });
+            // ! bug: scrolls the minimap too far
+            // // update window scroll position
+            // if (!screen.current || !world.current) return;
+            // const mx = info.delta.x;
+            // const my = info.delta.y;
+            // document.documentElement.scrollBy({
+            //   left: mx,
+            //   top: my,
+            // });
           }}
           style={{
             willChange,
@@ -84,10 +84,10 @@ export function Minimap({
           dragListener={!zoom}
           onDragStart={() => setGrab(true)}
           onDragEnd={() => setGrab(false)}
-          dragConstraints={wrapper}
+          dragConstraints={screen}
           dragElastic={0.1}
           dragMomentum={false}
-          dragControls={dragControls}
+          // dragControls={dragControls}
           dragTransition={{ bounceStiffness: 600, bounceDamping: 10 }}
           whileHover={{ cursor: "grab" }}
           whileTap={{
@@ -98,7 +98,7 @@ export function Minimap({
             scale: 0.9,
           }}
           ref={screen}
-          className="absolute origin-center touch-none rounded-md border-[1px] border-current shadow-md transition-shadow hover:shadow-xl"
+          className="absolute origin-center touch-none rounded-md border-[1px] border-current shadow-md transition-shadow hover:shadow-xl active:shadow-xl"
         >
           {/* lines */}
           <div className="pointer-events-none absolute bottom-full left-1/2 h-60 w-[1px] bg-current"></div>

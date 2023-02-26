@@ -99,7 +99,12 @@ export function useWorld() {
   // ?keyboard trigger
   const ScaleUp = useCallback(
     (e: KeyboardEvent) => {
-      if (!e.altKey || !world.current) return;
+      if (
+        !e.altKey ||
+        ((e.code as alt) !== "AltLeft" && (e.code as alt) !== "AltRight") ||
+        !world.current
+      )
+        return;
       e.preventDefault();
       setZoom(true);
     },

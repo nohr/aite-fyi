@@ -81,3 +81,5 @@ type HandProps = {
   hand: { x: number; y: number; z: number }[];
   side: string;
 };
+
+type alt = "AltLeft" | "AltRight";

@@ -17,22 +17,17 @@ import { useWorld } from "./useWorld";
 import { motion, useWillChange } from "framer-motion";
 import { Landscape } from "./(3D)/Landscape";
 import { Stats } from "@react-three/drei";
-import { useEffect } from "react";
 
 export default function World() {
   const { world, wrapper, screen, scale, rotateX, rotateY } = useWorld();
   const willChange = useWillChange();
-  // useEffect(() => {
-  //   if (world.current)
-  //     console.log(window.innerHeight / world.current.clientHeight);
-  // });
 
   return (
     <>
       {/* loading spinner */}
       <div
         id="worldSpinner"
-        className=" pointer-events-none fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform transition-opacity delay-1000"
+        className=" pointer-events-none fixed top-1/2 left-1/2 flex -translate-x-1/2 -translate-y-1/2 transform transition-opacity delay-1000"
       >
         <VscLoading className="h-16 animate-spin" />
       </div>
@@ -58,7 +53,6 @@ export default function World() {
             scale,
             rotateX,
             rotateY,
-            rotateZ: 0,
             willChange,
           }}
           className="relative top-0 left-0 isolate origin-top-left rounded-xl border-2 border-current"
@@ -80,7 +74,7 @@ export default function World() {
           </div>
         </motion.div>
         {/* 3D world */}
-        <Landscape scale={scale} rotateX={rotateX} rotateY={rotateY} />
+        {/* <Landscape scale={scale} rotateX={rotateX} rotateY={rotateY} /> */}
       </div>
       {/* <Stats /> */}
     </>

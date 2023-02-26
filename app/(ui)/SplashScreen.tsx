@@ -21,6 +21,7 @@ export function SplashScreen() {
   // }, [input, canvas, results, setStatus]);
 
   return (
+    // todo control truthy with other booleans instead of status
     <Fade truthy={status !== ""}>
       <div
         className={`fixed z-[100] flex h-screen w-screen items-center bg-current p-4`}
