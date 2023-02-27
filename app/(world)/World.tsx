@@ -55,19 +55,19 @@ export default function World() {
             rotateY,
             willChange,
           }}
-          className="relative top-0 left-0 isolate origin-top-left rounded-xl border-2 border-current"
+          className="relative top-0 left-0 isolate flex origin-top-left flex-row rounded-xl border-2 border-current"
         >
-          <div className="flex h-screen w-max flex-row flex-nowrap ">
+          <div className="flex h-max w-screen flex-col flex-nowrap [&>div]:relative [&>div]:h-screen [&>div]:overflow-visible [&>div]:p-6">
             <Page2 />
             <About />
             <Work />
           </div>
-          <div className="flex h-screen w-max flex-row flex-nowrap ">
+          <div className="flex h-max w-screen flex-col flex-nowrap [&>div]:relative [&>div]:h-screen [&>div]:overflow-visible [&>div]:p-6">
             <About2 />
             <Home />
             <Work2 />
           </div>
-          <div className="flex h-screen w-max flex-row flex-nowrap ">
+          <div className="flex h-max w-screen flex-col flex-nowrap [&>div]:relative [&>div]:h-screen [&>div]:overflow-visible [&>div]:p-6">
             <Page3 />
             <About3 />
             <Work3 />

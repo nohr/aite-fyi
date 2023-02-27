@@ -27,11 +27,11 @@ export function Section(props?: any) {
   }, [observer, props.id, zoom]);
 
   return (
-    <div className="route relative w-screen overflow-visible p-2" {...props}>
+    <div {...props}>
       <Fade truthy={zoom && !rotate}>
         <Link
           href={`/${props.id}`}
-          onClick={(e) => {
+          onClick={() => {
             routeChange();
           }}
           className=" absolute top-0 left-0 flex h-full w-full items-center justify-center text-9xl transition-colors duration-300 ease-in-out hover:underline "

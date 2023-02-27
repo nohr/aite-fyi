@@ -12,7 +12,7 @@ export default function RootLayout({
   return (
     <html lang="en" className=" bg-white dark:bg-black">
       <head />
-      <body className="hidebar flex h-full w-max flex-col overflow-y-scroll text-red-500 ">
+      <body className="hidebar flex h-max w-full flex-row overflow-x-scroll text-red-500 ">
         <SplashScreen />
         <Nav />
         {children}
