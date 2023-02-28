@@ -11,7 +11,7 @@ export function Section(props?: any) {
   const observer = useInView(`/${props.id}`);
   const zoom = useWorldStore((state) => state.zoom);
   const rotate = useWorldStore((state) => state.rotate);
-  const { routeChange } = useRouteChange();
+  // const { routeChange } = useRouteChange();
 
   useEffect(() => {
     const observe = observer.current;
@@ -19,11 +19,6 @@ export function Section(props?: any) {
     if (page && observe && !zoom) {
       observe.observe(page);
     }
-    return () => {
-      if (page && observe) {
-        observe.unobserve(page);
-      }
-    };
   }, [observer, props.id, zoom]);
 
   return (
@@ -31,9 +26,9 @@ export function Section(props?: any) {
       <Fade truthy={zoom && !rotate}>
         <Link
           href={`/${props.id}`}
-          onClick={() => {
-            routeChange();
-          }}
+          // onClick={() => {
+          //   routeChange();
+          // }}
           className=" absolute top-0 left-0 flex h-full w-full items-center justify-center text-9xl transition-colors duration-300 ease-in-out hover:underline "
         >
           {props.id}

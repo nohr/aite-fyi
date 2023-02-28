@@ -10,24 +10,24 @@ export function useInView(route: string) {
   const rotate = useWorldStore((state) => state.rotate);
   const routing = useUIStore((state) => state.routing);
   const setStatus = useUIStore((state) => state.setStatus);
-  const router = useRouter();
-  const pathname = usePathname() ?? "/";
+  // const router = useRouter();
+  // const pathname = usePathname() ?? "/";
   const observer = useRef<IntersectionObserver | null>(null);
 
   // change the route to the page when in view
-  useEffect(() => {
-    if (zoom || rotate) return;
-    // scroll to the element with the id of the current pathname
-    const el = document.getElementById(pathname.split("/")[1] || "home");
-    if (el) {
-      el.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-        inline: "nearest",
-      });
-      setStatus("");
-    }
-  }, [pathname, rotate, setStatus, zoom]);
+  // useEffect(() => {
+  //   if (zoom || rotate) return;
+  //   // scroll to the element with the id of the current pathname
+  //   const el = document.getElementById(pathname.split("/")[1] || "home");
+  //   if (el) {
+  //     el.scrollIntoView({
+  //       behavior: "smooth",
+  //       block: "start",
+  //       inline: "nearest",
+  //     });
+  //     setStatus("");
+  //   }
+  // }, [pathname, rotate, setStatus, zoom]);
 
   // use intersection observer to check if the element is in view
   useEffect(() => {
@@ -43,8 +43,10 @@ export function useInView(route: string) {
             setTimeout(() => {
               // check if count is still 1
               if (count === 1) {
-                router.push(route === "/home" ? "/" : route);
-                observer.current?.unobserve(entry.target); // stop observing
+                console.log("in view", route);
+                // TODO: listen to route change and set to zustand state to route in higher component
+                // router.push(route === "/home" ? "/" : route);
+                // observer.current?.unobserve(entry.target); // stop observing
               }
               count = 0; // decrement count after delay
             }, 500);
@@ -58,6 +60,6 @@ export function useInView(route: string) {
         threshold: 0.3,
       }
     );
-  }, [route, router, routing, zoom]);
+  }, [route, routing, zoom]);
   return observer;
 }

@@ -1,10 +1,16 @@
-import { Grid } from "@react-three/drei";
+import { WorldProps } from "(ui)";
+import { Grid, Html, OrbitControls } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { useRef } from "react";
+import React, { forwardRef, memo, useRef } from "react";
 import { Mesh, BufferGeometry, Material } from "three";
 import { Camera } from "./Camera";
+import { Dom } from "./HtmlWorld";
 
-export function Landscape({ ...props }) {
+export const Landscape = memo(function Landscape({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <Canvas
       gl={{
@@ -12,19 +18,18 @@ export function Landscape({ ...props }) {
         antialias: false,
         logarithmicDepthBuffer: true,
         stencil: false,
-        powerPreference: "high-performance",
+        powerPreference: "low-power",
       }}
       className="!fixed !top-0 !left-0 -z-10 !m-0"
       id="Landscape"
     >
-      <Camera {...props} />
-      <ambientLight intensity={0.5} />
-      {/* <spotLight position={[1, 15, 1]} angle={0.3} /> */}
-      {/* <pointLight position={[-10, -15, -10]} />
-      <fog attach="fog" args={["white", 5, 15]} /> */}
+      {children}
+      <Camera />
+      {/* <ambientLight intensity={1} /> */}
+      {/* <fog attach="fog" args={["white", 5, 15]} /> */}
       <Box position={[-1, 0, 0]} />
       <Box position={[1, 0, 0]} />
-      {/* <Grid
+      <Grid
         infiniteGrid
         followCamera={false}
         cellSize={1}
@@ -32,20 +37,22 @@ export function Landscape({ ...props }) {
         cellThickness={0}
         sectionSize={1}
         sectionThickness={1}
-      /> */}
+        position={[0, 0, 0]}
+      />
       <mesh
         position={[0, -1, 0]}
-        rotation={[-Math.PI / 2, 0, 0]}
+        rotation={[Math.PI / 2, 0, 0]}
         frustumCulled={false}
       >
         <planeGeometry args={[100, 100]} />
-        <meshStandardMaterial color={"#52525B"} />
+        <meshStandardMaterial color={"#E4E4E7"} />
       </mesh>
+      {/* <OrbitControls /> */}
     </Canvas>
   );
-}
+});
 
-function Box(props: JSX.IntrinsicElements["mesh"]) {
+const Box = memo(function Box(props: JSX.IntrinsicElements["mesh"]) {
   // This reference will give us direct access to the mesh
   const mesh = useRef<Mesh<BufferGeometry, Material | Material[]>>(null);
   // Subscribe this component to the render-loop, rotate the mesh every frame
@@ -60,4 +67,4 @@ function Box(props: JSX.IntrinsicElements["mesh"]) {
       <meshStandardMaterial color={"#ED2E38"} />
     </mesh>
   );
-}
+});

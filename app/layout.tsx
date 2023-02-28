@@ -1,10 +1,12 @@
 "use client";
 
 import "./globals.css";
-import React from "react";
+import React, { useRef } from "react";
 import Cursor from "(cursor)";
 import { Nav, SplashScreen } from "(ui)";
 import { World, useWorld } from "(world)";
+import { Landscape } from "(world)/(3D)/Landscape";
+import { Dom } from "(world)/(3D)/HtmlWorld";
 
 export default function RootLayout({
   children,
@@ -25,18 +27,21 @@ export default function RootLayout({
     <html lang="en" className=" bg-zinc-200 dark:bg-zinc-600">
       <head />
       <body
-        className="hidebar relative flex h-max w-full flex-col overflow-x-scroll text-zinc-900 selection:bg-zinc-900 selection:text-zinc-200 selection:dark:text-zinc-600
+        className="[&>div]hidebar relative flex h-max w-full flex-col overflow-x-scroll text-zinc-900 selection:bg-zinc-900 selection:text-zinc-200 selection:dark:text-zinc-600
 "
       >
-        <SplashScreen />
+        {/* <SplashScreen /> */}
+        {/* <Cursor /> */}
+        {/* <World ref={world} style={{ scale, rotateX, rotateY }} /> */}
+        {children}
         <Nav
           wrapper={wrapper}
           screen={screen}
           style={{ rotateX, rotateY, translateY, translateX }}
         />
-        {children}
-        {/* <Cursor /> */}
-        <World ref={world} style={{ scale, rotateX, rotateY }} />
+        <Landscape>
+          <Dom world={world} />
+        </Landscape>
       </body>
     </html>
   );
