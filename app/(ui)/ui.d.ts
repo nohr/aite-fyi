@@ -1,6 +1,6 @@
 import { MotionValue, type WillChange } from "framer-motion";
 
-interface MinimapProps {
+interface WorldProps {
   world?: React.RefObject<HTMLDivElement | null>;
   wrapper?: React.RefObject<HTMLDivElement>;
   screen?: React.RefObject<HTMLDivElement>;

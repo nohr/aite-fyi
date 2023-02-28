@@ -22,10 +22,10 @@ export default function RootLayout({
     translateX,
   } = useWorld();
   return (
-    <html lang="en" className=" bg-zinc-600">
+    <html lang="en" className=" bg-zinc-200 dark:bg-zinc-600">
       <head />
       <body
-        className="hidebar flex h-max w-full flex-col overflow-x-scroll text-zinc-900 selection:bg-zinc-900 selection:text-zinc-600
+        className="hidebar relative flex h-max w-full flex-col overflow-x-scroll text-zinc-900 selection:bg-zinc-900 selection:text-zinc-200 selection:dark:text-zinc-600
 "
       >
         <SplashScreen />

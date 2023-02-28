@@ -1,14 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useEffect } from "react";
-import { useRouteChange, useTimeout } from "./useUtils";
+import { memo } from "react";
+import { useRouteChange } from "./useUtils";
 import { usePathname } from "next/navigation";
 import { Fade } from "./Fade";
 import { useWorldStore } from "(world)/useWorldStore";
 import { Minimap } from "(world)/Minimap";
-import { MinimapProps } from "./ui";
-import { useUIStore } from "./useUIStore";
+import { WorldProps } from "./ui";
 
 const links = [
   { href: "/about" },
@@ -17,71 +16,46 @@ const links = [
   { href: "/contact" },
 ];
 
-export function Nav({ ...props }: MinimapProps) {
+export const Nav = memo(function Nav({ ...props }: WorldProps) {
   const { routeChange } = useRouteChange();
   const zoom = useWorldStore((state) => state.zoom);
-  // const fade = useUIStore((state) => state.fade);
-  const setFade = useUIStore((state) => state.setFade);
-  const { reset } = useTimeout(() => setFade(false), 2000);
-
-  // on mouse move, reset the fade timer
-  const handleFade = useCallback(() => {
-    setFade(true);
-    reset();
-  }, [reset, setFade]);
-
-  useEffect(() => {
-    document.addEventListener("mousemove", handleFade);
-    document.addEventListener("scroll", handleFade);
-    return () => {
-      document.removeEventListener("mousemove", handleFade);
-      document.removeEventListener("scroll", handleFade);
-    };
-  }, [handleFade]);
-
+  const wrapper_width = useWorldStore((state) => state.wrapper_width);
   const pathname = usePathname();
-  // const home = pathname === "/";
+  const active = (href: string) => href === pathname;
 
-  const visible = (href: string) => href !== pathname;
+  // console.log("rendering nav");
+
   return (
-    <nav
-      // truthy={true}
-      // truthy={(fade && !zoom) || (home && !zoom)}
-      className="fixed top-0 left-0 z-[90] flex h-16 w-screen flex-row items-center p-0 backdrop-blur-xl"
-    >
-      <Link
-        href="/"
-        className="flex h-full w-1/3 items-end border-b-[1px] border-r-[1px] border-current px-2 text-lg uppercase transition-colors duration-100 hover:bg-zinc-900 hover:text-zinc-600"
+    <nav className="fixed top-0 left-0 z-[90] flex h-16 w-screen select-none flex-row items-center justify-end p-0">
+      <Fade
+        truthy={!zoom}
+        className="inline-flex h-full w-full flex-row border-b-[1px] border-current backdrop-blur-lg"
       >
-        home
-      </Link>
-      <div
-        // truthy={!zoom}
-        className=" flex h-full w-full flex-row border-b-[1px] border-current"
-      >
+        <Link
+          href="/"
+          style={{ width: wrapper_width }}
+          className="flex h-full items-end  border-r-[1px] border-zinc-900 px-2 text-lg uppercase backdrop-blur-lg transition-colors  duration-100 hover:bg-zinc-900 hover:text-zinc-200 hover:dark:text-zinc-600"
+        >
+          Æ
+        </Link>
         {links.map(({ href }) => (
-          <Fade
+          <Link
             key={href}
-            truthy={visible(href)}
-            className="flex h-full w-fit"
-            style={{
-              transformOrigin: "50% 50%",
+            href={href}
+            onClick={() => {
+              routeChange();
             }}
+            className={`flex items-end px-2 text-lg uppercase transition-colors duration-100 ${
+              active(href)
+                ? "bg-zinc-900 text-zinc-200 dark:text-zinc-600"
+                : "bg-transparent text-zinc-900 hover:bg-zinc-900 hover:text-zinc-200 hover:dark:text-zinc-600"
+            } `}
           >
-            <Link
-              href={href}
-              onClick={() => {
-                routeChange();
-              }}
-              className=" flex items-end px-2 text-lg uppercase transition-colors duration-100 hover:bg-zinc-900 hover:text-zinc-600"
-            >
-              {href.split("/")[1] || "home"}
-            </Link>
-          </Fade>
+            {href.split("/")[1] || "home"}
+          </Link>
         ))}
-      </div>
-      {/* minimap */}
+      </Fade>
       <Minimap {...props} />
     </nav>
   );
-}
+});

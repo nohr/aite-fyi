@@ -18,6 +18,7 @@ export function useWorld() {
   const screen = useRef<HTMLDivElement | null>(null);
   const world = useRef<HTMLDivElement | null>(null);
   const setWorld = useWorldStore((state) => state.setWorld);
+  const setWrapper = useWorldStore((state) => state.setWrapper);
   const zoom = useWorldStore((state) => state.zoom);
   const setZoom = useWorldStore((state) => state.setZoom);
   const setRotate = useWorldStore((state) => state.setRotate);
@@ -178,15 +179,15 @@ export function useWorld() {
 
   const scaleScreen = useCallback(
     function (value = 1) {
+      const height = wrapper_height / 3 / value;
+      const width = wrapper_width / 3 / value;
+      // console.log(width, height);
+
       if (!screen.current) return;
-      screen.current.style.height = `${
-        ((window.innerHeight / world_height) * 100) / value
-      }%`;
-      screen.current.style.width = `${
-        ((window.innerWidth / world_width) * 100) / value
-      }%`;
+      screen.current.style.height = `${height}px`;
+      screen.current.style.width = `${width}px`;
     },
-    [screen, world_height, world_width]
+    [wrapper_height, wrapper_width]
   );
 
   useEffect(() => {
@@ -205,12 +206,14 @@ export function useWorld() {
 
       const { width, height } = world.current.getBoundingClientRect();
       setWorld(height, width);
+      if (!wrapper.current) return;
+      setWrapper(wrapper.current.clientHeight);
     };
     handleResize();
     wrapper.current?.offsetParent?.classList.add("opacity-100");
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, [setWorld, world]);
+  }, [setWorld, setWrapper, world]);
 
   // * update transform origin on scroll
   useEffect(() => {
@@ -238,12 +241,12 @@ export function useWorld() {
   const translateY = useTransform(
     scrollY,
     [0, world_height],
-    [0, zoom ? 0 : wrapper_height()]
+    [0, zoom ? 0 : wrapper_height]
   );
   const translateX = useTransform(
     scrollX,
     [0, world_width],
-    [0, zoom ? 0 : wrapper_width()]
+    [0, zoom ? 0 : wrapper_width]
   );
   return {
     world,

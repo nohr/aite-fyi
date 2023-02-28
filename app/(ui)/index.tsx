@@ -6,4 +6,4 @@ export { useUIStore } from "./useUIStore";
 export { useTimeout } from "./useUtils";
 export { useUtils } from "./useUtils";
 export { Fade } from "./Fade";
-export type { MinimapProps } from "./ui";
+export type { WorldProps } from "./ui";

@@ -19,7 +19,7 @@ export function Landscape({ ...props }) {
     >
       <Camera {...props} />
       <ambientLight intensity={0.5} />
-      <spotLight position={[1, 15, 1]} angle={0.3} />
+      {/* <spotLight position={[1, 15, 1]} angle={0.3} /> */}
       {/* <pointLight position={[-10, -15, -10]} />
       <fog attach="fog" args={["white", 5, 15]} /> */}
       <Box position={[-1, 0, 0]} />
@@ -33,6 +33,14 @@ export function Landscape({ ...props }) {
         sectionSize={1}
         sectionThickness={1}
       /> */}
+      <mesh
+        position={[0, -1, 0]}
+        rotation={[-Math.PI / 2, 0, 0]}
+        frustumCulled={false}
+      >
+        <planeGeometry args={[100, 100]} />
+        <meshStandardMaterial color={"#52525B"} />
+      </mesh>
     </Canvas>
   );
 }

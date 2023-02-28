@@ -7,12 +7,14 @@ export const useWorldStore = create<WorldProps>()((set, get) => ({
   setWorld(world_height, world_width) {
     set(() => ({ world_height, world_width }));
   },
-  wrapper_height: () => get().world_height / get().modifier,
-  wrapper_width: () => get().world_width / get().modifier,
-  screen_height: 0,
-  screen_width: 0,
-  setScreen(screen_height, screen_width) {
-    set(() => ({ screen_height, screen_width }));
+
+  wrapper_height: 0,
+  wrapper_width: 0,
+  setWrapper(wrapper_height) {
+    set(() => ({
+      wrapper_height,
+      wrapper_width: wrapper_height * (get().world_width / get().world_height),
+    }));
   },
   zoom: false,
   setZoom(zoom = !get().zoom) {
@@ -29,11 +31,9 @@ interface WorldProps {
   world_height: number;
   world_width: number;
   setWorld: (world_height: number, world_width: number) => void;
-  wrapper_height: () => number;
-  wrapper_width: () => number;
-  screen_height: number;
-  screen_width: number;
-  setScreen: (screen_height: number, screen_width: number) => void;
+  wrapper_height: number;
+  wrapper_width: number;
+  setWrapper: (wrapper_height: number) => void;
   zoom: boolean;
   setZoom: (zoom?: boolean) => void;
   rotate: boolean;

@@ -46,7 +46,7 @@ export function Camera({ ...props }) {
   rotateX.on("change", (value) => (rot.current.x = value));
   rotateY.on("change", (value) => (rot.current.y = value));
 
-  useFrame(({ camera }, delta) => {
+  useFrame(({ camera, scene }, delta) => {
     // console.log(rot.current.x, rot.current.y);
     //   convert to radians
     const radx = rot.current.x * (Math.PI / 180);
@@ -72,6 +72,7 @@ export function Camera({ ...props }) {
       7 / scaleNow.current + radx * 12,
       pos.current.y * Math.pow(scaleNow.current, 4) - radx * 14,
     ]);
+    // console.log(scene);
   });
 
   return (
@@ -82,6 +83,13 @@ export function Camera({ ...props }) {
       fov={80}
       aspect={innerWidth / innerHeight}
       ref={camera}
-    />
+    >
+      <spotLight
+        // rotation={[-Math.PI / 3, 0, 0]}
+        intensity={1}
+        color="white"
+        penumbra={0.5}
+      />
+    </PerspectiveCamera>
   );
 }
