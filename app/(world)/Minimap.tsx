@@ -1,56 +1,24 @@
-import { useUIStore } from "(ui)";
-import {
-  motion,
-  MotionValue,
-  // useDragControls,
-  useScroll,
-  useTransform,
-  useWillChange,
-} from "framer-motion";
+import { useUIStore, type MinimapProps } from "(ui)";
+import { motion, useWillChange } from "framer-motion";
+import { memo } from "react";
 import { useWorldStore } from "./useWorldStore";
 
-export function Minimap({
-  wrapper,
-  screen,
-  world,
-  rotateX,
-  rotateY,
-}: {
-  wrapper: React.RefObject<HTMLDivElement>;
-  screen: React.RefObject<HTMLDivElement>;
-  world: React.RefObject<HTMLDivElement>;
-  rotateX: MotionValue<number>;
-  rotateY: MotionValue<number>;
-}) {
-  const grab = useUIStore((state) => state.grab);
+export function Minimap({ ...props }: MinimapProps) {
+  const { wrapper, screen } = props;
   const setGrab = useUIStore((state) => state.setGrab);
   const zoom = useWorldStore((state) => state.zoom);
-  const world_height = useWorldStore((state) => state.world_height);
-  const world_width = useWorldStore((state) => state.world_width);
   const wrapper_height = useWorldStore((state) => state.wrapper_height);
   const wrapper_width = useWorldStore((state) => state.wrapper_width);
-  const willChange = useWillChange();
-  // const dragControls = useDragControls();
-  const { scrollX, scrollY } = useScroll();
-  const translateY = useTransform(
-    scrollY,
-    [0, world_height],
-    [0, zoom ? 0 : wrapper_height()]
-  );
-  const translateX = useTransform(
-    scrollX,
-    [0, world_width],
-    [0, zoom ? 0 : wrapper_width()]
-  );
 
+  const willChange = useWillChange();
   return (
     <div
-      className={`fixed bottom-4 right-4 isolate z-40 select-none overflow-hidden rounded-md border-[1px]
-      border-current  bg-white opacity-0 shadow-md transition-opacity delay-200 hover:opacity-100 dark:bg-black`}
+      className={` relative isolate z-40 
+      select-none border-l-[1px] border-b-[1px] w-[${wrapper_width()}px] border-current `}
     >
       <motion.div
         ref={wrapper}
-        className="relative m-1"
+        className="relative m-1 overflow-hidden "
         style={{
           height: wrapper_height(),
           width: wrapper_width(),
@@ -66,21 +34,14 @@ export function Minimap({
             setGrab(true);
             // ! bug: scrolls the minimap too far
             // // update window scroll position
-            // if (!screen.current || !world.current) return;
-            // const mx = info.delta.x;
-            // const my = info.delta.y;
-            // document.documentElement.scrollBy({
-            //   left: mx,
-            //   top: my,
-            // });
+            const mx = info.delta.x;
+            const my = info.delta.y;
+            document.documentElement.scrollBy({
+              left: mx,
+              top: my,
+            });
           }}
-          style={{
-            willChange,
-            rotateX,
-            rotateY,
-            translateY,
-            translateX,
-          }}
+          style={{ ...props.style, willChange }}
           dragListener={!zoom}
           onDragStart={() => setGrab(true)}
           onDragEnd={() => setGrab(false)}

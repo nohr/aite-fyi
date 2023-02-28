@@ -9,6 +9,7 @@ export function useInView(route: string) {
   const zoom = useWorldStore((state) => state.zoom);
   const rotate = useWorldStore((state) => state.rotate);
   const routing = useUIStore((state) => state.routing);
+  const setStatus = useUIStore((state) => state.setStatus);
   const router = useRouter();
   const pathname = usePathname() ?? "/";
   const observer = useRef<IntersectionObserver | null>(null);
@@ -24,13 +25,9 @@ export function useInView(route: string) {
         block: "start",
         inline: "nearest",
       });
-      const worldWrap = document.getElementById("worldWrap");
-      const worldSpinner = document.getElementById("worldSpinner");
-      if (!worldWrap || !worldSpinner) return;
-      worldWrap.style.opacity = "1";
-      worldSpinner.style.opacity = "0";
+      setStatus("");
     }
-  }, [pathname, rotate, zoom]);
+  }, [pathname, rotate, setStatus, zoom]);
 
   // use intersection observer to check if the element is in view
   useEffect(() => {
@@ -57,6 +54,7 @@ export function useInView(route: string) {
         });
       },
       {
+        root: null,
         threshold: 0.3,
       }
     );

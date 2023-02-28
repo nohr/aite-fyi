@@ -1,1 +1,2 @@
-export { default } from "./World";
+export { World } from "./World";
+export { useWorld } from "./useWorld";

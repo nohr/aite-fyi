@@ -24,9 +24,9 @@ export function SplashScreen() {
     // todo control truthy with other booleans instead of status
     <Fade truthy={status !== ""}>
       <div
-        className={`fixed z-[100] flex h-screen w-screen items-center bg-current p-4`}
+        className={`fixed z-[100] flex h-screen w-screen items-center bg-zinc-600 p-4`}
       >
-        <div className=" inline-flex gap-x-2 text-white dark:text-black">
+        <div className=" inline-flex gap-x-2 text-zinc-900">
           <VscLoading className="h-6 animate-spin" />
           {status}
         </div>

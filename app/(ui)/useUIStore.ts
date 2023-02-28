@@ -13,7 +13,7 @@ export const useUIStore = create<UIProps>()(
       setMotion() {
         set((state: any) => ({ motion: !state.motion }));
       },
-      status: "",
+      status: "Loading...",
       setStatus(status): void {
         // clearTimeout(time);
         // console.log(status);
@@ -33,6 +33,10 @@ export const useUIStore = create<UIProps>()(
       routing: false,
       setRouting(routing = !get().routing) {
         set(() => ({ routing }));
+      },
+      fade: false,
+      setFade(fade = !get().fade) {
+        set(() => ({ fade }));
       },
     }),
     {

@@ -1,75 +1,87 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 import { useRouteChange, useTimeout } from "./useUtils";
 import { usePathname } from "next/navigation";
 import { Fade } from "./Fade";
 import { useWorldStore } from "(world)/useWorldStore";
+import { Minimap } from "(world)/Minimap";
+import { MinimapProps } from "./ui";
+import { useUIStore } from "./useUIStore";
 
 const links = [
-  { href: "/" },
-  { href: "/page2" },
-  { href: "/page3" },
   { href: "/about" },
-  { href: "/about2" },
-  { href: "/about3" },
-  { href: "/work" },
-  { href: "/work2" },
-  { href: "/work3" },
+  { href: "/professional" },
+  { href: "/personal" },
+  { href: "/contact" },
 ];
 
-let x = 0;
-export function Nav() {
+export function Nav({ ...props }: MinimapProps) {
   const { routeChange } = useRouteChange();
   const zoom = useWorldStore((state) => state.zoom);
-  const [fade, setFade] = useState(true);
+  // const fade = useUIStore((state) => state.fade);
+  const setFade = useUIStore((state) => state.setFade);
   const { reset } = useTimeout(() => setFade(false), 2000);
-  x++;
-  console.log("render nav", x);
 
   // on mouse move, reset the fade timer
-  const handleMouseMove = useCallback(() => {
+  const handleFade = useCallback(() => {
     setFade(true);
     reset();
-  }, [reset]);
+  }, [reset, setFade]);
 
   useEffect(() => {
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, [handleMouseMove]);
+    document.addEventListener("mousemove", handleFade);
+    document.addEventListener("scroll", handleFade);
+    return () => {
+      document.removeEventListener("mousemove", handleFade);
+      document.removeEventListener("scroll", handleFade);
+    };
+  }, [handleFade]);
 
   const pathname = usePathname();
+  // const home = pathname === "/";
 
-  function visible(href: string) {
-    return href !== pathname;
-  }
+  const visible = (href: string) => href !== pathname;
   return (
-    <Fade
+    <nav
       // truthy={true}
-      truthy={fade && !zoom}
-      className="pointer-events-none fixed bottom-0 left-0 z-[100] flex h-min w-full flex-row gap-x-2 p-4"
+      // truthy={(fade && !zoom) || (home && !zoom)}
+      className="fixed top-0 left-0 z-[90] flex h-16 w-screen flex-row items-center p-0 backdrop-blur-xl"
     >
-      {links.map(({ href }) => (
-        <Fade
-          key={href}
-          truthy={visible(href)}
-          className="sticky mb-0 flex h-min w-fit rounded-md bg-current"
-          style={{
-            transformOrigin: "50% 50%",
-          }}
-        >
-          <Link
-            href={href}
-            onClick={() => {
-              routeChange();
+      <Link
+        href="/"
+        className="flex h-full w-1/3 items-end border-b-[1px] border-r-[1px] border-current px-2 text-lg uppercase transition-colors duration-100 hover:bg-zinc-900 hover:text-zinc-600"
+      >
+        home
+      </Link>
+      <div
+        // truthy={!zoom}
+        className=" flex h-full w-full flex-row border-b-[1px] border-current"
+      >
+        {links.map(({ href }) => (
+          <Fade
+            key={href}
+            truthy={visible(href)}
+            className="flex h-full w-fit"
+            style={{
+              transformOrigin: "50% 50%",
             }}
-            className="!pointer-events-auto p-1 text-[0.5rem] font-bold  uppercase text-white"
           >
-            {href.split("/")[1] || "home"}
-          </Link>
-        </Fade>
-      ))}
-    </Fade>
+            <Link
+              href={href}
+              onClick={() => {
+                routeChange();
+              }}
+              className=" flex items-end px-2 text-lg uppercase transition-colors duration-100 hover:bg-zinc-900 hover:text-zinc-600"
+            >
+              {href.split("/")[1] || "home"}
+            </Link>
+          </Fade>
+        ))}
+      </div>
+      {/* minimap */}
+      <Minimap {...props} />
+    </nav>
   );
 }

@@ -1,9 +1,9 @@
 import { Section } from "../../Section";
 
-export function Page2() {
+export function Professional() {
   return (
-    <Section id="page2">
-      <h1 className="text-4xl font-bold">Page2</h1>
+    <Section id="professional">
+      <h1 className="text-4xl font-bold">professional</h1>
       <p>
         about page Lorem, ipsum dolor sit amet consectetur adipisicing elit.
         Natus explicabo, veritatis minus corporis unde, nulla voluptas quaerat

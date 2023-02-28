@@ -59,6 +59,8 @@ interface UIProps {
   //   setTheme: (theme: "light" | "dark") => void;
   routing: boolean;
   setRouting: (routing?: boolean) => void;
+  fade: boolean;
+  setFade: (fade?: boolean) => void;
 }
 
 interface CursorProps {

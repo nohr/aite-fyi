@@ -1,23 +1,42 @@
+"use client";
+
 import "./globals.css";
 import React from "react";
 import Cursor from "(cursor)";
 import { Nav, SplashScreen } from "(ui)";
-import World from "(world)";
+import { World, useWorld } from "(world)";
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const {
+    world,
+    wrapper,
+    screen,
+    scale,
+    rotateX,
+    rotateY,
+    translateY,
+    translateX,
+  } = useWorld();
   return (
-    <html lang="en" className=" bg-white dark:bg-black">
+    <html lang="en" className=" bg-zinc-600">
       <head />
-      <body className="hidebar flex h-max w-full flex-row overflow-x-scroll text-red-500 ">
+      <body
+        className="hidebar flex h-max w-full flex-col overflow-x-scroll text-zinc-900 selection:bg-zinc-900 selection:text-zinc-600
+"
+      >
         <SplashScreen />
-        <Nav />
+        <Nav
+          wrapper={wrapper}
+          screen={screen}
+          style={{ rotateX, rotateY, translateY, translateX }}
+        />
         {children}
         {/* <Cursor /> */}
-        <World />
+        <World ref={world} style={{ scale, rotateX, rotateY }} />
       </body>
     </html>
   );

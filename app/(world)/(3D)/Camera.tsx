@@ -9,7 +9,7 @@ export function Camera({ ...props }) {
   const world_height = useWorldStore((state) => state.world_height);
   const world_width = useWorldStore((state) => state.world_width);
   const camera = useRef<PerspectiveCameraProps>(null);
-  const { scale, rotateX, rotateY } = props as {
+  const { scale, rotateX, rotateY } = props.style as {
     scale: MotionValue<number>;
     rotateX: MotionValue<number>;
     rotateY: MotionValue<number>;

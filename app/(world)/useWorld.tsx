@@ -1,5 +1,12 @@
+"use client";
+
 import { useUtils, useTimeout } from "(ui)";
-import { animate, useMotionValue } from "framer-motion";
+import {
+  animate,
+  useMotionValue,
+  useScroll,
+  useTransform,
+} from "framer-motion";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef } from "react";
 import { useWorldStore } from "./useWorldStore";
@@ -16,6 +23,8 @@ export function useWorld() {
   const setRotate = useWorldStore((state) => state.setRotate);
   const world_height = useWorldStore((state) => state.world_height);
   const world_width = useWorldStore((state) => state.world_width);
+  const wrapper_height = useWorldStore((state) => state.wrapper_height);
+  const wrapper_width = useWorldStore((state) => state.wrapper_width);
   const pathname = usePathname();
   const scale = useMotionValue(1);
   const rotateX = useMotionValue(0);
@@ -89,10 +98,8 @@ export function useWorld() {
     window.addEventListener("wheel", throttle(handlePinch), {
       passive: false,
     });
-    window.addEventListener("gesturechange", (e) => e.preventDefault());
     return () => {
       window.removeEventListener("wheel", throttle(handlePinch));
-      window.removeEventListener("gesturechange", (e) => e.preventDefault());
     };
   }, [throttle, handlePinch]);
 
@@ -227,5 +234,25 @@ export function useWorld() {
     return () => window.removeEventListener("scroll", onScroll);
   }, [world_height, world_width, zoom]);
 
-  return { world, wrapper, screen, scale, rotateX, rotateY };
+  const { scrollX, scrollY } = useScroll();
+  const translateY = useTransform(
+    scrollY,
+    [0, world_height],
+    [0, zoom ? 0 : wrapper_height()]
+  );
+  const translateX = useTransform(
+    scrollX,
+    [0, world_width],
+    [0, zoom ? 0 : wrapper_width()]
+  );
+  return {
+    world,
+    wrapper,
+    screen,
+    scale,
+    rotateX,
+    rotateY,
+    translateY,
+    translateX,
+  };
 }

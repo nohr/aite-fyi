@@ -1,8 +1,7 @@
 import { create } from "zustand";
 
 export const useWorldStore = create<WorldProps>()((set, get) => ({
-  scale: 1,
-  modifier: 28,
+  modifier: 36,
   world_height: 0,
   world_width: 0,
   setWorld(world_height, world_width) {
@@ -26,7 +25,6 @@ export const useWorldStore = create<WorldProps>()((set, get) => ({
 }));
 
 interface WorldProps {
-  scale: number;
   modifier: number;
   world_height: number;
   world_width: number;
