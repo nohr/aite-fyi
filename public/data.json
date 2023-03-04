@@ -8,11 +8,13 @@
     "projects": [
         {
             "title": "Paredol",
-            "description": "Paredol is a web development company",
+            "description": "The site for Paredol, my freelance web design and development practice.",
             "desktop": "/videos/desktop/paredol.com.mp4",
             "mobile": "/videos/mobile/paredol.com.mp4",
-            "github": "https://www.github.com/paredol/paredol-site",
-            "url": "https://paredol.com",
+            "url": [
+                "https://paredol.com",
+                "https://www.github.com/paredol/paredol-site"
+            ],
             "program": [
                 "react",
                 "Next.js",
@@ -22,11 +24,13 @@
         },
         {
             "title": "Nabla",
-            "description": "The site for Nabla, Paredol's old identity.",
+            "description": "The site for Nabla, Paredol's old identity. The mobile version adds a layer of natural physical interaction in using the gyroscope for manual sifting through projects.",
             "desktop": "videos/desktop/nabla7.web.app.mov",
             "mobile": "/videos/mobile/nabla7.web.app.mp4",
-            "github": "https://www.github.com/nohr/nabla.ooo",
-            "url": "https://nabla7.web.app",
+            "url": [
+                "https://nabla7.web.app",
+                "https://www.github.com/nohr/nabla.ooo"
+            ],
             "program": [
                 "react",
                 "three",
@@ -36,11 +40,13 @@
         },
         {
             "title": "Geese",
-            "description": "AI website for Geese",
+            "description": "Website for Geese that takes advantage of OpenAI's DALLE-2 API and Firebase Cloud Functions to hourly generate a new image from a prompt.",
             "desktop": "/videos/desktop/geese-site.web.app.mov",
             "mobile": "/videos/mobile/geese-site.web.app.mp4",
-            "github": "https://www.github.com/paredol/geese-site",
-            "url": "https://geeseband.com",
+            "url": [
+                "https://geeseband.com",
+                "https://www.github.com/paredol/geese-site"
+            ],
             "program": [
                 "astro",
                 "react",
@@ -53,8 +59,10 @@
             "description": "The site for Afterdark Digital.",
             "desktop": "/videos/desktop/afterdark-digital.web.app.mp4",
             "mobile": "/videos/desktop/afterdark-digital.web.app.mp4",
-            "github": "https://www.github.com/nohr/nabla.ooo",
-            "url": "https://afterdark-digital.web.app/",
+            "url": [
+                "https://afterdark-digital.web.app/",
+                "https://www.github.com/nohr/nabla.ooo"
+            ],
             "program": [
                 "react",
                 "firebase"

@@ -63,7 +63,6 @@ interface ProjectProps {
   description: string;
   desktop: string;
   mobile: string;
-  github?: string;
-  url?: string;
+  url?: string | string[];
   program: string[];
 }

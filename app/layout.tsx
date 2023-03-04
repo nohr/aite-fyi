@@ -49,7 +49,7 @@ export default function RootLayout({
           horizontal={!mobileOnly}
         >
           <Scroll html>
-            <div className=" relative top-0 left-0 flex !h-full !w-full !translate-x-0 !translate-y-0 flex-col overflow-scroll md:flex-row">
+            <div className=" !h-full!w-full relative top-0 left-0 flex !translate-x-0 !translate-y-0 flex-col overflow-scroll md:flex-row">
               <Home />
               {data.projects.map((project, i) => (
                 <Project key={i} {...project} />
