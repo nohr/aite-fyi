@@ -33,10 +33,6 @@ export const Nav = memo(function Nav({
     // routeChange();
   }, [path, router]);
 
-  useEffect(() => {
-    console.log(home);
-  }, [home]);
-
   function Home() {
     return (
       <Link
@@ -94,7 +90,7 @@ export const Nav = memo(function Nav({
     children: React.ReactNode;
   }) {
     return (
-      <div className={className + ` `} onClick={onClick}>
+      <div className={className + ` `} onClick={onClick} tabIndex={0}>
         {children}
       </div>
     );
