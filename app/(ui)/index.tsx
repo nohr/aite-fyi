@@ -1,4 +1,4 @@
-export { Section } from "../(world)/Section";
+export { Section } from "./Section";
 export { SplashScreen } from "./SplashScreen";
 export { Nav } from "./Nav";
 export { useInView } from "./useInView";
@@ -7,3 +7,4 @@ export { useTimeout } from "./useUtils";
 export { useUtils } from "./useUtils";
 export { Fade } from "./Fade";
 export type { WorldProps } from "./ui";
+export { Socials } from "./Socials";

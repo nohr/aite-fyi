@@ -15,7 +15,6 @@ body {
   width: -moz-fit-content;
   width: fit-content;
   height: dvh;
-  overflow-x: scroll;
   /* scroll-snap-type: proximity; */
   /* scroll-behavior: smooth; */
 }
@@ -27,11 +26,11 @@ a {
 
 /* Hide scrollbar for Chrome, Safari and Opera */
 .hidebar::-webkit-scrollbar {
-  display: none;
+  /* display: none; */
 }
 
 /* Hide scrollbar for IE, Edge and Firefox */
 .hidebar {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  /*-ms-overflow-style: none; /* IE and Edge */
+  /*scrollbar-width: none; /* Firefox */
 }

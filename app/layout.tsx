@@ -1,46 +1,73 @@
 "use client";
 
 import "./globals.css";
-import React, { useRef } from "react";
-import Cursor from "(cursor)";
-import { Nav, SplashScreen } from "(ui)";
-import { World, useWorld } from "(world)";
-import { Landscape } from "(world)/(3D)/Landscape";
-import { Dom } from "(world)/(3D)/HtmlWorld";
+import React, { useEffect, useState } from "react";
+// import Cursor from "(cursor)";
+import { Nav } from "(ui)";
+import { Landscape } from "(3D)/Landscape";
+import { Home, Project } from "(routes)";
+import { Scroll } from "@react-three/drei";
+import { Scan } from "(3D)/Scan";
+import { Device } from "(3D)/Device";
+import data from "@public/data.json" assert { type: "json" };
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const {
-    world,
-    wrapper,
-    screen,
-    scale,
-    rotateX,
-    rotateY,
-    translateY,
-    translateX,
-  } = useWorld();
+  const [mobile, setMobile] = useState<boolean | undefined>();
+  const [mobileOnly, setMobileOnly] = useState(true);
+
+  useEffect(() => {
+    setMobile(window.matchMedia("(max-width: 768px)").matches);
+    setMobileOnly(window.matchMedia("(max-width: 768px)").matches);
+  }, []);
+
+  const [home, setHome] = useState(false);
+
   return (
-    <html lang="en" className=" bg-zinc-200 dark:bg-zinc-600">
+    <html lang="en" className=" bg-zinc-200 dark:bg-zinc-900">
       <head />
       <body
-        className="[&>div]hidebar relative flex h-max w-full flex-col overflow-x-scroll text-zinc-900 selection:bg-zinc-900 selection:text-zinc-200 selection:dark:text-zinc-600
+        className="hidebar relative flex w-full  flex-col text-zinc-900 selection:bg-zinc-900 selection:text-zinc-200 dark:text-zinc-600 selection:dark:bg-zinc-600 selection:dark:text-zinc-900
 "
       >
         {/* <SplashScreen /> */}
         {/* <Cursor /> */}
-        {/* <World ref={world} style={{ scale, rotateX, rotateY }} /> */}
         {children}
         <Nav
-          wrapper={wrapper}
-          screen={screen}
-          style={{ rotateX, rotateY, translateY, translateX }}
+          mobile={mobile}
+          setMobile={setMobile}
+          projects={data.projects}
+          home={home}
         />
-        <Landscape>
-          <Dom world={world} />
+        <Landscape
+          pages={1 + data.projects.length}
+          // infinite
+          damping={0.2}
+          horizontal={!mobileOnly}
+        >
+          <Scroll html>
+            <div className=" relative top-0 left-0 flex !h-full !w-full !translate-x-0 !translate-y-0 flex-col overflow-scroll md:flex-row">
+              <Home />
+              {data.projects.map((project, i) => (
+                <Project key={i} {...project} />
+              ))}
+            </div>
+          </Scroll>
+          <Scroll>
+            <Scan
+              position={mobileOnly ? [4, 2, 0] : [7, -2, 0]}
+              scale={mobileOnly ? 0.3 : 0.5}
+            />
+          </Scroll>
+          <Device
+            mobile={mobile}
+            projects={data.projects}
+            home={home}
+            setHome={setHome}
+          />
         </Landscape>
       </body>
     </html>
