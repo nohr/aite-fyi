@@ -1,4 +1,3 @@
-import { useWorldStore } from "(world)/useWorldStore";
 import { useEffect, useRef } from "react";
 import { useCursorStore } from "./useCursorStore";
 import { useModelStore } from "./useModelStore";
@@ -20,7 +19,6 @@ export function useGesture(cursor: boolean) {
     zoom_max: 0.65,
     zoom_min: 0.3,
   };
-  const zoom = useWorldStore((state) => state.zoom);
 
   // * zoom gesture - for zooming
   useEffect(() => {
@@ -168,7 +166,6 @@ export function useGesture(cursor: boolean) {
     cursor,
     setDrag,
     drag,
-    zoom,
   ]);
 
   return { select, drag, zooming };
