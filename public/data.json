@@ -18,8 +18,7 @@
             "program": [
                 "react",
                 "Next.js",
-                "firebase",
-                "tailwind"
+                "firebase"
             ]
         },
         {
@@ -34,13 +33,12 @@
             "program": [
                 "react",
                 "three",
-                "firebase",
-                "tailwind"
+                "firebase"
             ]
         },
         {
             "title": "Geese",
-            "description": "Website for Geese that takes advantage of OpenAI's DALLE-2 API and Firebase Cloud Functions to hourly generate a new image from a prompt.",
+            "description": "This website for Geese takes advantage of OpenAI's DALLE-2 API and Firebase Cloud Functions to hourly generate a new image from a text prompt.",
             "desktop": "/videos/desktop/geese-site.web.app.mov",
             "mobile": "/videos/mobile/geese-site.web.app.mp4",
             "url": [
@@ -50,8 +48,7 @@
             "program": [
                 "astro",
                 "react",
-                "firebase",
-                "tailwind"
+                "firebase"
             ]
         },
         {
