@@ -31,11 +31,14 @@ function VideoMaterial({
   const texture = useVideoTexture(
     projects[project][mobile ? "mobile" : "desktop"],
     {
+      unsuspend: "canplay",
+      crossOrigin: "Anonymous",
+      muted: true,
       loop: true,
       start: true,
-      muted: true,
     }
   );
+  texture.needsUpdate = true;
 
   texture.offset.y = mobile ? 0 : 0.006;
   texture.anisotropy = 64;
@@ -166,13 +169,11 @@ export const Device = memo(
       );
     });
 
-    console.log(mobile);
-
     return (
       <Suspense fallback={null}>
         {/* <Preload all /> */}
-        <group position={[0, -h / 3, 0]}>
-          <spotLight intensity={1} penumbra={0.9} position={[0, 0, 0]}>
+        <spotLight intensity={1} penumbra={0.9} position={[0, 0, 0]}>
+          <group position={[0, -h / 3, 0]}>
             <directionalLight
               ref={keyLight}
               intensity={0.8}
@@ -208,8 +209,8 @@ export const Device = memo(
                 />
               </Phone>
             ) : null}
-          </spotLight>
-        </group>
+          </group>
+        </spotLight>
       </Suspense>
     );
   },

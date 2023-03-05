@@ -1,7 +1,8 @@
 import { Section } from "(ui)";
-import { IconType } from "react-icons";
+import { SiNextdotjs, SiTailwindcss, SiThreedotjs } from "react-icons/si";
 import { GrGithub, GrLink, GrNext, GrReactjs } from "react-icons/gr";
 import { IoLogoFirebase } from "react-icons/io5";
+import Image from "next/image";
 
 export function Project({
   title,
@@ -12,7 +13,7 @@ export function Project({
 }: ProjectProps & React.HTMLAttributes<HTMLDivElement>) {
   return (
     <Section id={title} {...props}>
-      <div className="flex flex-col rounded-md bg-zinc-200 !bg-opacity-50 p-2 backdrop-blur-xl dark:bg-zinc-900 md:w-fit">
+      <div className="flex flex-col rounded-md bg-zinc-200 !bg-opacity-50 p-2 backdrop-blur-xl dark:bg-zinc-900 md:max-w-prose">
         <h1 className="text-4xl font-bold">{title}</h1>
         {description ? <p>{description}</p> : null}
         <div className="flex flex-row justify-between">
@@ -31,7 +32,7 @@ function Link({ url }: { url: ProjectProps["url"] }) {
       key={link}
       target="_blank"
       rel="noreferrer"
-      className="p-2 md:hover:opacity-50 [&>*>*]:stroke-current [&>svg]:aspect-square [&>svg]:h-8 [&>svg]:w-auto"
+      className="p-2 transition-opacity duration-200 md:hover:opacity-50 [&>*>*]:stroke-current [&>svg]:aspect-square [&>svg]:h-8 [&>svg]:w-auto"
     >
       {link.includes("github") ? <GrGithub /> : <GrLink />}
     </a>
@@ -52,18 +53,32 @@ function Programs({ program }: { program: string[] }) {
       {program.map((title: string, i): JSX.Element => {
         let icon: JSX.Element = <p key={title}>{title}</p>;
         switch (title) {
+          case "astro":
+            icon = (
+              <Image
+                key={title}
+                height="32"
+                width="32"
+                src="https://unpkg.com/simple-icons@v8/icons/astro.svg"
+                alt="Astro"
+              />
+            );
+            break;
           case "react":
             icon = <GrReactjs key={title} />;
             break;
           case "firebase":
             icon = <IoLogoFirebase key={title} />;
             break;
-          // case "nextjs":
-          //   icon = <GrNext key={title} />;
-          //   break;
-          // case "three":
-          //   icon = <GrNext />;
-          //   break;
+          case "tailwind":
+            icon = <SiTailwindcss key={title} />;
+            break;
+          case "nextjs":
+            icon = <SiNextdotjs key={title} />;
+            break;
+          case "three":
+            icon = <SiThreedotjs key={title} />;
+            break;
           default:
             break;
         }

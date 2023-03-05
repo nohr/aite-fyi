@@ -1,11 +1,11 @@
 "use client";
 
-import React, { Suspense } from "react";
+import React from "react";
 import {
   ScrollControls,
   ScrollControlsProps,
   SoftShadows,
-  Stats,
+  // Stats,
 } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Camera } from "./Camera";
@@ -23,7 +23,7 @@ export function Landscape({
         dpr={[1, 1.5]}
         // gl={{ antialias: true }}
         frameloop="demand"
-        className="!fixed !top-[64px] !left-0 -z-10 !m-0 !h-screen"
+        className="!fixed !left-0 -z-10 !m-0 !h-screen"
       >
         <ambientLight intensity={0.6} />
         <Camera zoom={28} position={[0, 0, 12]} far={80} near={0.1} />
