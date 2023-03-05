@@ -43,11 +43,11 @@ export default function RootLayout({
         <Landscape
           pages={1 + data.projects.length}
           // infinite
-          damping={0.2}
+          damping={0.1}
           horizontal={!mobileOnly}
         >
           <Scroll html>
-            <div className=" !h-full!w-full relative !top-[64px] left-0 flex !translate-x-0 !translate-y-0 flex-col overflow-scroll md:flex-row">
+            <div className=" relative !top-[64px] left-0 flex !h-full !w-full !translate-x-0 !translate-y-0 flex-col overflow-scroll md:flex-row">
               <Home />
               {data.projects.map((project, i) => (
                 <Project key={i} {...project} />
@@ -56,7 +56,7 @@ export default function RootLayout({
           </Scroll>
           <Scroll>
             <Scan
-              position={mobileOnly ? [4, 2, 0] : [7, -2, 0]}
+              position={mobileOnly ? [4, 0, 0] : [7, -2, 0]}
               scale={mobileOnly ? 0.3 : 0.5}
             />
           </Scroll>

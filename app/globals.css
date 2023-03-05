@@ -34,3 +34,12 @@ a {
   /*-ms-overflow-style: none; /* IE and Edge */
   /*scrollbar-width: none; /* Firefox */
 }
+
+#fullscreen {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  height: 100svh !important;
+  z-index: -10;
+  margin: 0;
+}

@@ -6,5 +6,6 @@ export { useUIStore } from "./useUIStore";
 export { useTimeout } from "./useUtils";
 export { useUtils } from "./useUtils";
 export { Fade } from "./Fade";
+export { SlideFade } from "./SlideFade";
 export type { WorldProps } from "./ui";
 export { Socials } from "./Socials";

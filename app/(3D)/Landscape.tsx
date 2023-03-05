@@ -1,30 +1,42 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import {
+  OrbitControls,
+  PerformanceMonitor,
   ScrollControls,
   ScrollControlsProps,
-  SoftShadows,
-  // Stats,
+  // SoftShadows,
+  Stats,
 } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Camera } from "./Camera";
 // import { Env } from "./Environment";
 // import { Modals } from "./Modals";
+import round from "lodash/round";
 
 export function Landscape({
   children,
   ...props
 }: React.PropsWithChildren<ScrollControlsProps>) {
+  const [dpr, setDpr] = React.useState(1.5);
+  useEffect(() => {
+    console.log("dpr", dpr);
+  }, [dpr]);
+
   return (
     <>
       <Canvas
-        // shadows
-        dpr={[1, 1.5]}
+        id="fullscreen"
+        dpr={dpr}
         // gl={{ antialias: true }}
         frameloop="demand"
-        className="!fixed !left-0 -z-10 !m-0 !h-screen"
+        // className="!fixed !left-0 -z-10 !m-0 !h-screen"
       >
+        <PerformanceMonitor
+          factor={1}
+          onChange={({ factor }) => setDpr(round(0.5 + 1.5 * factor, 1))}
+        />
         <ambientLight intensity={0.6} />
         <Camera zoom={28} position={[0, 0, 12]} far={80} near={0.1} />
         <ScrollControls {...props}>
@@ -32,10 +44,10 @@ export function Landscape({
           {/* <Modals /> */}
         </ScrollControls>
         {/* <Env /> */}
-        <SoftShadows />
+        {/* <SoftShadows /> */}
         {/* <OrbitControls enableZoom={false} /> */}
       </Canvas>
-      {/* <Stats className="!top-auto !bottom-0" /> */}
+      <Stats className="!top-auto !bottom-0" />
     </>
   );
 }

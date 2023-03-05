@@ -12,19 +12,19 @@ export function Socials() {
         <RiMailSendLine />
       </a>
       <a
-        href="www.linkedin.com/in/aite"
+        href="https://www.linkedin.com/in/aite/"
         title="linkedin"
         target="_blank"
-        rel="noreferrer"
+        rel="noreferrer noopener"
         className="p-2 transition-opacity duration-200 hover:opacity-50 "
       >
         <BsLinkedin />
       </a>
       <a
-        href="www.github.com/nohr"
+        href="https://www.github.com/nohr"
         title="github"
         target="_blank"
-        rel="noreferrer"
+        rel="noreferrer noopener"
         className="p-2 transition-opacity duration-200 hover:opacity-50 "
       >
         <BsGithub />

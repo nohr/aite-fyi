@@ -278,4 +278,4 @@ export const Phone = forwardRef(function Phone(
   );
 });
 
-// useGLTF.preload(url);
+useGLTF.preload(url);

@@ -9,6 +9,7 @@ import { useUIStore } from "./useUIStore";
 import { IoPhonePortrait, IoLaptopOutline } from "react-icons/io5";
 import { Socials } from "./Socials";
 import { GrContactInfo } from "react-icons/gr";
+import { SlideFade } from "./SlideFade";
 
 const Nav = memo(function Nav({
   mobile,
@@ -109,9 +110,9 @@ const Nav = memo(function Nav({
           {mobile ? <IoLaptopOutline /> : <IoPhonePortrait />}
         </Icon>
       </Fade>
-      <Fade truthy={home || about} init={0}>
+      <SlideFade truthy={home || about}>
         <Socials />
-      </Fade>
+      </SlideFade>
     </nav>
   );
 });

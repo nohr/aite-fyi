@@ -1,64 +1,20 @@
 /* eslint-disable jsx-a11y/alt-text */
 import {
-  Html,
-  Loader,
+  // Html,
+  // Loader,
   // Preload,
   useScroll,
-  useTexture,
-  useVideoTexture,
 } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
-import { memo, Suspense, useRef, useState } from "react";
+import { memo, Suspense, useRef } from "react";
 import { VscLoading } from "react-icons/vsc";
 import * as THREE from "three";
 import { M1 } from "./M1";
 import { Phone } from "./Phone";
+import { VideoMaterial } from "./VideoMaterial";
 
 const rsqw = (t: number, delta = 0.02, a = 1, f = 1 / (2 * Math.PI)) =>
   (a / Math.atan(1 / delta)) * Math.atan(Math.sin(2 * Math.PI * t * f) / delta);
-
-function VideoMaterial({
-  projects,
-  project,
-  mobile,
-}: {
-  projects: ProjectProps[];
-  project: number;
-  mobile: boolean;
-}) {
-  // console.log("rendered");
-
-  const texture = useVideoTexture(
-    projects[project][mobile ? "mobile" : "desktop"],
-    {
-      unsuspend: "canplay",
-      crossOrigin: "Anonymous",
-      muted: true,
-      loop: true,
-      start: true,
-    }
-  );
-  texture.needsUpdate = true;
-
-  texture.offset.y = mobile ? 0 : 0.006;
-  texture.anisotropy = 64;
-  return (
-    <Suspense fallback={<FallbackMaterial url="/videos/fallback.png" />}>
-      <meshLambertMaterial
-        map={texture}
-        toneMapped={false}
-        side={mobile ? THREE.BackSide : undefined}
-      />
-    </Suspense>
-  );
-}
-// fallback texture
-function FallbackMaterial({ url }: { url: string }) {
-  console.log(url.includes("mobile"));
-
-  const texture = useTexture(url);
-  return <meshBasicMaterial map={texture} toneMapped={false} />;
-}
 
 export const Device = memo(
   function Device({
@@ -79,19 +35,10 @@ export const Device = memo(
     const keyLight = useRef<THREE.DirectionalLight>(null!);
     const scroll = useScroll();
 
-    const pages = 1 + projects.length;
-    // change texture with scroll position
-    const [project, setProject] = useState(0);
-    useFrame(() => {
-      let num = Math.floor(scroll.offset * pages - 1);
-      num = num > projects.length - 1 ? projects.length - 1 : num < 0 ? 0 : num;
-      setProject(num);
-    });
-
     // handle device sizing
     const M1Height = window.matchMedia("(max-width: 768px)").matches
       ? h / 4
-      : 0;
+      : -h / 12;
     const M1Scale =
       w / 40 > 1.23
         ? 1.23
@@ -105,6 +52,7 @@ export const Device = memo(
       : h / 130;
     // console.log(PhoneScale);
 
+    const pages = 1 + projects.length;
     // Desktop
     useFrame((state, delta) => {
       const r1 = scroll.range(1 / pages, 1 / pages);
@@ -187,14 +135,10 @@ export const Device = memo(
                 rotation={[-Math.PI / 7, -Math.PI / 2, 0]}
                 position={[0, M1Height, -w / 2.625]}
               >
-                <VideoMaterial
-                  mobile={false}
-                  project={project}
-                  projects={projects}
-                />
+                <VideoMaterial mobile={false} projects={projects} />
               </M1>
             ) : null}
-            {mobile ? (
+            {/* {mobile ? (
               <Phone
                 ref={phone}
                 rotation={[-0.8, -Math.PI, 0]}
@@ -202,13 +146,9 @@ export const Device = memo(
                 scale={PhoneScale}
                 frustumCulled={false}
               >
-                <VideoMaterial
-                  mobile={true}
-                  project={project}
-                  projects={projects}
-                />
+                <VideoMaterial mobile={true} projects={projects} />
               </Phone>
-            ) : null}
+            ) : null} */}
           </group>
         </spotLight>
       </Suspense>

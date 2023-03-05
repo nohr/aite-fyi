@@ -40,7 +40,7 @@ export const M1 = forwardRef(function M1(
     <group {...props} ref={props.body} dispose={null}>
       <group
         ref={ref}
-        position={[0, -0.43, -11.35]}
+        position={[0.0, -0.43, -11.45]}
         rotation={[Math.PI / 2, 0, 0]}
       >
         <mesh
@@ -67,4 +67,4 @@ export const M1 = forwardRef(function M1(
   );
 });
 
-// useGLTF.preload(url);
+useGLTF.preload(url);

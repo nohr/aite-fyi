@@ -3,6 +3,7 @@ import { SiNextdotjs, SiTailwindcss, SiThreedotjs } from "react-icons/si";
 import { GrGithub, GrLink, GrNext, GrReactjs } from "react-icons/gr";
 import { IoLogoFirebase } from "react-icons/io5";
 import Image from "next/image";
+import { useScroll } from "@react-three/drei";
 
 export function Project({
   title,
@@ -11,6 +12,13 @@ export function Project({
   program,
   ...props
 }: ProjectProps & React.HTMLAttributes<HTMLDivElement>) {
+  // const scroll = useScroll();
+
+  // scroll.el?.addEventListener("scroll", () => {
+  //   console.log(scroll.offset);
+  // });
+
+  // scroll.
   return (
     <Section id={title} {...props}>
       <div className="flex flex-col rounded-md bg-zinc-200 !bg-opacity-50 p-2 backdrop-blur-xl dark:bg-zinc-900 md:max-w-prose">
@@ -61,6 +69,7 @@ function Programs({ program }: { program: string[] }) {
                 width="32"
                 src="https://unpkg.com/simple-icons@v8/icons/astro.svg"
                 alt="Astro"
+                className="fill-current"
               />
             );
             break;
