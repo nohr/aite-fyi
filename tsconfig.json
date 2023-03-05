@@ -24,7 +24,8 @@
       "@public/*": ["../public/*"],
       "(cursor)": ["./(cursor)/."],
       "(routes)": ["./(routes)/."],
-      "(ui)": ["./(ui)/."]
+      "(ui)": ["./(ui)/."],
+      "(3D)": ["./(3D)/."]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

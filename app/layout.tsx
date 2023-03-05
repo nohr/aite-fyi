@@ -3,12 +3,10 @@
 import "./globals.css";
 import React, { useEffect, useState } from "react";
 // import Cursor from "(cursor)";
-import { Nav } from "(ui)";
-import { Landscape } from "(3D)/Landscape";
+import { Nav } from "(ui)/Nav";
+import { Device, Landscape, Scan } from "(3D)";
 import { Home, Project } from "(routes)";
 import { Scroll } from "@react-three/drei";
-import { Scan } from "(3D)/Scan";
-import { Device } from "(3D)/Device";
 import data from "@public/data.json" assert { type: "json" };
 
 export default function RootLayout({
