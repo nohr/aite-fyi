@@ -1,6 +1,6 @@
 export { Section } from "./Section";
 export { SplashScreen } from "./SplashScreen";
-export { Nav } from "./Nav";
+export { default } from "./Nav";
 export { useInView } from "./useInView";
 export { useUIStore } from "./useUIStore";
 export { useTimeout } from "./useUtils";

@@ -3,7 +3,7 @@
 import "./globals.css";
 import React, { useEffect, useState } from "react";
 // import Cursor from "(cursor)";
-import { Nav } from "(ui)/Nav";
+import Nav from "(ui)";
 import { Device, Landscape, Scan } from "(3D)";
 import { Home, Project } from "(routes)";
 import { Scroll } from "@react-three/drei";

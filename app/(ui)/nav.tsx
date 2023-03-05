@@ -10,7 +10,7 @@ import { IoPhonePortrait, IoLaptopOutline } from "react-icons/io5";
 import { Socials } from "./Socials";
 import { GrContactInfo } from "react-icons/gr";
 
-export const Nav = memo(function Nav({
+const Nav = memo(function Nav({
   mobile,
   setMobile,
   projects,
@@ -115,3 +115,5 @@ export const Nav = memo(function Nav({
     </nav>
   );
 });
+
+export default Nav;
