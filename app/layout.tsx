@@ -3,7 +3,7 @@
 import "./globals.css";
 import React, { useEffect, useState } from "react";
 // import Cursor from "(cursor)";
-import Nav from "(ui)";
+import Nav, { SplashScreen } from "(ui)";
 import { Device, Landscape, Scan } from "(3D)";
 import { Home, Project } from "(routes)";
 import { Scroll } from "@react-three/drei";
@@ -31,7 +31,7 @@ export default function RootLayout({
         className="hidebar relative flex w-full  flex-col text-zinc-900 selection:bg-zinc-900 selection:text-zinc-200 dark:text-zinc-500 selection:dark:bg-zinc-500 selection:dark:text-zinc-900
 "
       >
-        {/* <SplashScreen /> */}
+        <SplashScreen />
         {/* <Cursor /> */}
         {children}
         <Nav

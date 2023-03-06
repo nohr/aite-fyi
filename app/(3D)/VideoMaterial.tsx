@@ -1,6 +1,7 @@
+import { useUIStore } from "(ui)";
 import { useVideoTexture, useTexture, useScroll } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { useState, Suspense } from "react";
+import { useState, Suspense, useEffect } from "react";
 import { BackSide } from "three";
 
 export function VideoMaterial({
@@ -10,6 +11,7 @@ export function VideoMaterial({
   projects: ProjectProps[];
   mobile: boolean;
 }) {
+  const setStatus = useUIStore((state) => state.setStatus);
   // console.log("rendered");
   const scroll = useScroll();
 
@@ -44,8 +46,12 @@ export function VideoMaterial({
   const vis = scroll.visible(1 / pages, projects.length / pages);
   // console.log(vis);
 
+  useEffect(() => {
+    setStatus("");
+  }, [setStatus]);
+
   return (
-    <Suspense fallback={<FallbackMaterial url="/videos/fallback.png" />}>
+    <Suspense fallback={<FallbackMaterial />}>
       <meshLambertMaterial
         map={
           !vis
@@ -62,7 +68,7 @@ export function VideoMaterial({
 }
 
 // fallback texture
-function FallbackMaterial({ url }: { url: string }) {
+function FallbackMaterial({ url = "/videos/fallback.png" }: { url?: string }) {
   console.log(url.includes("mobile"));
 
   const texture = useTexture(url);
