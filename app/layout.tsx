@@ -40,7 +40,7 @@ export default function RootLayout({
           // projects={data.projects}
           home={home}
         /> */}
-        {/* <Landscape
+        <Landscape
           pages={1 + data.projects.length}
           // infinite
           damping={0.1}
@@ -66,7 +66,7 @@ export default function RootLayout({
             home={home}
             setHome={setHome}
           />
-        </Landscape> */}
+        </Landscape>
       </body>
     </html>
   );
