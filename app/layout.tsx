@@ -40,7 +40,7 @@ export default function RootLayout({
           // projects={data.projects}
           home={home}
         />
-        <Landscape
+        {/* <Landscape
           pages={1 + data.projects.length}
           // infinite
           damping={0.1}
@@ -60,13 +60,13 @@ export default function RootLayout({
               scale={mobileOnly ? 0.3 : 0.5}
             />
           </Scroll>
-          {/* <Device
+          <Device
             mobile={mobile}
             projects={data.projects}
             home={home}
             setHome={setHome}
-          /> */}
-        </Landscape>
+          />
+        </Landscape> */}
       </body>
     </html>
   );
