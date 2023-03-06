@@ -6,6 +6,8 @@ source: https://sketchfab.com/3d-models/2021-macbook-pro-14-m1-pro-m1-max-f6b0b9
 title: 2021 Macbook Pro 14" (M1 Pro / M1 Max)
 */
 
+"use client";
+
 import * as THREE from "three";
 import React, { forwardRef, MutableRefObject, Ref } from "react";
 import { useGLTF } from "@react-three/drei";
@@ -26,7 +28,7 @@ type GLTFResult = GLTF & {
   };
 };
 
-console.log("render");
+// console.log("render");
 const url = "/models/mbp-v1-pipe.glb";
 export const M1 = forwardRef(function M1(
   {

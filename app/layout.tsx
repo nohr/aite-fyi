@@ -60,12 +60,12 @@ export default function RootLayout({
               scale={mobileOnly ? 0.3 : 0.5}
             />
           </Scroll>
-          <Device
+          {/* <Device
             mobile={mobile}
             projects={data.projects}
             home={home}
             setHome={setHome}
-          />
+          /> */}
         </Landscape>
       </body>
     </html>

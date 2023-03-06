@@ -6,6 +6,8 @@ source: https://sketchfab.com/3d-models/iphone-13-pro-8f33734764b64263b998610438
 title: Iphone 13 Pro
 */
 
+"use client";
+
 import * as THREE from "three";
 import React, { forwardRef, Ref } from "react";
 import { useGLTF } from "@react-three/drei";

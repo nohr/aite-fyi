@@ -3,7 +3,7 @@ import { SiNextdotjs, SiTailwindcss, SiThreedotjs } from "react-icons/si";
 import { GrGithub, GrLink, GrNext, GrReactjs } from "react-icons/gr";
 import { IoLogoFirebase } from "react-icons/io5";
 import Image from "next/image";
-import { useScroll } from "@react-three/drei";
+// import { useScroll } from "@react-three/drei";
 
 export function Project({
   title,

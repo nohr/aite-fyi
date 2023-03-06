@@ -1,4 +1,5 @@
-/* eslint-disable jsx-a11y/alt-text */
+"use client";
+
 import {
   // Html,
   // Loader,
@@ -7,7 +8,7 @@ import {
 } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import { memo, Suspense, useRef } from "react";
-import { VscLoading } from "react-icons/vsc";
+// import { VscLoading } from "react-icons/vsc";
 import * as THREE from "three";
 import { M1 } from "./M1";
 import { Phone } from "./Phone";
@@ -138,7 +139,7 @@ export const Device = memo(
                 <VideoMaterial mobile={false} projects={projects} />
               </M1>
             ) : null}
-            {/* {mobile ? (
+            {mobile ? (
               <Phone
                 ref={phone}
                 rotation={[-0.8, -Math.PI, 0]}
@@ -148,7 +149,7 @@ export const Device = memo(
               >
                 <VideoMaterial mobile={true} projects={projects} />
               </Phone>
-            ) : null} */}
+            ) : null}
           </group>
         </spotLight>
       </Suspense>
