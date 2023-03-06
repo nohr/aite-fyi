@@ -33,13 +33,13 @@ export default function RootLayout({
       >
         {/* <SplashScreen /> */}
         {/* <Cursor /> */}
-        {/* {children}
+        {children}
         <Nav
           mobile={mobile}
           setMobile={setMobile}
           // projects={data.projects}
           home={home}
-        /> */}
+        />
         <Landscape
           pages={1 + data.projects.length}
           // infinite

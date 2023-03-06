@@ -25,20 +25,19 @@ const Nav = memo(function Nav({
   const pathname = usePathname();
   const about = pathname === "/about";
   const active = (href: routes) => href === pathname;
-  const path = useUIStore((state) => state.path);
+  // const path = useUIStore((state) => state.path);
   const setPath = useUIStore((state) => state.setPath);
-  const router = useRouter();
-  const { routeChange } = useRouteChange();
-  useEffect(() => {
-    router.push(path);
-    // routeChange();
-  }, [path, router]);
+  // const router = useRouter();
+  // const { routeChange } = useRouteChange();
+  // useEffect(() => {
+  //   router.push(path);
+  //   // routeChange();
+  // }, [path, router]);
 
   function Home() {
     return (
       <Link
         onClick={() => {
-          routeChange();
           setPath("/");
         }}
         href="/"
@@ -63,7 +62,6 @@ const Nav = memo(function Nav({
         key={href}
         href={href}
         onClick={() => {
-          routeChange();
           setPath(href);
         }}
         className={
