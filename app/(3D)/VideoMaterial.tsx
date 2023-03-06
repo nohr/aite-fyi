@@ -36,22 +36,31 @@ export function VideoMaterial({
 
   texture.offset.y = mobile ? 0 : 0.006;
   texture.anisotropy = 1;
+  const phoneLock = useTexture("/videos/mobile/lockscreen.jpeg");
+  const M1Lock = useTexture("/videos/desktop/lockscreen.jpg");
+  phoneLock.anisotropy = 16;
+  M1Lock.anisotropy = 1;
 
   const vis = scroll.visible(1 / pages, projects.length / pages);
   // console.log(vis);
 
   return (
     <Suspense fallback={<FallbackMaterial url="/videos/fallback.png" />}>
-      {vis ? (
-        <meshLambertMaterial
-          map={texture}
-          toneMapped={false}
-          side={mobile ? BackSide : undefined}
-        />
-      ) : null}
+      <meshLambertMaterial
+        map={
+          !vis
+            ? !window.matchMedia("(max-width: 768px)").matches
+              ? M1Lock
+              : phoneLock
+            : texture
+        }
+        toneMapped={false}
+        side={mobile ? BackSide : undefined}
+      />
     </Suspense>
   );
 }
+
 // fallback texture
 function FallbackMaterial({ url }: { url: string }) {
   console.log(url.includes("mobile"));

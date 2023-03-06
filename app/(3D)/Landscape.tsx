@@ -6,7 +6,6 @@ import {
   PerformanceMonitor,
   ScrollControls,
   ScrollControlsProps,
-  // SoftShadows,
   Stats,
 } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
@@ -20,9 +19,9 @@ export function Landscape({
   ...props
 }: React.PropsWithChildren<ScrollControlsProps>) {
   const [dpr, setDpr] = React.useState(1.5);
-  useEffect(() => {
-    console.log("dpr", dpr);
-  }, [dpr]);
+  // useEffect(() => {
+  //   console.log("dpr", dpr);
+  // }, [dpr]);
 
   return (
     <>
@@ -31,7 +30,6 @@ export function Landscape({
         dpr={dpr}
         // gl={{ antialias: true }}
         frameloop="demand"
-        // className="!fixed !left-0 -z-10 !m-0 !h-screen"
       >
         <PerformanceMonitor
           factor={1}
@@ -44,10 +42,9 @@ export function Landscape({
           {/* <Modals /> */}
         </ScrollControls>
         {/* <Env /> */}
-        {/* <SoftShadows /> */}
         {/* <OrbitControls enableZoom={false} /> */}
       </Canvas>
-      <Stats className="!top-auto !bottom-0" />
+      {/* <Stats className="!top-auto !bottom-0" /> */}
     </>
   );
 }
