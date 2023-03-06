@@ -7,7 +7,6 @@ import { useModelStore } from "./useModelStore";
 export default function Canvas() {
   const canvas = useModelStore((state) => state.canvas);
   const get_canvas = useModelStore((state) => state.get_canvas);
-  const setStatus = useUIStore((state) => state.setStatus);
   const motion = useUIStore((state) => state.motion);
 
   useEffect(() => {

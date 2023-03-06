@@ -28,7 +28,7 @@ export default function RootLayout({
     <html lang="en" className=" bg-zinc-200 dark:bg-zinc-900">
       <head />
       <body
-        className="hidebar relative flex w-full  flex-col text-zinc-900 selection:bg-zinc-900 selection:text-zinc-200 dark:text-zinc-500 selection:dark:bg-zinc-500 selection:dark:text-zinc-900
+        className="hidebar relative flex w-full  flex-col text-zinc-900 selection:bg-zinc-900 selection:text-zinc-200 dark:text-zinc-400 selection:dark:bg-zinc-400 selection:dark:text-zinc-900
 "
       >
         <SplashScreen />

@@ -11,10 +11,9 @@ export function VideoMaterial({
   projects: ProjectProps[];
   mobile: boolean;
 }) {
-  const setStatus = useUIStore((state) => state.setStatus);
   // console.log("rendered");
   const scroll = useScroll();
-
+  const setLoading = useUIStore((state) => state.setLoading);
   const pages = 1 + projects.length;
   // change texture with scroll position
   const [project, setProject] = useState(0);
@@ -47,8 +46,9 @@ export function VideoMaterial({
   // console.log(vis);
 
   useEffect(() => {
-    setStatus("");
-  }, [setStatus]);
+    console.log("loaded");
+    setLoading(false);
+  }, [setLoading]);
 
   return (
     <Suspense fallback={<FallbackMaterial />}>

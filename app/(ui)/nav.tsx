@@ -41,7 +41,7 @@ const Nav = memo(function Nav({
           setPath("/");
         }}
         href="/"
-        className=" flex h-full w-fit items-center justify-center px-2 text-6xl font-thin uppercase transition-colors duration-100 hover:bg-zinc-900 hover:text-zinc-200  dark:text-zinc-500 hover:dark:bg-zinc-500 hover:dark:text-zinc-900"
+        className=" flex h-full w-fit items-center justify-center px-2 text-6xl font-thin uppercase transition-colors duration-100 hover:bg-zinc-900 hover:text-zinc-200  dark:text-zinc-400 hover:dark:bg-zinc-400 hover:dark:text-zinc-900"
       >
         Æ
       </Link>
@@ -68,8 +68,8 @@ const Nav = memo(function Nav({
           className +
           ` flex !aspect-square items-end justify-center !self-center justify-self-end bg-transparent p-4 text-lg  uppercase  transition-colors duration-100 [&>*]:!m-0 [&>*]:h-8 [&>*]:w-auto ${
             active(href)
-              ? "bg-zinc-900 text-zinc-200 dark:bg-zinc-500 dark:text-zinc-900 [&>*]:stroke-zinc-200 "
-              : "bg-transparent text-zinc-900 hover:bg-zinc-900 hover:text-zinc-200 dark:text-zinc-500 hover:dark:bg-zinc-500 hover:dark:text-zinc-900 [&>*]:hover:stroke-zinc-900 [&>*]:hover:dark:stroke-zinc-500 "
+              ? "bg-zinc-900 text-zinc-200 dark:bg-zinc-400 dark:text-zinc-900 [&>*]:stroke-zinc-200 "
+              : "bg-transparent text-zinc-900 hover:bg-zinc-900 hover:text-zinc-200 dark:text-zinc-400 hover:dark:bg-zinc-400 hover:dark:text-zinc-900 [&>*]:hover:stroke-zinc-900 [&>*]:hover:dark:stroke-zinc-400 "
           } `
         }
       >
@@ -80,7 +80,7 @@ const Nav = memo(function Nav({
 
   function Icon({
     className = ` cursor-pointer flex !aspect-square !self-center justify-self-end p-4 [&>*]:!m-0 [&>*]:h-8 [&>*]:w-auto items-end justify-center bg-transparent p-2 text-lg uppercase text-zinc-900
-               transition-colors duration-100 hover:bg-zinc-900 hover:text-zinc-200 dark:text-zinc-500 hover:dark:bg-zinc-500 hover:dark:text-zinc-900`,
+               transition-colors duration-100 hover:bg-zinc-900 hover:text-zinc-200 dark:text-zinc-400 hover:dark:bg-zinc-400 hover:dark:text-zinc-900`,
     onClick,
     children,
   }: {

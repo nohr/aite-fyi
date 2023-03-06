@@ -18,6 +18,8 @@ interface UIProps {
    * @param status The status message which may be a string or JSX.Element.
    */
   setStatus: (status: string | JSX.Element) => void;
+  loading: boolean;
+  setLoading: (loading?: boolean) => void;
   //   theme: "light" | "dark";
   //   setTheme: (theme: "light" | "dark") => void;
   routing: boolean;

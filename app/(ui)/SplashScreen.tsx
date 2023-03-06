@@ -7,6 +7,7 @@ import { Fade } from ".";
 
 export function SplashScreen() {
   const status = useUIStore((state) => state.status);
+  const loading = useUIStore((state) => state.loading);
   // const setStatus = useUIStore((state) => state.setStatus);
   // const input = useModelStore((state) => state.input);
   // const canvas = useModelStore((state) => state.canvas);
@@ -22,7 +23,7 @@ export function SplashScreen() {
 
   return (
     // todo control truthy with other booleans instead of status
-    <Fade truthy={status !== ""}>
+    <Fade truthy={loading}>
       <div
         className={`fixed z-[200] flex h-screen w-screen items-center bg-zinc-200 p-4 dark:bg-zinc-600`}
       >
