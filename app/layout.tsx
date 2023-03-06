@@ -37,7 +37,7 @@ export default function RootLayout({
         <Nav
           mobile={mobile}
           setMobile={setMobile}
-          projects={data.projects}
+          // projects={data.projects}
           home={home}
         />
         <Landscape

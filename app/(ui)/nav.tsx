@@ -14,12 +14,12 @@ import { SlideFade } from "./SlideFade";
 const Nav = memo(function Nav({
   mobile,
   setMobile,
-  projects,
+  // projects,
   home,
 }: {
   mobile: boolean | undefined;
   setMobile: React.Dispatch<React.SetStateAction<boolean | undefined>>;
-  projects: ProjectProps[];
+  // projects: ProjectProps[];
   home: boolean;
 }) {
   const pathname = usePathname();
