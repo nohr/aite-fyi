@@ -96,7 +96,7 @@ const Nav = memo(function Nav({
   }
 
   return (
-    <nav className="fixed left-0 top-0 z-[90] flex h-16 w-screen select-none flex-row items-center justify-between p-0 !pr-4 backdrop-blur-lg md:!p-0">
+    <nav className="fixed left-0 top-0 z-[90] flex h-16 w-screen select-none flex-row items-center justify-between bg-zinc-200 !bg-opacity-5 p-0 !pr-4 backdrop-blur-lg dark:bg-zinc-900 md:!p-0">
       <div className="flex h-full flex-row">
         <Home />
         <NavLink href="/about">

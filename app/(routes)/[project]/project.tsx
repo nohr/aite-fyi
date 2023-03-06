@@ -21,7 +21,7 @@ export function Project({
   // scroll.
   return (
     <Section id={title} {...props}>
-      <div className="flex flex-col rounded-md bg-zinc-200 !bg-opacity-50 p-2 backdrop-blur-xl dark:bg-zinc-900 md:max-w-prose">
+      <div className="flex flex-col rounded-md bg-zinc-200 !bg-opacity-80 p-2 backdrop-blur-xl dark:bg-zinc-900 md:max-w-prose">
         <h1 className="text-4xl font-bold">{title}</h1>
         {description ? <p>{description}</p> : null}
         <div className="flex flex-row justify-between">
