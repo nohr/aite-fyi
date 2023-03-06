@@ -2,11 +2,12 @@ import { Camera } from "@mediapipe/camera_utils";
 import { drawConnectors, drawLandmarks } from "@mediapipe/drawing_utils";
 import { Hands, HAND_CONNECTIONS } from "@mediapipe/hands";
 import { create } from "zustand";
+import { ModelProps } from "./model";
 
 export const useModelStore = create<ModelProps>()((set, get) => ({
   resolution: { width: 640, height: 360 },
   camera: null,
-  hands: undefined,
+  hands: null,
   kill_hands: () => {
     set(() => ({ hands: null, camera: null, results: null }));
   },

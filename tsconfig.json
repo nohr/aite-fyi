@@ -21,10 +21,11 @@
     ],
     "baseUrl": "./app",
     "paths": {
+      "@public/*": ["../public/*"],
       "(cursor)": ["./(cursor)/."],
-      "(routes)": ["./(world)/(routes)/."],
+      "(routes)": ["./(routes)/."],
       "(ui)": ["./(ui)/."],
-      "(world)": ["./(world)/."]
+      "(3D)": ["./(3D)/."]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

@@ -1,5 +1,6 @@
 "use client";
-import { useWorldStore } from "(world)/useWorldStore";
+
+import { useScroll } from "@react-three/drei";
 import { useRef, useCallback, useEffect } from "react";
 import { useUIStore } from "./useUIStore";
 
@@ -51,19 +52,19 @@ export function useTimeout(callback: () => void, delay: number) {
 
 export function useRouteChange() {
   const setRouting = useUIStore((state) => state.setRouting);
-  const setZoom = useWorldStore((state) => state.setZoom);
+
+  const scroll = useScroll();
+  // listen to scroll event
+  if (scroll) {
+    // set routing to false when scrolling stops
+    setTimeout(() => {
+      setRouting(false);
+    }, 750);
+  }
 
   const routeChange = useCallback(() => {
-    setRouting(true);
-    setZoom(false);
-    // listen to scroll event
-    window.addEventListener("scroll", () => {
-      // set routing to false when scrolling stops
-      setTimeout(() => {
-        setRouting(false);
-      }, 750);
-    });
-  }, [setRouting, setZoom]);
+    // setRouting(true);
+  }, [setRouting]);
 
   return { routeChange };
 }

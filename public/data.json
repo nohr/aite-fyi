@@ -1,0 +1,72 @@
+{
+    "about": {
+        "name": "Aite",
+        "title": "Web Developer",
+        "bio1": "I have been working as a freelance web developer for several years, during which time I have had the opportunity to work on a wide variety of projects for clients in diverse industries. While I have greatly enjoyed the flexibility and creative freedom that freelancing provides, I am now eager to pursue a full-time position that will allow me to collaborate with a team of talented developers and continue to learn and grow in my career.\nHowever, my freelance work has been instrumental in helping me develop my skills and expertise as a web developer. Through my work with clients, I have gained experience in a range of programming languages and technologies, and have honed my ability to create effective, user-friendly websites that meet the unique needs and goals of each client. I have also learned valuable skills in project management, communication, and customer service, which I believe will be invaluable in any future role.\nUltimately, I see my freelance work as a testament to my passion for web development and my commitment to continuously improving my skills and knowledge. I am excited to bring this experience and enthusiasm to a full-time position, and am confident that I have the skills and expertise necessary to be a valuable asset to any team.",
+        "bio": "I'm a recent graduate from New York University where I received a bachelor's degree in interactive media arts, and I also earned an associate's degree in animation from BMCC.\n\nDuring my journey as a web developer, I've always been driven by the goal of making the web more interactive and engaging through 3D modeling and animation, as well as machine learning models. I'm always eager to learn new technologies and stay up to date with the latest trends in the field.\n\nIn addition to my academic background, I've also been running a freelance company with some friends where we create art and websites for people. Our projects have been really cool and sometimes require advanced technology such as computer vision, virtual production, or live coding to bring them to life.\n\nAs a web developer, I have the expertise and technical know-how to bring any project to life, from simple websites to complex web applications. I pride myself on being a creative problem solver with strong communication skills that make me a valuable asset to any team. I'm passionate about creating engaging and interactive experiences that leave a lasting impression on users. ",
+        "email": ""
+    },
+    "projects": [
+        {
+            "title": "Paredol",
+            "description": "The site for Paredol, my freelance web design and development practice.",
+            "desktop": "/videos/desktop/paredol.com.mp4",
+            "mobile": "/videos/mobile/paredol.com.mp4",
+            "url": [
+                "https://paredol.com",
+                "https://www.github.com/paredol/paredol-site"
+            ],
+            "program": [
+                "react",
+                "nextjs",
+                "firebase",
+                "tailwind"
+            ]
+        },
+        {
+            "title": "Nabla",
+            "description": "The site for Nabla, Paredol's old identity. The mobile version adds a layer of natural physical interaction in using the gyroscope for manual sifting through projects.",
+            "desktop": "videos/desktop/nabla7.web.app.mov",
+            "mobile": "/videos/mobile/nabla7.web.app.mp4",
+            "url": [
+                "https://nabla7.web.app",
+                "https://www.github.com/nohr/nabla.ooo"
+            ],
+            "program": [
+                "react",
+                "three",
+                "firebase"
+            ]
+        },
+        {
+            "title": "Geese",
+            "description": "This website for Geese takes advantage of OpenAI's DALLE-2 API and Firebase Cloud Functions to hourly generate a new image from a text prompt.",
+            "desktop": "/videos/desktop/geese-site.web.app.mov",
+            "mobile": "/videos/mobile/geese-site.web.app.mp4",
+            "url": [
+                "https://geeseband.com",
+                "https://www.github.com/paredol/geese-site"
+            ],
+            "program": [
+                "astro",
+                "react",
+                "firebase",
+                "tailwind"
+            ]
+        },
+        {
+            "title": "Afterdark Digital",
+            "description": "The site for Afterdark Digital.",
+            "desktop": "/videos/desktop/afterdark-digital.web.app.mp4",
+            "mobile": "/videos/mobile/afterdark-digital.web.app.mp4",
+            "url": [
+                "https://afterdark-digital.web.app/",
+                "https://github.com/nohr/afterdark.digital"
+            ],
+            "program": [
+                "react",
+                "firebase"
+            ]
+        }
+    ]
+}
