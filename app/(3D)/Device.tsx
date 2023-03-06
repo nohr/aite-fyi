@@ -143,7 +143,7 @@ export const Device = memo(
               <Phone
                 ref={phone}
                 rotation={[-0.8, -Math.PI, 0]}
-                position={[0, PhoneScale * 4, -w / 2.625]}
+                position={[0, -PhoneScale * 8, -w / 2.625]}
                 scale={PhoneScale}
                 frustumCulled={false}
               >

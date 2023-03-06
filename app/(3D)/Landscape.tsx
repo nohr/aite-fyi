@@ -20,8 +20,6 @@ export function Landscape({
   children,
   ...props
 }: React.PropsWithChildren<ScrollControlsProps>) {
-  const setStatus = useUIStore((state) => state.setStatus);
-
   const [dpr, setDpr] = React.useState(1.5);
   // useEffect(() => {
   //   console.log("dpr", dpr);
