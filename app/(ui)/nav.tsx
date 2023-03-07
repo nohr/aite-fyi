@@ -1,11 +1,8 @@
 "use client";
 
-import Link from "next/link";
-import { memo, useEffect } from "react";
-import { useRouteChange } from "./useUtils";
+import { memo } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { Fade } from "./Fade";
-import { useUIStore } from "./useUIStore";
 import { IoPhonePortrait, IoLaptopOutline } from "react-icons/io5";
 import { Socials } from "./Socials";
 import { GrContactInfo } from "react-icons/gr";
@@ -14,37 +11,28 @@ import { SlideFade } from "./SlideFade";
 const Nav = memo(function Nav({
   mobile,
   setMobile,
-  // projects,
   home,
 }: {
   mobile: boolean;
   setMobile: React.Dispatch<React.SetStateAction<boolean>>;
-  // projects: ProjectProps[];
   home: boolean;
 }) {
   const pathname = usePathname();
   const about = pathname === "/about";
   const active = (href: routes) => href === pathname;
-  // const path = useUIStore((state) => state.path);
-  const setPath = useUIStore((state) => state.setPath);
-  // const router = useRouter();
-  // const { routeChange } = useRouteChange();
-  // useEffect(() => {
-  //   router.push(path);
-  //   // routeChange();
-  // }, [path, router]);
+  const router = useRouter();
 
   function Home() {
     return (
-      <Link
+      <div
         onClick={() => {
-          setPath("/");
+          router.push("/");
         }}
-        href="/"
-        className=" flex h-full w-fit items-center justify-center px-2 text-6xl font-thin uppercase transition-colors duration-100 hover:bg-zinc-900 hover:text-zinc-200  dark:text-zinc-400 hover:dark:bg-zinc-400 hover:dark:text-zinc-900"
+        tabIndex={0}
+        className=" flex h-full w-fit cursor-pointer items-center justify-center px-2 text-6xl font-thin uppercase transition-colors duration-100 hover:bg-zinc-900 hover:text-zinc-200  dark:text-zinc-400 hover:dark:bg-zinc-400 hover:dark:text-zinc-900"
       >
         Æ
-      </Link>
+      </div>
     );
   }
 
@@ -52,21 +40,22 @@ const Nav = memo(function Nav({
     href,
     className,
     children,
+    onClick = () => {
+      router.push(href);
+    },
   }: {
     href: routes;
     className?: string;
     children?: React.ReactNode;
+    onClick?: () => void;
   }) {
     return (
-      <Link
-        key={href}
-        href={href}
-        onClick={() => {
-          setPath(href);
-        }}
+      <div
+        onClick={onClick}
+        tabIndex={0}
         className={
           className +
-          ` flex !aspect-square items-end justify-center !self-center justify-self-end bg-transparent p-4 text-lg  uppercase  transition-colors duration-100 [&>*]:!m-0 [&>*]:h-8 [&>*]:w-auto ${
+          ` flex !aspect-square cursor-pointer items-end justify-center !self-center justify-self-end bg-transparent p-4 text-lg  uppercase  transition-colors duration-100 [&>*]:!m-0 [&>*]:h-8 [&>*]:w-auto ${
             active(href)
               ? "bg-zinc-900 text-zinc-200 dark:bg-zinc-400 dark:text-zinc-900 [&>*]:stroke-zinc-200 "
               : "bg-transparent text-zinc-900 hover:bg-zinc-900 hover:text-zinc-200 dark:text-zinc-400 hover:dark:bg-zinc-400 hover:dark:text-zinc-900 [&>*]:hover:stroke-zinc-900 [&>*]:hover:dark:stroke-zinc-400 "
@@ -74,7 +63,7 @@ const Nav = memo(function Nav({
         }
       >
         {children ? children : href.split("/")[1] || "home"}
-      </Link>
+      </div>
     );
   }
 

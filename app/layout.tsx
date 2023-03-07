@@ -36,7 +36,7 @@ export default function RootLayout({
       >
         <SplashScreen loading={loading} />
         {/* <Cursor /> */}
-        {/* {children} */}
+        {children}
         <Nav mobile={mobile} setMobile={setMobile} home={home} />
         <Fade truthy={pathname === "/about"} init={0}>
           <About />
