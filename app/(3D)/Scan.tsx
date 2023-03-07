@@ -23,40 +23,40 @@ type GLTFResult = GLTF & {
     Scan: THREE.Mesh;
   };
 };
-const DisplaceMaterial = shaderMaterial(
-  {
-    map: null,
-    color: new Color("turquoise"),
-    color2: new Color("magenta"),
-    amount: 1,
-  },
-  `
-    uniform sampler2D map;
-    uniform float amount;
+// const DisplaceMaterial = shaderMaterial(
+//   {
+//     map: null,
+//     color: new Color("turquoise"),
+//     color2: new Color("magenta"),
+//     amount: 1,
+//   },
+//   `
+//     uniform sampler2D map;
+//     uniform float amount;
 
-    varying float vDisplace;
-    void main() {
-      float displace = texture2D(map, uv).r;
-      vDisplace = displace;
+//     varying float vDisplace;
+//     void main() {
+//       float displace = texture2D(map, uv).r;
+//       vDisplace = displace;
 
-      vec3 pos = position;
-      pos.z += displace * amount;
+//       vec3 pos = position;
+//       pos.z += displace * amount;
 
-      gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
-    }
-  `,
-  `
-    uniform vec3 color;
-    uniform vec3 color2;
+//       gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+//     }
+//   `,
+//   `
+//     uniform vec3 color;
+//     uniform vec3 color2;
 
-    varying float vDisplace;
-    void main() {
-      vec3 col = mix(color, color2, vDisplace);
-      gl_FragColor.rgba = vec4(col, 1.0);
-    }
-  `
-);
-extend({ DisplaceMaterial });
+//     varying float vDisplace;
+//     void main() {
+//       vec3 col = mix(color, color2, vDisplace);
+//       gl_FragColor.rgba = vec4(col, 1.0);
+//     }
+//   `
+// );
+// extend({ DisplaceMaterial });
 
 const url = "/models/Scan2.gltf";
 export const Scan = memo(
@@ -65,16 +65,16 @@ export const Scan = memo(
     const ref = useRef<THREE.Mesh>(null!);
     const scroll = useScroll();
 
-    const config: TrailConfig = {
-      size: 60,
-      maxAge: 500,
-      radius: 1,
-      interpolate: 0,
-      smoothing: 0.5,
-      minForce: 0.3,
-    };
+    // const config: TrailConfig = {
+    //   size: 60,
+    //   maxAge: 500,
+    //   radius: 1,
+    //   interpolate: 0,
+    //   smoothing: 0.5,
+    //   minForce: 0.3,
+    // };
 
-    const [texture, onMove] = useTrailTexture(config);
+    // const [texture, onMove] = useTrailTexture(config);
 
     useFrame(() => {
       ref.current.rotation.y = scroll.offset * 5;
@@ -84,7 +84,6 @@ export const Scan = memo(
       // TODO pointer interactivity
     });
 
-    const displace = new DisplaceMaterial();
     return (
       <Suspense
         fallback={
@@ -102,8 +101,6 @@ export const Scan = memo(
             metalness={0.5}
             flatShading={true}
           />
-
-          {/* <displaceMaterial attach="material" map={texture} /> */}
           {/* <meshStandardMaterial
             side={DoubleSide}
             displacementMap={texture}
