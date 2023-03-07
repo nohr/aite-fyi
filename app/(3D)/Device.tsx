@@ -1,5 +1,6 @@
 "use client";
 
+import { useUIStore } from "(ui)";
 import {
   // Html,
   // Loader,
@@ -7,12 +8,11 @@ import {
   useScroll,
 } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
-import { memo, Suspense, useRef } from "react";
+import { memo, Suspense, useEffect, useRef } from "react";
 // import { VscLoading } from "react-icons/vsc";
 import * as THREE from "three";
 import { M1 } from "./M1";
 import { Phone } from "./Phone";
-import { VideoMaterial } from "./VideoMaterial";
 
 const rsqw = (t: number, delta = 0.02, a = 1, f = 1 / (2 * Math.PI)) =>
   (a / Math.atan(1 / delta)) * Math.atan(Math.sin(2 * Math.PI * t * f) / delta);
@@ -23,11 +23,13 @@ export const Device = memo(
     projects,
     home,
     setHome,
+    children,
   }: {
     mobile: boolean | undefined;
     projects: ProjectProps[];
     home: boolean;
     setHome: React.Dispatch<React.SetStateAction<boolean>>;
+    children: React.ReactNode;
   }) {
     const { width: w, height: h } = useThree((state) => state.viewport);
     const screen = useRef<THREE.Group>(null!);
@@ -136,7 +138,7 @@ export const Device = memo(
                 rotation={[-Math.PI / 7, -Math.PI / 2, 0]}
                 position={[0, M1Height, -w / 2.625]}
               >
-                <VideoMaterial mobile={false} projects={projects} />
+                {children}
               </M1>
             ) : null}
             {mobile ? (
@@ -147,7 +149,7 @@ export const Device = memo(
                 scale={PhoneScale}
                 frustumCulled={false}
               >
-                <VideoMaterial mobile={true} projects={projects} />
+                {children}
               </Phone>
             ) : null}
           </group>

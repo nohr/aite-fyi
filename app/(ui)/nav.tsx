@@ -17,8 +17,8 @@ const Nav = memo(function Nav({
   // projects,
   home,
 }: {
-  mobile: boolean | undefined;
-  setMobile: React.Dispatch<React.SetStateAction<boolean | undefined>>;
+  mobile: boolean;
+  setMobile: React.Dispatch<React.SetStateAction<boolean>>;
   // projects: ProjectProps[];
   home: boolean;
 }) {

@@ -5,10 +5,8 @@ import { useUIStore } from "(ui)";
 import { Fade } from ".";
 // import { useModelStore } from "../(cursor)/useModelStore";
 
-export function SplashScreen() {
+export function SplashScreen({ loading }: { loading: boolean }) {
   const status = useUIStore((state) => state.status);
-  const loading = useUIStore((state) => state.loading);
-  // const setStatus = useUIStore((state) => state.setStatus);
   // const input = useModelStore((state) => state.input);
   // const canvas = useModelStore((state) => state.canvas);
   // const results = useModelStore((state) => state.results);

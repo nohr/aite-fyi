@@ -20,10 +20,6 @@ export const useUIStore = create<UIProps>()(
     setStatus(status): void {
       set(() => ({ status }));
     },
-    loading: true,
-    setLoading(loading = !get().loading) {
-      set(() => ({ loading }));
-    },
     routing: false,
     setRouting(routing = !get().routing) {
       set(() => ({ routing }));

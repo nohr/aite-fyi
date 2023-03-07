@@ -4,7 +4,7 @@ import "./globals.css";
 import React, { useEffect, useState } from "react";
 // import Cursor from "(cursor)";
 import Nav, { SplashScreen } from "(ui)";
-import { Device, Landscape, Scan } from "(3D)";
+import { Device, Landscape, Scan, VideoMaterial } from "(3D)";
 import { Home, Project } from "(routes)";
 import { Scroll } from "@react-three/drei";
 import data from "@public/data.json" assert { type: "json" };
@@ -14,8 +14,9 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const [mobile, setMobile] = useState<boolean | undefined>();
+  const [mobile, setMobile] = useState<boolean>(false);
   const [mobileOnly, setMobileOnly] = useState(true);
+  const [project, setProject] = useState(0);
 
   useEffect(() => {
     setMobile(window.matchMedia("(max-width: 768px)").matches);
@@ -23,7 +24,7 @@ export default function RootLayout({
   }, []);
 
   const [home, setHome] = useState(false);
-
+  const [loading, setLoading] = useState(true);
   return (
     <html lang="en" className=" bg-zinc-200 dark:bg-zinc-900">
       <head />
@@ -31,18 +32,12 @@ export default function RootLayout({
         className="hidebar relative flex w-full  flex-col text-zinc-900 selection:bg-zinc-900 selection:text-zinc-200 dark:text-zinc-400 selection:dark:bg-zinc-400 selection:dark:text-zinc-900
 "
       >
-        <SplashScreen />
+        <SplashScreen loading={loading} />
         {/* <Cursor /> */}
         {children}
-        <Nav
-          mobile={mobile}
-          setMobile={setMobile}
-          // projects={data.projects}
-          home={home}
-        />
+        <Nav mobile={mobile} setMobile={setMobile} home={home} />
         <Landscape
           pages={1 + data.projects.length}
-          // infinite
           damping={0.1}
           horizontal={!mobileOnly}
         >
@@ -65,7 +60,13 @@ export default function RootLayout({
             projects={data.projects}
             home={home}
             setHome={setHome}
-          />
+          >
+            <VideoMaterial
+              mobile={mobile}
+              projects={data.projects}
+              setLoading={setLoading}
+            />
+          </Device>
         </Landscape>
       </body>
     </html>

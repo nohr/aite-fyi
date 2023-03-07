@@ -1,19 +1,21 @@
 import { useUIStore } from "(ui)";
 import { useVideoTexture, useTexture, useScroll } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { useState, Suspense, useEffect } from "react";
+import { useState, Suspense, useEffect, memo } from "react";
 import { BackSide } from "three";
 
 export function VideoMaterial({
+  setLoading,
   projects,
   mobile,
 }: {
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   projects: ProjectProps[];
   mobile: boolean;
 }) {
   // console.log("rendered");
   const scroll = useScroll();
-  const setLoading = useUIStore((state) => state.setLoading);
+
   const pages = 1 + projects.length;
   // change texture with scroll position
   const [project, setProject] = useState(0);
@@ -39,38 +41,39 @@ export function VideoMaterial({
   texture.anisotropy = 1;
   const phoneLock = useTexture("/videos/mobile/lockscreen.jpeg");
   const M1Lock = useTexture("/videos/desktop/lockscreen.jpg");
-  phoneLock.anisotropy = 16;
+  phoneLock.anisotropy = 1;
   M1Lock.anisotropy = 1;
 
   const vis = scroll.visible(1 / pages, projects.length / pages);
   // console.log(vis);
 
+  // / fallback texture
+  function FallbackMaterial({
+    url = "/videos/fallback.png",
+  }: {
+    url?: string;
+  }) {
+    console.log(url.includes("mobile"));
+
+    return (
+      <meshBasicMaterial
+        map={!mobile ? M1Lock : phoneLock}
+        toneMapped={false}
+      />
+    );
+  }
+
   useEffect(() => {
-    console.log("loaded");
     setLoading(false);
   }, [setLoading]);
-
   return (
     <Suspense fallback={<FallbackMaterial />}>
       <meshLambertMaterial
-        map={
-          !vis
-            ? !window.matchMedia("(max-width: 768px)").matches
-              ? M1Lock
-              : phoneLock
-            : texture
-        }
+        flatShading
+        map={!vis ? (!mobile ? M1Lock : phoneLock) : texture}
         toneMapped={false}
         side={mobile ? BackSide : undefined}
       />
     </Suspense>
   );
-}
-
-// fallback texture
-function FallbackMaterial({ url = "/videos/fallback.png" }: { url?: string }) {
-  console.log(url.includes("mobile"));
-
-  const texture = useTexture(url);
-  return <meshBasicMaterial map={texture} toneMapped={false} />;
 }
