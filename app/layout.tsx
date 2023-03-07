@@ -3,11 +3,12 @@
 import "./globals.css";
 import React, { useEffect, useState } from "react";
 // import Cursor from "(cursor)";
-import Nav, { SplashScreen } from "(ui)";
+import Nav, { Fade, SplashScreen } from "(ui)";
 import { Device, Landscape, Scan, VideoMaterial } from "(3D)";
-import { Home, Project } from "(routes)";
+import { About, Home, Project } from "(routes)";
 import { Scroll } from "@react-three/drei";
 import data from "@public/data.json" assert { type: "json" };
+import { usePathname } from "next/navigation";
 
 export default function RootLayout({
   children,
@@ -17,6 +18,7 @@ export default function RootLayout({
   const [mobile, setMobile] = useState<boolean>(false);
   const [mobileOnly, setMobileOnly] = useState(true);
   const [project, setProject] = useState(0);
+  const pathname = usePathname();
 
   useEffect(() => {
     setMobile(window.matchMedia("(max-width: 768px)").matches);
@@ -34,8 +36,11 @@ export default function RootLayout({
       >
         <SplashScreen loading={loading} />
         {/* <Cursor /> */}
-        {children}
+        {/* {children} */}
         <Nav mobile={mobile} setMobile={setMobile} home={home} />
+        <Fade truthy={pathname === "/about"} init={0}>
+          <About />
+        </Fade>
         <Landscape
           pages={1 + data.projects.length}
           damping={0.1}

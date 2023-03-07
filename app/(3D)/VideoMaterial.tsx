@@ -44,30 +44,14 @@ export function VideoMaterial({
   phoneLock.anisotropy = 1;
   M1Lock.anisotropy = 1;
 
-  const vis = scroll.visible(1 / pages, projects.length / pages);
+  const vis = scroll.visible(1 / pages, pages / pages);
   // console.log(vis);
-
-  // / fallback texture
-  function FallbackMaterial({
-    url = "/videos/fallback.png",
-  }: {
-    url?: string;
-  }) {
-    console.log(url.includes("mobile"));
-
-    return (
-      <meshBasicMaterial
-        map={!mobile ? M1Lock : phoneLock}
-        toneMapped={false}
-      />
-    );
-  }
 
   useEffect(() => {
     setLoading(false);
   }, [setLoading]);
   return (
-    <Suspense fallback={<FallbackMaterial />}>
+    <Suspense fallback={null}>
       <meshLambertMaterial
         flatShading
         map={!vis ? (!mobile ? M1Lock : phoneLock) : texture}
@@ -75,5 +59,20 @@ export function VideoMaterial({
         side={mobile ? BackSide : undefined}
       />
     </Suspense>
+  );
+}
+
+// / fallback texture
+function FallbackMaterial({
+  mobile,
+  M1Lock,
+  phoneLock,
+}: {
+  mobile: boolean;
+  M1Lock: THREE.Texture;
+  phoneLock: THREE.Texture;
+}) {
+  return (
+    <meshBasicMaterial map={!mobile ? M1Lock : phoneLock} toneMapped={false} />
   );
 }

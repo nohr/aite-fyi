@@ -14,7 +14,7 @@ html,
 body {
   width: -moz-fit-content;
   width: fit-content;
-  height: dvh;
+  height: 100svh;
   /* scroll-snap-type: proximity; */
   /* scroll-behavior: smooth; */
 }
