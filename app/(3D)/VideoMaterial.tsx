@@ -19,7 +19,9 @@ export function VideoMaterial({
   const pages = 1 + projects.length;
   // change texture with scroll position
   const [project, setProject] = useState(0);
+  const [visible, setVisible] = useState(false);
   useFrame(() => {
+    setVisible(scroll.visible(1 / pages, pages / pages));
     let num = Math.floor(scroll.offset * pages - 1);
     num = num > projects.length - 1 ? projects.length - 1 : num < 0 ? 0 : num;
     setProject(num);
@@ -38,23 +40,22 @@ export function VideoMaterial({
   // texture.needsUpdate = true;
 
   texture.offset.y = mobile ? 0 : 0.006;
-  texture.anisotropy = 1;
+  texture.anisotropy = 16;
   const phoneLock = useTexture("/videos/mobile/lockscreen.jpeg");
   const M1Lock = useTexture("/videos/desktop/lockscreen.jpg");
   phoneLock.anisotropy = 1;
   M1Lock.anisotropy = 1;
 
-  const vis = scroll.visible(1 / pages, pages / pages);
-  // console.log(vis);
-
   useEffect(() => {
     setLoading(false);
   }, [setLoading]);
+
   return (
     <Suspense fallback={null}>
       <meshLambertMaterial
         flatShading
-        map={!vis ? (!mobile ? M1Lock : phoneLock) : texture}
+        reflectivity={0}
+        map={!visible ? (!mobile ? M1Lock : phoneLock) : texture}
         toneMapped={false}
         side={mobile ? BackSide : undefined}
       />

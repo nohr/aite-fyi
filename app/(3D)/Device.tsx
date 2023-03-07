@@ -40,7 +40,7 @@ export const Device = memo(
 
     // handle device sizing
     const M1Height = window.matchMedia("(max-width: 768px)").matches
-      ? h / 4
+      ? h / 10
       : -h / 12;
     const M1Scale =
       w / 40 > 1.23

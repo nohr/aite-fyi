@@ -17,7 +17,6 @@ export default function RootLayout({
 }) {
   const [mobile, setMobile] = useState<boolean>(false);
   const [mobileOnly, setMobileOnly] = useState(true);
-  const [project, setProject] = useState(0);
   const pathname = usePathname();
 
   useEffect(() => {
