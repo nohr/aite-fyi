@@ -9,7 +9,6 @@ import {
   Html,
   Loader,
   shaderMaterial,
-  TrailConfig,
   useGLTF,
   useScroll,
   useTrailTexture,
