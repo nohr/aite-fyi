@@ -11,7 +11,7 @@ import {
 } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Camera } from "./Camera";
-// import { Env } from "./Environment";
+import { Env } from "./Environment";
 // import { Modals } from "./Modals";
 import round from "lodash/round";
 import { useUIStore } from "(ui)";
@@ -44,7 +44,7 @@ export function Landscape({
             {children}
             {/* <Modals /> */}
           </ScrollControls>
-          {/* <Env /> */}
+          <Env />
           {/* <OrbitControls enableZoom={false} /> */}
         </Suspense>
       </Canvas>

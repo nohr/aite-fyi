@@ -1,5 +1,18 @@
 {
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
-  "cSpell.words": ["distx", "disty", "hidebar"]
+  "cSpell.words": ["distx", "disty", "hidebar"],
+
+  //enable antialiasing in glsl canvas
+  "glsl-canvas.refreshOnChange": false,
+  "webgl-glsl-editor.format.placeSpaceAfterkeywords": true,
+  "[glsl]": {
+    "editor.defaultFormatter": "raczzalan.webgl-glsl-editor"
+  },
+  "[frag]": {
+    "editor.defaultFormatter": "raczzalan. webgl-gis1-editor"
+  },
+  "[vert]": {
+    "editor.defaultFormatter": "raczzalan.webg1-glsl-editor"
+  }
 }
