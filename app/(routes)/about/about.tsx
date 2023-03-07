@@ -1,7 +1,12 @@
 import { Section } from "(ui)";
 import data from "@public/data.json" assert { type: "json" };
+import { useEffect } from "react";
 
 export function About({ ...props }) {
+  useEffect(() => {
+    props.setLoading(false);
+  }, [props]);
+
   return (
     <Section
       id="about"

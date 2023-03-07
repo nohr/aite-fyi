@@ -44,7 +44,7 @@ export default function RootLayout({
           <Nav mobile={mobile} setMobile={setMobile} home={home} />
         </Fade>
         <Fade truthy={pathname === "/about"} init={0}>
-          <About />
+          <About setLoading={setLoading} />
         </Fade>
         <Fade truthy={pathname === "/"} init={0}>
           <Landscape
