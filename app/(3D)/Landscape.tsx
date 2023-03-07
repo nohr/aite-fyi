@@ -48,7 +48,7 @@ export function Landscape({
           {/* <OrbitControls enableZoom={false} /> */}
         </Suspense>
       </Canvas>
-      <Stats className="!top-auto !bottom-0" />
+      {/* <Stats className="!top-auto !bottom-0" /> */}
     </>
   );
 }
