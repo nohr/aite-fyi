@@ -1,16 +1,10 @@
 "use client";
 
-import { useUIStore } from "(ui)";
-import {
-  // Html,
-  // Loader,
-  // Preload,
-  useScroll,
-} from "@react-three/drei";
+import { useScroll } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
-import { memo, Suspense, useEffect, useRef } from "react";
-// import { VscLoading } from "react-icons/vsc";
-import * as THREE from "three";
+import { memo, Suspense, useRef } from "react";
+import { DirectionalLight } from "three/src/lights/DirectionalLight";
+import { Group } from "three/src/objects/Group";
 import { M1 } from "./M1";
 import { Phone } from "./Phone";
 
@@ -32,10 +26,10 @@ export const Device = memo(
     children: React.ReactNode;
   }) {
     const { width: w, height: h } = useThree((state) => state.viewport);
-    const screen = useRef<THREE.Group>(null!);
-    const body = useRef<THREE.Group>(null!);
-    const phone = useRef<THREE.Group>(null!);
-    const keyLight = useRef<THREE.DirectionalLight>(null!);
+    const screen = useRef<Group>(null!);
+    const body = useRef<Group>(null!);
+    const phone = useRef<Group>(null!);
+    const keyLight = useRef<DirectionalLight>(null!);
     const scroll = useScroll();
 
     // handle device sizing

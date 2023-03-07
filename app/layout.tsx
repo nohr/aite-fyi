@@ -36,42 +36,50 @@ export default function RootLayout({
         <SplashScreen loading={loading} />
         {/* <Cursor /> */}
         {children}
-        <Nav mobile={mobile} setMobile={setMobile} home={home} />
+        <Fade
+          truthy={!loading}
+          init={0}
+          transition={{ duration: 2, ease: "anticipate" }}
+        >
+          <Nav mobile={mobile} setMobile={setMobile} home={home} />
+        </Fade>
         <Fade truthy={pathname === "/about"} init={0}>
           <About />
         </Fade>
-        <Landscape
-          pages={1 + data.projects.length}
-          damping={0.1}
-          horizontal={!mobileOnly}
-        >
-          <Scroll html>
-            <div className=" relative !top-[64px] left-0 flex !h-full !w-full !translate-x-0 !translate-y-0 flex-col overflow-scroll md:flex-row">
-              <Home />
-              {data.projects.map((project, i) => (
-                <Project key={i} {...project} />
-              ))}
-            </div>
-          </Scroll>
-          <Scroll>
-            <Scan
-              position={mobileOnly ? [4, 0, 0] : [7, -2, 0]}
-              scale={mobileOnly ? 0.3 : 0.5}
-            />
-          </Scroll>
-          <Device
-            mobile={mobile}
-            projects={data.projects}
-            home={home}
-            setHome={setHome}
+        <Fade truthy={pathname === "/"} init={0}>
+          <Landscape
+            pages={1 + data.projects.length}
+            damping={0.1}
+            horizontal={!mobileOnly}
           >
-            <VideoMaterial
+            <Scroll html>
+              <div className=" relative !top-[64px] left-0 flex !h-full !w-full !translate-x-0 !translate-y-0 flex-col overflow-scroll md:flex-row">
+                <Home />
+                {data.projects.map((project, i) => (
+                  <Project key={i} {...project} />
+                ))}
+              </div>
+            </Scroll>
+            <Scroll>
+              <Scan
+                position={mobileOnly ? [4, 0, 0] : [7, -2, 0]}
+                scale={mobileOnly ? 0.3 : 0.5}
+              />
+            </Scroll>
+            <Device
               mobile={mobile}
               projects={data.projects}
-              setLoading={setLoading}
-            />
-          </Device>
-        </Landscape>
+              home={home}
+              setHome={setHome}
+            >
+              <VideoMaterial
+                mobile={mobile}
+                projects={data.projects}
+                setLoading={setLoading}
+              />
+            </Device>
+          </Landscape>
+        </Fade>
       </body>
     </html>
   );

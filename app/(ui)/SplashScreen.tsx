@@ -20,8 +20,11 @@ export function SplashScreen({ loading }: { loading: boolean }) {
   // }, [input, canvas, results, setStatus]);
 
   return (
-    // todo control truthy with other booleans instead of status
-    <Fade truthy={loading}>
+    <Fade
+      truthy={loading}
+      init={1}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+    >
       <div
         className={`fixed z-[200] flex h-screen w-screen items-center bg-zinc-200 p-4 dark:bg-zinc-600`}
       >

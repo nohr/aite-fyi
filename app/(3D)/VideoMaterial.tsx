@@ -1,7 +1,12 @@
 import { useUIStore } from "(ui)";
-import { useVideoTexture, useTexture, useScroll } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
-import { useState, Suspense, useEffect, memo } from "react";
+import {
+  useVideoTexture,
+  useTexture,
+  useScroll,
+  Html,
+} from "@react-three/drei";
+import { useFrame, useThree } from "@react-three/fiber";
+import { useState, Suspense, useEffect, memo, MutableRefObject } from "react";
 import { BackSide } from "three";
 
 export function VideoMaterial({
@@ -52,13 +57,33 @@ export function VideoMaterial({
 
   return (
     <Suspense fallback={null}>
-      <meshLambertMaterial
-        flatShading
+      <meshBasicMaterial
         reflectivity={0}
         map={!visible ? (!mobile ? M1Lock : phoneLock) : texture}
         toneMapped={false}
         side={mobile ? BackSide : undefined}
       />
+      {/* <Html
+        transform
+        as="div"
+        occlude="raycast"
+        wrapperClass=" [&>*]:!pointer-events-none w-full h-full"
+        scale={1.3}
+        position={mobile ? [0, 0, 0] : [0, -0.8, -12]}
+        rotation={mobile ? [0, 0, 0] : [Math.PI / 2, Math.PI, Math.PI]}
+        portal={
+          {
+            current: gl.domElement.parentNode,
+          } as MutableRefObject<HTMLElement>
+        }
+      >
+        <video
+          src={projects[project][mobile ? "mobile" : "desktop"]}
+          className=" pointer-events-none"
+          autoPlay
+          muted
+        />
+      </Html> */}
     </Suspense>
   );
 }

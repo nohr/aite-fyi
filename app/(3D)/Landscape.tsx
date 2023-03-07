@@ -31,7 +31,7 @@ export function Landscape({
         id="fullscreen"
         dpr={dpr}
         // gl={{ antialias: true }}
-        frameloop="demand"
+        // frameloop="demand"
       >
         <Suspense fallback={null}>
           <PerformanceMonitor
@@ -48,7 +48,7 @@ export function Landscape({
           {/* <OrbitControls enableZoom={false} /> */}
         </Suspense>
       </Canvas>
-      {/* <Stats className="!top-auto !bottom-0" /> */}
+      <Stats className="!top-auto !bottom-0" />
     </>
   );
 }

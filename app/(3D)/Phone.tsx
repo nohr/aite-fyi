@@ -8,276 +8,278 @@ title: Iphone 13 Pro
 
 "use client";
 
-import * as THREE from "three";
-import React, { forwardRef, Ref } from "react";
+import React, { forwardRef, memo, Ref } from "react";
 import { useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
+import { Group, Mesh, MeshStandardMaterial } from "three";
 
 type GLTFResult = GLTF & {
   nodes: {
-    Object_8: THREE.Mesh;
-    Object_10: THREE.Mesh;
-    Object_12: THREE.Mesh;
-    Object_14: THREE.Mesh;
-    Object_16: THREE.Mesh;
-    Object_19: THREE.Mesh;
-    Object_21: THREE.Mesh;
-    Object_23: THREE.Mesh;
-    Object_25: THREE.Mesh;
-    Object_27: THREE.Mesh;
-    Object_29: THREE.Mesh;
-    Object_31: THREE.Mesh;
-    Object_34: THREE.Mesh;
-    Object_36: THREE.Mesh;
-    Object_38: THREE.Mesh;
-    Object_40: THREE.Mesh;
-    Object_43: THREE.Mesh;
-    Object_46: THREE.Mesh;
-    Object_49: THREE.Mesh;
-    Object_52: THREE.Mesh;
-    Object_55: THREE.Mesh;
-    Object_57: THREE.Mesh;
-    Object_59: THREE.Mesh;
-    Object_61: THREE.Mesh;
-    Object_63: THREE.Mesh;
-    Object_65: THREE.Mesh;
-    Object_67: THREE.Mesh;
-    Object_69: THREE.Mesh;
-    Object_72: THREE.Mesh;
+    Object_8: Mesh;
+    Object_10: Mesh;
+    Object_12: Mesh;
+    Object_14: Mesh;
+    Object_16: Mesh;
+    Object_19: Mesh;
+    Object_21: Mesh;
+    Object_23: Mesh;
+    Object_25: Mesh;
+    Object_27: Mesh;
+    Object_29: Mesh;
+    Object_31: Mesh;
+    Object_34: Mesh;
+    Object_36: Mesh;
+    Object_38: Mesh;
+    Object_40: Mesh;
+    Object_43: Mesh;
+    Object_46: Mesh;
+    Object_49: Mesh;
+    Object_52: Mesh;
+    Object_55: Mesh;
+    Object_57: Mesh;
+    Object_59: Mesh;
+    Object_61: Mesh;
+    Object_63: Mesh;
+    Object_65: Mesh;
+    Object_67: Mesh;
+    Object_69: Mesh;
+    Object_72: Mesh;
   };
 
   materials: {
-    Frame: THREE.MeshStandardMaterial;
-    Port: THREE.MeshStandardMaterial;
-    Antenna: THREE.MeshStandardMaterial;
-    Frame2: THREE.MeshStandardMaterial;
-    material: THREE.MeshStandardMaterial;
-    Bezel: THREE.MeshStandardMaterial;
-    Body: THREE.MeshStandardMaterial;
-    Camera_Glass: THREE.MeshStandardMaterial;
-    Lens: THREE.MeshStandardMaterial;
-    Material: THREE.MeshStandardMaterial;
-    Glass: THREE.MeshStandardMaterial;
-    ["Camera_Frame.001"]: THREE.MeshStandardMaterial;
-    Screen_Glass: THREE.MeshStandardMaterial;
-    Logo: THREE.MeshStandardMaterial;
-    Gray_Glass: THREE.MeshStandardMaterial;
-    Flash: THREE.MeshStandardMaterial;
-    Camera_Frame: THREE.MeshStandardMaterial;
-    Black_Glass: THREE.MeshStandardMaterial;
-    ["Material.002"]: THREE.MeshStandardMaterial;
+    Frame: MeshStandardMaterial;
+    Port: MeshStandardMaterial;
+    Antenna: MeshStandardMaterial;
+    Frame2: MeshStandardMaterial;
+    material: MeshStandardMaterial;
+    Bezel: MeshStandardMaterial;
+    Body: MeshStandardMaterial;
+    Camera_Glass: MeshStandardMaterial;
+    Lens: MeshStandardMaterial;
+    Material: MeshStandardMaterial;
+    Glass: MeshStandardMaterial;
+    ["Camera_Frame.001"]: MeshStandardMaterial;
+    Screen_Glass: MeshStandardMaterial;
+    Logo: MeshStandardMaterial;
+    Gray_Glass: MeshStandardMaterial;
+    Flash: MeshStandardMaterial;
+    Camera_Frame: MeshStandardMaterial;
+    Black_Glass: MeshStandardMaterial;
+    ["Material.002"]: MeshStandardMaterial;
   };
-  // materials["Camera_Frame.001"]: THREE.MeshStandardMaterial;
+  // materials["Camera_Frame.001"]: MeshStandardMaterial;
 };
 const url = "/models/iphone_13_pro.glb";
-export const Phone = forwardRef(function Phone(
-  { children, ...props }: JSX.IntrinsicElements["group"],
-  ref: Ref<THREE.Group>
-) {
-  const {
-    nodes,
-    materials,
-    materials: {
-      Frame,
-      Port,
-      Antenna,
-      Frame2,
-      material,
-      Bezel,
-      Body,
-      Camera_Glass,
-      Lens,
-      Material,
-      Glass,
-      Screen_Glass,
-      Logo,
-      Gray_Glass,
-      Flash,
-      Camera_Frame,
-      Black_Glass,
-    },
-  } = useGLTF(url, false) as GLTFResult;
-  return (
-    <group {...props} ref={ref} dispose={null}>
-      <group
-        scale={100}
-        position={[0, 0, 0]}
-        rotation={[-Math.PI / 2, 0, Math.PI]}
-      >
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_8.geometry}
-          material={Frame}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_10.geometry}
-          material={Port}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_12.geometry}
-          material={Antenna}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_14.geometry}
-          material={Frame2}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_16.geometry}
-          material={material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_19.geometry}
-          material={material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_21.geometry}
-          material={Bezel}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_23.geometry}
-          material={Body}
-        />
-        <mesh castShadow receiveShadow geometry={nodes.Object_25.geometry}>
-          {children}
-        </mesh>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_27.geometry}
-          material={Camera_Glass}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_29.geometry}
-          material={Lens}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_31.geometry}
-          material={Material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_34.geometry}
-          material={Body}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_36.geometry}
-          material={Glass}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_38.geometry}
-          material={materials["Camera_Frame.001"]}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_40.geometry}
-          material={material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_43.geometry}
-          material={Screen_Glass}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_46.geometry}
-          material={Frame}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_49.geometry}
-          material={Frame}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_52.geometry}
-          material={Logo}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_55.geometry}
-          material={Body}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_57.geometry}
-          material={Gray_Glass}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_59.geometry}
-          material={Flash}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_61.geometry}
-          material={Port}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_63.geometry}
-          material={Camera_Frame}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_65.geometry}
-          material={Camera_Glass}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_67.geometry}
-          material={Lens}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_69.geometry}
-          material={Black_Glass}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_72.geometry}
-          material={materials["Material.002"]}
-        />
+export const Phone = memo(
+  forwardRef(function Phone(
+    { children, ...props }: JSX.IntrinsicElements["group"],
+    ref: Ref<Group>
+  ) {
+    const {
+      nodes,
+      materials,
+      materials: {
+        Frame,
+        Port,
+        Antenna,
+        Frame2,
+        material,
+        Bezel,
+        Body,
+        Camera_Glass,
+        Lens,
+        Material,
+        Glass,
+        Screen_Glass,
+        Logo,
+        Gray_Glass,
+        Flash,
+        Camera_Frame,
+        Black_Glass,
+      },
+    } = useGLTF(url, false) as GLTFResult;
+    return (
+      <group {...props} ref={ref} dispose={null}>
+        <group
+          scale={100}
+          position={[0, 0, 0]}
+          rotation={[-Math.PI / 2, 0, Math.PI]}
+        >
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_8.geometry}
+            material={Frame}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_10.geometry}
+            material={Port}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_12.geometry}
+            material={Antenna}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_14.geometry}
+            material={Frame2}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_16.geometry}
+            material={material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_19.geometry}
+            material={material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_21.geometry}
+            material={Bezel}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_23.geometry}
+            material={Body}
+          />
+          <mesh castShadow receiveShadow geometry={nodes.Object_25.geometry}>
+            {children}
+          </mesh>
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_27.geometry}
+            material={Camera_Glass}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_29.geometry}
+            material={Lens}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_31.geometry}
+            material={Material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_34.geometry}
+            material={Body}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_36.geometry}
+            material={Glass}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_38.geometry}
+            material={materials["Camera_Frame.001"]}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_40.geometry}
+            material={material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_43.geometry}
+            material={Screen_Glass}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_46.geometry}
+            material={Frame}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_49.geometry}
+            material={Frame}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_52.geometry}
+            material={Logo}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_55.geometry}
+            material={Body}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_57.geometry}
+            material={Gray_Glass}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_59.geometry}
+            material={Flash}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_61.geometry}
+            material={Port}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_63.geometry}
+            material={Camera_Frame}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_65.geometry}
+            material={Camera_Glass}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_67.geometry}
+            material={Lens}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_69.geometry}
+            material={Black_Glass}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_72.geometry}
+            material={materials["Material.002"]}
+          />
+        </group>
       </group>
-    </group>
-  );
-});
+    );
+  })
+);
 
 useGLTF.preload(url);
