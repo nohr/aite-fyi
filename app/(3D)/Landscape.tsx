@@ -38,14 +38,11 @@ export function Landscape({
             factor={1}
             onChange={({ factor }) => setDpr(round(0.5 + 1.5 * factor, 1))}
           />
-          <ambientLight intensity={0.6} />
+          {/* <ambientLight intensity={0.6} /> */}
           <Camera zoom={28} position={[0, 0, 12]} far={80} near={0.1} />
-          <ScrollControls {...props}>
-            {children}
-            {/* <Modals /> */}
-          </ScrollControls>
+          <ScrollControls {...props}>{children}</ScrollControls>
           <Env />
-          {/* <OrbitControls enableZoom={false} /> */}
+          <OrbitControls enableZoom={false} />
         </Suspense>
       </Canvas>
       {/* <Stats className="!top-auto !bottom-0" /> */}

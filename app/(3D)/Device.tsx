@@ -117,7 +117,7 @@ export const Device = memo(
     return (
       <Suspense fallback={null}>
         {/* <Preload all /> */}
-        <spotLight intensity={1} penumbra={0.9} position={[0, 0, 0]}>
+        <spotLight intensity={1} penumbra={0.6} position={[0, 0, 0]}>
           <group position={[0, -h / 3, 0]}>
             <directionalLight
               ref={keyLight}
