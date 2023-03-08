@@ -42,7 +42,7 @@ export function Landscape({
           <Camera zoom={28} position={[0, 0, 12]} far={80} near={0.1} />
           <ScrollControls {...props}>{children}</ScrollControls>
           <Env />
-          <OrbitControls enableZoom={false} />
+          {/* <OrbitControls enableZoom={false} /> */}
         </Suspense>
       </Canvas>
       {/* <Stats className="!top-auto !bottom-0" /> */}
