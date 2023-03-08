@@ -6,7 +6,7 @@ import React, { useEffect, useState } from "react";
 import Nav, { Fade, SplashScreen } from "(ui)";
 import { Device, Landscape, Scan, VideoMaterial } from "(3D)";
 import { About, Home, Project } from "(routes)";
-import { Scroll } from "@react-three/drei";
+import { PresentationControls, Scroll } from "@react-three/drei";
 import data from "@public/data.json" assert { type: "json" };
 import { usePathname } from "next/navigation";
 
@@ -66,18 +66,20 @@ export default function RootLayout({
                 scale={mobileOnly ? 0.3 : 0.5}
               />
             </Scroll>
-            <Device
-              mobile={mobile}
-              projects={data.projects}
-              home={home}
-              setHome={setHome}
-            >
-              <VideoMaterial
+            <PresentationControls snap>
+              <Device
                 mobile={mobile}
                 projects={data.projects}
-                setLoading={setLoading}
-              />
-            </Device>
+                home={home}
+                setHome={setHome}
+              >
+                <VideoMaterial
+                  mobile={mobile}
+                  projects={data.projects}
+                  setLoading={setLoading}
+                />
+              </Device>
+            </PresentationControls>
           </Landscape>
         </Fade>
       </body>
