@@ -1,5 +1,10 @@
 import { Section } from "(ui)";
-import { SiNextdotjs, SiTailwindcss, SiThreedotjs } from "react-icons/si";
+import {
+  SiAstro,
+  SiNextdotjs,
+  SiTailwindcss,
+  SiThreedotjs,
+} from "react-icons/si";
 import { GrGithub, GrLink, GrNext, GrReactjs } from "react-icons/gr";
 import { IoLogoFirebase } from "react-icons/io5";
 import Image from "next/image";
@@ -48,16 +53,7 @@ export const Project = memo(function Project({
           let icon: JSX.Element = <p key={title}>{title}</p>;
           switch (title) {
             case "astro":
-              icon = (
-                <Image
-                  key={title}
-                  height="32"
-                  width="32"
-                  src="https://unpkg.com/simple-icons@v8/icons/astro.svg"
-                  alt="Astro"
-                  className="fill-current"
-                />
-              );
+              icon = <SiAstro key={title} />;
               break;
             case "react":
               icon = <GrReactjs key={title} />;
