@@ -5,7 +5,6 @@ import {
   SiFirebase,
   SiHtml5,
   SiJavascript,
-  SiMicrosoftedge,
   SiNextdotjs,
   SiReact,
   SiTailwindcss,
@@ -27,7 +26,6 @@ export function Tools() {
       <SiThreedotjs />
       <SiFirebase />
       <SiVisualstudiocode />
-      <SiMicrosoftedge />
     </div>
   );
 }

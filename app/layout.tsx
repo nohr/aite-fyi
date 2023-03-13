@@ -30,7 +30,7 @@ export default function RootLayout({
     <html lang="en" className=" bg-zinc-200 dark:bg-zinc-900">
       <head />
       <body
-        className="hidebar relative flex w-full  flex-col text-zinc-900 selection:bg-zinc-900 selection:text-zinc-200 dark:text-zinc-400 selection:dark:bg-zinc-400 selection:dark:text-zinc-900
+        className="hidebar relative flex flex-col text-zinc-900 selection:bg-zinc-900 selection:text-zinc-200 dark:text-zinc-400 selection:dark:bg-zinc-400 selection:dark:text-zinc-900
 "
       >
         <SplashScreen loading={loading} />
@@ -53,7 +53,7 @@ export default function RootLayout({
             horizontal={!mobileOnly}
           >
             <Scroll html>
-              <div className=" relative !top-[64px] left-0 flex !h-full !w-full !translate-x-0 !translate-y-0 flex-col overflow-scroll md:flex-row">
+              <div className=" relative !top-[64px] left-0 flex !h-full !translate-x-0 !translate-y-0 flex-col overflow-scroll md:flex-row">
                 <Home />
                 {data.projects.map((project, i) => (
                   <Project key={i} {...project} />

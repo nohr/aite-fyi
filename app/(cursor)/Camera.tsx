@@ -32,7 +32,7 @@ export default function Camera() {
       <video
         width={`${resolution.width}`}
         height={`${resolution.height}`}
-        className={`input_video absolute top-0 -z-10 hidden  h-full w-full border-[1px] border-red-500 opacity-0 ${
+        className={`input_video absolute top-0 -z-10 hidden  h-full border-[1px] border-red-500 opacity-0 ${
           !selfie ? "-scale-x-100" : " scale-x-100"
         } `}
       ></video>
