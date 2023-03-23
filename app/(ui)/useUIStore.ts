@@ -20,6 +20,10 @@ export const useUIStore = create<UIProps>()(
     setStatus(status): void {
       set(() => ({ status }));
     },
+    theme: "light",
+    setTheme(theme: "light" | "dark") {
+      set(() => ({ theme }));
+    },
     routing: false,
     setRouting(routing = !get().routing) {
       set(() => ({ routing }));

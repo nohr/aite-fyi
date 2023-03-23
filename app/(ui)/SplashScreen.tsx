@@ -26,9 +26,9 @@ export function SplashScreen({ loading }: { loading: boolean }) {
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
       <div
-        className={`fixed z-[200] flex h-screen w-screen items-center bg-zinc-200 p-4 dark:bg-zinc-600`}
+        className={`fixed z-[200] flex h-screen w-screen items-center bg-zinc-200 p-4 dark:bg-zinc-900`}
       >
-        <div className=" inline-flex gap-x-2 text-zinc-900">
+        <div className=" inline-flex gap-x-2">
           <VscLoading className="h-6 animate-spin" />
           {status}
         </div>

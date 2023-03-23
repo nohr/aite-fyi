@@ -22,20 +22,6 @@ const Nav = memo(function Nav({
   const active = (href: routes) => href === pathname;
   const router = useRouter();
 
-  function Home() {
-    return (
-      <div
-        onClick={() => {
-          router.push("/");
-        }}
-        tabIndex={0}
-        className=" flex h-full w-fit cursor-pointer items-center justify-center px-2 text-6xl font-thin uppercase transition-colors duration-100 hover:bg-zinc-900 hover:text-zinc-200  dark:text-zinc-400 hover:dark:bg-zinc-400 hover:dark:text-zinc-900"
-      >
-        Æ
-      </div>
-    );
-  }
-
   function NavLink({
     href,
     className,
@@ -53,12 +39,13 @@ const Nav = memo(function Nav({
       <div
         onClick={onClick}
         tabIndex={0}
+        title="about"
         className={
           className +
-          ` flex !aspect-square cursor-pointer items-end justify-center !self-center justify-self-end bg-transparent p-4 text-lg  uppercase  transition-colors duration-100 [&>*]:!m-0 [&>*]:h-8 [&>*]:w-auto ${
+          ` flex !aspect-square h-full cursor-pointer items-end justify-center self-center bg-transparent p-4 text-6xl font-thin uppercase text-current transition-colors duration-100 [&>*]:!m-0 [&>*]:h-8 [&>*]:w-auto ${
             active(href)
-              ? "bg-zinc-900 text-zinc-200 dark:bg-zinc-400 dark:text-zinc-900 [&>*]:stroke-zinc-200 "
-              : "bg-transparent text-zinc-900 hover:bg-zinc-900 hover:text-zinc-200 dark:text-zinc-400 hover:dark:bg-zinc-400 hover:dark:text-zinc-900 [&>*]:hover:stroke-zinc-900 [&>*]:hover:dark:stroke-zinc-400 "
+              ? "bg-zinc-900  text-zinc-200 dark:bg-lime-200 dark:text-zinc-900  [&>*>*]:stroke-zinc-200 [&>*>*]:dark:stroke-zinc-900 "
+              : "bg-transparent hover:bg-zinc-900 hover:text-zinc-200  hover:dark:bg-lime-200 hover:dark:text-zinc-900 [&>*>*]:stroke-zinc-900 [&>*>*]:hover:stroke-zinc-200 [&>*>*]:dark:stroke-lime-200 [&>*>*]:hover:dark:stroke-current "
           } `
         }
       >
@@ -68,8 +55,7 @@ const Nav = memo(function Nav({
   }
 
   function Icon({
-    className = ` cursor-pointer flex !aspect-square !self-center justify-self-end p-4 [&>*]:!m-0 [&>*]:h-8 [&>*]:w-auto items-end justify-center bg-transparent p-2 text-lg uppercase text-zinc-900
-               transition-colors duration-100 hover:bg-zinc-900 hover:text-zinc-200 dark:text-zinc-400 hover:dark:bg-zinc-400 hover:dark:text-zinc-900`,
+    className = ` `,
     onClick,
     children,
   }: {
@@ -78,7 +64,16 @@ const Nav = memo(function Nav({
     children: React.ReactNode;
   }) {
     return (
-      <div className={className + ` `} onClick={onClick} tabIndex={0}>
+      <div
+        className={
+          className +
+          ` hover:dark:bg-current0 flex !aspect-square cursor-pointer items-end justify-center !self-center justify-self-end bg-transparent p-4 text-lg uppercase transition-colors duration-100 
+               hover:bg-zinc-900 hover:text-zinc-200 hover:dark:bg-lime-200 hover:dark:text-zinc-900 [&>*]:!m-0 [&>*]:h-8 [&>*]:w-auto`
+        }
+        title="toggle device"
+        onClick={onClick}
+        tabIndex={0}
+      >
         {children}
       </div>
     );
@@ -87,9 +82,11 @@ const Nav = memo(function Nav({
   return (
     <nav className="fixed left-0 top-0 z-[90] flex h-16 w-screen select-none flex-row items-center justify-between bg-zinc-200 !bg-opacity-5 p-0 !pr-4 backdrop-blur-lg dark:bg-zinc-900 md:!p-0">
       <div className="flex h-full flex-row">
-        <Home />
+        <NavLink href="/" className=" !p-1">
+          Æ
+        </NavLink>
         <NavLink href="/about">
-          <GrContactInfo className=" [&>*]:!stroke-current" />
+          <GrContactInfo />
         </NavLink>
       </div>
       <Fade truthy={!about}>

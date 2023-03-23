@@ -11,10 +11,10 @@ export function About({ ...props }) {
     <Section
       id="about"
       {...props}
-      className="fixed mt-16 overflow-scroll bg-zinc-200 !bg-opacity-75 pb-12 backdrop-blur-xl dark:bg-zinc-900 md:grid md:grid-cols-[40%_60%]"
+      className="fixed overflow-scroll bg-zinc-200 !bg-opacity-75 pt-16 pb-12 backdrop-blur-xl dark:bg-zinc-900 md:grid md:grid-cols-[40%_60%]"
     >
-      <h1 className="text-4xl font-bold">About</h1>
-      <div className=" max-w-prose self-start whitespace-pre-wrap pb-12 ">
+      {/* <h1 className="text-4xl font-bold">About Me</h1> */}
+      <div className=" col-start-2 max-w-prose whitespace-pre-wrap py-12 leading-7 ">
         {data.about.bio}
       </div>
     </Section>

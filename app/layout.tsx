@@ -3,7 +3,7 @@
 import "./globals.css";
 import React, { useEffect, useState } from "react";
 // import Cursor from "(cursor)";
-import Nav, { Fade, SplashScreen } from "(ui)";
+import Nav, { Fade, SplashScreen, useUIStore } from "(ui)";
 import { Device, Landscape, Scan, VideoMaterial } from "(3D)";
 import { About, Home, Project } from "(routes)";
 import { PresentationControls, Scroll } from "@react-three/drei";
@@ -15,6 +15,8 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const theme = useUIStore((state) => state.theme);
+  const setTheme = useUIStore((state) => state.setTheme);
   const [mobile, setMobile] = useState<boolean>(false);
   const [mobileOnly, setMobileOnly] = useState(true);
   const pathname = usePathname();
@@ -24,13 +26,26 @@ export default function RootLayout({
     setMobileOnly(window.matchMedia("(max-width: 768px)").matches);
   }, []);
 
+  useEffect(() => {
+    const theme = window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+    setTheme(theme);
+    // listen for changes
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", (e) => {
+        setTheme(e.matches ? "dark" : "light");
+      });
+  }, [setTheme]);
+
   const [home, setHome] = useState(false);
   const [loading, setLoading] = useState(true);
   return (
     <html lang="en" className=" bg-zinc-200 dark:bg-zinc-900">
       <head />
       <body
-        className="hidebar relative flex flex-col text-zinc-900 selection:bg-zinc-900 selection:text-zinc-200 dark:text-zinc-400 selection:dark:bg-zinc-400 selection:dark:text-zinc-900
+        className="hidebar relative flex flex-col text-zinc-900 selection:bg-zinc-900 selection:text-zinc-200 dark:text-lime-200 selection:dark:bg-lime-200 selection:dark:text-zinc-900
 "
       >
         <SplashScreen loading={loading} />
@@ -53,7 +68,7 @@ export default function RootLayout({
             horizontal={!mobileOnly}
           >
             <Scroll html>
-              <div className=" relative !top-[64px] left-0 flex !h-full !translate-x-0 !translate-y-0 flex-col overflow-scroll md:flex-row">
+              <div className=" relative top-0 left-0 mt-16 flex !h-full !translate-x-0 !translate-y-0 flex-col overflow-scroll py-16 md:flex-row">
                 <Home />
                 {data.projects.map((project, i) => (
                   <Project key={i} {...project} />
@@ -62,6 +77,7 @@ export default function RootLayout({
             </Scroll>
             <Scroll>
               <Scan
+                theme={theme}
                 position={mobileOnly ? [4, 0, 0] : [7, -2, 0]}
                 scale={mobileOnly ? 0.3 : 0.5}
               />

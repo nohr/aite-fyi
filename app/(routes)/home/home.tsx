@@ -8,7 +8,7 @@ export function Home({ ...props }) {
     <Section
       {...props}
       id="home"
-      className=" grid select-none grid-cols-[75%_25%] items-center justify-center"
+      className=" grid !h-[100dvh] select-none grid-cols-[75%_25%] items-center justify-center"
     >
       <div className="flex  flex-col items-start md:items-center">
         <Tools />

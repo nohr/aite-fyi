@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Suspense, useEffect } from "react";
+import React, { memo, Suspense, useEffect } from "react";
 import {
   Html,
   OrbitControls,
@@ -16,7 +16,7 @@ import { Env } from "./Environment";
 import round from "lodash/round";
 import { useUIStore } from "(ui)";
 
-export function Landscape({
+export const Landscape = memo(function Landscape({
   children,
   ...props
 }: React.PropsWithChildren<ScrollControlsProps>) {
@@ -48,4 +48,4 @@ export function Landscape({
       {/* <Stats className="!top-auto !bottom-0" /> */}
     </>
   );
-}
+});
