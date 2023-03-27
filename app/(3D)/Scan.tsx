@@ -4,7 +4,6 @@ import React, { memo, Suspense, useRef } from "react";
 import {
   Html,
   Loader,
-  TrailConfig,
   useGLTF,
   useScroll,
   useTrailTexture,
@@ -27,14 +26,14 @@ export const Scan = memo(
     const ref = useRef<THREE.Mesh>(null!);
     const scroll = useScroll();
 
-    const config: TrailConfig = {
-      size: 60,
-      maxAge: 500,
-      radius: 1,
-      interpolate: 1,
-      smoothing: 0.5,
-      minForce: 0.3,
-    };
+    // const config: TrailConfig = {
+    //   size: 60,
+    //   maxAge: 500,
+    //   radius: 1,
+    //   interpolate: 1,
+    //   smoothing: 0.5,
+    //   minForce: 0.3,
+    // };
 
     // const [texture, onMove] = useTrailTexture(config);
 
