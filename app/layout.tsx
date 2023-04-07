@@ -1,14 +1,22 @@
 "use client";
 
 import "./globals.css";
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 // import Cursor from "(cursor)";
 import Nav, { Fade, SplashScreen, useUIStore } from "(ui)";
 import { Device, Landscape, Scan, VideoMaterial } from "(3D)";
 import { About, Home, Project } from "(routes)";
 import { PresentationControls, Scroll } from "@react-three/drei";
-import data from "@public/data.json" assert { type: "json" };
 import { usePathname } from "next/navigation";
+import { ProjectType } from "api/projects/route";
+
+async function getProjects() {
+  const res = await fetch("/api/projects", {
+    method: "GET",
+  });
+  const data = await res.json();
+  return data;
+}
 
 export default function RootLayout({
   children,
@@ -39,6 +47,14 @@ export default function RootLayout({
       });
   }, [setTheme]);
 
+  // data fetching
+  const [projects, setProjects] = useState([]);
+  useEffect(() => {
+    getProjects().then((projects) => {
+      setProjects(projects);
+    });
+  }, []);
+
   const [home, setHome] = useState(false);
   const [loading, setLoading] = useState(true);
   return (
@@ -64,16 +80,17 @@ export default function RootLayout({
         </Fade>
         <Fade truthy={pathname === "/"} init={0}>
           <Landscape
-            pages={1 + data.projects.length}
+            pages={1 + projects.length}
             damping={0.1}
             horizontal={!mobileOnly}
           >
             <Scroll html>
               <div className=" relative top-0 left-0 mt-16 flex !h-full !translate-x-0 !translate-y-0 flex-col overflow-scroll py-16 md:flex-row">
                 <Home />
-                {data.projects.map((project, i) => (
-                  <Project key={i} {...project} />
-                ))}
+                {projects.length &&
+                  projects.map((project: ProjectType, i) => (
+                    <Project key={i} {...project} />
+                  ))}
               </div>
             </Scroll>
             <Scroll>
@@ -86,13 +103,13 @@ export default function RootLayout({
             <PresentationControls snap>
               <Device
                 mobile={mobile}
-                projects={data.projects}
+                projects={projects}
                 home={home}
                 setHome={setHome}
               >
                 <VideoMaterial
                   mobile={mobile}
-                  projects={data.projects}
+                  projects={projects}
                   setLoading={setLoading}
                 />
               </Device>

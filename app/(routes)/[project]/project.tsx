@@ -5,9 +5,9 @@ import {
   SiTailwindcss,
   SiThreedotjs,
 } from "react-icons/si";
-import { GrGithub, GrLink, GrNext, GrReactjs } from "react-icons/gr";
+import { GrGithub, GrLink, GrReactjs } from "react-icons/gr";
 import { IoLogoFirebase } from "react-icons/io5";
-import Image from "next/image";
+// import Image from "next/image";
 import { memo } from "react";
 // import { useScroll } from "@react-three/drei";
 export const Project = memo(function Project({
