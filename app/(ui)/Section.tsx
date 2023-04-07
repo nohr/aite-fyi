@@ -18,7 +18,7 @@ export function Section({ className = "", id, children, ...props }: any) {
       id={id}
       className={
         className +
-        "  flex h-[100dvh] w-screen flex-col items-center overflow-hidden p-4 py-0 md:h-full md:pb-0"
+        "  flex h-[100dvh] w-screen flex-col overflow-hidden p-4 py-0 md:h-full md:justify-end md:pb-0"
       }
     >
       {children}

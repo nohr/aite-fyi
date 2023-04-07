@@ -49,7 +49,7 @@ type HandProps = {
 
 type alt = "AltLeft" | "AltRight";
 
-type routes =
+type Routes =
   | "/"
   | "/home"
   | "/about"

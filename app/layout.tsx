@@ -1,7 +1,7 @@
 "use client";
 
 import "./globals.css";
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 // import Cursor from "(cursor)";
 import Nav, { Fade, SplashScreen, useUIStore } from "(ui)";
 import { Device, Landscape, Scan, VideoMaterial } from "(3D)";
@@ -42,10 +42,11 @@ export default function RootLayout({
   const [home, setHome] = useState(false);
   const [loading, setLoading] = useState(true);
   return (
-    <html lang="en" className=" bg-zinc-200 dark:bg-zinc-900">
+    <html lang="en" className=" ">
       <head />
       <body
-        className="hidebar relative flex flex-col text-zinc-900 selection:bg-zinc-900 selection:text-zinc-200 dark:text-lime-200 selection:dark:bg-lime-200 selection:dark:text-zinc-900
+        className="hidebar relative flex flex-col selection:bg-zinc-900 selection:text-zinc-200
+        selection:dark:bg-lime-200 selection:dark:text-zinc-900
 "
       >
         <SplashScreen loading={loading} />

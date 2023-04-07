@@ -48,7 +48,7 @@ export const Project = memo(function Project({
   }
   function Programs({ program }: { program: string[] }) {
     return (
-      <div className=" flex w-fit flex-row gap-x-1 !self-center [&>*]:h-6 [&>*]:w-auto">
+      <div className="light flex w-fit flex-row gap-x-1 !self-center [&>*]:h-6 [&>*]:w-auto">
         {program.map((title: string, i): JSX.Element => {
           let icon: JSX.Element = <p key={title}>{title}</p>;
           switch (title) {
@@ -81,10 +81,10 @@ export const Project = memo(function Project({
 
   return (
     <Section id={title} {...props}>
-      <div className=" flex w-full flex-col border-[1px] border-current bg-zinc-200 !bg-opacity-80  p-2 backdrop-blur-xl dark:bg-zinc-900 md:max-w-prose">
+      <div className=" splash flex w-full flex-col border-[1px] border-current  !bg-opacity-50  p-2 backdrop-blur-xl md:w-min">
         <h1 className="text-4xl font-bold">{title}</h1>
-        {description ? <p>{description}</p> : null}
-        <div className="flex flex-row justify-between">
+        {description ? <p className="focused">{description}</p> : null}
+        <div className="flex flex-row justify-between gap-y-8">
           {url ? <Link url={url} /> : null}
           <Programs program={program} />
         </div>
@@ -92,5 +92,3 @@ export const Project = memo(function Project({
     </Section>
   );
 });
-
-console.log(Project);

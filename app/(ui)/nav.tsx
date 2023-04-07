@@ -19,18 +19,18 @@ const Nav = memo(function Nav({
 }) {
   const pathname = usePathname();
   const about = pathname === "/about";
-  const active = (href: routes) => href === pathname;
+  const active = (href: Routes) => href === pathname;
   const router = useRouter();
 
   function NavLink({
     href,
-    className,
+    className = "navIcon ",
     children,
     onClick = () => {
       router.push(href);
     },
   }: {
-    href: routes;
+    href: Routes;
     className?: string;
     children?: React.ReactNode;
     onClick?: () => void;
@@ -39,13 +39,11 @@ const Nav = memo(function Nav({
       <div
         onClick={onClick}
         tabIndex={0}
-        title="about"
+        title={href.split("/")[1] || "home"}
         className={
           className +
-          ` flex !aspect-square h-full cursor-pointer items-end justify-center self-center bg-transparent p-4 text-6xl font-thin uppercase text-current transition-colors duration-100 [&>*]:!m-0 [&>*]:h-8 [&>*]:w-auto ${
-            active(href)
-              ? "bg-zinc-900  text-zinc-200 dark:bg-lime-200 dark:text-zinc-900  [&>*>*]:stroke-zinc-200 [&>*>*]:dark:stroke-zinc-900 "
-              : "bg-transparent hover:bg-zinc-900 hover:text-zinc-200  hover:dark:bg-lime-200 hover:dark:text-zinc-900 [&>*>*]:stroke-zinc-900 [&>*>*]:hover:stroke-zinc-200 [&>*>*]:dark:stroke-lime-200 [&>*>*]:hover:dark:stroke-current "
+          ` flex !aspect-square h-full cursor-pointer items-end justify-center self-center bg-transparent p-4 text-6xl font-thin uppercase transition-colors duration-100 [&>*]:!m-0 [&>*]:h-8 [&>*]:w-auto ${
+            active(href) ? "active  " : ""
           } `
         }
       >
@@ -67,8 +65,8 @@ const Nav = memo(function Nav({
       <div
         className={
           className +
-          ` hover:dark:bg-current0 flex !aspect-square cursor-pointer items-end justify-center !self-center justify-self-end bg-transparent p-4 text-lg uppercase transition-colors duration-100 
-               hover:bg-zinc-900 hover:text-zinc-200 hover:dark:bg-lime-200 hover:dark:text-zinc-900 [&>*]:!m-0 [&>*]:h-8 [&>*]:w-auto`
+          ` navIcon flex !aspect-square cursor-pointer items-end justify-center !self-center justify-self-end bg-transparent p-4 text-lg uppercase transition-colors duration-100 
+             [&>*]:!m-0 [&>*]:h-8 [&>*]:w-auto`
         }
         title="toggle device"
         onClick={onClick}
@@ -80,7 +78,7 @@ const Nav = memo(function Nav({
   }
 
   return (
-    <nav className="fixed left-0 top-0 z-[90] flex h-16 w-screen select-none flex-row items-center justify-between bg-zinc-200 !bg-opacity-5 p-0 !pr-4 backdrop-blur-lg dark:bg-zinc-900 md:!p-0">
+    <nav className="fixed left-0 top-0 z-[90] flex h-16 w-screen select-none flex-row items-center justify-between bg-opacity-5 p-0 !pr-4 backdrop-blur-lg md:!p-0">
       <div className="flex h-full flex-row">
         <NavLink href="/" className=" !p-1">
           Æ

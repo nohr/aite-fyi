@@ -15,7 +15,7 @@ import {
 
 export function Tools() {
   return (
-    <div className="flex flex-row items-center justify-center gap-x-3 p-1">
+    <div className=" flex flex-row items-center justify-center gap-x-3 p-1">
       <SiHtml5 />
       <SiCss3 />
       <SiJavascript />

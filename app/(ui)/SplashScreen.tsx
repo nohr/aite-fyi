@@ -23,10 +23,11 @@ export function SplashScreen({ loading }: { loading: boolean }) {
     <Fade
       truthy={loading}
       init={1}
-      transition={{ duration: 0.5, ease: "easeOut" }}
+      // transition={{ duration: 0.5, ease: "easeOut" }}
+      transition={{ duration: 0.5, ease: "circOut" }}
     >
       <div
-        className={`fixed z-[200] flex h-screen w-screen items-center bg-zinc-200 p-4 dark:bg-zinc-900`}
+        className={`splash fixed z-[200] flex h-screen w-screen items-center bg-current p-4`}
       >
         <div className=" inline-flex gap-x-2">
           <VscLoading className="h-6 animate-spin" />
