@@ -5,7 +5,7 @@ export const useUIStore = create<UIProps>()(
   //   persist(
   (set, get) => ({
     path: "/",
-    setPath(path: routes) {
+    setPath(path: Routes) {
       set(() => ({ path }));
     },
     grab: false,

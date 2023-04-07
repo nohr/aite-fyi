@@ -6,7 +6,7 @@ import { useCallback, useEffect, useRef } from "react";
 import { useUIStore } from "./useUIStore";
 import { useRouteChange } from "./useUtils";
 
-export function useInView(route: routes) {
+export function useInView(route: Routes) {
   const routing = useUIStore((state) => state.routing);
   const setStatus = useUIStore((state) => state.setStatus);
   const observer = useRef<IntersectionObserver | null>(null);
@@ -14,7 +14,7 @@ export function useInView(route: routes) {
   const setPath = useUIStore((state) => state.setPath);
   // // change the route to the page when in view
   const ScrollIntoView = useCallback(
-    (path: routes) => {
+    (path: Routes) => {
       // scroll to the element with the id of the current pathname
       const el = document.getElementById(path?.split("/")[1] || "home");
       if (el) {
