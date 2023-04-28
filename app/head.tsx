@@ -1,7 +1,7 @@
 export default function Head() {
   return (
     <>
-      <title>Aite Eboigbe</title>
+      <title>Aite, for your info...</title>
       <meta
         content="width=device-width, initial-scale=1, user-scalable=0"
         name="viewport"

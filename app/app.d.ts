@@ -1,6 +1,8 @@
 // zustand state props
 
 interface UIProps {
+  loading: boolean;
+  setLoading: (loading?: boolean) => void;
   path: routes;
   setPath: (path: routes) => void;
   grab: boolean;
@@ -57,12 +59,3 @@ type Routes =
   | "/professional"
   | "/personal"
   | "/resume";
-
-interface ProjectProps {
-  title: string;
-  description: string;
-  desktop: string;
-  mobile: string;
-  url?: string | string[];
-  program: string[];
-}

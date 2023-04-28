@@ -1,25 +1,20 @@
 import { useUIStore } from "(ui)";
-import {
-  useVideoTexture,
-  useTexture,
-  useScroll,
-  Html,
-} from "@react-three/drei";
-import { useFrame, useThree } from "@react-three/fiber";
-import { useState, Suspense, useEffect, memo, MutableRefObject } from "react";
+import { useVideoTexture, useTexture, useScroll } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
+import { ProjectType } from "api/projects/route";
+import { useState, Suspense, useEffect } from "react";
 import { BackSide } from "three";
 
 export function VideoMaterial({
-  setLoading,
   projects,
   mobile,
 }: {
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
-  projects: ProjectProps[];
+  projects: ProjectType[];
   mobile: boolean;
 }) {
   // console.log("rendered");
   const scroll = useScroll();
+  const setLoading = useUIStore((state) => state.setLoading);
 
   const pages = 1 + projects.length;
   // change texture with scroll position
@@ -85,20 +80,5 @@ export function VideoMaterial({
         />
       </Html> */}
     </Suspense>
-  );
-}
-
-// / fallback texture
-function FallbackMaterial({
-  mobile,
-  M1Lock,
-  phoneLock,
-}: {
-  mobile: boolean;
-  M1Lock: THREE.Texture;
-  phoneLock: THREE.Texture;
-}) {
-  return (
-    <meshBasicMaterial map={!mobile ? M1Lock : phoneLock} toneMapped={false} />
   );
 }

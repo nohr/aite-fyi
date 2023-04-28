@@ -1,97 +1,69 @@
-"use client";
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { useUIStore } from "(ui)";
+import { useFrame, useLoader } from "@react-three/fiber";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { Group, Vector3 } from "three";
+import { PCDLoader } from "three/examples/jsm/loaders/PCDLoader";
+import { PointsMaterial } from "three/src/materials/PointsMaterial";
+import { Color } from "three/src/math/Color";
+import { Points } from "three/src/objects/Points";
 
-import React, { memo, Suspense, useRef } from "react";
-import {
-  Html,
-  Loader,
-  useGLTF,
-  useScroll,
-  // useTrailTexture,
-} from "@react-three/drei";
-import { GLTF } from "three-stdlib";
-import { useFrame } from "@react-three/fiber";
+export function Scan({ ...props }: JSX.IntrinsicElements["group"]) {
+  const head = useLoader(PCDLoader, "/models/head.pcd");
+  const body = useLoader(PCDLoader, "/models/body.pcd");
+  const headRef = useRef<Points>(null!);
+  const bodyRef = useRef<Points>(null!);
+  const groupRef = useRef<Group>(null!);
+  const [color, setColor] = useState<Color>(new Color("#000000"));
+  const mod = 3.2;
+  const theme = useUIStore((s) => s.theme);
 
-type GLTFResult = GLTF & {
-  nodes: {
-    Scan2: THREE.Mesh;
-  };
-};
+  const listener = useCallback(() => {
+    let arc: Color | string = getComputedStyle(document.documentElement)
+      .getPropertyValue(
+        theme === "dark"
+          ? "--arc-palette-subtitle"
+          : "--arc-palette-maxContrastColor"
+      )
+      .slice(0, -2)
+      .toLocaleLowerCase();
+    arc = new Color(parseInt(arc.replace("#", "0x"), 16));
+    setColor(arc);
+  }, [theme]);
 
-const url = "/models/Scan2.gltf";
-export const Scan = memo(
-  function Scan({
-    theme,
-    ...props
-  }: JSX.IntrinsicElements["mesh"] & {
-    theme: string;
-  }) {
-    const { nodes } = useGLTF(url) as GLTFResult;
-    const ref = useRef<THREE.Group>(null!);
-    const scroll = useScroll();
+  useEffect(() => {
+    listener();
+  }, [listener]);
 
-    // const config: TrailConfig = {
-    //   size: 60,
-    //   maxAge: 500,
-    //   radius: 1,
-    //   interpolate: 1,
-    //   smoothing: 0.5,
-    //   minForce: 0.3,
-    // };
+  useFrame(({ mouse }) => {
+    const target = new Vector3((mouse.x * mod * 2) / 1, mouse.y * mod, 0.5);
+    headRef.current?.lookAt(target.x, target.y - 1.5, target.z);
+    bodyRef.current?.lookAt(target.x * 0.25, target.y / 2, 4);
 
-    // const [texture, onMove] = useTrailTexture(config);
+    // animate the group ref position so that it oscillates between 0.1 and -0.1 on the y axis
+    groupRef.current.position.y = Math.sin(Date.now() / 1000) / 10;
+  });
 
-    useFrame(() => {
-      const theme = window
-        .getComputedStyle(document.body)
-        .getPropertyValue("--arc-palette-focus")
-        .slice(1, -2);
-      setArcTheme(theme);
+  const mat = useMemo(
+    () =>
+      new PointsMaterial({
+        size: 0.001,
+        fog: true,
+        color,
+      }),
+    [color]
+  );
 
-      ref.current.rotation.y = scroll.offset * 5;
-      if (ref.current.rotation.y > Math.PI / 3.5) ref.current.visible = false;
-      else ref.current.visible = true;
-
-      // TODO pointer interactivity
-    });
-
-    const [arcTheme, setArcTheme] = React.useState<string | undefined>(
-      undefined
-    );
-
-    return (
-      <Suspense
-        fallback={
-          <Html as="div" fullscreen>
-            <Loader />
-          </Html>
-        }
-      >
-        <group ref={ref} rotation={[0, Math.PI / 9, 0]}>
-          <mesh
-            {...props}
-            rotation={[Math.PI / 4.5, 0, 0]}
-            // onPointerMove={onMove}
-            geometry={nodes.Scan2.geometry}
-          >
-            <meshBasicMaterial
-              attach="material"
-              color={
-                arcTheme ? arcTheme : theme === "light" ? "#18181B" : "#BFF164"
-              }
-            />
-            {/* <meshLambertMaterial
-            side={DoubleSide}
-            displacementMap={texture}
-            displacementScale={0.1}
-            wireframe
-            color="#BFF164"
-          /> */}
-          </mesh>
-        </group>
-      </Suspense>
-    );
-  },
-  (prev, next) => prev.theme === next.theme
-);
-
-useGLTF.preload(url);
+  return (
+    <group
+      {...props}
+      ref={groupRef}
+      position={[0, 0, -2]}
+      rotation={[0, Math.PI / 2, 0]}
+      scale={0.17}
+    >
+      <points ref={headRef} geometry={head.geometry} material={mat} />
+      <points ref={bodyRef} geometry={body.geometry} material={mat} />
+    </group>
+  );
+}

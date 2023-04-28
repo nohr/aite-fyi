@@ -1,33 +1,35 @@
 "use client";
 
+import useTheme from "@hooks/useTheme";
 import { AnimatePresence, HTMLMotionProps, motion } from "framer-motion";
+import { usePathname } from "next/navigation";
 
 export function Fade({
   children,
   className,
-  truthy,
-  init = 1,
+  init = 0,
   ...props
 }: {
   children: React.ReactNode;
   className?: string;
-  truthy: boolean;
   init?: number;
 } & HTMLMotionProps<"div">): JSX.Element {
+  const pathname = usePathname();
+  // console.log(children);
+  useTheme();
   return (
-    <AnimatePresence>
-      {truthy ? (
-        <motion.div
-          {...props}
-          className={className}
-          initial={{ opacity: init }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.5, ease: "circOut" }}
-        >
-          {children}
-        </motion.div>
-      ) : null}
+    <AnimatePresence initial={false} mode="wait">
+      <motion.main
+        {...props}
+        key={pathname}
+        className={className}
+        initial={{ opacity: init }}
+        animate={{ opacity: 1 }}
+        // exit={{ opacity: 0 }}
+        // transition={{ duration: 0.5, ease: "circOut" }}
+      >
+        {children}
+      </motion.main>
     </AnimatePresence>
   );
 }

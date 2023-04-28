@@ -23,6 +23,7 @@
     "paths": {
       "@public/*": ["../public/*"],
       "@lib/*": ["../lib/*"],
+      "@hooks/*": ["../hooks/*"],
       "(cursor)": ["./(cursor)/."],
       "(routes)": ["./(routes)/."],
       "(ui)": ["./(ui)/."],
