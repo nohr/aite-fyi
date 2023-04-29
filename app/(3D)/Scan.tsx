@@ -39,6 +39,7 @@ export function Scan({ ...props }: JSX.IntrinsicElements["group"]) {
     const target = new Vector3((mouse.x * mod * 2) / 1, mouse.y * mod, 0.5);
     headRef.current?.lookAt(target.x, target.y - 1.5, target.z);
     bodyRef.current?.lookAt(target.x * 0.25, target.y / 2, 4);
+    // todo make an idle target for when the mouse is not moving or out of the canvas
 
     // animate the group ref position so that it oscillates between 0.1 and -0.1 on the y axis
     groupRef.current.position.y = Math.sin(Date.now() / 1000) / 10;

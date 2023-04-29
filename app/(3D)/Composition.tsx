@@ -22,11 +22,7 @@ export default function Composition() {
         gl={{ antialias: false, alpha: true }}
       >
         <Scene />
-        {pathname === "/projects" ? (
-          <>
-            <Device /> <Env />
-          </>
-        ) : null}
+        {pathname === "/projects" ? <Device /> : null}
       </Canvas>
       <Stats className="!top-auto !bottom-0" />
     </>

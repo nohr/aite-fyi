@@ -7,6 +7,7 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { memo, Suspense, useRef } from "react";
 import { DirectionalLight } from "three/src/lights/DirectionalLight";
 import { Group } from "three/src/objects/Group";
+import { Env } from "./Environment";
 import { M1 } from "./M1";
 import { Phone } from "./Phone";
 
@@ -59,9 +60,8 @@ export const Device = memo(function Device() {
   });
 
   return (
-    <PresentationControls snap>
-      <Suspense fallback={null}>
-        {/* <Preload all /> */}
+    <Suspense fallback={null}>
+      <PresentationControls snap>
         <spotLight intensity={1} penumbra={0.6} position={[0, 0, 0]}>
           <group position={[0, -h / 3, 0]}>
             <directionalLight
@@ -75,21 +75,18 @@ export const Device = memo(function Device() {
               scale={M1Scale}
               rotation={[-Math.PI, -Math.PI / 2, 0]}
               position={[0, M1Height, -w / 3]}
-            >
-              {/* {children} */}
-            </M1>
+            ></M1>
             <Phone
               ref={phone}
               rotation={[0.5, -Math.PI, -0.3]}
               position={[-w / 3, -PhoneScale * 5, -w / 2.625]}
               scale={PhoneScale}
               frustumCulled={false}
-            >
-              {/* {children} */}
-            </Phone>
+            ></Phone>
           </group>
         </spotLight>
-      </Suspense>
-    </PresentationControls>
+      </PresentationControls>
+      <Env />
+    </Suspense>
   );
 });

@@ -2,23 +2,26 @@
 
 import useTheme from "@hooks/useTheme";
 import { AnimatePresence, HTMLMotionProps, motion } from "framer-motion";
-import { usePathname } from "next/navigation";
 
 export function Fade({
+  pathname,
   children,
   className,
   init = 0,
   ...props
 }: {
+  pathname: string;
   children: React.ReactNode;
   className?: string;
   init?: number;
 } & HTMLMotionProps<"div">): JSX.Element {
-  const pathname = usePathname();
+  // const pathname = usePathname();
   // console.log(children);
+  // console.log(window.location.pathname);
+
   useTheme();
   return (
-    <AnimatePresence initial={false} mode="wait">
+    <AnimatePresence initial={true} mode="wait">
       <motion.main
         {...props}
         key={pathname}
