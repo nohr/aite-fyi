@@ -7,7 +7,6 @@ import { Box, Flex } from "@react-three/flex";
 import { usePathname } from "next/navigation";
 import { Suspense } from "react";
 import { Device } from "./Device";
-import { Env } from "./Environment";
 import { Scan } from "./Scan";
 
 export default function Composition() {
