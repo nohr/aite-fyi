@@ -6,11 +6,13 @@ import { usePathname } from "next/navigation";
 import { memo } from "react";
 import { shallow } from "zustand/shallow";
 import { GiBombingRun, GiHand, GiMusicalNotes } from "react-icons/gi";
+import { useAudioStore } from "@hooks/useAudioStore";
 
 type Route = "home" | "proj." | "music";
 interface NavLinkProps {
   children: React.ReactNode;
   to: Route;
+  className?: string;
 }
 
 const Nav = memo(function Nav() {
@@ -20,13 +22,14 @@ const Nav = memo(function Nav() {
     shallow
   );
 
-  const NavLink = ({ children, to }: NavLinkProps) => {
+  const NavLink = ({ children, to, className }: NavLinkProps) => {
     return (
       <Link
         onClick={() => setLoading(true)}
         title={to}
         href={`/${to === "home" ? "" : to === "proj." ? "projects" : to}`}
         className={
+          className +
           `nav-link pointer-events-auto flex h-12 w-12 select-none flex-col items-center justify-center rounded-full border-[1px] border-current shadow-lg transition hover:shadow-xl
          ${
            pathname === `/${to === "home" && ""}` ||
@@ -51,6 +54,8 @@ const Nav = memo(function Nav() {
     );
   };
 
+  const playing = useAudioStore((s) => s.playing);
+
   return (
     <>
       {/* <FaSpinner className=" animate-spin" /> */}
@@ -62,7 +67,7 @@ const Nav = memo(function Nav() {
           <GiHand />
         </NavLink>
         <NavLink to="music">
-          <GiMusicalNotes />
+          <GiMusicalNotes className={playing ? "animate-pulse" : ""} />
         </NavLink>
       </nav>
     </>

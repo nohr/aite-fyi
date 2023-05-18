@@ -42,9 +42,8 @@ export const useAudioStore = create<AudioProps>()((set, get) => ({
   time: 0,
   setTime: (e) => {
     const { duration, currentTime } = e.currentTarget;
-    // console.log(duration);
     const time = (currentTime / duration) * 100;
-    set({ time: time ?? 0 });
+    set({ time: time || 0 });
   },
   changeTime: (e) => {
     const { duration } = get().audio ?? { duration: 0 };
