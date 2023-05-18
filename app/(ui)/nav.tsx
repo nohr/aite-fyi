@@ -22,14 +22,13 @@ const Nav = memo(function Nav() {
     shallow
   );
 
-  const NavLink = ({ children, to, className }: NavLinkProps) => {
+  const NavLink = ({ children, to }: NavLinkProps) => {
     return (
       <Link
         onClick={() => setLoading(true)}
         title={to}
         href={`/${to === "home" ? "" : to === "proj." ? "projects" : to}`}
         className={
-          className +
           `nav-link pointer-events-auto flex h-12 w-12 select-none flex-col items-center justify-center rounded-full border-[1px] border-current shadow-lg transition hover:shadow-xl
          ${
            pathname === `/${to === "home" && ""}` ||
