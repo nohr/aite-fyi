@@ -59,7 +59,7 @@ const Nav = memo(function Nav() {
   return (
     <>
       {/* <FaSpinner className=" animate-spin" /> */}
-      <nav className=" pointer-events-none  flex w-full flex-col justify-center gap-2 self-center border-transparent py-4 md:max-w-prose md:flex-row md:border-b-[1px]">
+      <nav className=" pointer-events-none  flex w-full flex-col justify-start gap-2 self-start border-transparent px-8 py-4 md:max-w-prose md:flex-row md:border-b-[1px]">
         <NavLink to="proj.">
           <GiBombingRun />
         </NavLink>

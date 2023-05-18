@@ -4,7 +4,7 @@ import { FaEnvelope } from "react-icons/fa";
 export default function Footer() {
   const email = "aite@nyu.edu";
   return (
-    <footer className="pointer-events-none flex  w-screen flex-col items-center justify-center">
+    <footer className="pointer-events-none flex  w-screen flex-col items-start justify-center px-8">
       <div className="pointer-events-none flex h-min w-min flex-row justify-between gap-x-2 text-xs [&>a>*]:h-8 md:[&>a>*]:!h-4 [&>a>svg]:w-auto">
         <a
           href="https://www.linkedin.com/in/aite/"
