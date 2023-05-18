@@ -22,7 +22,7 @@ export function Scan({ ...props }: JSX.IntrinsicElements["group"]) {
     let arc: Color | string = getComputedStyle(document.documentElement)
       .getPropertyValue(
         theme === "dark"
-          ? "--arc-palette-subtitle"
+          ? "--arc-palette-foregroundSecondary"
           : "--arc-palette-maxContrastColor"
       )
       .slice(0, -2)
@@ -35,15 +35,57 @@ export function Scan({ ...props }: JSX.IntrinsicElements["group"]) {
     listener();
   }, [listener]);
 
+  // todo events
+  // let animating = false;
+  // function Idle(body: Points, group: Group) {
+  //   groupRef.current.position.y = Math.sin(Date.now() / 1000) / 10;
+  //   const followTarget = new Vector3(
+  //     body.position.x,
+  //     body.position.y,
+  //     body.position.z + 10
+  //   );
+  //   const target = new Vector3(
+  //     body.position.x,
+  //     body.position.y,
+  //     body.position.z + 10
+  //   );
+
+  //   body.lookAt(target);
+  //   target.lerp(followTarget, 0.1);
+  //   const raiseHead = setInterval(() => {
+  //     headRef.current?.lookAt(0, 0, 0);
+  //   }, 1000);
+  //   // const lowerHead = setInterval(() => {
+  //   //   headRef.current?.lookAt(0, 0, 0);
+  //   // }, 1000);
+
+  //   setTimeout(() => {
+  //     clearInterval(raiseHead);
+  //     // clearInterval(lowerHead);
+  //     animating = false;
+  //   }, 15000);
+  // }
+
   useFrame(({ mouse }) => {
     const target = new Vector3((mouse.x * mod * 2) / 1, mouse.y * mod, 0.5);
+    // if (!animating) {
     headRef.current?.lookAt(target.x, target.y - 1.5, target.z);
     bodyRef.current?.lookAt(target.x * 0.25, target.y / 2, 4);
-    // todo make an idle target for when the mouse is not moving or out of the canvas
-
     // animate the group ref position so that it oscillates between 0.1 and -0.1 on the y axis
     groupRef.current.position.y = Math.sin(Date.now() / 1000) / 10;
+    // }
+
+    // todo make an idle target for when the mouse is not moving or out of the canvas
+    // wait 10 seconds and then call the idle function to make the head and body look at the camera
+
+    // clearTimeout(idle);
   });
+
+  // const idle = setTimeout(() => {
+  //   // console.log("idle");
+  //   animating = true;
+  //   Idle(bodyRef.current, groupRef.current);
+  // }, 10000);
 
   const mat = useMemo(
     () =>
@@ -51,6 +93,7 @@ export function Scan({ ...props }: JSX.IntrinsicElements["group"]) {
         size: 0.001,
         fog: true,
         color,
+        toneMapped: false,
       }),
     [color]
   );

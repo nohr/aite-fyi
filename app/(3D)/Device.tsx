@@ -4,17 +4,18 @@
 import { PresentationControls } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 // import { ProjectType } from "api/projects/route";
-import { memo, Suspense, useRef } from "react";
+import { memo, Suspense, useEffect, useRef } from "react";
 import { DirectionalLight } from "three/src/lights/DirectionalLight";
 import { Group } from "three/src/objects/Group";
 import { Env } from "./Environment";
 import { M1 } from "./M1";
 import { Phone } from "./Phone";
+import { VideoMaterial } from "./VideoMaterial";
 
 const rsqw = (t: number, delta = 0.02, a = 1, f = 1 / (2 * Math.PI)) =>
   (a / Math.atan(1 / delta)) * Math.atan(Math.sin(2 * Math.PI * t * f) / delta);
 
-export const Device = memo(function Device() {
+export const Device = memo(function Device({ ...props }: { params: string[] }) {
   const { width: w, height: h } = useThree((state) => state.viewport);
   const screen = useRef<Group>(null!);
   const body = useRef<Group>(null!);
@@ -47,7 +48,7 @@ export const Device = memo(function Device() {
           ? (body.current.rotation.y / -2) * 0.07
           : 0;
       body.current.rotation.x +=
-        body.current.rotation.x < -Math.PI / 6.5
+        body.current.rotation.x < -Math.PI / 9
           ? (body.current.rotation.x / -2) * 0.07
           : 0;
     }
@@ -60,8 +61,8 @@ export const Device = memo(function Device() {
   });
 
   return (
-    <Suspense fallback={null}>
-      <PresentationControls snap>
+    <PresentationControls snap>
+      <Suspense fallback={null}>
         <spotLight intensity={1} penumbra={0.6} position={[0, 0, 0]}>
           <group position={[0, -h / 3, 0]}>
             <directionalLight
@@ -75,18 +76,22 @@ export const Device = memo(function Device() {
               scale={M1Scale}
               rotation={[-Math.PI, -Math.PI / 2, 0]}
               position={[0, M1Height, -w / 3]}
-            ></M1>
+            >
+              <VideoMaterial mobile={false} {...props} />
+            </M1>
             <Phone
               ref={phone}
               rotation={[0.5, -Math.PI, -0.3]}
-              position={[-w / 3, -PhoneScale * 5, -w / 2.625]}
+              position={[-w / 2, -PhoneScale * 5, -4.5]}
               scale={PhoneScale}
               frustumCulled={false}
-            ></Phone>
+            >
+              <VideoMaterial mobile {...props} />
+            </Phone>
           </group>
         </spotLight>
-      </PresentationControls>
-      <Env />
-    </Suspense>
+        <Env />
+      </Suspense>
+    </PresentationControls>
   );
 });

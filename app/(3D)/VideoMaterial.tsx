@@ -1,84 +1,90 @@
 import { useUIStore } from "(ui)";
-import { useVideoTexture, useTexture, useScroll } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
-import { ProjectType } from "api/projects/route";
-import { useState, Suspense, useEffect } from "react";
+import { useVideoTexture, useTexture, Html } from "@react-three/drei";
+import { Suspense, useCallback, useEffect, useState } from "react";
+import { FaSpinner } from "react-icons/fa";
+import { getVideoObjects } from "sanity.utils";
 import { BackSide } from "three";
+import { VideoObject } from "types/Project";
+// import { Data } from "./(device)";
+
+export function Texture({
+  videoObjects,
+  ...props
+}: {
+  videoObjects: VideoObject;
+  params: string[];
+  mobile: boolean;
+}) {
+  const texture = useVideoTexture(videoObjects.url, {
+    crossOrigin: "Anonymous",
+    muted: true,
+    loop: true,
+    start: true,
+    autoplay: true,
+    playsInline: true,
+    volume: 0,
+  });
+  texture.needsUpdate = true;
+
+  texture.offset.y = props.mobile ? 0 : 0.006;
+  texture.anisotropy = 16;
+
+  return (
+    <>
+      {texture && (
+        <meshBasicMaterial
+          reflectivity={0}
+          map={texture}
+          toneMapped={false}
+          side={props.mobile ? BackSide : undefined}
+        />
+      )}
+    </>
+  );
+}
 
 export function VideoMaterial({
-  projects,
-  mobile,
+  ...props
 }: {
-  projects: ProjectType[];
+  params: string[];
   mobile: boolean;
 }) {
   // console.log("rendered");
-  const scroll = useScroll();
   const setLoading = useUIStore((state) => state.setLoading);
+  const [videoObjects, setVideoObjects] = useState<VideoObject | undefined>();
 
-  const pages = 1 + projects.length;
-  // change texture with scroll position
-  const [project, setProject] = useState(0);
-  const [visible, setVisible] = useState(false);
-  useFrame(() => {
-    setVisible(scroll.visible(1 / pages, pages / pages));
-    let num = Math.floor(scroll.offset * pages - 1);
-    num = num > projects.length - 1 ? projects.length - 1 : num < 0 ? 0 : num;
-    setProject(num);
-  });
+  const getObjects = useCallback(async () => {
+    const { VideoObjects } = await getVideoObjects(props.params[0]);
+    // console.log(VideoObjects);
 
-  const texture = useVideoTexture(
-    projects[project][mobile ? "mobile" : "desktop"],
-    {
-      // unsuspend: "canplay",
-      crossOrigin: "Anonymous",
-      muted: true,
-      loop: true,
-      start: true,
-    }
-  );
-  // texture.needsUpdate = true;
+    // set a new variable to the array object that contains the matching mobile value
+    const videoObject = VideoObjects.find(
+      (videoObject: VideoObject) => videoObject?.mobile === props.mobile
+    );
+    // console.log(videoObject);
 
-  texture.offset.y = mobile ? 0 : 0.006;
-  texture.anisotropy = 16;
-  const phoneLock = useTexture("/videos/mobile/lockscreen.jpeg");
-  const M1Lock = useTexture("/videos/desktop/lockscreen.jpg");
-  phoneLock.anisotropy = 1;
-  M1Lock.anisotropy = 1;
+    setVideoObjects(videoObject);
+  }, [props.mobile, props.params]);
 
   useEffect(() => {
-    setLoading(false);
-  }, [setLoading]);
+    getObjects();
+  }, [getObjects]);
+
+  console.log(videoObjects);
+
+  // useEffect(() => {
+  //   setLoading(false);
+  // }, [setLoading]);
 
   return (
     <Suspense fallback={null}>
-      <meshBasicMaterial
-        reflectivity={0}
-        map={!visible ? (!mobile ? M1Lock : phoneLock) : texture}
-        toneMapped={false}
-        side={mobile ? BackSide : undefined}
-      />
-      {/* <Html
-        transform
-        as="div"
-        occlude="raycast"
-        wrapperClass=" [&>*]:!pointer-events-none w-full h-full"
-        scale={1.3}
-        position={mobile ? [0, 0, 0] : [0, -0.8, -12]}
-        rotation={mobile ? [0, 0, 0] : [Math.PI / 2, Math.PI, Math.PI]}
-        portal={
-          {
-            current: gl.domElement.parentNode,
-          } as MutableRefObject<HTMLElement>
-        }
-      >
-        <video
-          src={projects[project][mobile ? "mobile" : "desktop"]}
-          className=" pointer-events-none"
-          autoPlay
-          muted
-        />
-      </Html> */}
+      {videoObjects?.url ? (
+        <Texture videoObjects={videoObjects} {...props} />
+      ) : (
+        <Html transform as="div" center>
+          <FaSpinner className="animate-spin" />
+        </Html>
+      )}
     </Suspense>
   );
 }

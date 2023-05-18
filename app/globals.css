@@ -44,7 +44,8 @@ a {
 
 @media (prefers-color-scheme: dark) {
   html {
-    background-color: var(--arc-palette-backgroundExtra, rgb(24 24 27 / 1));
-    color: var(--arc-palette-subtitle, rgb(161 161 170 / 1));
+    /* background-color: var(--arc-palette-backgroundExtra, rgb(24 24 27 / 1)); */
+    background: rgb(0, 0, 0);
+    color: var(--arc-palette-foregroundSecondary, rgb(161 161 170 / 1));
   }
 }
