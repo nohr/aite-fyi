@@ -29,7 +29,7 @@ const Nav = memo(function Nav() {
         title={to}
         href={`/${to === "home" ? "" : to === "proj." ? "projects" : to}`}
         className={
-          `nav-link pointer-events-auto flex h-12 w-12 select-none flex-col items-center justify-center rounded-full border-[1px] border-current shadow-lg transition hover:shadow-xl
+          `nav-link pointer-events-auto flex h-12 w-12 select-none flex-col items-center justify-center rounded-full border-[1px] border-current no-underline shadow-lg transition hover:shadow-xl
          ${
            pathname === `/${to === "home" && ""}` ||
            pathname.includes(to === "proj." ? "projects" : to)
@@ -57,16 +57,15 @@ const Nav = memo(function Nav() {
 
   return (
     <>
-      {/* <FaSpinner className=" animate-spin" /> */}
       <nav className=" pointer-events-none  flex w-full flex-col justify-start gap-2 self-start border-transparent px-8 py-4 md:max-w-prose md:flex-row md:border-b-[1px]">
-        <NavLink to="proj.">
-          <GiBombingRun />
-        </NavLink>
         <NavLink to="home">
           <GiHand />
         </NavLink>
         <NavLink to="music">
           <GiMusicalNotes className={playing ? "animate-pulse" : ""} />
+        </NavLink>
+        <NavLink to="proj.">
+          <GiBombingRun />
         </NavLink>
       </nav>
     </>

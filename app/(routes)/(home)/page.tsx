@@ -1,17 +1,14 @@
-import Link from "next/link";
+import { getInfo } from "sanity.utils";
 import Bio from "./Bio";
 import Locale from "./Locale";
 
-export default function Home() {
+export default async function Home() {
+  const Info = await getInfo();
+
   return (
-    <>
-      <section className="pointer-events-none flex max-w-prose flex-col items-start gap-2">
-        <Locale />
-        <Bio />
-        <Link href="/admin" className="pointer-events-auto">
-          admin
-        </Link>
-      </section>
-    </>
+    <section className="pointer-events-none flex max-w-prose flex-col items-start gap-2">
+      <Locale location={Info.location} />
+      <Bio bio={Info.bio} />
+    </section>
   );
 }

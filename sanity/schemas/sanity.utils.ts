@@ -1,7 +1,8 @@
 // "use server";
 
 import { createClient, groq } from "next-sanity";
-import { Project, VideoObject, VideoObjects } from "types/Project";
+import { Info } from "types/Info";
+import { Project, VideoObjects } from "types/Project";
 import { Song } from "types/Song";
 import clientConfig from "../config/client.config";
 
@@ -64,5 +65,17 @@ export async function getSongs(): Promise<Song[]> {
         "cover": cover.asset->url,
         links
       } | order(date desc, name asc)`
+  );
+}
+
+export async function getInfo(): Promise<Info> {
+  return createClient(clientConfig).fetch(
+    groq`
+      *[ _type == "info" ][0]{
+        _id,
+        _createdAt,
+        bio,
+        location
+      }`
   );
 }
