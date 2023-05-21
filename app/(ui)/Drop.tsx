@@ -6,9 +6,11 @@ import React from "react";
 export default function Drop({
   children,
   className,
+  key = null,
 }: {
   children: React.ReactNode;
   className: string;
+  key?: string | null;
 }) {
   const mot = {
     initial: { y: -100, opacity: 0 },
@@ -17,7 +19,7 @@ export default function Drop({
   };
 
   return (
-    <motion.div {...mot} className={className}>
+    <motion.div {...mot} key={key} className={className}>
       {children}
     </motion.div>
   );

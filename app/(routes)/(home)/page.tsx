@@ -1,4 +1,5 @@
 import { getInfo } from "sanity.utils";
+import Animate from "./Animate";
 import Bio from "./Bio";
 import Locale from "./Locale";
 
@@ -7,8 +8,10 @@ export default async function Home() {
 
   return (
     <section className="pointer-events-none flex max-w-prose flex-col items-start gap-2">
-      <Locale location={Info.location} />
-      <Bio bio={Info.bio} />
+      <Animate>
+        <Locale Info={Info} />
+        <Bio Info={Info} />
+      </Animate>
     </section>
   );
 }

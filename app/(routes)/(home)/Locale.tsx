@@ -1,35 +1,49 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
-import { TbClockFilled } from "react-icons/tb";
+import { useEffect, useMemo, useState } from "react";
+import { TbClockFilled, TbLocationFilled } from "react-icons/tb";
+import { motion } from "framer-motion";
 import { Info } from "types/Info";
 
-export default function Locale({ location }: { location: Info["location"] }) {
+export default function Locale({ Info }: { Info: Info }) {
+  const { location } = Info;
+
   const config: Intl.DateTimeFormatOptions = useMemo(
     () => ({
       timeZone: location,
       hour: "2-digit",
       minute: "2-digit",
       second: "2-digit",
+      timeZoneName: "short",
       hour12: false,
     }),
     [location]
   );
-  const timeRef = useRef<HTMLParagraphElement>(null);
   const estTime = new Date().toLocaleString("en-US", config);
-  const [time, setTime] = useState(estTime);
+  const [time, setTime] = useState<string | null>(estTime);
 
   useEffect(() => {
-    if (!timeRef.current) return;
     setInterval(() => {
       setTime(new Date().toLocaleString("en-US", config));
     }, 1000);
   }, [config]);
 
+  const city = "brooklyn, ny";
   return (
-    <div className="pointer-events-none flex flex-row items-center gap-x-1 whitespace-nowrap text-sm opacity-50">
-      <TbClockFilled />
-      <p ref={timeRef}>{`${time}\t•\tbrooklyn, ny`}</p>
-    </div>
+    <>
+      <motion.div
+        key={Info._id + "locale"}
+        // initial={{ opacity: 0 }}
+        animate={{ opacity: 1.5 }}
+        transition={{ duration: 0.5, delay: 0, ease: "easeIn" }}
+        className="pointer-events-none flex flex-row items-center gap-x-1 whitespace-nowrap text-sm opacity-50"
+      >
+        <TbLocationFilled />
+        <p>{`${city}`}</p>
+        <p> {`\t•\t`}</p>
+        <TbClockFilled />
+        <p>{`${time}`}</p>
+      </motion.div>
+    </>
   );
 }
