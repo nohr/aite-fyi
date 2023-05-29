@@ -35,7 +35,7 @@ export default function File({ song }: { song: Song }) {
               : ""
           }`}
     >
-      <div className="pointer-events-auto aspect-square h-fit border-[1px] border-current">
+      <div className="pointer-events-auto aspect-square h-[50px] w-[50px] overflow-hidden border-[1px] border-current">
         {song.cover ? (
           <Image
             src={song.cover}
