@@ -76,8 +76,8 @@ export const M1 = memo(
         >
           <Decal
             map={texture}
-            roughness={0.5}
-            side={DoubleSide}
+            // // roughness={0.5}
+            // side={DoubleSide}
             // debug
             position={[7, 0, -5]}
             rotation={[Math.PI / 2, 0, Math.PI]}

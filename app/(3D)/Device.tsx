@@ -77,7 +77,7 @@ export const Device = memo(function Device({ ...props }: { params: string[] }) {
               rotation={[-Math.PI, -Math.PI / 2, 0]}
               position={[0, M1Height, -w / 3]}
             >
-              <VideoMaterial mobile={false} {...props} />
+              <VideoMaterial mobile={null} {...props} />
             </M1>
             <Phone
               ref={phone}

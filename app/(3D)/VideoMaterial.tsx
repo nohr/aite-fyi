@@ -5,7 +5,6 @@ import { FaSpinner } from "react-icons/fa";
 import { getVideoObjects } from "sanity.utils";
 import { BackSide } from "three";
 import { VideoObject } from "types/Project";
-// import { Data } from "./(device)";
 
 export function Texture({
   videoObjects,
@@ -13,7 +12,7 @@ export function Texture({
 }: {
   videoObjects: VideoObject;
   params: string[];
-  mobile: boolean;
+  mobile: boolean | null;
 }) {
   const texture = useVideoTexture(videoObjects.url, {
     crossOrigin: "Anonymous",
@@ -47,7 +46,7 @@ export function VideoMaterial({
   ...props
 }: {
   params: string[];
-  mobile: boolean;
+  mobile: boolean | null;
 }) {
   // console.log("rendered");
   const setLoading = useUIStore((state) => state.setLoading);
@@ -64,13 +63,17 @@ export function VideoMaterial({
     // console.log(videoObject);
 
     setVideoObjects(videoObject);
+
+    return () => {
+      setVideoObjects(undefined);
+    };
   }, [props.mobile, props.params]);
 
   useEffect(() => {
     getObjects();
   }, [getObjects]);
 
-  console.log(videoObjects);
+  // console.log(videoObjects);
 
   // useEffect(() => {
   //   setLoading(false);

@@ -41,11 +41,11 @@ export async function getVideoObjects(
 ): Promise<{ VideoObjects: VideoObjects }> {
   return createClient(clientConfig).fetch(
     groq`*[ _type == "project" && slug.current == $slug][0]{
-   "VideoObjects":VideoObjects[]->{
+   VideoObjects[]{
     alt,
     mobile, 
     "url": url.asset->url,
-  }
+   }
  }`,
     { slug }
   );
