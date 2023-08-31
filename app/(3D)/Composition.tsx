@@ -4,6 +4,7 @@ import { Html, Stats, useAspect, useProgress } from "@react-three/drei";
 // import { OrbitControls } from "@react-three/drei";
 import { Canvas, useThree } from "@react-three/fiber";
 import { Box, Flex } from "@react-three/flex";
+import { usePathname } from "next/navigation";
 import { Suspense } from "react";
 
 export default function Composition({
@@ -30,18 +31,31 @@ function Scene({ children }: { children?: React.ReactNode }) {
   const { size } = useThree();
   const [vpWidth, vpHeight] = useAspect(size.width, size.height);
   const progress = useProgress();
+  const pathname = usePathname();
+
+  console.log(size.width > 768 && !pathname.includes("/projects/"));
+
   return (
     <Suspense fallback={<Html center>{progress.progress}%</Html>}>
       <Flex
         flexDirection="column"
         scaleFactor={1}
-        justify="flex-start"
-        align="flex-end"
+        justify={
+          size.width > 768 || !pathname.includes("/projects/")
+            ? "flex-start"
+            : "flex-start"
+        }
+        align={size.width > 768 ? "flex-end" : "center"}
         width={vpWidth}
         height={vpHeight}
         position={[-vpWidth / 2, vpHeight / 2, 0]}
       >
-        <Box width={0.1} height={0.1} mt={2}>
+        <Box
+          width={0.1}
+          height={0.1}
+          mt={size.width > 768 ? 2 : pathname.includes("/projects/") ? 1.5 : 5}
+          mr={size.width > 768 ? 0 : pathname.includes("/projects/") ? 1.5 : 0}
+        >
           {children}
         </Box>
       </Flex>

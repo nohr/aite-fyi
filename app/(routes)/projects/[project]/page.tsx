@@ -13,17 +13,17 @@ export default async function Project({
 
   return (
     <>
-      <Drop className="max-w-prose pl-2">
+      <Drop className="pointer-events-auto max-w-prose pl-2">
         <PortableText value={project?.content} />
       </Drop>
-      <Drop className=" flex w-fit flex-row content-between gap-2 pl-2">
+      <Drop className=" pointer-events-auto flex w-fit flex-row content-between gap-2 pl-2">
         {project.url.map((url) => (
           <a
             key={url}
             href={url}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex flex-row items-center gap-1 text-sm underline underline-offset-8 transition-opacity hover:opacity-80"
+            className=" pointer-events-auto flex flex-row items-center gap-1 text-sm underline underline-offset-8 transition-opacity hover:opacity-75"
           >
             {url.includes("github") ? "Github" : "Project Link"}
             <BsArrowUpRight className="h-3 w-3" />

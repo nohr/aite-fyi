@@ -10,7 +10,7 @@ import { IoLogoFirebase } from "react-icons/io5";
 
 export default function Programs({ program }: { program: string[] }) {
   return (
-    <div className="light flex w-fit flex-row gap-x-1 !self-center [&>*]:h-6 [&>*]:w-auto">
+    <div className="light pointer-events-auto flex w-fit flex-row gap-x-1 !self-center [&>*]:h-6 [&>*]:w-auto">
       {program.map((title: string): JSX.Element => {
         let icon: JSX.Element = (
           <p title={title} key={title}>

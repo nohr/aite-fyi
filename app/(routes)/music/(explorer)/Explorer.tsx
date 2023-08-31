@@ -12,7 +12,7 @@ export default function Explorer() {
   const query = searchParams.get("query");
 
   return (
-    <div className="pointer-events-none flex h-full resize-x flex-col gap-2 p-2">
+    <div className="pointer-events-none flex h-full resize-x flex-col gap-2 p-3">
       <ContextBar />
       {/* songs */}
       <div className="pointer-events-auto grid h-fit w-fit grid-cols-3 grid-rows-1 gap-8 overflow-scroll">

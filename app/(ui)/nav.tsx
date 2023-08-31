@@ -56,19 +56,17 @@ const Nav = memo(function Nav() {
   const playing = useAudioStore((s) => s.playing);
 
   return (
-    <>
-      <nav className=" pointer-events-none  flex w-full flex-col justify-start gap-2 self-start border-transparent px-8 py-4 md:max-w-prose md:flex-row md:border-b-[1px]">
-        <NavLink to="home">
-          <GiHand />
-        </NavLink>
-        <NavLink to="music">
-          <GiMusicalNotes className={playing ? "animate-pulse" : ""} />
-        </NavLink>
-        <NavLink to="proj.">
-          <GiBombingRun />
-        </NavLink>
-      </nav>
-    </>
+    <nav className=" pointer-events-none flex w-screen flex-row justify-start gap-2 self-start border-transparent p-2 md:border-b-[1px] md:px-8 md:py-4">
+      <NavLink to="home">
+        <GiHand />
+      </NavLink>
+      <NavLink to="music">
+        <GiMusicalNotes className={playing ? "animate-pulse" : ""} />
+      </NavLink>
+      <NavLink to="proj.">
+        <GiBombingRun />
+      </NavLink>
+    </nav>
   );
 });
 

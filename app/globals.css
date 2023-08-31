@@ -23,13 +23,13 @@ body {
   /* scroll-behavior: smooth; */
 }
 html {
-  background-color: var(--arc-palette-backgroundExtra, rgb(255 255 255 / 1));
-  color: var(--arc-palette-maxContrastColor, rgb(24 24 27 / 1));
+  background-color: var(--arc-palette-title, rgb(255 255 255 / 1));
+  color: var(--arc-palette-minContrastColor, rgb(24 24 27 / 1));
 }
 
 .nav-link:hover > *,
 .active > * {
-  @apply mix-blend-plus-lighter dark:!mix-blend-difference;
+  @apply mix-blend-plus-lighter dark:mix-blend-difference;
 }
 
 .nav-link:hover,

@@ -7,7 +7,10 @@ export default function Template({ children }: { children: React.ReactNode }) {
   const pathname = usePathname().split("/")[1];
 
   return (
-    <Fade pathname={pathname} className=" flex h-[100svh] flex-col px-8 py-2">
+    <Fade
+      pathname={pathname}
+      className=" flex h-[100svh] flex-col hyphens-auto px-1 md:px-8 md:py-2 "
+    >
       {children}
     </Fade>
   );

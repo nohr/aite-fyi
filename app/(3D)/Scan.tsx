@@ -1,39 +1,40 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { useUIStore } from "(ui)";
-import { useFrame, useLoader } from "@react-three/fiber";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useFrame, useLoader, useThree } from "@react-three/fiber";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Group, Vector3 } from "three";
 import { PCDLoader } from "three/examples/jsm/loaders/PCDLoader";
 import { PointsMaterial } from "three/src/materials/PointsMaterial";
 import { Color } from "three/src/math/Color";
 import { Points } from "three/src/objects/Points";
+import { mod } from "../../utils/constants";
 
 export function Scan({ ...props }: JSX.IntrinsicElements["group"]) {
+  const { size } = useThree();
   const head = useLoader(PCDLoader, "/models/head.pcd");
   const body = useLoader(PCDLoader, "/models/body.pcd");
   const headRef = useRef<Points>(null!);
   const bodyRef = useRef<Points>(null!);
   const groupRef = useRef<Group>(null!);
   const [color, setColor] = useState<Color>(new Color("#000000"));
-  const mod = 3.2;
   const theme = useUIStore((s) => s.theme);
 
-  const listener = useCallback(() => {
-    let arc: Color | string = getComputedStyle(document.documentElement)
-      .getPropertyValue(
-        theme === "dark"
-          ? "--arc-palette-foregroundSecondary"
-          : "--arc-palette-maxContrastColor"
-      )
+  useEffect(() => {
+    const dark = getComputedStyle(document.documentElement)
+      .getPropertyValue("--arc-palette-foregroundSecondary")
       .slice(0, -2)
       .toLocaleLowerCase();
-    arc = new Color(parseInt(arc.replace("#", "0x"), 16));
-    setColor(arc);
-  }, [theme]);
 
-  useEffect(() => {
-    listener();
-  }, [listener]);
+    const light = getComputedStyle(document.documentElement)
+      .getPropertyValue("--arc-palette-focus")
+      .slice(0, -2)
+      .toLocaleLowerCase();
+
+    const arc = theme === "dark" ? dark : light;
+    // console.log(arc);
+
+    setColor(new Color(parseInt(arc.replace("#", "0x"), 16)));
+  }, [theme]);
 
   // todo events
   // let animating = false;
@@ -91,9 +92,9 @@ export function Scan({ ...props }: JSX.IntrinsicElements["group"]) {
     () =>
       new PointsMaterial({
         size: 0.001,
-        fog: true,
+        fog: false,
         color,
-        toneMapped: false,
+        toneMapped: true,
       }),
     [color]
   );
@@ -102,9 +103,9 @@ export function Scan({ ...props }: JSX.IntrinsicElements["group"]) {
     <group
       {...props}
       ref={groupRef}
-      position={[0, 0, -2]}
+      position={[0, size.width > 768 ? 0 : 4, -2]}
       rotation={[0, Math.PI / 2, 0]}
-      scale={0.17}
+      scale={size.width > 768 ? 0.17 : 0.1}
     >
       <points ref={headRef} geometry={head.geometry} material={mat} />
       <points ref={bodyRef} geometry={body.geometry} material={mat} />

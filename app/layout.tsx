@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en" className=" ">
       <head />
-      <body className="pointer-events-none relative flex h-[100svh] w-screen flex-col">
+      <body className="pointer-events-none relative flex h-[100dvh] w-[100dvw] flex-col">
         <Nav />
         {children}
         <Footer />

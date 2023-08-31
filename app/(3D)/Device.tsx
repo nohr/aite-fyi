@@ -5,8 +5,10 @@ import { PresentationControls } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 // import { ProjectType } from "api/projects/route";
 import { memo, Suspense, useEffect, useRef } from "react";
+import { Vector3 } from "three";
 import { DirectionalLight } from "three/src/lights/DirectionalLight";
 import { Group } from "three/src/objects/Group";
+import { mod } from "../../utils/constants";
 import { Env } from "./Environment";
 import { M1 } from "./M1";
 import { Phone } from "./Phone";
@@ -21,23 +23,17 @@ export const Device = memo(function Device({ ...props }: { params: string[] }) {
   const body = useRef<Group>(null!);
   const phone = useRef<Group>(null!);
   const keyLight = useRef<DirectionalLight>(null!);
+  const { size } = useThree();
 
   // handle device sizing
   const M1Height = window.matchMedia("(max-width: 768px)").matches
-    ? h / 10
+    ? -1
     : -h / 4;
 
-  const M1Scale =
-    w / 40 > 1.23
-      ? 1.23
-      : window.matchMedia("(max-width: 768px)").matches
-      ? 0.45
-      : w / 40;
+  const M1Scale = w / 40;
   // console.log(M1Scale)
 
-  const PhoneScale = window.matchMedia("(max-width: 768px)").matches
-    ? 0.2
-    : h / 130;
+  const PhoneScale = w / 180;
 
   // Desktop
   useFrame(() => {
@@ -60,11 +56,28 @@ export const Device = memo(function Device({ ...props }: { params: string[] }) {
     }
   });
 
+  const groupRef = useRef<Group>(null!);
+  // motion
+  useFrame(({ mouse }) => {
+    const target = new Vector3(
+      mouse.x * mod * 2 * 0.1 + 5,
+      mouse.y * mod * 0.2 - 1.5,
+      0.5
+    );
+
+    if (!groupRef.current) return;
+    if (size.width > 768) groupRef.current.lookAt(target);
+    else {
+      groupRef.current.lookAt(0, -1, 10);
+      groupRef.current.position.x = 0;
+      groupRef.current.position.z = 2;
+    }
+  });
   return (
-    <PresentationControls snap>
+    <PresentationControls snap enabled={size.width <= 768}>
       <Suspense fallback={null}>
         <spotLight intensity={1} penumbra={0.6} position={[0, 0, 0]}>
-          <group position={[0, -h / 3, 0]}>
+          <group position={[0, -h / 2.5, 0]} ref={groupRef}>
             <directionalLight
               ref={keyLight}
               intensity={0.8}
@@ -75,7 +88,7 @@ export const Device = memo(function Device({ ...props }: { params: string[] }) {
               ref={screen}
               scale={M1Scale}
               rotation={[-Math.PI, -Math.PI / 2, 0]}
-              position={[0, M1Height, -w / 3]}
+              position={[0, M1Height, -3]}
             >
               <VideoMaterial mobile={null} {...props} />
             </M1>
