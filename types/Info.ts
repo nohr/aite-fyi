@@ -4,4 +4,5 @@ export interface Info {
   _id: string;
   bio: PortableTextBlock[];
   location: string;
+  timeZone: string;
 }

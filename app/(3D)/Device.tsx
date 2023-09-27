@@ -31,7 +31,6 @@ export const Device = memo(function Device({ ...props }: { params: string[] }) {
     : -h / 4;
 
   const M1Scale = w / 40;
-  // console.log(M1Scale)
 
   const PhoneScale = w / 180;
 
@@ -59,25 +58,24 @@ export const Device = memo(function Device({ ...props }: { params: string[] }) {
   const groupRef = useRef<Group>(null!);
   // motion
   useFrame(({ mouse }) => {
+    if (!groupRef.current) return;
     const target = new Vector3(
       mouse.x * mod * 2 * 0.1 + 5,
       mouse.y * mod * 0.2 - 1.5,
-      0.5
+      7
     );
-
-    if (!groupRef.current) return;
     if (size.width > 768) groupRef.current.lookAt(target);
     else {
       groupRef.current.lookAt(0, -1, 10);
       groupRef.current.position.x = 0;
-      groupRef.current.position.z = 2;
+      groupRef.current.position.z = -2;
     }
   });
   return (
     <PresentationControls snap enabled={size.width <= 768}>
       <Suspense fallback={null}>
         <spotLight intensity={1} penumbra={0.6} position={[0, 0, 0]}>
-          <group position={[0, -h / 2.5, 0]} ref={groupRef}>
+          <group position={[w / 2, -h / 2.5, 0]} ref={groupRef}>
             <directionalLight
               ref={keyLight}
               intensity={0.8}
@@ -87,8 +85,8 @@ export const Device = memo(function Device({ ...props }: { params: string[] }) {
               body={body}
               ref={screen}
               scale={M1Scale}
-              rotation={[-Math.PI, -Math.PI / 2, 0]}
-              position={[0, M1Height, -3]}
+              rotation={[-Math.PI, -Math.PI, 0]}
+              position={[0, M1Height, -3.5]}
             >
               <VideoMaterial mobile={null} {...props} />
             </M1>

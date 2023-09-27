@@ -18,7 +18,7 @@ export default function Composition({
         linear
         dpr={[1, 2]}
         className="!fixed -z-10 "
-        gl={{ antialias: false, alpha: true }}
+        gl={{ antialias: false, alpha: true, stencil: true }}
       >
         <Scene>{children}</Scene>
       </Canvas>
@@ -33,24 +33,31 @@ function Scene({ children }: { children?: React.ReactNode }) {
   const progress = useProgress();
   const pathname = usePathname();
 
-  console.log(size.width > 768 && !pathname.includes("/projects/"));
+  // console.log(
+  //   !pathname.includes("/projects/") && size.width > 768 ? "flex-end" : "center"
+  // );
 
   return (
     <Suspense fallback={<Html center>{progress.progress}%</Html>}>
       <Flex
         flexDirection="column"
         scaleFactor={1}
-        justify={
-          size.width > 768 || !pathname.includes("/projects/")
-            ? "flex-start"
-            : "flex-start"
+        justify={"flex-start"}
+        align={
+          !pathname.includes("/projects/") && size.width > 768
+            ? "flex-end"
+            : "center"
         }
-        align={size.width > 768 ? "flex-end" : "center"}
         width={vpWidth}
         height={vpHeight}
         position={[-vpWidth / 2, vpHeight / 2, 0]}
       >
         <Box
+          alignSelf={
+            !pathname.includes("/projects/") && size.width > 768
+              ? "flex-end"
+              : "center"
+          }
           width={0.1}
           height={0.1}
           mt={size.width > 768 ? 2 : pathname.includes("/projects/") ? 1.5 : 5}

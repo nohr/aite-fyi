@@ -14,6 +14,11 @@ const info = {
       title: "Location",
       type: "string",
     },
+    {
+      name: "timeZone",
+      title: "Timezone",
+      type: "string",
+    },
   ],
 };
 

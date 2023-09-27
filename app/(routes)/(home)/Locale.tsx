@@ -6,18 +6,18 @@ import { motion } from "framer-motion";
 import { Info } from "types/Info";
 
 export default function Locale({ Info }: { Info: Info }) {
-  const { location } = Info;
+  const { timeZone, location } = Info;
 
   const config: Intl.DateTimeFormatOptions = useMemo(
     () => ({
-      timeZone: location,
+      timeZone: timeZone,
       hour: "2-digit",
       minute: "2-digit",
       second: "2-digit",
       timeZoneName: "short",
       hour12: false,
     }),
-    [location]
+    [timeZone]
   );
   const estTime = new Date().toLocaleString("en-US", config);
   const [time, setTime] = useState<string | null>(estTime);
@@ -28,7 +28,6 @@ export default function Locale({ Info }: { Info: Info }) {
     }, 1000);
   }, [config]);
 
-  const city = "brooklyn, ny";
   return (
     <>
       <motion.div
@@ -39,7 +38,7 @@ export default function Locale({ Info }: { Info: Info }) {
         className="pointer-events-none flex flex-row items-center gap-x-1 whitespace-nowrap text-sm opacity-50"
       >
         <TbLocationFilled />
-        <p>{`${city}`}</p>
+        <p>{`${location}`}</p>
         <p> {`\t•\t`}</p>
         <TbClockFilled />
         <p>{`${time}`}</p>

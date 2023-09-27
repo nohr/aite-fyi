@@ -75,7 +75,8 @@ export async function getInfo(): Promise<Info> {
         _id,
         _createdAt,
         bio,
-        location
+        location,
+        timeZone
       }`
   );
 }

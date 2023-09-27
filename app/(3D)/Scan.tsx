@@ -2,7 +2,7 @@
 import { useUIStore } from "(ui)";
 import { useFrame, useLoader, useThree } from "@react-three/fiber";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Group, Vector3 } from "three";
+import { ColorRepresentation, Group, RGBAFormat, Vector3 } from "three";
 import { PCDLoader } from "three/examples/jsm/loaders/PCDLoader";
 import { PointsMaterial } from "three/src/materials/PointsMaterial";
 import { Color } from "three/src/math/Color";
@@ -16,9 +16,53 @@ export function Scan({ ...props }: JSX.IntrinsicElements["group"]) {
   const headRef = useRef<Points>(null!);
   const bodyRef = useRef<Points>(null!);
   const groupRef = useRef<Group>(null!);
-  const [color, setColor] = useState<Color>(new Color("#000000"));
+  const [color, setColor] = useState<Color | string>(new Color("#373737"));
   const theme = useUIStore((s) => s.theme);
 
+  const hexToHsl = (H: string) => {
+    // Convert hex to RGB first
+    let r = 0,
+      g = 0,
+      b = 0;
+    if (H.length === 4) {
+      r = parseInt("0x" + H[1] + H[1]);
+      g = parseInt("0x" + H[2] + H[2]);
+      b = parseInt("0x" + H[3] + H[3]);
+    } else if (H.length === 7) {
+      r = parseInt("0x" + H[1] + H[2]);
+      g = parseInt("0x" + H[3] + H[4]);
+      b = parseInt("0x" + H[5] + H[6]);
+    }
+    // Then to HSL
+    r /= 255;
+    g /= 255;
+    b /= 255;
+    const cmin = Math.min(r, g, b),
+      cmax = Math.max(r, g, b),
+      delta = cmax - cmin;
+    let h = 0,
+      s = 0,
+      l = 0;
+
+    if (delta === 0) h = 0;
+    else if (cmax === r) h = ((g - b) / delta) % 6;
+    else if (cmax === g) h = (b - r) / delta + 2;
+    else h = (r - g) / delta + 4;
+
+    h = Math.round(h * 60);
+
+    if (h < 0) h += 360;
+
+    l = (cmax + cmin) / 2;
+
+    s = delta === 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
+
+    s = +(s * 100).toFixed(1);
+
+    l = +(l * 100).toFixed(1);
+
+    return "hsl(" + h + "," + s + "%," + l + "%)";
+  };
   useEffect(() => {
     const dark = getComputedStyle(document.documentElement)
       .getPropertyValue("--arc-palette-foregroundSecondary")
@@ -26,14 +70,15 @@ export function Scan({ ...props }: JSX.IntrinsicElements["group"]) {
       .toLocaleLowerCase();
 
     const light = getComputedStyle(document.documentElement)
-      .getPropertyValue("--arc-palette-focus")
+      .getPropertyValue("--arc-palette-title")
       .slice(0, -2)
       .toLocaleLowerCase();
 
     const arc = theme === "dark" ? dark : light;
-    // console.log(arc);
+    console.log(theme);
+    console.log(hexToHsl(arc));
 
-    setColor(new Color(parseInt(arc.replace("#", "0x"), 16)));
+    // setColor(new Color(hexToHsl(arc)));
   }, [theme]);
 
   // todo events
@@ -88,14 +133,18 @@ export function Scan({ ...props }: JSX.IntrinsicElements["group"]) {
   //   Idle(bodyRef.current, groupRef.current);
   // }, 10000);
 
+  // console.log(color);
+
   const mat = useMemo(
     () =>
       new PointsMaterial({
-        size: 0.001,
+        size: 1,
         fog: false,
         color,
-        toneMapped: true,
-      }),
+        toneMapped: false,
+        opacity: 1,
+        sizeAttenuation: false,
+      }) as PointsMaterial & { color: ColorRepresentation },
     [color]
   );
 
