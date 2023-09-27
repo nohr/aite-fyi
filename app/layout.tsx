@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { Device } from "(3D)/Device";
 import { Scan } from "(3D)/Scan";
 import Media from "(ui)/Media";
+import useColor from "@hooks/useColor";
 
 export default function RootLayout({
   children,
@@ -15,6 +16,7 @@ export default function RootLayout({
 }) {
   const pathname = usePathname();
   const params = pathname.split("/").slice(2);
+const color = useColor();
 
   return (
     <html lang="en" className=" ">
@@ -27,7 +29,7 @@ export default function RootLayout({
           {pathname.includes("/projects/") ? (
             <Device params={params} />
           ) : (
-            <Scan />
+            <Scan color={color}/>
           )}
         </Composition>
         <Media />

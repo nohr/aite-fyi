@@ -30,12 +30,22 @@ body {
 }
 
 html {
-  background: var(--arc-palette-minContrastColor, rgb(255 255 255 / 1));
+  /* background: var(--arc-palette-minContrastColor, #F1F8FEFF); */
+  background: var(--arc-palette-subtitle, #96BDD5FF);
   background: linear-gradient(180deg,
-      var(--arc-palette-hover, rgb(210, 210, 210)) 0%,
-      var(--arc-palette-minContrastColor, rgb(255 255 255 / 1)) 15%);
-  color: var(--arc-palette-title, rgb(24 24 27 / 1));
+      var(--arc-palette-hover, #CADEEAFF) 0%,
+      var(--arc-palette-minContrastColor, #F1F8FEFF) 15%);
+  color: var(--arc-palette-subtitle, #96BDD5FF);
   background-repeat: no-repeat;
+}
+
+meta[name="theme-color"] {
+  attr-content: "var(--arc-palette-hover, #CADEEAFF)";
+}
+@media (prefers-color-scheme: dark) {
+  meta[name="theme-color"] {
+    attr-content: "rgb(0, 0, 0)";
+  }
 }
 
 .nav-link:hover>*,
@@ -62,6 +72,6 @@ a {
       var(--arc-palette-maxContrastColor, rgb(24 24 27 / 1)) 0%,
       var(--arc-palette-title, rgb(255 255 255 / 1)) 10%
     ); */
-    color: var(--arc-palette-foregroundSecondary, rgb(161 161 170 / 1));
+    color: var(--arc-palette-foregroundSecondary, #2e2e2e);
   }
 }

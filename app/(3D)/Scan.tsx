@@ -9,77 +9,15 @@ import { Color } from "three/src/math/Color";
 import { Points } from "three/src/objects/Points";
 import { mod } from "../../utils/constants";
 
-export function Scan({ ...props }: JSX.IntrinsicElements["group"]) {
+export function Scan({ ...props }: JSX.IntrinsicElements["group"] & { color: ColorRepresentation }) {
   const { size } = useThree();
   const head = useLoader(PCDLoader, "/models/head.pcd");
   const body = useLoader(PCDLoader, "/models/body.pcd");
   const headRef = useRef<Points>(null!);
   const bodyRef = useRef<Points>(null!);
   const groupRef = useRef<Group>(null!);
-  const [color, setColor] = useState<Color | string>(new Color("#373737"));
-  const theme = useUIStore((s) => s.theme);
-
-  const hexToHsl = (H: string) => {
-    // Convert hex to RGB first
-    let r = 0,
-      g = 0,
-      b = 0;
-    if (H.length === 4) {
-      r = parseInt("0x" + H[1] + H[1]);
-      g = parseInt("0x" + H[2] + H[2]);
-      b = parseInt("0x" + H[3] + H[3]);
-    } else if (H.length === 7) {
-      r = parseInt("0x" + H[1] + H[2]);
-      g = parseInt("0x" + H[3] + H[4]);
-      b = parseInt("0x" + H[5] + H[6]);
-    }
-    // Then to HSL
-    r /= 255;
-    g /= 255;
-    b /= 255;
-    const cmin = Math.min(r, g, b),
-      cmax = Math.max(r, g, b),
-      delta = cmax - cmin;
-    let h = 0,
-      s = 0,
-      l = 0;
-
-    if (delta === 0) h = 0;
-    else if (cmax === r) h = ((g - b) / delta) % 6;
-    else if (cmax === g) h = (b - r) / delta + 2;
-    else h = (r - g) / delta + 4;
-
-    h = Math.round(h * 60);
-
-    if (h < 0) h += 360;
-
-    l = (cmax + cmin) / 2;
-
-    s = delta === 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
-
-    s = +(s * 100).toFixed(1);
-
-    l = +(l * 100).toFixed(1);
-
-    return "hsl(" + h + "," + s + "%," + l + "%)";
-  };
-  useEffect(() => {
-    const dark = getComputedStyle(document.documentElement)
-      .getPropertyValue("--arc-palette-foregroundSecondary")
-      .slice(0, -2)
-      .toLocaleLowerCase();
-
-    const light = getComputedStyle(document.documentElement)
-      .getPropertyValue("--arc-palette-title")
-      .slice(0, -2)
-      .toLocaleLowerCase();
-
-    const arc = theme === "dark" ? dark : light;
-    console.log(theme);
-    console.log(hexToHsl(arc));
-
-    // setColor(new Color(hexToHsl(arc)));
-  }, [theme]);
+  console.log(props.color);
+  
 
   // todo events
   // let animating = false;
@@ -118,6 +56,7 @@ export function Scan({ ...props }: JSX.IntrinsicElements["group"]) {
     headRef.current?.lookAt(target.x, target.y - 1.5, target.z);
     bodyRef.current?.lookAt(target.x * 0.25, target.y / 2, 4);
     // animate the group ref position so that it oscillates between 0.1 and -0.1 on the y axis
+    if (groupRef.current)
     groupRef.current.position.y = Math.sin(Date.now() / 1000) / 10;
     // }
 
@@ -133,21 +72,22 @@ export function Scan({ ...props }: JSX.IntrinsicElements["group"]) {
   //   Idle(bodyRef.current, groupRef.current);
   // }, 10000);
 
-  // console.log(color);
+  console.log(props.color);
 
   const mat = useMemo(
     () =>
       new PointsMaterial({
         size: 1,
         fog: false,
-        color,
-        toneMapped: false,
+        color:props.color,
+        // toneMapped: false,
         opacity: 1,
         sizeAttenuation: false,
       }) as PointsMaterial & { color: ColorRepresentation },
-    [color]
+    [props.color]
   );
 
+  if (!props.color) return null;
   return (
     <group
       {...props}
@@ -156,6 +96,8 @@ export function Scan({ ...props }: JSX.IntrinsicElements["group"]) {
       rotation={[0, Math.PI / 2, 0]}
       scale={size.width > 768 ? 0.17 : 0.1}
     >
+
+      <ambientLight intensity={7}  position={[0, 0, 100]}/>
       <points ref={headRef} geometry={head.geometry} material={mat} />
       <points ref={bodyRef} geometry={body.geometry} material={mat} />
     </group>
