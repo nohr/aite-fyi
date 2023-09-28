@@ -69,7 +69,7 @@ function useColor() {
       console.log(hexToHsl(light));
   
     //   setColor(new Color(theme === "dark" ? dark : light === "#f3f1f1" ? light: hexToHsl(light)));
-            setColor(theme === "dark" ? dark : light === "#f3f1f1" ? light : hexToHsl(light)); 
+            setColor(theme === "dark" ? dark : hexToHsl(light)); 
         } , 500)
     }, [theme]);
 

@@ -7,11 +7,12 @@ import { memo } from "react";
 import { shallow } from "zustand/shallow";
 import { GiBombingRun, GiHand, GiMusicalNotes } from "react-icons/gi";
 import { useAudioStore } from "@hooks/useAudioStore";
+import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from "react-icons/bs";
 
 type Route = "home" | "proj." | "music";
 interface NavLinkProps {
   children: React.ReactNode;
-  to: Route;
+  to?: Route;
   className?: string;
 }
 
@@ -21,9 +22,13 @@ const Nav = memo(function Nav() {
     (s) => [s.loading, s.setLoading],
     shallow
   );
+  const [navLeft, setNavLeft] = useUIStore(
+    (s) => [s.navLeft, s.setNavLeft],
+    shallow
+  );
 
-  const NavLink = ({ children, to }: NavLinkProps) => {
-    return (
+  const NavLink = ({ children,className ="", to = undefined }: NavLinkProps) => {
+    return (<>{to ? 
       <Link
         onClick={() => setLoading(true)}
         title={to}
@@ -49,14 +54,20 @@ const Nav = memo(function Nav() {
         }
       >
         {children} <p className="text-xs">{to}</p>
-      </Link>
+      </Link>: 
+      <div className={className + " nav-link pointer-events-auto flex h-12 w-12 select-none overflow-visible flex-col items-center justify-center rounded-full border-[1px] border-current no-underline shadow-lg transition hover:shadow-xl"}
+      onClick={() => setNavLeft(!navLeft)}
+ >
+        {children}
+      </div>}
+      </>
     );
   };
 
   const playing = useAudioStore((s) => s.playing);
 
-  return (
-    <nav className=" pointer-events-none flex w-screen flex-row justify-start gap-2 self-start border-transparent p-2 md:border-b-[1px] md:px-8 md:py-4">
+  return (<div className={`flex flex-row p-2 w-screen md:px-8 md:py-4 justify-between ${navLeft ? "" : "flex-row-reverse"}`}>
+    <nav className=" pointer-events-none w-fit flex transition-all duration-100 flex-row justify-start gap-2 self-start border-transparent  md:border-b-[1px] ">
       <NavLink to="home">
         <GiHand />
       </NavLink>
@@ -67,6 +78,11 @@ const Nav = memo(function Nav() {
         <GiBombingRun />
       </NavLink>
     </nav>
+      <NavLink className=" md:hidden">
+        {navLeft ? <BsArrowRightCircleFill/> : <BsArrowLeftCircleFill />}
+      </NavLink>
+
+    </div>
   );
 });
 

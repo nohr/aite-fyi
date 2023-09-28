@@ -21,6 +21,7 @@ body {
   height: 100svh;
   touch-action: pan-y, pan-x;
   overscroll-behavior-y: none;
+  overflow: hidden;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;

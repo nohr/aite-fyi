@@ -10,6 +10,8 @@ interface UIProps {
    * @param status The status message which may be a string or JSX.Element.
    */
   setStatus: (status: string | JSX.Element) => void;
+  navLeft: boolean;
+  setNavLeft: (navLeft?: boolean) => void;
   theme: "light" | "dark";
   setTheme: (theme: "light" | "dark") => void;
   routing: boolean;
@@ -28,6 +30,10 @@ export const useUIStore = create<UIProps>()(
     status: "Loading...",
     setStatus(status): void {
       set(() => ({ status }));
+    },
+    navLeft: false,
+    setNavLeft(navLeft = !get().navLeft) {
+      set(() => ({ navLeft }));
     },
     theme: "light",
     setTheme(theme: "light" | "dark") {

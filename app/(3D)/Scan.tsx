@@ -10,6 +10,8 @@ import { Points } from "three/src/objects/Points";
 import { mod } from "../../utils/constants";
 
 export function Scan({ ...props }: JSX.IntrinsicElements["group"] & { color: ColorRepresentation }) {
+
+  if (!props.color) return null;
   const { size } = useThree();
   const head = useLoader(PCDLoader, "/models/head.pcd");
   const body = useLoader(PCDLoader, "/models/body.pcd");
@@ -77,7 +79,7 @@ export function Scan({ ...props }: JSX.IntrinsicElements["group"] & { color: Col
   const mat = useMemo(
     () =>
       new PointsMaterial({
-        size: 1,
+        size: size.width > 768 ? 0.7 :size.width < 450 ? 0.25 : 0.75, 
         fog: false,
         color:props.color,
         // toneMapped: false,
@@ -86,8 +88,6 @@ export function Scan({ ...props }: JSX.IntrinsicElements["group"] & { color: Col
       }) as PointsMaterial & { color: ColorRepresentation },
     [props.color]
   );
-
-  if (!props.color) return null;
   return (
     <group
       {...props}
