@@ -1,4 +1,5 @@
 "use client";
+
 import "./globals.css";
 import "@fontsource/delius";
 import { Footer, Nav } from "(ui)";
@@ -8,6 +9,8 @@ import { Device } from "(3D)/Device";
 import { Scan } from "(3D)/Scan";
 import Media from "(ui)/Media";
 import useColor from "@hooks/useColor";
+import useDisablePinch from "@hooks/useDisablePinch";
+import Logo from "(ui)/logo";
 
 export default function RootLayout({
   children,
@@ -16,13 +19,15 @@ export default function RootLayout({
 }) {
   const pathname = usePathname();
   const params = pathname.split("/").slice(2);
-const color = useColor();
+  const color = useColor();
+  useDisablePinch();
 
   return (
     <html lang="en" className=" ">
       <head />
       <body className="pointer-events-none relative flex h-[100dvh] w-[100dvw] flex-col">
         <Nav />
+        <Logo />
         {children}
         <Footer />
         <Composition>

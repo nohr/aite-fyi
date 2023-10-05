@@ -2,7 +2,6 @@
 
 import { useAudioStore } from "@hooks/useAudioStore";
 import { useCallback, useEffect, useRef } from "react";
-import { shallow } from "zustand/shallow";
 
 export default function Media() {
   const [song, volume, playing, setSong, playlist, time, setTime, setAudio] =
@@ -16,8 +15,7 @@ export default function Media() {
         s.time,
         s.setTime,
         s.setAudio,
-      ],
-      shallow
+      ]
     );
 
   const audioRef = useRef<HTMLAudioElement>(null);

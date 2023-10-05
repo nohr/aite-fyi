@@ -15,7 +15,7 @@ export default function Explorer() {
     <div className="pointer-events-none flex h-full resize-x flex-col gap-2 p-3">
       <ContextBar />
       {/* songs */}
-      <div className="pointer-events-auto grid h-fit w-fit grid-cols-3 grid-rows-1 gap-8 overflow-scroll">
+      <div className="pointer-events-auto grid h-fit w-fit grid-cols-4 grid-rows-1 gap-8 overflow-scroll">
         {playlist
           .filter((song: any) => {
             if (!query || query.length === 0) return true;

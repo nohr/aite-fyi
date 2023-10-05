@@ -35,14 +35,14 @@ export default function File({ song }: { song: Song }) {
               : ""
           }`}
     >
-      <div className="pointer-events-auto aspect-square h-[50px] w-[50px] overflow-hidden border-[1px] border-current">
+      <div className="pointer-events-auto relative aspect-square h-[50px] w-[50px] overflow-hidden border-[1px] border-current">
         {song.cover ? (
           <Image
             src={song.cover}
             alt={song.name}
-            width={50}
-            height={50}
-            className="pointer-events-auto object-cover"
+            fill
+            sizes="50px"
+            className="pointer-events-auto object-cover absolute"
           />
         ) : (
           <FaSpinner className="pointer-events-auto animate-spin" />

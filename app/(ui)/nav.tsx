@@ -66,7 +66,7 @@ const Nav = memo(function Nav() {
 
   const playing = useAudioStore((s) => s.playing);
 
-  return (<div className={`flex flex-row p-2 w-screen md:px-8 md:py-4 justify-between ${navLeft ? "" : "flex-row-reverse"}`}>
+  return (<div className={` flex flex-row p-2 w-screen md:px-8 py-4 justify-between order-2 md:order-1 ${navLeft ? "" : "flex-row-reverse"}`}>
     <nav className=" pointer-events-none w-fit flex transition-all duration-100 flex-row justify-start gap-2 self-start border-transparent  md:border-b-[1px] ">
       <NavLink to="home">
         <GiHand />
@@ -81,7 +81,6 @@ const Nav = memo(function Nav() {
       <NavLink className=" md:hidden">
         {navLeft ? <BsArrowRightCircleFill/> : <BsArrowLeftCircleFill />}
       </NavLink>
-
     </div>
   );
 });

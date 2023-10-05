@@ -58,7 +58,7 @@ function useColor() {
       const dark = getComputedStyle(document.documentElement)
         .getPropertyValue("--arc-palette-foregroundSecondary")
         .slice(0, -2)
-        .toLocaleLowerCase() || "#4d4d4d";
+        .toLocaleLowerCase() || "#ff0055";
   
       const light = getComputedStyle(document.documentElement)
         .getPropertyValue("--arc-palette-subtitle")

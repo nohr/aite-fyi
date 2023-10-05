@@ -18,7 +18,7 @@ export function Scan({ ...props }: JSX.IntrinsicElements["group"] & { color: Col
   const headRef = useRef<Points>(null!);
   const bodyRef = useRef<Points>(null!);
   const groupRef = useRef<Group>(null!);
-  console.log(props.color);
+  // console.log(props.color);
   
 
   // todo events
@@ -74,12 +74,12 @@ export function Scan({ ...props }: JSX.IntrinsicElements["group"] & { color: Col
   //   Idle(bodyRef.current, groupRef.current);
   // }, 10000);
 
-  console.log(props.color);
+  // console.log(props.color);
 
   const mat = useMemo(
     () =>
       new PointsMaterial({
-        size: size.width > 768 ? 0.7 :size.width < 450 ? 0.25 : 0.75, 
+        size: size.width > 768 ? 0.7 :size.width < 450 ? 0.2 : 0.75, 
         fog: false,
         color:props.color,
         // toneMapped: false,
@@ -88,13 +88,16 @@ export function Scan({ ...props }: JSX.IntrinsicElements["group"] & { color: Col
       }) as PointsMaterial & { color: ColorRepresentation },
     [props.color]
   );
+
+  const { width: w, height: h } = useThree((state) => state.viewport);
+
   return (
     <group
       {...props}
       ref={groupRef}
-      position={[0, size.width > 768 ? 0 : 4, -2]}
+      position={[0, size.width > 768 ? 70 : w/2, -3.5]}
       rotation={[0, Math.PI / 2, 0]}
-      scale={size.width > 768 ? 0.17 : 0.1}
+      scale={size.width > 768 ? 0.25 : 0.1}
     >
 
       <ambientLight intensity={7}  position={[0, 0, 100]}/>

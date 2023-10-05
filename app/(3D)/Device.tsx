@@ -28,11 +28,11 @@ export const Device = memo(function Device({ ...props }: { params: string[] }) {
   // handle device sizing
   const M1Height = window.matchMedia("(max-width: 768px)").matches
     ? -1
-    : -h / 4;
+    : -h / 10;
 
-  const M1Scale = w / 40;
+  const M1Scale = w / 36;
 
-  const PhoneScale = w / 180;
+  const PhoneScale = w / 200;
 
   // Desktop
   useFrame(() => {
@@ -75,7 +75,7 @@ export const Device = memo(function Device({ ...props }: { params: string[] }) {
     <PresentationControls snap enabled={size.width <= 768}>
       <Suspense fallback={null}>
         <spotLight intensity={1} penumbra={0.6} position={[0, 0, 0]}>
-          <group position={[w / 2, -h / 2.5, 0]} ref={groupRef}>
+          <group position={size.width > 768 ? [w / 3.5, -h / 5, -2] : [w / 3, -h / 16, -5]} ref={groupRef}>
             <directionalLight
               ref={keyLight}
               intensity={0.8}
@@ -86,14 +86,14 @@ export const Device = memo(function Device({ ...props }: { params: string[] }) {
               ref={screen}
               scale={M1Scale}
               rotation={[-Math.PI, -Math.PI, 0]}
-              position={[0, M1Height, -3.5]}
+              position={[0, M1Height, 0]}
             >
               <VideoMaterial mobile={null} {...props} />
             </M1>
             <Phone
               ref={phone}
               rotation={[0.5, -Math.PI, -0.3]}
-              position={[-w / 2, -PhoneScale * 5, -4.5]}
+              position={[-w / 1.75, -PhoneScale * 5, -1.5]}
               scale={PhoneScale}
               frustumCulled={false}
             >

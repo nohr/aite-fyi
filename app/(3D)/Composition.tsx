@@ -39,22 +39,22 @@ function Scene({ children }: { children?: React.ReactNode }) {
 
   return (
     <Suspense fallback={<Html center>{progress.progress}%</Html>}>
-      <Flex
+      {/* <Flex
         flexDirection="column"
         scaleFactor={1}
         justify={"flex-start"}
         align={
-          !pathname.includes("/projects/") && size.width > 768
+          !pathname.includes("/projects/")
             ? "flex-end"
             : "center"
         }
         width={vpWidth}
         height={vpHeight}
-        position={[-vpWidth / 2, vpHeight / 2, 0]}
-      >
-        <Box
+        position={[-vpWidth , vpHeight / 2, 0]}
+      > */}
+        {/* <Box
           alignSelf={
-            !pathname.includes("/projects/") && size.width > 768
+            !pathname.includes("/projects/")
               ? "flex-end"
               : "center"
           }
@@ -62,10 +62,10 @@ function Scene({ children }: { children?: React.ReactNode }) {
           height={0.1}
           mt={size.width > 768 ? 2 : pathname.includes("/projects/") ? 1.5 : 5}
           mr={size.width > 768 ? 0 : pathname.includes("/projects/") ? 1.5 : 0}
-        >
+        > */}
           {children}
-        </Box>
-      </Flex>
+        {/* </Box>
+      </Flex> */}
       <orthographicCamera position={[0, 0, 100]} far={1000} near={0.1} />
       {/* <OrbitControls minDistance={30} maxDistance={200} /> */}
     </Suspense>

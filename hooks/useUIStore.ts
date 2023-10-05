@@ -31,7 +31,7 @@ export const useUIStore = create<UIProps>()(
     setStatus(status): void {
       set(() => ({ status }));
     },
-    navLeft: false,
+    navLeft: true,
     setNavLeft(navLeft = !get().navLeft) {
       set(() => ({ navLeft }));
     },

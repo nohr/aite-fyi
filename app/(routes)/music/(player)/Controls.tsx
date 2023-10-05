@@ -1,7 +1,6 @@
 "use client";
 
 import { useAudioStore } from "@hooks/useAudioStore";
-import { shallow } from "zustand/shallow";
 import {
   BsFastForwardBtnFill,
   BsFillRewindBtnFill,
@@ -42,8 +41,7 @@ export default function Controls() {
       s.playlist,
       s.time,
       s.changeTime,
-    ],
-    shallow
+    ]
   );
 
   const [volumeBar, setVolumeBar] = useState(false);
@@ -109,11 +107,11 @@ export default function Controls() {
         className="range [&::-webkit-slider-runnable-track]:!bg-current/25 pointer-events-auto h-8 w-full appearance-none bg-transparent accent-current "
         type="range"
         value={time}
-        min="0"
-        max={song?.duration || 0}
+        min={0}
+        max={100}
         onChange={changeTime}
       ></input>
-      <div className=" flex flex-row gap-2">
+      {/* <div className=" flex flex-row gap-2">
         <button
           type="button"
           title="volume"
@@ -157,7 +155,7 @@ export default function Controls() {
             ></input>
           ) : null}
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

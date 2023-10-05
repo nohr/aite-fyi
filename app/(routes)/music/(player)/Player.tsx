@@ -10,14 +10,16 @@ import { useEffect } from "react";
 import { shallow } from "zustand/shallow";
 
 export default function Player() {
-  const [song, setPlaylist] = useAudioStore(
-    (s) => [s.song, s.setPlaylist],
+  const [song, setSong, setPlaylist] = useAudioStore(
+    (s) => [s.song,s.setSong,  s.setPlaylist],
     shallow
   );
   useEffect(() => {
     (async () => {
       const songs = await getSongs();
       if (songs.length > 0) {
+
+          setSong(songs[0]);
         setPlaylist(songs);
       }
     })();

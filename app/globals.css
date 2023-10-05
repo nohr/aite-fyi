@@ -43,6 +43,7 @@ html {
 meta[name="theme-color"] {
   attr-content: "var(--arc-palette-hover, #CADEEAFF)";
 }
+
 @media (prefers-color-scheme: dark) {
   meta[name="theme-color"] {
     attr-content: "rgb(0, 0, 0)";
@@ -73,6 +74,17 @@ a {
       var(--arc-palette-maxContrastColor, rgb(24 24 27 / 1)) 0%,
       var(--arc-palette-title, rgb(255 255 255 / 1)) 10%
     ); */
-    color: var(--arc-palette-foregroundSecondary, #2e2e2e);
+    color: var(--arc-palette-maxContrastColor, #ff0055);
   }
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+* {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
