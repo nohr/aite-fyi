@@ -56,7 +56,7 @@ function useColor() {
     useEffect(() => {
         setTimeout(() => {
       const dark = getComputedStyle(document.documentElement)
-        .getPropertyValue("--arc-palette-foregroundSecondary")
+        .getPropertyValue("--arc-palette-maxContrastColor")
         .slice(0, -2)
         .toLocaleLowerCase() || "#ff0055";
   
@@ -65,8 +65,8 @@ function useColor() {
         .slice(0, -2)
         .toLocaleLowerCase() || "#96BDD5";
   
-      console.log(light, dark);
-      console.log(hexToHsl(light));
+      // console.log(light, dark);
+      // console.log(hexToHsl(light));
   
     //   setColor(new Color(theme === "dark" ? dark : light === "#f3f1f1" ? light: hexToHsl(light)));
             setColor(theme === "dark" ? dark : hexToHsl(light)); 

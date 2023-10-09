@@ -9,7 +9,7 @@ export default async function ProjectsLayout({
   const projects = await getProjects();
 
   return (
-    <ul className="pointer-events-none flex h-full flex-col justify-start gap-y-2 self-start overflow-scroll pb-8 md:pb-0">
+    <ul className="pointer-events-none max-w-prose flex h-full flex-col justify-start gap-y-2 self-center overflow-scroll pb-8 md:pb-0">
       {projects.map((project) => (
         <ListItem key={project._id} project={project}>
           {children}

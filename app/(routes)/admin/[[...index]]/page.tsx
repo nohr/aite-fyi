@@ -2,11 +2,10 @@
 
 import { NextStudio } from "next-sanity/studio";
 import config from "sanity.config";
-import styles from "./admin.module.scss";
 
 export default function AdminPage() {
   return (
-    <section className={styles.admin}>
+    <section  className="absolute !z-[999] top-0 w-full left-0">
       <NextStudio config={config} />
     </section>
   );

@@ -4,31 +4,28 @@ import { useAudioStore } from "@hooks/useAudioStore";
 import Image from "next/image";
 import { FaSpinner } from "react-icons/fa";
 import Controls from "./Controls";
-import { Song } from "types/Song";
 import { getSongs } from "sanity.utils";
 import { useEffect } from "react";
-import { shallow } from "zustand/shallow";
 
 export default function Player() {
   const [song, setSong, setPlaylist] = useAudioStore(
-    (s) => [s.song,s.setSong,  s.setPlaylist],
-    shallow
+    (s) => [s.song,s.setSong,  s.setPlaylist]
   );
   useEffect(() => {
     (async () => {
       const songs = await getSongs();
       if (songs.length > 0) {
-
+        if (!song)
           setSong(songs[0]);
         setPlaylist(songs);
       }
     })();
   }, [setPlaylist]);
   return (
-    <div className="items-between pointer-events-none flex h-full w-full flex-row justify-start gap-2 p-2">
+    <div className="items-between pointer-events-none flex h-full w-full flex-row justify-start gap-4 p-2">
       {/* Cover */}
       {song ? (
-        <div className="relative aspect-square h-full border-[1px] border-current">
+        <div className="relative aspect-square h-full border-[0px] border-current rounded-sm">
           {song.cover ? (
             <Image
               src={song.cover}

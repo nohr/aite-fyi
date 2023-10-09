@@ -4,12 +4,10 @@ import { useAudioStore } from "@hooks/useAudioStore";
 import Image from "next/image";
 import { useState } from "react";
 import { FaSpinner } from "react-icons/fa";
-import { shallow } from "zustand/shallow";
 
 export default function File({ song }: { song: Song }) {
   const [setSong, setPlaying] = useAudioStore(
-    (s) => [s.setSong, s.setPlaying],
-    shallow
+    (s) => [s.setSong, s.setPlaying]
   );
   // console.log(song);
 
@@ -29,6 +27,7 @@ export default function File({ song }: { song: Song }) {
         }
       }}
       className={`pointer-events-auto flex aspect-square flex-col items-center justify-center gap-1 border-[1px] border-transparent p-1 transition-all hover:!border-current hover:shadow-md
+      rounded-xl
           ${
             confirm
               ? " border-current shadow-md hover:bg-current hover:bg-opacity-20 [&_*]:mix-blend-plus-lighter [&_*]:dark:mix-blend-difference"

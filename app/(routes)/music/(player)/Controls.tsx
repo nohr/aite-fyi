@@ -61,7 +61,7 @@ export default function Controls() {
   };
   return (
     <div
-      className={`flex w-full flex-row items-center justify-center border-[1px] border-current p-1 transition-all ${
+      className={`flex w-full flex-row items-center justify-center border-[1px]  bg-[var(--arc-palette-minContrastColor,#F1F8FEaa)] dark:bg-black/75 hover:bg-opacity-100 focus:bg-[var(--arc-palette-title,_rgb(255_255_255_/_1))] dark:hover:bg-black dark:hover:bg-opacity-70 focus:dark:bg-black focus:dark:bg-opacity-70 focus:bg-opacity-70 border-current py-1 px-2 transition-all rounded-full ${
         song ? "pointer-events-auto" : "pointer-events-none opacity-50"
       }}`}
     >
@@ -104,7 +104,7 @@ export default function Controls() {
         id="track"
         title="track"
         placeholder="track"
-        className="range [&::-webkit-slider-runnable-track]:!bg-current/25 pointer-events-auto h-8 w-full appearance-none bg-transparent accent-current "
+        className="range [&::-webkit-slider-runnable-track]:!bg-current/25 pointer-events-auto h-8 pl-2 w-full appearance-none bg-transparent accent-current "
         type="range"
         value={time}
         min={0}

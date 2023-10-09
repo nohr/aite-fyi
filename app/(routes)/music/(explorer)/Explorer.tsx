@@ -2,7 +2,6 @@
 
 import ContextBar from "./ContextBar";
 import File from "./File";
-import { Song } from "types/Song";
 import { useSearchParams } from "next/navigation";
 import { useAudioStore } from "@hooks/useAudioStore";
 
@@ -15,7 +14,7 @@ export default function Explorer() {
     <div className="pointer-events-none flex h-full resize-x flex-col gap-2 p-3">
       <ContextBar />
       {/* songs */}
-      <div className="pointer-events-auto grid h-fit w-fit grid-cols-4 grid-rows-1 gap-8 overflow-scroll">
+      <div className="pointer-events-auto grid h-fit w-full grid-cols-4 md:grid-cols-5 overflow-visible grid-rows-1 gap-8">
         {playlist
           .filter((song: any) => {
             if (!query || query.length === 0) return true;

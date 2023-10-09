@@ -97,7 +97,7 @@ export function Scan({ ...props }: JSX.IntrinsicElements["group"] & { color: Col
       ref={groupRef}
       position={[0, size.width > 768 ? 70 : w/2, -3.5]}
       rotation={[0, Math.PI / 2, 0]}
-      scale={size.width > 768 ? 0.25 : 0.1}
+      scale={size.width > 768 ? 0.25 : 0.25}
     >
 
       <ambientLight intensity={7}  position={[0, 0, 100]}/>
