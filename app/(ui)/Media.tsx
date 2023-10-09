@@ -4,16 +4,14 @@ import { useAudioStore } from "@hooks/useAudioStore";
 import { useCallback, useEffect, useRef } from "react";
 
 export default function Media() {
-  const [song, volume, playing, setSong, playlist, time, setTime, setAudio] =
+  const [song, playing, setSong, playlist, updateTime, setAudio] =
     useAudioStore(
       (s) => [
         s.song,
-        s.volume,
         s.playing,
         s.setSong,
         s.playlist,
-        s.time,
-        s.setTime,
+        s.updateTime,
         s.setAudio,
       ]
     );
@@ -46,7 +44,11 @@ export default function Media() {
           src={`${song?.file}?dl=` + song?.name + ".mp3"}
           autoPlay={playing}
           playsInline
-          onTimeUpdate={setTime}
+          onTimeUpdate={e => {
+            const audio = e.currentTarget;
+            if (!audio || Number.isNaN(audio.duration)) return;
+            updateTime(audio.currentTime / audio.duration * 100)
+          }}
           onEnded={(e) => {
             if (e.currentTarget.loop) {
               e.currentTarget.play();

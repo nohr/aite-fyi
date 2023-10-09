@@ -1,6 +1,7 @@
 "use client";
 
 import { useAudioStore } from "@hooks/useAudioStore";
+import useSFX from "@hooks/useSFX";
 import Image from "next/image";
 import { useState } from "react";
 import { FaSpinner } from "react-icons/fa";
@@ -10,6 +11,8 @@ export default function File({ song }: { song: Song }) {
     (s) => [s.setSong, s.setPlaying]
   );
   // console.log(song);
+  const [play] = useSFX("/sfx/click.mp3");
+
 
   const [confirm, setConfirm] = useState(false);
   return (
@@ -19,6 +22,7 @@ export default function File({ song }: { song: Song }) {
       key={song.name}
       onClick={() => {
         if (confirm) {
+          play();
           setSong(song);
           setPlaying(true);
         } else {

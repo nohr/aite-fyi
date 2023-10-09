@@ -8,6 +8,7 @@ import { PointsMaterial } from "three/src/materials/PointsMaterial";
 import { Color } from "three/src/math/Color";
 import { Points } from "three/src/objects/Points";
 import { mod } from "../../utils/constants";
+import { useAudioStore } from "@hooks/useAudioStore";
 
 export function Scan({ ...props }: JSX.IntrinsicElements["group"] & { color: ColorRepresentation }) {
 
@@ -18,7 +19,8 @@ export function Scan({ ...props }: JSX.IntrinsicElements["group"] & { color: Col
   const headRef = useRef<Points>(null!);
   const bodyRef = useRef<Points>(null!);
   const groupRef = useRef<Group>(null!);
-  // console.log(props.color);
+  const [song, playing] = useAudioStore((s) => [s.song, s.playing]);
+  // console.log(song, playing);
   
 
   // todo events
@@ -55,8 +57,15 @@ export function Scan({ ...props }: JSX.IntrinsicElements["group"] & { color: Col
   useFrame(({ mouse }) => {
     const target = new Vector3((mouse.x * mod * 2) / 1, mouse.y * mod, 0.5);
     // if (!animating) {
-    headRef.current?.lookAt(target.x, target.y - 1.5, target.z);
-    bodyRef.current?.lookAt(target.x * 0.25, target.y / 2, 4);
+    let y = target.y;
+    if (playing &&song?.tempo) {
+      let del = Math.sin(Date.now() / (song.tempo)) / 5;
+      console.log(del);
+      y = y + del;
+      
+    }
+    headRef.current?.lookAt(target.x, y - 1.5, target.z);
+    bodyRef.current?.lookAt(target.x * 0.25, y / 2, 4);
     // animate the group ref position so that it oscillates between 0.1 and -0.1 on the y axis
     if (groupRef.current)
     groupRef.current.position.y = Math.sin(Date.now() / 1000) / 10;

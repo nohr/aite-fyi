@@ -58,7 +58,7 @@ export const Device = memo(function Device({ ...props }: { params: string[], siz
     }
   });
 
-  console.log(w);
+  // console.log(w);
   
   return (
     <PresentationControls snap enabled={w <= 768}>

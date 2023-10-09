@@ -8,7 +8,7 @@ import { GiBombingRun, GiHand, GiMusicalNotes } from "react-icons/gi";
 import { useAudioStore } from "@hooks/useAudioStore";
 import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from "react-icons/bs";
 import { skew } from "../../utils/constants";
-import useSound from 'use-sound';
+import useSFX from "@hooks/useSFX";
 
 type Route = "home" | "proj." | "music";
 interface NavLinkProps {
@@ -23,7 +23,7 @@ const Nav = memo(function Nav() {
   const [navLeft, setNavLeft] = useUIStore(
     (s) => [s.navLeft, s.setNavLeft]
   );
-  const [play] = useSound("/sfx/click.mp3",{volume: 0.05, interrupt: true});
+  const [play] = useSFX("/sfx/click.mp3");
 
   const NavLink = ({ children,className ="", to = undefined }: NavLinkProps) => {
     return (<>{to ? 

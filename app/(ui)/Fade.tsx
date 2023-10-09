@@ -26,9 +26,9 @@ export function Fade({
         {...props}
         key={pathname}
         className={className}
-        initial={{ opacity: init, scale:0.95}}
-        animate={{ opacity: 1, scale: 1, transition: { duration: 0.25, ease: "circOut" } }}
-        exit={{ opacity: init, scale: 0.95, transition: { duration: 0.05, ease: "circOut" } }}
+        initial={{ opacity: init, scale:0.95,rotateX: -30}}
+        animate={{ opacity: 1, scale: 1, rotateX: 0, transition: { duration: 0.25, ease: "circOut" } }}
+        exit={{ opacity: init, scale: 0.95,rotateX: -30, transition: { duration: 0.05, ease: "circOut" } }}
       >
         {children}
       </motion.main>

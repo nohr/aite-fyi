@@ -24,6 +24,11 @@ const song = {
       type: "datetime",
     },
     {
+      name: "tempo",
+      title: "Tempo",
+      type: "number",
+    },
+    {
       name: "file",
       title: "File",
       type: "file",

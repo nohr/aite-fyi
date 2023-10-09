@@ -4,4 +4,5 @@ export interface Song {
   file: string;
   cover: string;
   links: string[];
+  tempo?: number | null;
 }

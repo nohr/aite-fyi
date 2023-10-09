@@ -60,6 +60,7 @@ export async function getSongs(): Promise<Song[]> {
         name,
         artist,
         album,
+        tempo,
         "date": date,
         "file": file.asset->url,
         "cover": cover.asset->url,

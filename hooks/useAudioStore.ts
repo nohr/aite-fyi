@@ -1,4 +1,5 @@
-import { ChangeEventHandler, ReactEventHandler } from "react";
+import { ChangeEventHandler, FormEvent, FormEventHandler, ReactEventHandler, RefObject, SyntheticEvent } from "react";
+import { Song } from "types/Song";
 import { create } from "zustand";
 
 interface AudioProps {
@@ -15,13 +16,13 @@ interface AudioProps {
   playlist: Song[];
   setPlaylist: (playlist: Song[]) => void;
   time: number;
-  setTime: ReactEventHandler<HTMLAudioElement>;
-  changeTime: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  setTime: FormEventHandler<HTMLInputElement>;
+  updateTime: (time: number) => void;
 }
 
 export const useAudioStore = create<AudioProps>()((set, get) => ({
   audio: null,
-  setAudio: (audio: HTMLAudioElement) => set({ audio }),
+  setAudio: (audio: HTMLAudioElement | null) => set({ audio }),
   volume: 50,
   setVolume: (e) => set({ volume: Number(e.target.value) }),
   muted: false,
@@ -41,16 +42,17 @@ export const useAudioStore = create<AudioProps>()((set, get) => ({
   setPlaylist: (playlist: Song[]) => set({ playlist }),
   time: 0,
   setTime: (e) => {
-    const { duration, currentTime } = e.currentTarget;
-    const time = (currentTime / duration) * 100;
-    
-    set({ time: time || 0 });
+    const audio = document.querySelector("audio");
+    if (!audio) return;
+    get().setPlaying();
+    const time = parseInt(e.currentTarget.value);
+    if (time && !Number.isNaN(audio.duration))
+    audio.currentTime = time/100 * audio.duration;
+
+    set({ time: time/100  });
+    get().setPlaying();
   },
-  changeTime: (e) => {
-    const { duration } = get().audio ?? { duration: 0 };
-    const time = Number(e.target.value);
-    const audio = get().audio ?? { currentTime: 0 };
-    audio.currentTime = (time / 100) * duration;
-    set({ time });
+  updateTime: (time) => {
+      set({ time});
   },
 }));

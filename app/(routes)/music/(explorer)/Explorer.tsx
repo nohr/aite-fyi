@@ -12,7 +12,7 @@ export default function Explorer() {
 
   return (
     <div className="pointer-events-none flex h-full resize-x flex-col gap-2 p-3">
-      <ContextBar />
+      {/* <ContextBar /> */}
       {/* songs */}
       <div className="pointer-events-auto grid h-fit w-full grid-cols-4 md:grid-cols-5 overflow-visible grid-rows-1 gap-8">
         {playlist

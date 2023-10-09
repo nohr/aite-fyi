@@ -21,6 +21,7 @@ export default function Player() {
       }
     })();
   }, [setPlaylist]);
+  
   return (
     <div className="items-between pointer-events-none flex h-full w-full flex-row justify-start gap-4 p-2">
       {/* Cover */}
@@ -44,7 +45,7 @@ export default function Player() {
         <div className=" h-max ">
           {song ? (
             <>
-              <div className=" pointer-events-auto">{song.name}</div>
+              <div className=" pointer-events-auto font-serif text-base uppercase">{song.name}</div>
               <div className="flex flex-row gap-2">
                 <div className=" pointer-events-auto">{song.artist}</div> •
                 <div className=" pointer-events-auto">{song.album}</div>
