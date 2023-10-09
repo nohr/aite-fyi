@@ -29,7 +29,7 @@ export default function Media() {
       if (playing) {
         audioRef.current.play();
         const index = playlist.findIndex((s) => s.name === song?.name);
-        playlist[index].duration = audioRef.current.duration;
+        // playlist[index].duration = audioRef.current.duration;
       } else {
         audioRef.current.pause();
       }

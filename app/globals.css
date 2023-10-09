@@ -21,7 +21,7 @@ body {
   height: 100svh;
   touch-action: pan-y, pan-x;
   overscroll-behavior-y: none;
-  overflow: hidden;
+  /* overflow: hidden; */
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -70,8 +70,8 @@ a {
     /* background-color: var(--arc-palette-backgroundExtra, rgb(24 24 27 / 1)); */
     /* background: rgb(0, 0, 0); */
     background: linear-gradient(180deg,
-        var(--arc-palette-title,#2b0003) 0%,
-         rgb(0 0 0 / 1) 10%);
+        var(--arc-palette-title, #2b0003) 0%,
+        rgb(0 0 0 / 1) 10%);
     color: var(--arc-palette-maxContrastColor, #ff0022);
   }
 }

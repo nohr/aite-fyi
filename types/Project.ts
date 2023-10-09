@@ -16,5 +16,6 @@ export type Project = {
   VideoObject: VideoObjects;
   url: string[];
   program: string[];
+  thumbnail: string;
   content: PortableTextBlock[];
 };

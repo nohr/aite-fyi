@@ -5,7 +5,7 @@ import config from "sanity.config";
 
 export default function AdminPage() {
   return (
-    <section  className="absolute !z-[999] top-0 w-full left-0">
+    <section  className="absolute !z-[999] top-0 w-full left-0 [&_*]:!pointer-events-all">
       <NextStudio config={config} />
     </section>
   );

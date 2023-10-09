@@ -34,6 +34,11 @@ const project = {
       of: [{ type: "string" }],
     },
     {
+      name: "thumbnail",
+      title: "Thumbnail",
+      type: "image",
+    },
+    {
       name: "content",
       title: "Content",
       type: "array",

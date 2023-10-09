@@ -5,6 +5,7 @@ import useSFX from "@hooks/useSFX";
 import Image from "next/image";
 import { useState } from "react";
 import { FaSpinner } from "react-icons/fa";
+import { Song } from "types/Song";
 
 export default function File({ song }: { song: Song }) {
   const [setSong, setPlaying] = useAudioStore(

@@ -60,7 +60,7 @@ export function Scan({ ...props }: JSX.IntrinsicElements["group"] & { color: Col
     let y = target.y;
     if (playing &&song?.tempo) {
       let del = Math.sin(Date.now() / (song.tempo)) / 5;
-      console.log(del);
+      // console.log(del);
       y = y + del;
       
     }
