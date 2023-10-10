@@ -23,10 +23,14 @@
     "paths": {
       "@public/*": ["../public/*"],
       "@lib/*": ["../lib/*"],
+      "@hooks/*": ["../hooks/*"],
+      "types/*": ["../types/*"],
       "(cursor)": ["./(cursor)/."],
       "(routes)": ["./(routes)/."],
       "(ui)": ["./(ui)/."],
-      "(3D)": ["./(3D)/."]
+      "(3D)": ["./(3D)/."],
+      "sanity.config": ["../sanity.config.ts"],
+      "sanity.utils": ["../sanity/schemas/sanity.utils.ts"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

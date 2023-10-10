@@ -1,104 +1,93 @@
 import { useUIStore } from "(ui)";
-import {
-  useVideoTexture,
-  useTexture,
-  useScroll,
-  Html,
-} from "@react-three/drei";
-import { useFrame, useThree } from "@react-three/fiber";
-import { useState, Suspense, useEffect, memo, MutableRefObject } from "react";
+import { useVideoTexture, useTexture, Html } from "@react-three/drei";
+import { Suspense, useCallback, useEffect, useState } from "react";
+import { FaSpinner } from "react-icons/fa";
+import { getVideoObjects } from "sanity.utils";
 import { BackSide } from "three";
+import { VideoObject } from "types/Project";
 
-export function VideoMaterial({
-  setLoading,
-  projects,
-  mobile,
+export function Texture({
+  videoObjects,
+  ...props
 }: {
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
-  projects: ProjectProps[];
-  mobile: boolean;
+  videoObjects: VideoObject;
+  params: string[];
+  mobile: boolean | null;
 }) {
-  // console.log("rendered");
-  const scroll = useScroll();
-
-  const pages = 1 + projects.length;
-  // change texture with scroll position
-  const [project, setProject] = useState(0);
-  const [visible, setVisible] = useState(false);
-  useFrame(() => {
-    setVisible(scroll.visible(1 / pages, pages / pages));
-    let num = Math.floor(scroll.offset * pages - 1);
-    num = num > projects.length - 1 ? projects.length - 1 : num < 0 ? 0 : num;
-    setProject(num);
+  const texture = useVideoTexture(videoObjects.url, {
+    crossOrigin: "Anonymous",
+    muted: true,
+    loop: true,
+    start: true,
+    autoplay: true,
+    playsInline: true,
+    volume: 0,
   });
+  texture.needsUpdate = true;
 
-  const texture = useVideoTexture(
-    projects[project][mobile ? "mobile" : "desktop"],
-    {
-      // unsuspend: "canplay",
-      crossOrigin: "Anonymous",
-      muted: true,
-      loop: true,
-      start: true,
-    }
-  );
-  // texture.needsUpdate = true;
-
-  texture.offset.y = mobile ? 0 : 0.006;
+  texture.offset.y = props.mobile ? 0 : 0.006;
   texture.anisotropy = 16;
-  const phoneLock = useTexture("/videos/mobile/lockscreen.jpeg");
-  const M1Lock = useTexture("/videos/desktop/lockscreen.jpg");
-  phoneLock.anisotropy = 1;
-  M1Lock.anisotropy = 1;
-
-  useEffect(() => {
-    setLoading(false);
-  }, [setLoading]);
 
   return (
-    <Suspense fallback={null}>
-      <meshBasicMaterial
-        reflectivity={0}
-        map={!visible ? (!mobile ? M1Lock : phoneLock) : texture}
-        toneMapped={false}
-        side={mobile ? BackSide : undefined}
-      />
-      {/* <Html
-        transform
-        as="div"
-        occlude="raycast"
-        wrapperClass=" [&>*]:!pointer-events-none w-full h-full"
-        scale={1.3}
-        position={mobile ? [0, 0, 0] : [0, -0.8, -12]}
-        rotation={mobile ? [0, 0, 0] : [Math.PI / 2, Math.PI, Math.PI]}
-        portal={
-          {
-            current: gl.domElement.parentNode,
-          } as MutableRefObject<HTMLElement>
-        }
-      >
-        <video
-          src={projects[project][mobile ? "mobile" : "desktop"]}
-          className=" pointer-events-none"
-          autoPlay
-          muted
+    <>
+      {texture && (
+        <meshBasicMaterial
+          reflectivity={0}
+          map={texture}
+          toneMapped={false}
+          side={props.mobile ? BackSide : undefined}
         />
-      </Html> */}
-    </Suspense>
+      )}
+    </>
   );
 }
 
-// / fallback texture
-function FallbackMaterial({
-  mobile,
-  M1Lock,
-  phoneLock,
+export function VideoMaterial({
+  ...props
 }: {
-  mobile: boolean;
-  M1Lock: THREE.Texture;
-  phoneLock: THREE.Texture;
+  params: string[];
+  mobile: boolean | null;
 }) {
+  // console.log("rendered");
+  const setLoading = useUIStore((state) => state.setLoading);
+  const [videoObjects, setVideoObjects] = useState<VideoObject | undefined>();
+
+  const getObjects = useCallback(async () => {
+    const { VideoObjects } = await getVideoObjects(props.params[0]);
+    // console.log(VideoObjects);
+
+    // set a new variable to the array object that contains the matching mobile value
+    const videoObject = VideoObjects.find(
+      (videoObject: VideoObject) => videoObject?.mobile === props.mobile
+    );
+    // console.log(videoObject);
+
+    setVideoObjects(videoObject);
+
+    return () => {
+      setVideoObjects(undefined);
+    };
+  }, [props.mobile, props.params]);
+
+  useEffect(() => {
+    getObjects();
+  }, [getObjects]);
+
+  // console.log(videoObjects);
+
+  // useEffect(() => {
+  //   setLoading(false);
+  // }, [setLoading]);
+
   return (
-    <meshBasicMaterial map={!mobile ? M1Lock : phoneLock} toneMapped={false} />
+    <Suspense fallback={null}>
+      {videoObjects?.url ? (
+        <Texture videoObjects={videoObjects} {...props} />
+      ) : (
+        <Html transform as="div" center>
+          <FaSpinner className="animate-spin" />
+        </Html>
+      )}
+    </Suspense>
   );
 }

@@ -1,6 +1,17 @@
-import { OrthographicCamera } from "@react-three/drei";
-import { OrthographicCameraProps } from "@react-three/fiber";
+import React from 'react'
+import { useFrame } from '@react-three/fiber'
 
-export function Camera(props: OrthographicCameraProps) {
-  return <OrthographicCamera {...props} makeDefault />;
+function Camera({ zoom } : { zoom: number }) {
+
+  useFrame(({ camera, mouse, size:{width} }) => { 
+      if (width < 768) return;
+      
+        camera.position.z = zoom;
+        camera.position.x = mouse.x * 2.25;
+    })
+
+  return (<perspectiveCamera position={[0, 0, 2]} far={80} near={0.1} />
+  )
 }
+
+export default Camera

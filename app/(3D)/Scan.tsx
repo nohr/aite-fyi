@@ -1,97 +1,117 @@
-"use client";
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { useUIStore } from "(ui)";
+import { useFrame, useLoader, useThree } from "@react-three/fiber";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { ColorRepresentation, Group, RGBAFormat, Vector3 } from "three";
+import { PCDLoader } from "three/examples/jsm/loaders/PCDLoader";
+import { PointsMaterial } from "three/src/materials/PointsMaterial";
+import { Color } from "three/src/math/Color";
+import { Points } from "three/src/objects/Points";
+import { mod } from "../../utils/constants";
+import { useAudioStore } from "@hooks/useAudioStore";
 
-import React, { memo, Suspense, useRef } from "react";
-import {
-  Html,
-  Loader,
-  useGLTF,
-  useScroll,
-  // useTrailTexture,
-} from "@react-three/drei";
-import { GLTF } from "three-stdlib";
-import { useFrame } from "@react-three/fiber";
+export function Scan({ ...props }: JSX.IntrinsicElements["group"] & { color: ColorRepresentation }) {
 
-type GLTFResult = GLTF & {
-  nodes: {
-    Scan2: THREE.Mesh;
-  };
-};
+  if (!props.color) return null;
+  const { size } = useThree();
+  const head = useLoader(PCDLoader, "/models/head.pcd");
+  const body = useLoader(PCDLoader, "/models/body.pcd");
+  const headRef = useRef<Points>(null!);
+  const bodyRef = useRef<Points>(null!);
+  const groupRef = useRef<Group>(null!);
+  const [song, playing] = useAudioStore((s) => [s.song, s.playing]);
+  // console.log(song, playing);
+  
 
-const url = "/models/Scan2.gltf";
-export const Scan = memo(
-  function Scan({
-    theme,
-    ...props
-  }: JSX.IntrinsicElements["mesh"] & {
-    theme: string;
-  }) {
-    const { nodes } = useGLTF(url) as GLTFResult;
-    const ref = useRef<THREE.Group>(null!);
-    const scroll = useScroll();
+  // todo events
+  // let animating = false;
+  // function Idle(body: Points, group: Group) {
+  //   groupRef.current.position.y = Math.sin(Date.now() / 1000) / 10;
+  //   const followTarget = new Vector3(
+  //     body.position.x,
+  //     body.position.y,
+  //     body.position.z + 10
+  //   );
+  //   const target = new Vector3(
+  //     body.position.x,
+  //     body.position.y,
+  //     body.position.z + 10
+  //   );
 
-    // const config: TrailConfig = {
-    //   size: 60,
-    //   maxAge: 500,
-    //   radius: 1,
-    //   interpolate: 1,
-    //   smoothing: 0.5,
-    //   minForce: 0.3,
-    // };
+  //   body.lookAt(target);
+  //   target.lerp(followTarget, 0.1);
+  //   const raiseHead = setInterval(() => {
+  //     headRef.current?.lookAt(0, 0, 0);
+  //   }, 1000);
+  //   // const lowerHead = setInterval(() => {
+  //   //   headRef.current?.lookAt(0, 0, 0);
+  //   // }, 1000);
 
-    // const [texture, onMove] = useTrailTexture(config);
+  //   setTimeout(() => {
+  //     clearInterval(raiseHead);
+  //     // clearInterval(lowerHead);
+  //     animating = false;
+  //   }, 15000);
+  // }
 
-    useFrame(() => {
-      const theme = window
-        .getComputedStyle(document.body)
-        .getPropertyValue("--arc-palette-focus")
-        .slice(1, -2);
-      setArcTheme(theme);
+  useFrame(({ mouse }) => {
+    const target = new Vector3((mouse.x * mod * 2) / 1, mouse.y * mod, 0.5);
+    // if (!animating) {
+    let y = target.y;
+    if (playing &&song?.tempo) {
+      let del = Math.sin(Date.now() / (song.tempo)) / 5;
+      // console.log(del);
+      y = y + del;
+    }
+    
+    headRef.current?.lookAt(target.x, y - 1.5, target.z);
+    bodyRef.current?.lookAt(target.x * 0.25, y / 2, 4);
+    // animate the group ref position so that it oscillates between 0.1 and -0.1 on the y axis
+    if (groupRef.current)
+    groupRef.current.position.y = Math.sin(Date.now() / 1000) / 10;
+    // }
 
-      ref.current.rotation.y = scroll.offset * 5;
-      if (ref.current.rotation.y > Math.PI / 3.5) ref.current.visible = false;
-      else ref.current.visible = true;
+    // todo make an idle target for when the mouse is not moving or out of the canvas
+    // wait 10 seconds and then call the idle function to make the head and body look at the camera
 
-      // TODO pointer interactivity
-    });
+    // clearTimeout(idle);
+  });
 
-    const [arcTheme, setArcTheme] = React.useState<string | undefined>(
-      undefined
-    );
+  // const idle = setTimeout(() => {
+  //   // console.log("idle");
+  //   animating = true;
+  //   Idle(bodyRef.current, groupRef.current);
+  // }, 10000);
 
-    return (
-      <Suspense
-        fallback={
-          <Html as="div" fullscreen>
-            <Loader />
-          </Html>
-        }
-      >
-        <group ref={ref} rotation={[0, Math.PI / 9, 0]}>
-          <mesh
-            {...props}
-            rotation={[Math.PI / 4.5, 0, 0]}
-            // onPointerMove={onMove}
-            geometry={nodes.Scan2.geometry}
-          >
-            <meshBasicMaterial
-              attach="material"
-              color={
-                arcTheme ? arcTheme : theme === "light" ? "#18181B" : "#BFF164"
-              }
-            />
-            {/* <meshLambertMaterial
-            side={DoubleSide}
-            displacementMap={texture}
-            displacementScale={0.1}
-            wireframe
-            color="#BFF164"
-          /> */}
-          </mesh>
-        </group>
-      </Suspense>
-    );
-  },
-  (prev, next) => prev.theme === next.theme
-);
+  // console.log(props.color);
 
-useGLTF.preload(url);
+  const mat = useMemo(
+    () =>
+      new PointsMaterial({
+        size: size.width > 768 ? 0.7 :size.width < 450 ? 0.2 : 0.75, 
+        fog: false,
+        color:props.color,
+        // toneMapped: false,
+        opacity: 1,
+        sizeAttenuation: false,
+      }) as PointsMaterial & { color: ColorRepresentation },
+    [props.color]
+  );
+
+  const { width: w, height: h } = useThree((state) => state.viewport);
+
+  return (
+    <group
+      {...props}
+      ref={groupRef}
+      position={[0, size.width > 768 ? 70 : w/2, -3.5]}
+      rotation={[0, Math.PI / 2, 0]}
+      scale={size.width > 768 ? 0.25 : 0.25}
+    >
+
+      <ambientLight intensity={7}  position={[0, 0, 100]}/>
+      <points ref={headRef} geometry={head.geometry} material={mat} />
+      <points ref={bodyRef} geometry={body.geometry} material={mat} />
+    </group>
+  );
+}

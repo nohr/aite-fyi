@@ -1,101 +1,103 @@
 "use client";
 
-import { memo } from "react";
-import { usePathname, useRouter } from "next/navigation";
-import { Fade } from "./Fade";
-import { IoPhonePortrait, IoLaptopOutline } from "react-icons/io5";
-import { Socials } from "./Socials";
-import { GrContactInfo } from "react-icons/gr";
-import { SlideFade } from "./SlideFade";
+import { useUIStore } from "@hooks/useUIStore";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { memo, useEffect, useState } from "react";
+import { GiBombingRun, GiHand, GiMusicalNotes } from "react-icons/gi";
+import { useAudioStore } from "@hooks/useAudioStore";
+import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from "react-icons/bs";
+import { skew } from "../../utils/constants";
+import useSFX from "@hooks/useSFX";
 
-const Nav = memo(function Nav({
-  mobile,
-  setMobile,
-  home,
-}: {
-  mobile: boolean;
-  setMobile: React.Dispatch<React.SetStateAction<boolean>>;
-  home: boolean;
-}) {
+type Route = "home" | "proj." | "music";
+interface NavLinkProps {
+  children: React.ReactNode;
+  to?: Route;
+  className?: string;
+}
+
+
+const Nav = memo(function Nav() {
   const pathname = usePathname();
-  const about = pathname === "/about";
-  const active = (href: Routes) => href === pathname;
-  const router = useRouter();
+  const [navLeft, setNavLeft] = useUIStore(
+    (s) => [s.navLeft, s.setNavLeft]
+  );
+  const [play] = useSFX("/sfx/click.mp3");
 
-  function NavLink({
-    href,
-    className = "navIcon ",
-    children,
-    onClick = () => {
-      router.push(href);
-    },
-  }: {
-    href: Routes;
-    className?: string;
-    children?: React.ReactNode;
-    onClick?: () => void;
-  }) {
-    return (
-      <div
-        onClick={onClick}
-        tabIndex={0}
-        title={href.split("/")[1] || "home"}
+  const NavLink = ({ children,className ="", to = undefined }: NavLinkProps) => {
+    return (<>{to ? 
+      <Link
+        // @ts-ignore
+        onClick={play}
+        // onClick={() => setLoading(true)}
+        title={to}
+        href={`/${to === "home" ? "" : to === "proj." ? "projects" : to}`}
         className={
-          className +
-          ` flex !aspect-square h-full cursor-pointer items-end justify-center self-center bg-transparent p-4 text-6xl font-thin uppercase transition-colors duration-100 [&>*]:!m-0 [&>*]:h-8 [&>*]:w-auto ${
-            active(href) ? "active  " : ""
-          } `
+          `nav-link pointer-events-auto flex h-12 w-12 select-none flex-col items-center justify-center rounded-full border-[1px] border-current no-underline shadow-lg transition hover:shadow-xl
+         ${
+           pathname === `/${to === "home" && ""}` ||
+           pathname.includes(to === "proj." ? "projects" : to)
+             ? "active"
+             : ""
+         }`
+          //   +
+          // `
+          //   ${
+          //   loading &&
+          //   (pathname === `/${to === "home" && ""}` ||
+          //     pathname.includes(to === "proj." ? "projects" : to))
+          //     ? " animate-bounce"
+          //     : ""
+          //   }
+          // `
         }
       >
-        {children ? children : href.split("/")[1] || "home"}
-      </div>
-    );
-  }
-
-  function Icon({
-    className = ` `,
-    onClick,
-    children,
-  }: {
-    className?: string;
-    onClick?: () => void;
-    children: React.ReactNode;
-  }) {
-    return (
-      <div
-        className={
-          className +
-          ` navIcon flex !aspect-square cursor-pointer items-end justify-center !self-center justify-self-end bg-transparent p-4 text-lg uppercase transition-colors duration-100 
-             [&>*]:!m-0 [&>*]:h-8 [&>*]:w-auto`
-        }
-        title="toggle device"
-        onClick={onClick}
-        tabIndex={0}
-      >
+        {children} <p className="text-xs">{to}</p>
+      </Link>: 
+      <div className={className + " nav-link pointer-events-auto flex h-12 w-12 select-none overflow-visible flex-col items-center justify-center rounded-full border-[1px] border-current no-underline shadow-lg transition hover:shadow-xl"}
+      onClick={() => setNavLeft(!navLeft)}
+ >
         {children}
-      </div>
+      </div>}
+      </>
     );
-  }
+  };
 
-  return (
-    <nav className="fixed left-0 top-0 z-[90] flex h-16 w-screen select-none flex-row items-center justify-between bg-opacity-5 p-0 !pr-4 backdrop-blur-lg md:!p-0">
-      <div className="flex h-full flex-row">
-        <NavLink href="/" className=" !p-1">
-          Æ
-        </NavLink>
-        <NavLink href="/about">
-          <GrContactInfo />
-        </NavLink>
-      </div>
-      <Fade truthy={!about}>
-        <Icon onClick={() => setMobile(!mobile)}>
-          {mobile ? <IoLaptopOutline /> : <IoPhonePortrait />}
-        </Icon>
-      </Fade>
-      <SlideFade truthy={home || about}>
-        <Socials />
-      </SlideFade>
+  const playing = useAudioStore((s) => s.playing);
+  const [mobile, setMobile] = useState(false)
+
+  useEffect(() => {
+    window.addEventListener("resize", () => {
+      setMobile(window.innerWidth < 768)
+    }
+    )
+
+    return () => {
+      window.removeEventListener("resize", () => {
+        setMobile(window.innerWidth < 768)
+      })
+    }
+} ,[])
+
+  const navSkew = skew(navLeft, 12, 7);
+  const navSkew2 = skew(!navLeft, 12, 7);
+  return (<div className={` flex flex-row z-[1000] p-2 pb-8 w-screen md:px-8 md:py-4 justify-between order-3 md:order-1 ${navLeft ? "" : "flex-row-reverse"}`}>
+    <nav className={`${navSkew} pointer-events-none w-fit flex transition-all duration-100 flex-row justify-start gap-2 self-start border-transparent  md:border-b-[1px] `}>
+      <NavLink to="home">
+        <GiHand />
+      </NavLink>
+      <NavLink to="music">
+        <GiMusicalNotes className={playing ? "animate-pulse" : ""} />
+      </NavLink>
+      <NavLink to="proj.">
+        <GiBombingRun />
+      </NavLink>
     </nav>
+    <NavLink className={`${navSkew2} md:hidden`}>
+        {navLeft ? <BsArrowRightCircleFill/> : <BsArrowLeftCircleFill />}
+      </NavLink>
+    </div>
   );
 });
 

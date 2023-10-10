@@ -1,11 +1,5 @@
-export { Section } from "./Section";
-export { SplashScreen } from "./SplashScreen";
-export { default } from "./nav";
-export { useInView } from "./useInView";
-export { useUIStore } from "./useUIStore";
-export { useTimeout } from "./useUtils";
-export { useUtils } from "./useUtils";
+export { default as Nav } from "./nav";
+export { default as Footer } from "./footer";
+export { default as Drop } from "./Drop";
 export { Fade } from "./Fade";
-export { SlideFade } from "./SlideFade";
-export type { WorldProps } from "./ui";
-export { Socials } from "./Socials";
+export { useUIStore } from "../../hooks/useUIStore";
