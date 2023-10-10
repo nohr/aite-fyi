@@ -36,7 +36,7 @@ html {
   background: linear-gradient(180deg,
       var(--arc-palette-hover, #CADEEAFF) 0%,
       var(--arc-palette-minContrastColor, #F1F8FEFF) 15%);
-  color: var(--arc-palette-subtitle, #96BDD5FF);
+  color: var(--arc-palette-focus, #96BDD5FF);
   background-repeat: no-repeat;
 }
 

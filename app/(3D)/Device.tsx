@@ -63,7 +63,7 @@ export const Device = memo(function Device({ ...props }: { params: string[], siz
   return (
     <PresentationControls snap enabled={w <= 768}>
       <Suspense fallback={null}>
-        <group scale={w > 768 ? 1: w/700} position={[0, -3 , -10]} ref={groupRef}>
+        <group scale={w > 768 ? 1: w/700} position={[0, -4 , -10]} ref={groupRef}>
         <spotLight intensity={1} penumbra={0.6} position={[0, 6, 0]} />
             <directionalLight
               ref={keyLight}

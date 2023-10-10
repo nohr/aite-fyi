@@ -13,9 +13,9 @@ export default function Drop({
   key?: string | null;
 }) {
   const mot = {
-    initial: { y: -100, opacity: 0 },
-    animate: { y: 0, opacity: 1 },
-    transition: { ease: "linear", bounce: 0, duration: 0.1 },
+    initial: { y: -20, opacity: 0.4, rotateX: -90 },
+    animate: { y: 0, opacity: 1, rotateX: 0 },
+    transition: { ease: "linear", bounce: 0, duration: 0.2 },
   };
 
   return (

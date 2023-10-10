@@ -26,7 +26,7 @@ export default function Player() {
     <div className="items-between pointer-events-none flex h-full w-full flex-row justify-start gap-4 p-2">
       {/* Cover */}
       {song ? (
-        <div className="relative aspect-square h-full border-[0px] border-current rounded-sm">
+        <div className="relative !aspect-square h-fit w-1/6 rounded-xl border-[0px] shadow-lg border-current overflow-hidden">
           {song.cover ? (
             <Image
               src={song.cover}

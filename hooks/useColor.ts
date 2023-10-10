@@ -61,7 +61,7 @@ function useColor() {
         .toLocaleLowerCase() || "#ff0055";
   
       const light = getComputedStyle(document.documentElement)
-        .getPropertyValue("--arc-palette-subtitle")
+        .getPropertyValue("--arc-palette-focus")
         .slice(0, -2)
         .toLocaleLowerCase() || "#96BDD5";
   

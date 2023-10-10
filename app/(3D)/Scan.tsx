@@ -62,8 +62,8 @@ export function Scan({ ...props }: JSX.IntrinsicElements["group"] & { color: Col
       let del = Math.sin(Date.now() / (song.tempo)) / 5;
       // console.log(del);
       y = y + del;
-      
     }
+    
     headRef.current?.lookAt(target.x, y - 1.5, target.z);
     bodyRef.current?.lookAt(target.x * 0.25, y / 2, 4);
     // animate the group ref position so that it oscillates between 0.1 and -0.1 on the y axis

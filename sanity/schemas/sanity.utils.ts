@@ -13,7 +13,7 @@ export async function getProjects(): Promise<Project[]> {
         _id,
         _createdAt,
         name,
-        thumbnail,
+        "thumbnail": thumbnail.asset->url,
         "slug": slug.current,
       } | order(date desc, name asc)`
   );
