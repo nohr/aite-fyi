@@ -50,7 +50,7 @@ export default function ListItem({
         </motion.h2>
      {path === pathname ? null : 
      <div className={`${pathname.includes("/projects/") ? "w-10 h-10":"w-24 h-24"} rounded-xl overflow-hidden relative pointer-events-auto`}>
-        <Image src={project.thumbnail} alt={project.thumbnail} fill style={{position:"absolute", objectFit:"cover"}} />
+        <Image src={project.thumbnail} alt={project.thumbnail} fill sizes="96px" style={{position:"absolute", objectFit:"cover"}} />
             </div>}
           {/* {path !== pathname && <Image src={project.thumbnail} className=" absolute object-cover -z-[5] opacity-90 blur-sm" alt={project.thumbnail} fill />} */}
       </Link>
