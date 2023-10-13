@@ -8,6 +8,8 @@ import { Device } from "./Device";
 import { Scan } from "./Scan";
 import { Env } from "./Environment";
 import Camera from "./Camera";
+import { usePathname } from "next/navigation";
+import useColor from "@hooks/useColor";
 
 
 function Scene({params, color}: {params: string[], color: ColorRepresentation,}) {
@@ -25,7 +27,11 @@ function Scene({params, color}: {params: string[], color: ColorRepresentation,})
   );
 }
 
-export default (props: { params: string[]; color: ColorRepresentation }) => {
+export default () => {
+  const pathname = usePathname().split("/");
+  const page = pathname[1];
+  const params = pathname.slice(2);
+  const color = useColor();
   const [zoom, setZoom] = useState(5);
 
   useEffect(() => { 
@@ -38,7 +44,8 @@ export default (props: { params: string[]; color: ColorRepresentation }) => {
   
   return (
     <>
-      <Canvas
+   {  page !== "admin" ?
+   params && color ? <Canvas
         onWheel={updateZoom}
         linear
         dpr={[1, 2]}
@@ -46,9 +53,10 @@ export default (props: { params: string[]; color: ColorRepresentation }) => {
         gl={{ antialias: true, alpha: true,}}
       >      
         <Camera zoom={zoom} />
-        <Scene {...props} />
-      </Canvas>
-      {/* <Stats className="!top-auto !bottom-0 !left-auto !right-0 !pointer-events-auto" /> */}
+        <Scene color={color} params={params} />
+      </Canvas>: null
+      // {/* <Stats className="!top-auto !bottom-0 !left-auto !right-0 !pointer-events-auto" /> */}
+      : null}
     </>
   );
 }

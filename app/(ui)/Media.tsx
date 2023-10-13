@@ -1,7 +1,8 @@
 "use client";
 
 import { useAudioStore } from "@hooks/useAudioStore";
-import { useCallback, useEffect, useRef } from "react";
+import useSpecific from "@hooks/useSpecific";
+import {  useEffect, useRef } from "react";
 
 export default function Media() {
   const [song, playing, setSong, playlist, updateTime, setAudio] =
@@ -36,6 +37,7 @@ export default function Media() {
     }
   }, [playing, playlist, song?.name]);
 
+  useSpecific();
   return (
     <div className="">
       {song === null ? null : (

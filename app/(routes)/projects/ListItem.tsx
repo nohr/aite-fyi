@@ -36,7 +36,7 @@ export default function ListItem({
   return (
     <>
     <li
-      className={`flex flex-col gap-2  ${
+      className={`flex group flex-col gap-2  ${
         path === pathname ? " h-full w-full md:!w-[65ch] " : ""
       }`}
     >
@@ -49,7 +49,7 @@ export default function ListItem({
           {project?.name}
         </motion.h2>
      {path === pathname ? null : 
-     <div className={`${pathname.includes("/projects/") ? "w-10 h-10":"w-24 h-24"} rounded-xl overflow-hidden relative pointer-events-auto`}>
+     <div className={`${pathname.includes("/projects/") ? "w-10 h-10":"w-24 h-24"} rounded-xl overflow-hidden relative pointer-events-auto dark:opacity-50 dark:group-hover:opacity-100`}>
         <Image src={project.thumbnail} alt={project.thumbnail} fill sizes="96px" style={{position:"absolute", objectFit:"cover"}} />
             </div>}
           {/* {path !== pathname && <Image src={project.thumbnail} className=" absolute object-cover -z-[5] opacity-90 blur-sm" alt={project.thumbnail} fill />} */}

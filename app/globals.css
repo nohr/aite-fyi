@@ -31,23 +31,12 @@ body {
 }
 
 html {
-  /* background: var(--arc-palette-minContrastColor, #F1F8FEFF); */
   background: var(--arc-palette-subtitle, #96BDD5FF);
   background: linear-gradient(180deg,
       var(--arc-palette-hover, #CADEEAFF) 0%,
       var(--arc-palette-minContrastColor, #F1F8FEFF) 15%);
   color: var(--arc-palette-focus, #96BDD5FF);
   background-repeat: no-repeat;
-}
-
-meta[name="theme-color"] {
-  attr-content: "var(--arc-palette-hover, #CADEEAFF)";
-}
-
-@media (prefers-color-scheme: dark) {
-  meta[name="theme-color"] {
-    attr-content: "rgb(0, 0, 0)";
-  }
 }
 
 .nav-link:hover>*,
@@ -65,15 +54,11 @@ a {
   text-decoration: underline;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    /* background-color: var(--arc-palette-backgroundExtra, rgb(24 24 27 / 1)); */
-    /* background: rgb(0, 0, 0); */
-    background: linear-gradient(180deg,
-        var(--arc-palette-title, #2b0003) 0%,
-        rgb(0 0 0 / 1) 10%);
-    color: var(--arc-palette-maxContrastColor, #ff0022);
-  }
+.dark {
+  background: linear-gradient(180deg,
+      var(--arc-palette-title, #2b0003) 0%,
+      rgb(0 0 0 / 1) 10%) !important;
+  color: var(--arc-palette-maxContrastColor, #ff0022) !important;
 }
 
 *::-webkit-scrollbar {
