@@ -17,32 +17,35 @@ export default function Locale({ Info }: { Info: Info }) {
       timeZoneName: "short",
       hour12: false,
     }),
-    [timeZone]
+    [timeZone],
   );
-  const estTime = new Date().toLocaleString("en-US", config);
-  const [time, setTime] = useState<string | null>(estTime);
+  const [time, setTime] = useState<string | null>(null);
 
   useEffect(() => {
+    if (!time) setTime(new Date().toLocaleString("en-US", config));
+
     setInterval(() => {
       setTime(new Date().toLocaleString("en-US", config));
     }, 1000);
-  }, [config]);
+  }, [config, time]);
 
   return (
     <>
-      <motion.div
-        key={Info._id + "locale"}
-        // initial={{ opacity: 0 }}
-        animate={{ opacity: 1.5 }}
-        transition={{ duration: 0.5, delay: 0, ease: "easeIn" }}
-        className="pointer-events-none flex flex-row items-center gap-x-1 whitespace-nowrap text-sm opacity-50"
-      >
-        <TbLocationFilled />
-        <p>{`${location}`}</p>
-        <p> {`\t•\t`}</p>
-        <TbClockFilled />
-        <p>{`${time}`}</p>
-      </motion.div>
+      {time && (
+        <motion.div
+          key={Info._id + "locale"}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.25, delay: 0, ease: "easeIn" }}
+          className="pointer-events-none flex flex-row items-center gap-x-1 whitespace-nowrap text-sm opacity-50"
+        >
+          <TbLocationFilled />
+          <p>{`${location}`}</p>
+          <p> {`\t•\t`}</p>
+          <TbClockFilled />
+          <p>{`${time}`}</p>
+        </motion.div>
+      )}
     </>
   );
 }

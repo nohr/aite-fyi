@@ -5,7 +5,12 @@ import { skew } from "../../utils/constants";
 export default function Footer() {
   const email = "aite@nyu.edu";
   return (
-    <footer className={skew(false, 8, 2)+" pointer-events-none flex h-min w-screen flex-row items-center order-1 md:order-3 justify-around md:justify-start gap-x-2 text-xs md:items-start md:px-8 [&>a>*]:h-5 md:[&>a>*]:!h-4 [&>a>svg]:w-auto"}>
+    <footer
+      className={
+        skew(false, 8, 2) +
+        " absolute top-0 order-1 flex h-min w-screen flex-row items-center justify-around gap-x-2 text-xs md:bottom-0 md:top-auto md:order-3 md:items-start md:justify-start md:px-8 [&>a>*]:h-5 md:[&>a>*]:!h-4 [&>a>svg]:w-auto"
+      }
+    >
       <a
         href="https://www.linkedin.com/in/aite/"
         title="linkedin"

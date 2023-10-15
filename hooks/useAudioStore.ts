@@ -1,4 +1,11 @@
-import { ChangeEventHandler, FormEvent, FormEventHandler, ReactEventHandler, RefObject, SyntheticEvent } from "react";
+import {
+  ChangeEventHandler,
+  FormEvent,
+  FormEventHandler,
+  ReactEventHandler,
+  RefObject,
+  SyntheticEvent,
+} from "react";
 import { Song } from "types/Song";
 import { create } from "zustand";
 
@@ -44,15 +51,16 @@ export const useAudioStore = create<AudioProps>()((set, get) => ({
   setTime: (e) => {
     const audio = document.querySelector("audio");
     if (!audio) return;
-    get().setPlaying();
+    if (get().playing) get().setPlaying(false);
     const time = parseInt(e.currentTarget.value);
-    if (time && !Number.isNaN(audio.duration))
-    audio.currentTime = time/100 * audio.duration;
-
-    set({ time: time/100  });
+    if (time && !Number.isNaN(audio.duration)) {
+      const currentTime = (time / 100) * audio.duration;
+      audio.currentTime = currentTime;
+    }
+    set({ time: time / 100 });
     get().setPlaying();
   },
   updateTime: (time) => {
-      set({ time});
+    set({ time });
   },
 }));

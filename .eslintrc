@@ -19,7 +19,10 @@
   },
   "plugins": ["react", "@typescript-eslint", "prettier"],
   "rules": {
-    "prettier/prettier": "warn"
+    "prettier/prettier": "warn",
+    "prefer-const": "warn",
+    "@typescript-eslint/no-unused-vars": "warn",
+    "import/no-anonymous-default-export": "off"
   },
   "settings": {
     "react": {

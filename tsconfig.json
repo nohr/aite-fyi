@@ -24,6 +24,7 @@
       "@public/*": ["../public/*"],
       "@lib/*": ["../lib/*"],
       "@hooks/*": ["../hooks/*"],
+      "@helpers/*": ["../helpers/*"],
       "types/*": ["../types/*"],
       "(cursor)": ["./(cursor)/."],
       "(routes)": ["./(routes)/."],

@@ -8,39 +8,39 @@
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  webkit-appearance: none;
+  -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 html,
 body {
   font-family: "Delius", cursive;
-  width: -moz-fit-content;
-  width: fit-content;
-  height: 100svh;
-  touch-action: pan-y, pan-x;
-  overscroll-behavior-y: none;
-  /* overflow: hidden; */
+  width: 100%;
+  height: 100dvh;
+  overscroll-behavior: none;
+  overflow: hidden;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  /* scroll-snap-type: proximity; */
-  /* scroll-behavior: smooth; */
 }
 
 html {
-  background: var(--arc-palette-subtitle, #96BDD5FF);
-  background: linear-gradient(180deg,
-      var(--arc-palette-hover, #CADEEAFF) 0%,
-      var(--arc-palette-minContrastColor, #F1F8FEFF) 15%);
-  color: var(--arc-palette-focus, #96BDD5FF);
+  background: var(--arc-palette-subtitle, #96bdd5ff);
+  background: linear-gradient(
+    180deg,
+    var(--arc-palette-hover, #cadeeaff) 0%,
+    var(--arc-palette-minContrastColor, #f1f8feff) 15%
+  );
+  color: var(--arc-palette-focus, #96bdd5ff);
   background-repeat: no-repeat;
 }
 
-.nav-link:hover>*,
-.active>* {
+.nav-link:hover > *,
+.active > * {
   @apply mix-blend-plus-lighter dark:mix-blend-difference;
 }
 
@@ -55,19 +55,35 @@ a {
 }
 
 .dark {
-  background: linear-gradient(180deg,
-      var(--arc-palette-title, #2b0003) 0%,
-      rgb(0 0 0 / 1) 10%) !important;
+  background: var(--arc-palette-title, #2b0003);
+  background: linear-gradient(
+    180deg,
+    var(--arc-palette-title, #2b0003) 0%,
+    rgb(0 0 0 / 1) 10%
+  ) !important;
   color: var(--arc-palette-maxContrastColor, #ff0022) !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    @apply dark;
+  }
 }
 
 *::-webkit-scrollbar {
   display: none;
 }
 
-* {
-  -ms-overflow-style: none;
-  /* IE and Edge */
-  scrollbar-width: none;
-  /* Firefox */
+input[type="range"] {
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  cursor: pointer !important;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none; /* Centers thumb on the track */
+  background-color: currentColor;
+  height: 1.25rem;
+  width: 0.25rem;
 }

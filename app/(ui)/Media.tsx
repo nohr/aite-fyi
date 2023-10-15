@@ -1,21 +1,18 @@
 "use client";
 
 import { useAudioStore } from "@hooks/useAudioStore";
-import useSpecific from "@hooks/useSpecific";
-import {  useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 export default function Media() {
   const [song, playing, setSong, playlist, updateTime, setAudio] =
-    useAudioStore(
-      (s) => [
-        s.song,
-        s.playing,
-        s.setSong,
-        s.playlist,
-        s.updateTime,
-        s.setAudio,
-      ]
-    );
+    useAudioStore((s) => [
+      s.song,
+      s.playing,
+      s.setSong,
+      s.playlist,
+      s.updateTime,
+      s.setAudio,
+    ]);
 
   const audioRef = useRef<HTMLAudioElement>(null);
 
@@ -37,19 +34,18 @@ export default function Media() {
     }
   }, [playing, playlist, song?.name]);
 
-  useSpecific();
   return (
-    <div className="">
+    <>
       {song === null ? null : (
         <audio
           ref={audioRef}
           src={`${song?.file}?dl=` + song?.name + ".mp3"}
           autoPlay={playing}
           playsInline
-          onTimeUpdate={e => {
+          onTimeUpdate={(e) => {
             const audio = e.currentTarget;
             if (!audio || Number.isNaN(audio.duration)) return;
-            updateTime(audio.currentTime / audio.duration * 100)
+            updateTime((audio.currentTime / audio.duration) * 100);
           }}
           onEnded={(e) => {
             if (e.currentTarget.loop) {
@@ -66,6 +62,6 @@ export default function Media() {
           // onTimeUpdate={(e) => setTime(e.currentTarget.currentTime)}
         ></audio>
       )}
-    </div>
+    </>
   );
 }

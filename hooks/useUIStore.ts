@@ -12,7 +12,7 @@ interface UIProps {
   setStatus: (status: string | JSX.Element) => void;
   navLeft: boolean;
   setNavLeft: (navLeft?: boolean) => void;
-  theme: "light" | "dark";
+  theme: "light" | "dark" | undefined;
   setTheme: (theme: "light" | "dark") => void;
   routing: boolean;
   setRouting: (routing?: boolean) => void;
@@ -35,7 +35,7 @@ export const useUIStore = create<UIProps>()(
     setNavLeft(navLeft = !get().navLeft) {
       set(() => ({ navLeft }));
     },
-    theme: "light",
+    theme: undefined,
     setTheme(theme: "light" | "dark") {
       set(() => ({ theme }));
     },
@@ -47,5 +47,5 @@ export const useUIStore = create<UIProps>()(
     setFade(fade = !get().fade) {
       set(() => ({ fade }));
     },
-  })
+  }),
 );
