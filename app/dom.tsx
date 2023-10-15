@@ -18,7 +18,7 @@ function Dom({ children }: { children: React.ReactNode }) {
   // useDisablePinch();
 
   return (
-    <div ref={ref} className="h-screen">
+    <div ref={ref} className="fixed top-0 h-screen w-screen">
       <Nav />
       {children}
       <Footer />
