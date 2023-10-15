@@ -33,7 +33,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
         marginTop: margins[0],
         marginBottom: margins[1],
       }}
-      className={`flex h-[stretch] flex-col items-center hyphens-auto px-1 md:h-full md:px-8 md:py-2`}
+      className={`flex h-[stretch] flex-col items-center hyphens-auto px-1 md:px-8 md:py-2`}
     >
       {children}
     </Fade>
