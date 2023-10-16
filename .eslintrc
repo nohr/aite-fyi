@@ -22,6 +22,7 @@
     "prettier/prettier": "warn",
     "prefer-const": "warn",
     "@typescript-eslint/no-unused-vars": "warn",
+    "@typescript-eslint/no-explicit-any": "warn",
     "import/no-anonymous-default-export": "off"
   },
   "settings": {

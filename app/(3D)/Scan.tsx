@@ -75,7 +75,7 @@ export function Scan({ ...props }: JSX.IntrinsicElements["group"]) {
     bodyRef.current?.lookAt(target.x * 0.25, target.y / 2, 4);
   };
 
-  useFrame(({ mouse }, delta) => {
+  useFrame(({ mouse }) => {
     handleMouseMove(mouse);
 
     // animate breathing
@@ -98,7 +98,7 @@ export function Scan({ ...props }: JSX.IntrinsicElements["group"]) {
     [color, size.width],
   );
 
-  const { width: w, height: h } = useThree((state) => state.viewport);
+  const { width: w } = useThree((state) => state.viewport);
 
   return (
     <group

@@ -1,5 +1,5 @@
-import { useUIStore } from "(ui)";
-import { useVideoTexture, useTexture, Html } from "@react-three/drei";
+// import { useUIStore } from "(ui)";
+import { useVideoTexture, Html } from "@react-three/drei";
 import { Suspense, useCallback, useEffect, useState } from "react";
 import { FaSpinner } from "react-icons/fa";
 import { getVideoObjects } from "sanity.utils";
@@ -49,7 +49,7 @@ export function VideoMaterial({
   mobile: boolean | null;
 }) {
   // console.log("rendered");
-  const setLoading = useUIStore((state) => state.setLoading);
+  // const setLoading = useUIStore((state) => state.setLoading);
   const [videoObjects, setVideoObjects] = useState<VideoObject | undefined>();
 
   const getObjects = useCallback(async () => {
@@ -58,7 +58,7 @@ export function VideoMaterial({
 
     // set a new variable to the array object that contains the matching mobile value
     const videoObject = VideoObjects.find(
-      (videoObject: VideoObject) => videoObject?.mobile === props.mobile
+      (videoObject: VideoObject) => videoObject?.mobile === props.mobile,
     );
     // console.log(videoObject);
 

@@ -43,7 +43,7 @@ export const M1 = memo(
       children,
       ...props
     }: JSX.IntrinsicElements["group"] & { body: MutableRefObject<Group> },
-    ref: Ref<Group>
+    ref: Ref<Group>,
   ) {
     const { nodes, materials } = useGLTF(url) as GLTFResult;
     const texture = useTexture("/misc/DSBridges.jpg");
@@ -91,7 +91,7 @@ export const M1 = memo(
         />
       </group>
     );
-  })
+  }),
 );
 
 useGLTF.preload(url);

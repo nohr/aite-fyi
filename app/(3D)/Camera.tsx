@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useFrame } from "@react-three/fiber";
-import { Vector3 } from "three";
+// import { Vector3 } from "three";
 
 function Camera() {
   const [zoom, setZoom] = useState(5);
@@ -9,7 +9,7 @@ function Camera() {
     window.innerWidth < 768 ? setZoom(7) : setZoom(5);
   }, []);
 
-  useFrame(({ camera, size: { width } }) => {
+  useFrame(({ camera }) => {
     // const vec = new Vector3();
     // const pos = new Vector3();
     // if (width < 768) return;

@@ -73,7 +73,7 @@ const url = "/models/iphone_13_pro.glb";
 export const Phone = memo(
   forwardRef(function Phone(
     { children, ...props }: JSX.IntrinsicElements["group"],
-    ref: Ref<Group>
+    ref: Ref<Group>,
   ) {
     const {
       nodes,
@@ -279,7 +279,7 @@ export const Phone = memo(
         </group>
       </group>
     );
-  })
+  }),
 );
 
 useGLTF.preload(url);

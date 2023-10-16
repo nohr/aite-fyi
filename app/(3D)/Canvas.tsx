@@ -2,7 +2,7 @@
 
 import { Html, Preload, useProgress } from "@react-three/drei";
 import { Canvas, CanvasProps, useThree } from "@react-three/fiber";
-import { Suspense, } from "react";
+import { Suspense } from "react";
 import { Device } from "./Device";
 import { Scan } from "./Scan";
 import { Env } from "./Environment";
