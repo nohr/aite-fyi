@@ -1,11 +1,9 @@
 "use client";
 
 import { useUIStore } from "(ui)";
+import { usePathname } from "next/navigation";
 import { useEffect } from "react";
-
-export default function useTheme() {
-  const [setTheme, theme] = useUIStore((s) => [s.setTheme, s.theme]);
-
+const updateTheme = (theme: string | undefined) => {
   if (theme === "dark") {
     const metaThemeColor = document.querySelector("meta[name=theme-color]");
     const arcDark =
@@ -25,6 +23,15 @@ export default function useTheme() {
     // console.log(arcLight);
     metaThemeColor?.setAttribute("content", arcLight);
   }
+};
+
+export default function useTheme() {
+  const pathname = usePathname();
+  const [setTheme, theme] = useUIStore((s) => [s.setTheme, s.theme]);
+
+  useEffect(() => {
+    updateTheme(theme);
+  }, [theme, pathname]);
 
   useEffect(() => {
     const theme = window.matchMedia("(prefers-color-scheme: dark)").matches

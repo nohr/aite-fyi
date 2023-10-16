@@ -1,6 +1,17 @@
 import ListItem from "./ListItem";
 import { getProjects } from "sanity.utils";
 
+export const metadata = {
+  title: "Aite, for your info...",
+  description: "Personal website of Aite Eboigbe",
+  themeColor: "var(--arc-palette-subtitle, #96BDD5FF)",
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    userScalable: false,
+  },
+};
+
 export default async function ProjectsLayout({
   children,
 }: {
