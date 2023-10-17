@@ -29,13 +29,13 @@ body {
 }
 
 html {
-  background: var(--arc-palette-subtitle, #96bdd5ff);
+  background: var(--arc-palette-subtitle, #b5beb9ff);
   background: linear-gradient(
     180deg,
-    var(--arc-palette-hover, #cadeeaff) 0%,
-    var(--arc-palette-minContrastColor, #f1f8feff) 15%
+    var(--arc-palette-hover, #dadedcff) 0%,
+    var(--arc-palette-minContrastColor, #eaefecff) 15%
   );
-  color: var(--arc-palette-focus, #96bdd5ff);
+  color: var(--arc-palette-focus, #a2aea7ff);
   background-repeat: no-repeat;
 }
 

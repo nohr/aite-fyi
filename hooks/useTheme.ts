@@ -17,9 +17,9 @@ const updateTheme = (theme: string | undefined) => {
     const metaThemeColor = document.querySelector("meta[name=theme-color]");
     const arcLight =
       getComputedStyle(document.documentElement)
-        .getPropertyValue("--arc-palette-subtitle")
+        .getPropertyValue("--arc-palette-hover")
         .slice(0, -2)
-        .toLocaleLowerCase() || "#CADEEAFF";
+        .toLocaleLowerCase() || "#dadedcff";
     // console.log(arcLight);
     metaThemeColor?.setAttribute("content", arcLight);
   }

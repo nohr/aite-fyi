@@ -6,7 +6,7 @@ import Dom from "dom";
 export const metadata = {
   title: "Aite, for your info...",
   description: "Personal website of Aite Eboigbe",
-  themeColor: "var(--arc-palette-subtitle, #96BDD5FF)",
+  themeColor: "var(--arc-palette-subtitle, #b5beb9ff)",
   viewport: {
     width: "device-width",
     initialScale: 1,
