@@ -13,47 +13,38 @@ import useSFX from "@hooks/useSFX";
 type Route = "home" | "proj." | "music";
 interface NavLinkProps {
   children: React.ReactNode;
-  to?: Route;
+  active?: boolean;
   className?: string;
+  to?: Route;
+  onClick?: () => void;
 }
 
 const Nav = memo(function Nav() {
   const pathname = usePathname();
-  const [navLeft, setNavLeft] = useUIStore((s) => [s.navLeft, s.setNavLeft]);
+  const [navLeft, setNavLeft, AIControl, setAIControl] = useUIStore((s) => [
+    s.navLeft,
+    s.setNavLeft,
+    s.AIControl,
+    s.setAIControl,
+  ]);
   const [play] = useSFX("/sfx/click.mp3");
 
   const NavLink = ({
     children,
+    active = false,
     className = "",
     to = undefined,
+    onClick = () => {},
   }: NavLinkProps) => {
     return (
       <>
         {to ? (
           <Link
             onClick={() => play()}
-            // onClick={() => setLoading(true)}
             title={to}
             href={`/${to === "home" ? "" : to === "proj." ? "projects" : to}`}
-            className={
-              `nav-link pointer-events-auto flex h-12 w-12 select-none flex-col items-center justify-center rounded-full border-[1px] border-current no-underline shadow-lg transition hover:shadow-xl
-         ${
-           pathname === `/${to === "home" && ""}` ||
-           pathname.includes(to === "proj." ? "projects" : to)
-             ? "active"
-             : ""
-         }`
-              //   +
-              // `
-              //   ${
-              //   loading &&
-              //   (pathname === `/${to === "home" && ""}` ||
-              //     pathname.includes(to === "proj." ? "projects" : to))
-              //     ? " animate-bounce"
-              //     : ""
-              //   }
-              // `
-            }
+            className={`nav-link pointer-events-auto flex h-12 w-12 select-none flex-col items-center justify-center rounded-full border-[1px] border-current no-underline shadow-lg transition hover:shadow-xl active:scale-90
+         ${active ? "active" : ""}`}
           >
             {children} <p className="text-xs">{to}</p>
           </Link>
@@ -61,9 +52,11 @@ const Nav = memo(function Nav() {
           <div
             className={
               className +
-              " nav-link pointer-events-auto flex h-12 w-12 select-none flex-col items-center justify-center overflow-visible rounded-full border-[1px] border-current no-underline shadow-lg transition hover:shadow-xl"
+              ` nav-link pointer-events-auto flex h-12 w-12 cursor-pointer select-none flex-col items-center justify-center overflow-visible rounded-full border-[1px] border-current no-underline shadow-lg transition hover:shadow-xl active:scale-90 ${
+                active ? "active" : ""
+              }`
             }
-            onClick={() => setNavLeft(!navLeft)}
+            onClick={onClick}
           >
             {children}
           </div>
@@ -85,19 +78,29 @@ const Nav = memo(function Nav() {
       <div
         className={`${navSkew} pointer-events-none flex w-fit flex-row justify-start gap-2 self-start border-transparent transition-all duration-100  md:border-b-[1px] `}
       >
-        <NavLink to="home">
+        <NavLink active={pathname === `/`} to="home">
           <GiHand />
         </NavLink>
-        <NavLink to="music">
+        <NavLink active={pathname.includes("music")} to="music">
           <GiMusicalNotes className={playing ? "animate-pulse" : ""} />
         </NavLink>
-        <NavLink to="proj.">
+        <NavLink active={pathname.includes("projects")} to="proj.">
           <GiBombingRun />
         </NavLink>
       </div>
-      <NavLink className={`${navSkew2} md:hidden`}>
+      <NavLink
+        onClick={() => setNavLeft(!navLeft)}
+        className={`${navSkew2} md:hidden`}
+      >
         {navLeft ? <BsArrowRightCircleFill /> : <BsArrowLeftCircleFill />}
       </NavLink>
+      {/* <NavLink
+        active={AIControl}
+        onClick={setAIControl}
+        className={`${navSkew2} hidden md:flex`}
+      >
+        <GiHand className="h-6 w-6" />
+      </NavLink> */}
     </nav>
   );
 });

@@ -1,7 +1,7 @@
 export const dynamic = "force-dynamic";
 
 import { useFrame, useLoader, useThree } from "@react-three/fiber";
-import { useMemo, useRef } from "react";
+import { memo, useRef } from "react";
 import { ColorRepresentation, Group, Vector2, Vector3 } from "three";
 import { PCDLoader } from "three/examples/jsm/loaders/PCDLoader";
 import { PointsMaterial } from "three/src/materials/PointsMaterial";
@@ -10,7 +10,7 @@ import { mod } from "../../utils/constants";
 import { useAudioStore } from "@hooks/useAudioStore";
 import useColor from "@hooks/useColor";
 
-export function Scan({ ...props }: JSX.IntrinsicElements["group"]) {
+export const Scan = memo(function Scan() {
   const { size } = useThree();
   const head = useLoader(PCDLoader, "/models/head.pcd");
   const body = useLoader(PCDLoader, "/models/body.pcd");
@@ -85,24 +85,19 @@ export function Scan({ ...props }: JSX.IntrinsicElements["group"]) {
     // todo: zoom in on blur and quickly zoom out on focus
   });
 
-  const mat = useMemo(
-    () =>
-      new PointsMaterial({
-        size: size.width > 768 ? 0.7 : size.width < 450 ? 0.2 : 0.75,
-        fog: false,
-        color: color,
-        // toneMapped: false,
-        opacity: 1,
-        sizeAttenuation: false,
-      }) as PointsMaterial & { color: ColorRepresentation },
-    [color, size.width],
-  );
+  const mat = new PointsMaterial({
+    size: size.width > 768 ? 0.7 : size.width < 450 ? 0.2 : 0.75,
+    fog: false,
+    color: color,
+    // toneMapped: false,
+    opacity: 1,
+    sizeAttenuation: false,
+  });
 
   const { width: w } = useThree((state) => state.viewport);
 
   return (
     <group
-      {...props}
       ref={groupRef}
       position={[0, size.width > 768 ? 70 : w / 2, -3.5]}
       rotation={[0, Math.PI / 2, 0]}
@@ -113,4 +108,4 @@ export function Scan({ ...props }: JSX.IntrinsicElements["group"]) {
       <points ref={bodyRef} geometry={body.geometry} material={mat} />
     </group>
   );
-}
+});

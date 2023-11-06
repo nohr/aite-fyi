@@ -1,6 +1,8 @@
 import { create } from "zustand";
 // import { devtools } from "zustand/middleware";
 interface UIProps {
+  AIControl: boolean;
+  setAIControl: (AIControl?: boolean) => void;
   loading: boolean;
   setLoading: (loading?: boolean) => void;
   status: string | JSX.Element;
@@ -23,6 +25,10 @@ interface UIProps {
 export const useUIStore = create<UIProps>()(
   //   persist(
   (set, get) => ({
+    AIControl: false,
+    setAIControl(AIControl = !get().AIControl) {
+      set(() => ({ AIControl }));
+    },
     loading: true,
     setLoading(loading = !get().loading) {
       set(() => ({ loading }));
