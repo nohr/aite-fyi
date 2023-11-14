@@ -3,6 +3,7 @@
 import { useUIStore } from "(ui)";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
+
 const updateTheme = (theme: string | undefined) => {
   if (theme === "dark") {
     const metaThemeColor = document.querySelector("meta[name=theme-color]");
@@ -10,7 +11,7 @@ const updateTheme = (theme: string | undefined) => {
       getComputedStyle(document.documentElement)
         .getPropertyValue("--arc-palette-maxContrastColor")
         .slice(0, -2)
-        .toLocaleLowerCase() || "#2b0003FF";
+        .toLocaleLowerCase() || "#292929";
     // console.log(arcDark);
     metaThemeColor?.setAttribute("content", arcDark);
   } else if (theme === "light") {

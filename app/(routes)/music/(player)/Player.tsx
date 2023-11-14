@@ -2,24 +2,22 @@
 
 import { useAudioStore } from "@hooks/useAudioStore";
 import Image from "next/image";
-import { FaSpinner } from "react-icons/fa";
 import Controls from "./Controls";
 import { getSongs } from "sanity.utils";
 import { useEffect } from "react";
 import { Song } from "types/Song";
 
-const Cover = ({ song }: { song: Song }) =>
-  song && song.cover ? (
+const Cover = ({ song }: { song: Song | null }) =>
+   song?.cover ? (
     <Image
       src={song.cover}
       alt={song.name}
       fill
+      priority
       sizes="100%"
       className="pointer-events-auto absolute object-cover"
-    />
-  ) : (
-    <FaSpinner className=" animate-spin" />
-  );
+      />
+  ) : null;
 
 export default function Player() {
   const [song, setSong, setPlaylist] = useAudioStore((s) => [
@@ -40,12 +38,9 @@ export default function Player() {
 
   return (
     <div className="items-between pointer-events-none flex h-full w-full flex-row justify-start gap-4 p-2">
-      {/* Cover */}
-      {song ? (
-        <div className="relative !aspect-square h-fit w-1/4 overflow-hidden rounded-xl border-[0px] border-current shadow-lg">
-          <Cover song={song} />
-        </div>
-      ) : null}
+    <div className="relative !aspect-square h-fit w-1/4 overflow-hidden border-[0px] border-current shadow-lg">
+        <Cover song={song} />
+      </div>
       <div className=" flex w-full flex-col justify-between gap-2">
         {/* Song info */}
         <div className=" h-max ">

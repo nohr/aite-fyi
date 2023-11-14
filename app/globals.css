@@ -29,13 +29,13 @@ body {
 }
 
 html {
-  background: var(--arc-palette-subtitle, #b5beb9ff);
+  background: var(--arc-palette-subtitle, #bdcdcd);
   background: linear-gradient(
     180deg,
-    var(--arc-palette-hover, #dadedcff) 0%,
-    var(--arc-palette-minContrastColor, #eaefecff) 15%
+    var(--arc-palette-hover, #bdcdcd) 0%,
+    var(--arc-palette-minContrastColor, #ffffff) 15%
   );
-  color: var(--arc-palette-focus, #a2aea7ff);
+  color: var(--arc-palette-focus, #007777);
   background-repeat: no-repeat;
 }
 
@@ -55,13 +55,13 @@ a {
 }
 
 .dark {
-  background: var(--arc-palette-title, #2b0003);
+  background: var(--arc-palette-title, #121a20);
   background: linear-gradient(
     180deg,
-    var(--arc-palette-title, #2b0003) 0%,
-    rgb(0 0 0 / 1) 10%
+    var(--arc-palette-title, #121a20) 0%,
+    rgb(0 0 0 / 1) 15%
   ) !important;
-  color: var(--arc-palette-maxContrastColor, #ff0022) !important;
+  color: var(--arc-palette-maxContrastColor, #405c6f) !important;
 }
 
 @media (prefers-color-scheme: dark) {

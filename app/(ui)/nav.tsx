@@ -9,6 +9,7 @@ import { useAudioStore } from "@hooks/useAudioStore";
 import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from "react-icons/bs";
 import { skew } from "../../utils/constants";
 import useSFX from "@hooks/useSFX";
+import { RiLoaderFill } from "react-icons/ri";
 
 type Route = "home" | "proj." | "music";
 interface NavLinkProps {
@@ -21,11 +22,11 @@ interface NavLinkProps {
 
 const Nav = memo(function Nav() {
   const pathname = usePathname();
-  const [navLeft, setNavLeft, AIControl, setAIControl] = useUIStore((s) => [
+  const [navLeft, setNavLeft, loading, setLoading] = useUIStore((s) => [
     s.navLeft,
     s.setNavLeft,
-    s.AIControl,
-    s.setAIControl,
+    s.loading,
+    s.setLoading,
   ]);
   const [play] = useSFX("/sfx/click.mp3");
 
@@ -87,6 +88,7 @@ const Nav = memo(function Nav() {
         <NavLink active={pathname.includes("projects")} to="proj.">
           <GiBombingRun />
         </NavLink>
+      {/* {loading ?  <RiLoaderFill className="h-6 w-6 m-3 animate-spin" /> : null} */}
       </div>
       <NavLink
         onClick={() => setNavLeft(!navLeft)}
@@ -94,13 +96,6 @@ const Nav = memo(function Nav() {
       >
         {navLeft ? <BsArrowRightCircleFill /> : <BsArrowLeftCircleFill />}
       </NavLink>
-      {/* <NavLink
-        active={AIControl}
-        onClick={setAIControl}
-        className={`${navSkew2} hidden md:flex`}
-      >
-        <GiHand className="h-6 w-6" />
-      </NavLink> */}
     </nav>
   );
 });

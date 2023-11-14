@@ -52,24 +52,21 @@ function useColor() {
 
     return "hsl(" + h + "," + s + "%," + l + "%)";
   };
+
   useEffect(() => {
     setTimeout(() => {
       const dark =
         getComputedStyle(document.documentElement)
           .getPropertyValue("--arc-palette-maxContrastColor")
           .slice(0, -2)
-          .toLocaleLowerCase() || "#ff0055";
+          .toLocaleLowerCase() || "#405C6F";
 
       const light =
         getComputedStyle(document.documentElement)
           .getPropertyValue("--arc-palette-focus")
           .slice(0, -2)
-          .toLocaleLowerCase() || "#a2aea7";
+          .toLocaleLowerCase() || "#007777";
 
-      // console.log(light, dark);
-      // console.log(hexToHsl(light));
-
-      //   setColor(new Color(theme === "dark" ? dark : light === "#f3f1f1" ? light: hexToHsl(light)));
       setColor(theme === "dark" ? dark : hexToHsl(light));
     }, 500);
   }, [theme]);

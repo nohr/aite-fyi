@@ -20,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="antialiased">
+    <html lang="en" className="antialiased font-semibold ">
       <body className="relative">
         <Dom>{children}</Dom>
         <Analytics debug={false} />
