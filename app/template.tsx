@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Template({ children }: { children: React.ReactNode }) {
+  // const pathname = usePathname();
   const pathname = usePathname().split("/")[1];
   const [margins, setMargins] = useState<[number, number]>([0, 0]);
 
@@ -16,7 +17,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
 
       if (!nav || !footer || !main) return;
       if (window.innerWidth > 768)
-        setMargins([nav.clientHeight, footer.clientHeight]);
+        setMargins([nav.clientHeight + footer.clientHeight, 0]);
       else setMargins([footer.clientHeight, nav.clientHeight]);
     }
 

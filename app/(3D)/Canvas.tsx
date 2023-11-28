@@ -1,22 +1,21 @@
 "use client";
 
-import { Html, Preload, useProgress } from "@react-three/drei";
-import { Canvas, CanvasProps, useThree } from "@react-three/fiber";
+import { Html, Preload, StatsGl, useProgress } from "@react-three/drei";
+import { Canvas, CanvasProps } from "@react-three/fiber";
 import { Suspense } from "react";
-import { Device } from "./Device";
 import { Scan } from "./Scan";
 import { Env } from "./Environment";
 import Camera from "./Camera";
 import { usePathname } from "next/navigation";
 import { r3f } from "@helpers/global";
 
-function Scene({ params }: { params: string[] }) {
-  const { size } = useThree();
+function Scene() {
   const { progress } = useProgress();
 
   return (
     <Suspense fallback={<Html center>{progress}%</Html>}>
-      {params.length > 0 ? <Device params={params} size={size} /> : <Scan />}
+      {/* {params.length === 0 ? null : <Device />} */}
+      <Scan />
       {/* <OrbitControls minDistance={30} maxDistance={200} /> */}
     </Suspense>
   );
@@ -25,7 +24,6 @@ function Scene({ params }: { params: string[] }) {
 const Comp = (props: Partial<CanvasProps>) => {
   const pathname = usePathname().split("/");
   const page = pathname[1];
-  const params = pathname.slice(2);
 
   return (
     <>
@@ -34,9 +32,14 @@ const Comp = (props: Partial<CanvasProps>) => {
           <r3f.Out />
           <Preload all />
           <Camera />
-          <Scene params={params} />
+          <Scene />
           <Env />
-          {/* {process.env.NODE_ENV === "development" ? <StatsGl /> : null} */}
+          {process.env.NODE_ENV === "development" ? (
+            <StatsGl
+              className="!absolute !bottom-0 !left-auto !right-0 !top-auto
+    h-[66px] w-[281px]"
+            />
+          ) : null}
         </Canvas>
       ) : null}
     </>

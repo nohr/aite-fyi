@@ -1,5 +1,5 @@
 {
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
-  "cSpell.words": ["distx", "disty", "hidebar", "unproject"]
+  "cSpell.words": ["cmax", "cmin", "distx", "disty", "hidebar", "unproject"]
 }

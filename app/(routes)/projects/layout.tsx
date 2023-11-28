@@ -3,13 +3,14 @@ import { getProjects } from "sanity.utils";
 
 export const metadata = {
   title: "Aite, for your info...",
-  description: "Personal website of Aite Eboigbe",
-  themeColor: "var(--arc-palette-subtitle, #96BDD5FF)",
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    userScalable: false,
-  },
+  description: "Personal website of Aite Aigbe",
+};
+
+export const viewport = {
+  themeColor: "var(--arc-palette-subtitle, #b5beb9ff)",
+  width: "device-width",
+  initialScale: 1,
+  userScalable: false,
 };
 
 export default async function ProjectsLayout({

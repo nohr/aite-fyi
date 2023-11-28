@@ -68,7 +68,7 @@ function useColor() {
           .toLocaleLowerCase() || "#007777";
 
       setColor(theme === "dark" ? dark : hexToHsl(light));
-    }, 500);
+    }, 20);
   }, [theme]);
 
   return color;

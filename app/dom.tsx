@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 // import useDisablePinch from "@hooks/useDisablePinch";
 import useSpecific from "@hooks/useSpecific";
 import { Nav } from "(ui)";
+
 const Comp = dynamic(() => import("(3D)/Canvas"), {
   ssr: false,
 });
@@ -19,9 +20,9 @@ function Dom({ children }: { children: React.ReactNode }) {
 
   return (
     <div ref={ref} className="fixed top-0 h-[100dvh] w-screen">
+      <Footer />
       <Nav />
       {children}
-      <Footer />
       <Media />
       <Comp
         linear

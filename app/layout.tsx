@@ -2,16 +2,19 @@ import "./globals.css";
 import "@fontsource/delius";
 import { Analytics } from "@vercel/analytics/react";
 import Dom from "dom";
+import Loading from "loading";
+import { Suspense } from "react";
 
 export const metadata = {
   title: "Aite, for your info...",
-  description: "Personal website of Aite Eboigbe",
+  description: "Personal website of Aite Aigbe",
+};
+
+export const viewport = {
   themeColor: "var(--arc-palette-subtitle, #b5beb9ff)",
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    userScalable: false,
-  },
+  width: "device-width",
+  initialScale: 1,
+  userScalable: false,
 };
 
 export default function RootLayout({
@@ -20,9 +23,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="antialiased font-semibold ">
+    <html lang="en" className="font-semibold antialiased ">
       <body className="relative">
-        <Dom>{children}</Dom>
+        <Loading />
+        <Suspense fallback={null}>
+          <Dom>{children}</Dom>
+        </Suspense>
         <Analytics debug={false} />
       </body>
     </html>

@@ -72,7 +72,7 @@ const Nav = memo(function Nav() {
   const navSkew2 = skew(!navLeft, 12, 7);
   return (
     <nav
-      className={` absolute bottom-0 z-[1000] flex w-screen flex-row justify-between p-2 pb-8 md:bottom-auto md:top-0 md:px-8 md:py-4 ${
+      className={` pointer-events-none absolute bottom-0 z-[1000] flex w-screen -skew-x-[5deg] -skew-y-[0.3deg] flex-row justify-between p-2 pb-8 md:bottom-auto md:top-4 md:-skew-x-[8deg] md:-skew-y-[2deg] md:px-8 md:py-4 ${
         navLeft ? "" : "flex-row-reverse"
       }`}
     >
@@ -88,7 +88,6 @@ const Nav = memo(function Nav() {
         <NavLink active={pathname.includes("projects")} to="proj.">
           <GiBombingRun />
         </NavLink>
-      {/* {loading ?  <RiLoaderFill className="h-6 w-6 m-3 animate-spin" /> : null} */}
       </div>
       <NavLink
         onClick={() => setNavLeft(!navLeft)}

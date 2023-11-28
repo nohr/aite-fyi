@@ -1,9 +1,9 @@
-import { FaSpinner } from "react-icons/fa";
+import { RiLoaderFill } from "react-icons/ri";
 
 export default function Loading() {
   return (
     <>
-      <FaSpinner className=" animate-spin" />
+      <RiLoaderFill className=" animate-spin" />
     </>
   );
 }

@@ -1,8 +1,12 @@
+"use client";
+
+import useLoading from "@hooks/useLoading";
 import { PortableText } from "@portabletext/react";
 import { Info } from "types/Info";
 
 export default function Bio({ Info }: { Info: Info }) {
   const { bio } = Info;
+  useLoading(bio);
   return (
     <div
       key={Info._id + "bio"}

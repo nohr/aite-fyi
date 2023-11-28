@@ -1,7 +1,7 @@
 export const dynamic = "force-dynamic";
 
 import { useFrame, useLoader, useThree } from "@react-three/fiber";
-import { memo, useRef } from "react";
+import { memo, useEffect, useRef } from "react";
 import { ColorRepresentation, Group, Vector2, Vector3 } from "three";
 import { PCDLoader } from "three/examples/jsm/loaders/PCDLoader";
 import { PointsMaterial } from "three/src/materials/PointsMaterial";
@@ -9,6 +9,9 @@ import { Points } from "three/src/objects/Points";
 import { mod } from "../../utils/constants";
 import { useAudioStore } from "@hooks/useAudioStore";
 import useColor from "@hooks/useColor";
+import { usePathname } from "next/navigation";
+import { useUIStore } from "(ui)";
+import useLoading from "@hooks/useLoading";
 
 export const Scan = memo(function Scan() {
   const { size } = useThree();
@@ -85,6 +88,8 @@ export const Scan = memo(function Scan() {
     // todo: zoom in on blur and quickly zoom out on focus
   });
 
+  useLoading();
+
   const mat = new PointsMaterial({
     size: size.width > 768 ? 0.7 : size.width < 450 ? 0.2 : 0.75,
     fog: false,
@@ -96,6 +101,8 @@ export const Scan = memo(function Scan() {
 
   const { width: w } = useThree((state) => state.viewport);
 
+  const params = usePathname().split("/")[2];
+  if (params) return null;
   return (
     <group
       ref={groupRef}

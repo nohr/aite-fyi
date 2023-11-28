@@ -22,18 +22,25 @@ export function Fade({
   useTheme();
 
   const standard_pagination_animation = {
-    initial: { opacity: init, scale: 0.95, rotateX: -30 },
+    initial: {
+      opacity: init,
+      scale: 0.95,
+      rotateX: -30,
+      filter: "blur(10px)",
+    },
     animate: {
       opacity: 1,
       scale: 1,
       rotateX: 0,
-      transition: { duration: 0.25, ease: "circOut" },
+      filter: "blur(0px)",
+      transition: { duration: 0.7, ease: [0, 0.93, 0.42, 0.87] },
     },
     exit: {
       opacity: init,
       scale: 0.95,
       rotateX: -30,
-      transition: { duration: 0.05, ease: "circOut" },
+      filter: "blur(10px)",
+      transition: { duration: 0.2, ease: [0, 0.93, 0.42, 0.87] },
     },
   };
   return (

@@ -2,8 +2,8 @@
 "use client";
 
 import { PresentationControls } from "@react-three/drei";
-import { Size, useFrame } from "@react-three/fiber";
-import { memo, Suspense, useRef } from "react";
+import { useFrame, useThree } from "@react-three/fiber";
+import { Suspense, useRef } from "react";
 import { Vector3 } from "three";
 import { DirectionalLight } from "three/src/lights/DirectionalLight";
 import { Group } from "three/src/objects/Group";
@@ -15,13 +15,10 @@ import { VideoMaterial } from "./VideoMaterial";
 const rsqw = (t: number, delta = 0.02, a = 1, f = 1 / (2 * Math.PI)) =>
   (a / Math.atan(1 / delta)) * Math.atan(Math.sin(2 * Math.PI * t * f) / delta);
 
-export const Device = memo(function Device({
-  ...props
-}: {
-  params: string[];
-  size: Size;
-}) {
-  const { width: w, height: h } = props.size;
+export const Device = function Device() {
+  const {
+    size: { width: w, height: h },
+  } = useThree();
   const screen = useRef<Group>(null!);
   const body = useRef<Group>(null!);
   const phone = useRef<Group>(null!);
@@ -63,7 +60,7 @@ export const Device = memo(function Device({
     }
   });
 
-  // console.log(w);
+  // console.log("rendered");
 
   return (
     <PresentationControls snap enabled={w <= 768}>
@@ -86,7 +83,7 @@ export const Device = memo(function Device({
             rotation={[-Math.PI, -Math.PI, -0.2]}
             position={[1, -1, 0]}
           >
-            <VideoMaterial mobile={null} {...props} />
+            <VideoMaterial mobile={null} />
           </M1>
           <Phone
             ref={phone}
@@ -95,10 +92,10 @@ export const Device = memo(function Device({
             scale={0.05}
             frustumCulled={false}
           >
-            <VideoMaterial mobile {...props} />
+            <VideoMaterial mobile />
           </Phone>
         </group>
       </Suspense>
     </PresentationControls>
   );
-});
+};

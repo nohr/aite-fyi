@@ -1,7 +1,8 @@
-// import { useUIStore } from "(ui)";
+import useLoading from "@hooks/useLoading";
 import { useVideoTexture, Html } from "@react-three/drei";
+import { usePathname } from "next/navigation";
 import { Suspense, useCallback, useEffect, useState } from "react";
-import { FaSpinner } from "react-icons/fa";
+import { RiLoaderFill } from "react-icons/ri";
 import { getVideoObjects } from "sanity.utils";
 import { BackSide } from "three";
 import { VideoObject } from "types/Project";
@@ -11,7 +12,6 @@ export function Texture({
   ...props
 }: {
   videoObjects: VideoObject;
-  params: string[];
   mobile: boolean | null;
 }) {
   const texture = useVideoTexture(videoObjects.url, {
@@ -42,18 +42,13 @@ export function Texture({
   );
 }
 
-export function VideoMaterial({
-  ...props
-}: {
-  params: string[];
-  mobile: boolean | null;
-}) {
+export function VideoMaterial({ ...props }: { mobile: boolean | null }) {
+  const params = usePathname().split("/")[2];
   // console.log("rendered");
-  // const setLoading = useUIStore((state) => state.setLoading);
   const [videoObjects, setVideoObjects] = useState<VideoObject | undefined>();
 
   const getObjects = useCallback(async () => {
-    const { VideoObjects } = await getVideoObjects(props.params[0]);
+    const { VideoObjects } = await getVideoObjects(params);
     // console.log(VideoObjects);
 
     // set a new variable to the array object that contains the matching mobile value
@@ -67,7 +62,7 @@ export function VideoMaterial({
     return () => {
       setVideoObjects(undefined);
     };
-  }, [props.mobile, props.params]);
+  }, [props.mobile, params]);
 
   useEffect(() => {
     getObjects();
@@ -75,9 +70,7 @@ export function VideoMaterial({
 
   // console.log(videoObjects);
 
-  // useEffect(() => {
-  //   setLoading(false);
-  // }, [setLoading]);
+  useLoading();
 
   return (
     <Suspense fallback={null}>
@@ -85,7 +78,7 @@ export function VideoMaterial({
         <Texture videoObjects={videoObjects} {...props} />
       ) : (
         <Html transform as="div" center>
-          <FaSpinner className="animate-spin" />
+          <RiLoaderFill className="animate-spin" />
         </Html>
       )}
     </Suspense>
