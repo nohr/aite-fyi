@@ -1,30 +1,12 @@
 "use client";
 
 import { Fade } from "(ui)";
+import useMargin from "@hooks/useMargin";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
 
 export default function Template({ children }: { children: React.ReactNode }) {
-  // const pathname = usePathname();
   const pathname = usePathname().split("/")[1];
-  const [margins, setMargins] = useState<[number, number]>([0, 0]);
-
-  useEffect(() => {
-    function handleMargin() {
-      const nav = document.querySelector("nav");
-      const footer = document.querySelector("footer");
-      const main = document.querySelector("main");
-
-      if (!nav || !footer || !main) return;
-      if (window.innerWidth > 768)
-        setMargins([nav.clientHeight + footer.clientHeight, 0]);
-      else setMargins([footer.clientHeight, nav.clientHeight]);
-    }
-
-    handleMargin();
-    window.addEventListener("resize", handleMargin);
-    return () => window.removeEventListener("resize", handleMargin);
-  }, []);
+  const margins = useMargin();
 
   return (
     <Fade
