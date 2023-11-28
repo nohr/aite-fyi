@@ -11,6 +11,7 @@ import { mod } from "../../utils/constants";
 import { M1 } from "./M1";
 import { Phone } from "./Phone";
 import { VideoMaterial } from "./VideoMaterial";
+import { usePathname } from "next/navigation";
 
 const rsqw = (t: number, delta = 0.02, a = 1, f = 1 / (2 * Math.PI)) =>
   (a / Math.atan(1 / delta)) * Math.atan(Math.sin(2 * Math.PI * t * f) / delta);
@@ -61,6 +62,8 @@ export const Device = function Device() {
   });
 
   // console.log("rendered");
+  const params = usePathname().split("/")[2];
+  if (!params) return null;
 
   return (
     <PresentationControls snap enabled={w <= 768}>

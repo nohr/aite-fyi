@@ -27,8 +27,8 @@ export default function ListItem({
       index + n === projects.length
         ? 0
         : index + n < 0
-        ? projects.length - 1
-        : index + n;
+          ? projects.length - 1
+          : index + n;
     const nextSlug = projects[nextIndex]?.slug;
 
     if (nextSlug === undefined) return path;
@@ -47,14 +47,16 @@ export default function ListItem({
           onClick={() => play()}
           className={`${
             !pathname.includes(path)
-              ? " pointer-events-auto relative w-fit flex-row-reverse gap-4 overflow-hidden p-2 hover:border-current"
+              ? `pointer-events-auto relative w-fit flex-col-reverse gap-4 overflow-hidden rounded-sm p-2 hover:border-current ${
+                  pathname.includes("/projects/") && "!flex-row-reverse"
+                }`
               : "w-full flex-col "
-          } flex h-fit items-center gap-2 rounded-3xl border-[1px] border-transparent no-underline transition-all duration-75`}
+          }  flex h-fit items-center gap-2 border border-transparent no-underline transition-all duration-75`}
         >
           <motion.h2
             className={` pointer-events-auto flex select-none flex-row flex-nowrap justify-between gap-2 font-serif text-base uppercase ${
               path === pathname
-                ? "w-full border-b-[1px]  border-current italic"
+                ? "w-full border-b  border-current italic"
                 : " w-fit"
             }`}
           >
@@ -63,14 +65,14 @@ export default function ListItem({
           {path === pathname ? null : (
             <div
               className={`${
-                pathname.includes("/projects/") ? "h-10 w-10" : "h-24 w-24"
-              } pointer-events-auto relative overflow-hidden rounded-xl dark:opacity-50 dark:group-hover:opacity-100`}
+                pathname.includes("/projects/") ? "h-10 w-10" : "h-48 w-48"
+              } pointer-events-auto relative overflow-hidden dark:opacity-50 dark:group-hover:opacity-100`}
             >
               <Image
                 src={project.thumbnail}
                 alt={project.thumbnail}
                 fill
-                sizes="96px"
+                sizes="400px"
                 style={{ position: "absolute", objectFit: "cover" }}
               />
             </div>

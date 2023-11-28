@@ -8,13 +8,14 @@ import { Env } from "./Environment";
 import Camera from "./Camera";
 import { usePathname } from "next/navigation";
 import { r3f } from "@helpers/global";
+import { Device } from "./Device";
 
 function Scene() {
   const { progress } = useProgress();
 
   return (
     <Suspense fallback={<Html center>{progress}%</Html>}>
-      {/* {params.length === 0 ? null : <Device />} */}
+      <Device />
       <Scan />
       {/* <OrbitControls minDistance={30} maxDistance={200} /> */}
     </Suspense>
