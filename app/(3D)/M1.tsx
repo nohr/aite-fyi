@@ -8,7 +8,7 @@ title: 2021 Macbook Pro 14" (M1 Pro / M1 Max)
 
 "use client";
 
-import React, { forwardRef, memo, MutableRefObject, Ref } from "react";
+import React, { forwardRef, memo, Ref, RefObject } from "react";
 import { Decal, useGLTF, useTexture } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
 import {
@@ -35,14 +35,13 @@ type GLTFResult = GLTF & {
   };
 };
 
-// console.log("render");
 const url = "/models/mbp-v1-pipe.glb";
 export const M1 = memo(
   forwardRef(function M1(
     {
       children,
       ...props
-    }: JSX.IntrinsicElements["group"] & { body: MutableRefObject<Group> },
+    }: JSX.IntrinsicElements["group"] & { body: RefObject<Group> },
     ref: Ref<Group>,
   ) {
     const { nodes, materials } = useGLTF(url) as GLTFResult;

@@ -47,11 +47,11 @@ export default function ListItem({
           onClick={() => play()}
           className={`${
             !pathname.includes(path)
-              ? `pointer-events-auto relative w-fit flex-col-reverse gap-4 overflow-hidden rounded-sm p-2 hover:border-current ${
+              ? `pointer-events-auto relative w-fit flex-col-reverse gap-4 overflow-hidden p-2 hover:border-current ${
                   pathname.includes("/projects/") && "!flex-row-reverse"
                 }`
               : "w-full flex-col "
-          }  flex h-fit items-center gap-2 border border-transparent no-underline transition-all duration-75`}
+          } flex h-fit items-center gap-2 rounded-sm border border-transparent no-underline transition-all duration-75`}
         >
           <motion.h2
             className={` pointer-events-auto flex select-none flex-row flex-nowrap justify-between gap-2 font-serif text-base uppercase ${

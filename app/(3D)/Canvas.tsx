@@ -30,7 +30,6 @@ const Comp = (props: Partial<CanvasProps>) => {
     <>
       {page !== "admin" ? (
         <Canvas {...props}>
-          <r3f.Out />
           <Preload all />
           <Camera />
           <Scene />

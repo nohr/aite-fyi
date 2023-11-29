@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import dynamic from "next/dynamic";
-// import useDisablePinch from "@hooks/useDisablePinch";
+import useDisablePinch from "@hooks/useDisablePinch";
 import useSpecific from "@hooks/useSpecific";
 import { Nav } from "(ui)";
 
@@ -16,7 +16,7 @@ function Dom({ children }: { children: React.ReactNode }) {
   const ref = useRef<HTMLDivElement>(null!);
 
   useSpecific();
-  // useDisablePinch();
+  useDisablePinch();
 
   return (
     <div ref={ref} className="fixed top-0 h-[100dvh] w-screen">

@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { useFrame } from "@react-three/fiber";
-// import { Vector3 } from "three";
+import { useFrame, useThree } from "@react-three/fiber";
+import { usePathname } from "next/navigation";
+import { Vector3 } from "three";
 
-function Camera() {
-  const [zoom, setZoom] = useState(5);
+// import { Vector3 } from "three";
+export default function Camera() {
+  const [zoom, setZoom] = useState(8);
+  const params = usePathname().split("/")[2];
+  const { scene } = useThree();
 
   useEffect(() => {
-    window.innerWidth < 768 ? setZoom(7) : setZoom(5);
-  }, []);
+    if (scene.children[1]) window.innerWidth < 768 ? setZoom(7) : setZoom(4);
+  }, [scene.children]);
 
   useFrame(({ camera }) => {
     // const vec = new Vector3();
@@ -27,18 +31,26 @@ function Camera() {
     // camera.position.x = x ?? 0;
     // };
 
+    // todo: zoom in on blur and quickly zoom out on focus
+
     window.onwheel = (e) => {
-      setZoom((prev) =>
-        Math.min(
-          10,
-          Math.max(1, prev + (e as globalThis.WheelEvent).deltaY / 10),
-        ),
-      );
+      !params &&
+        setZoom((prev) =>
+          Math.min(
+            10,
+            Math.max(1, prev + (e as globalThis.WheelEvent).deltaY / 10),
+          ),
+        );
     };
-    camera.position.z = zoom;
+
+    if (params && zoom > -5) setZoom(-5);
+    if (!params && zoom < 4) setZoom(4);
+
+    camera.position.lerp(
+      new Vector3(camera.position.x, camera.position.y, zoom),
+      0.075,
+    );
   });
 
   return <perspectiveCamera position={[0, 0, zoom]} far={80} near={0.1} />;
 }
-
-export default Camera;

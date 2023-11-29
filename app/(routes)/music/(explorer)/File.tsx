@@ -29,14 +29,14 @@ export default function File({ song }: { song: Song }) {
           setTimeout(() => setConfirm(false), 1000);
         }
       }}
-      className={`pointer-events-auto flex aspect-square flex-col items-center justify-center gap-1 border-[1px] border-transparent p-1 transition-all
+      className={`pointer-events-auto flex aspect-square flex-col items-center justify-center gap-1 rounded-sm border border-transparent p-1 transition-all
           ${
             confirm
               ? " border-current bg-current bg-opacity-20 shadow-md [&_*]:mix-blend-plus-lighter [&_*]:dark:mix-blend-difference"
               : ""
           }`}
     >
-      <div className="pointer-events-auto relative aspect-square h-[50px] w-[50px] overflow-hidden border-[1px] border-current">
+      <div className="pointer-events-auto relative aspect-square h-[50px] w-[50px] overflow-hidden rounded-sm border border-current">
         {song.cover ? (
           <Image
             src={song.cover}
