@@ -16,28 +16,6 @@ export default function useTheme() {
 
     if (user_theme === "dark") document.documentElement.classList.add("dark");
 
-    // if (user_theme === "dark") {
-    //   const metaThemeColor = document.querySelector("meta[name=theme-color]");
-    //   const arcDark =
-    //     getComputedStyle(document.documentElement)
-    //       .getPropertyValue("--arc-palette-background")
-    //       .slice(0, -2)
-    //       .toLocaleLowerCase() || "#121a20";
-    //   // console.log(arcDark);
-    //   metaThemeColor?.setAttribute("content", arcDark);
-    // }
-
-    // if (user_theme === "light") {
-    //   const metaThemeColor = document.querySelector("meta[name=theme-color]");
-    //   const arcLight =
-    //     getComputedStyle(document.documentElement)
-    //       .getPropertyValue("--arc-palette-subtitle")
-    //       .slice(0, -2)
-    //       .toLocaleLowerCase() || "#bdcdcd";
-    //   // console.log(arcLight);
-    //   metaThemeColor?.setAttribute("content", arcLight);
-    // }
-
     // listen for changes
     window
       .matchMedia("(prefers-color-scheme: dark)")

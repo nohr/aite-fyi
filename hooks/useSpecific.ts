@@ -22,7 +22,7 @@ function useSpecific() {
               if (!currentTheme) setCurrentTheme(theme);
               else if (currentTheme !== "dark") {
                 setTheme("dark");
-                document.documentElement.classList.add("dark");
+                document.documentElement.classList.add("cemetery_c");
               }
               if (theme === "dark") setDone(true);
             }
@@ -32,7 +32,7 @@ function useSpecific() {
                 if (theme !== currentTheme) {
                   setTheme(currentTheme);
                   document.documentElement.classList.toggle(
-                    "dark",
+                    "cemetery_c",
                     currentTheme === "dark",
                   );
                 }

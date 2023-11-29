@@ -22,7 +22,7 @@ export const Scan = memo(function Scan() {
   const bodyRef = useRef<Points>(null);
   const groupRef = useRef<Group>(null);
   const [song, playing] = useAudioStore((s) => [s.song, s.playing]);
-  const color = useColor();
+  const { color } = useColor();
 
   const getTarget = (mouse: Vector2) => {
     const pos = new Vector3((mouse.x * mod * 2) / 1, mouse.y * mod, 3);
@@ -73,7 +73,7 @@ export const Scan = memo(function Scan() {
   if (params) return null;
 
   const mat = new PointsMaterial({
-    size: size.width > 768 ? 0.7 : size.width < 450 ? 0.2 : 0.75,
+    size: size.width > 768 ? 0.65 : size.width < 450 ? 0.2 : 0.75,
     fog: false,
     color: color,
     toneMapped: false,

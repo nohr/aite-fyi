@@ -67,7 +67,7 @@ export default function Controls() {
 
   return (
     <div
-      className={`flex h-10 w-full flex-row items-center justify-center rounded-full border border-current bg-[var(--arc-palette-title,_#ffffffaa)] bg-opacity-70 px-2 py-1 transition-all hover:bg-[var(--arc-palette-title,_rgb(255_255_255_/_1))] hover:bg-opacity-100 focus:bg-opacity-70 dark:bg-[var(--arc-palette-backgroundExtra,#060a0c)] dark:hover:bg-[var(--arc-palette-backgroundExtra,#060a0c)] dark:hover:bg-opacity-70 focus:dark:bg-[var(--arc-palette-backgroundExtra,#060a0c)] focus:dark:bg-opacity-70 ${
+      className={`track flex h-10 w-full flex-row items-center justify-center rounded-full border border-current bg-[var(--arc-palette-title,#ece3e3aa)] bg-opacity-70 px-2 py-1 transition-all hover:bg-[var(--arc-palette-title,#ece3e3)] hover:bg-opacity-100 dark:bg-[var(--arc-palette-backgroundExtra,#060a0caa)] dark:bg-opacity-70 dark:hover:bg-[var(--arc-palette-backgroundExtra,#060a0c)] dark:hover:bg-opacity-100 ${
         song ? "pointer-events-auto" : "pointer-events-none opacity-50"
       }}`}
     >
@@ -118,7 +118,7 @@ export default function Controls() {
       <input
         suppressHydrationWarning
         id="track"
-        className="track pointer-events-auto h-1 w-full cursor-pointer rounded-full bg-current bg-opacity-50 accent-current"
+        className="track pointer-events-auto h-1 w-full cursor-pointer rounded-full bg-current bg-opacity-50 accent-current dark:bg-current dark:accent-current"
         type="range"
         value={time}
         min={0}

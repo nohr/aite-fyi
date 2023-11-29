@@ -40,15 +40,15 @@ function useColor() {
 
     if (h < 0) h += 360;
 
-    //   l = (cmax + cmin) / 2;
+    l = (cmax + cmin) / 2;
 
-    //   s = delta === 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
+    s = delta === 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
 
-    //   s = +(s * 100).toFixed(1);
-    s = 100;
+    s = +(s * 100).toFixed(1);
+    // s = 100;
 
-    //   l = +(l * 100).toFixed(1);
-    l = 90;
+    l = +(l * 100).toFixed(1);
+    // l = 90;
 
     return "hsl(" + h + "," + s + "%," + l + "%)";
   };
@@ -65,13 +65,13 @@ function useColor() {
         getComputedStyle(document.documentElement)
           .getPropertyValue("--arc-palette-focus")
           .slice(0, -2)
-          .toLocaleLowerCase() || "#007777";
+          .toLocaleLowerCase() || "#a27777";
 
-      setColor(theme === "dark" ? dark : light);
+      setColor(theme === "dark" ? dark : hexToHsl(light));
     }, 20);
   }, [theme]);
 
-  return color;
+  return { color, setColor };
 }
 
 export default useColor;

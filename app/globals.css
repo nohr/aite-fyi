@@ -18,21 +18,21 @@
 html,
 body {
   font-family: "Delius", cursive;
+  letter-spacing: 0.038em;
   width: 100%;
   height: 100dvh;
   overscroll-behavior: none;
   overflow: hidden;
 }
 
-html,
-body {
-  background: var(--arc-palette-title, #faffff);
+html {
+  background-color: var(--arc-palette-title, #ece3e3ff);
   background: linear-gradient(
     180deg,
-    var(--arc-palette-hover, #bdcdcd) 0%,
-    var(--arc-palette-title, #faffff) 15%
+    var(--arc-palette-hover, #d4bdbe) 0%,
+    var(--arc-palette-title, #ece3e3ff) 15%
   );
-  color: var(--arc-palette-focus, #007777);
+  color: var(--arc-palette-focus, #a27777);
   background-repeat: no-repeat;
 }
 
@@ -52,7 +52,7 @@ a {
 }
 
 .dark {
-  background: var(--arc-palette-backgroundExtra, #060a0c);
+  background-color: var(--arc-palette-backgroundExtra, #060a0c);
   background: linear-gradient(
     180deg,
     var(--arc-palette-background, #121a20) 0%,
@@ -62,16 +62,8 @@ a {
 }
 
 @media (prefers-color-scheme: dark) {
-  html,
-  body {
+  html {
     @apply dark;
-    background: var(--arc-palette-backgroundExtra, #060a0c);
-    background: linear-gradient(
-      180deg,
-      var(--arc-palette-background, #121a20) 0%,
-      var(--arc-palette-backgroundExtra, #060a0c) 15%
-    ) !important;
-    color: var(--arc-palette-cutoutColor, #405c6f) !important;
   }
 }
 
@@ -91,4 +83,20 @@ input[type="range"]::-webkit-slider-thumb {
   background-color: currentColor;
   height: 1.25rem;
   width: 0.25rem;
+}
+
+.cemetery_c {
+  background-color: #060a0c !important;
+  --arc-palette-cutoutColor: #ff4e4e !important;
+  background: linear-gradient(180deg, #121a20 0%, #060a0c 15%) !important;
+  color: #ff4e4e !important;
+
+  & .track {
+    background-color: #060a0caa !important;
+    color: #ff4e4e !important;
+
+    &:hover {
+      background-color: #060a0c !important;
+    }
+  }
 }

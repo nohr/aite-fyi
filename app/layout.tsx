@@ -14,7 +14,7 @@ export const viewport = {
   themeColor: [
     {
       media: "(prefers-color-scheme: light)",
-      color: " #bdcdcd",
+      color: " #D4BDBE",
     },
     {
       media: "(prefers-color-scheme: dark)",
@@ -32,7 +32,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="font-semibold antialiased ">
+    <html lang="en" className=" font-medium antialiased ">
       <body className="relative">
         <Loading />
         <Suspense fallback={null}>

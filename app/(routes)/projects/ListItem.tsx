@@ -75,6 +75,7 @@ export default function ListItem({
                 alt={project.thumbnail}
                 fill
                 sizes="400px"
+                priority
                 style={{ position: "absolute", objectFit: "cover" }}
               />
             </div>
