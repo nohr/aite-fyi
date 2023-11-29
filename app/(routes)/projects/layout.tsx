@@ -1,6 +1,8 @@
 import ListItem from "./ListItem";
 import { getProjects } from "sanity.utils";
 
+export const dynamic = "force-dynamic";
+
 export const metadata = {
   title: "Aite, for your info...",
   description: "Personal website of Aite Aigbe",

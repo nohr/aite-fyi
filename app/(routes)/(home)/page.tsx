@@ -3,6 +3,8 @@ import Animate from "./Animate";
 import Bio from "./Bio";
 import Locale from "./Locale";
 
+export const dynamic = "force-dynamic";
+
 export default async function Home() {
   const Info = await getInfo();
 

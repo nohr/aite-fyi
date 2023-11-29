@@ -4,6 +4,8 @@ import { BsArrowUpRight } from "react-icons/bs";
 import Programs from "./Programs";
 import { Drop } from "(ui)";
 
+export const dynamic = "force-dynamic";
+
 export default async function Project({
   params,
 }: {
