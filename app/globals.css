@@ -24,12 +24,13 @@ body {
   overflow: hidden;
 }
 
-html {
-  background: var(--arc-palette-subtitle, #bdcdcd);
+html,
+body {
+  background: var(--arc-palette-title, #faffff);
   background: linear-gradient(
     180deg,
     var(--arc-palette-hover, #bdcdcd) 0%,
-    var(--arc-palette-minContrastColor, #ffffff) 15%
+    var(--arc-palette-title, #faffff) 15%
   );
   color: var(--arc-palette-focus, #007777);
   background-repeat: no-repeat;
@@ -51,18 +52,26 @@ a {
 }
 
 .dark {
-  background: var(--arc-palette-title, #121a20);
+  background: var(--arc-palette-backgroundExtra, #060a0c);
   background: linear-gradient(
     180deg,
-    var(--arc-palette-title, #121a20) 0%,
-    rgb(0 0 0 / 1) 15%
+    var(--arc-palette-background, #121a20) 0%,
+    var(--arc-palette-backgroundExtra, #060a0c) 15%
   ) !important;
-  color: var(--arc-palette-maxContrastColor, #405c6f) !important;
+  color: var(--arc-palette-cutoutColor, #405c6f) !important;
 }
 
 @media (prefers-color-scheme: dark) {
-  html {
+  html,
+  body {
     @apply dark;
+    background: var(--arc-palette-backgroundExtra, #060a0c);
+    background: linear-gradient(
+      180deg,
+      var(--arc-palette-background, #121a20) 0%,
+      var(--arc-palette-backgroundExtra, #060a0c) 15%
+    ) !important;
+    color: var(--arc-palette-cutoutColor, #405c6f) !important;
   }
 }
 

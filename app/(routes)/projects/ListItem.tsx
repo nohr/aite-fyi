@@ -39,7 +39,9 @@ export default function ListItem({
     <>
       <li
         className={`group flex flex-col gap-2  ${
-          path === pathname ? " h-full w-full md:!w-[65ch] " : ""
+          path === pathname
+            ? " h-full w-full md:!w-[65ch] "
+            : " last-of-type:pb-28 "
         }`}
       >
         <Link

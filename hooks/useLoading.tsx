@@ -10,7 +10,6 @@ const useLoading = (thing: Thing = "nothing") => {
 
   useEffect(() => {
     setLoading(false);
-    console.log(pathname);
     return () => {
       setLoading(true);
     };

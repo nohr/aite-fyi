@@ -57,7 +57,7 @@ function useColor() {
     setTimeout(() => {
       const dark =
         getComputedStyle(document.documentElement)
-          .getPropertyValue("--arc-palette-maxContrastColor")
+          .getPropertyValue("--arc-palette-cutoutColor")
           .slice(0, -2)
           .toLocaleLowerCase() || "#405C6F";
 
@@ -67,7 +67,7 @@ function useColor() {
           .slice(0, -2)
           .toLocaleLowerCase() || "#007777";
 
-      setColor(theme === "dark" ? dark : hexToHsl(light));
+      setColor(theme === "dark" ? dark : light);
     }, 20);
   }, [theme]);
 

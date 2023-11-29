@@ -67,7 +67,7 @@ export default function Controls() {
 
   return (
     <div
-      className={`flex h-10 w-full flex-row items-center justify-center rounded-full  border-[1px] border-current bg-[var(--arc-palette-minContrastColor,_#ffffffaa)] px-2 py-1 transition-all hover:bg-[var(--arc-palette-minContrastColor,_rgb(255_255_255_/_1))] hover:bg-opacity-100 focus:bg-opacity-70 dark:bg-black/75 dark:hover:bg-black dark:hover:bg-opacity-70 focus:dark:bg-black focus:dark:bg-opacity-70 ${
+      className={`flex h-10 w-full flex-row items-center justify-center rounded-full border border-current bg-[var(--arc-palette-title,_#ffffffaa)] bg-opacity-70 px-2 py-1 transition-all hover:bg-[var(--arc-palette-title,_rgb(255_255_255_/_1))] hover:bg-opacity-100 focus:bg-opacity-70 dark:bg-[var(--arc-palette-backgroundExtra,#060a0c)] dark:hover:bg-[var(--arc-palette-backgroundExtra,#060a0c)] dark:hover:bg-opacity-70 focus:dark:bg-[var(--arc-palette-backgroundExtra,#060a0c)] focus:dark:bg-opacity-70 ${
         song ? "pointer-events-auto" : "pointer-events-none opacity-50"
       }}`}
     >

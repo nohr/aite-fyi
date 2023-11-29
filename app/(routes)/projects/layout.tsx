@@ -6,13 +6,6 @@ export const metadata = {
   description: "Personal website of Aite Aigbe",
 };
 
-export const viewport = {
-  themeColor: "var(--arc-palette-subtitle, #b5beb9ff)",
-  width: "device-width",
-  initialScale: 1,
-  userScalable: false,
-};
-
 export default async function ProjectsLayout({
   children,
 }: {

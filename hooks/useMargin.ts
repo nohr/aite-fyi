@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 export default function useMargin() {
   const [margins, setMargins] = useState<[number, number]>([0, 0]);
   const page = usePathname().split("/")[1];
-  console.log(page);
 
   useEffect(() => {
     function handleMargin() {

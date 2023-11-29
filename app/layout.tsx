@@ -11,7 +11,16 @@ export const metadata = {
 };
 
 export const viewport = {
-  themeColor: "var(--arc-palette-subtitle, #b5beb9ff)",
+  themeColor: [
+    {
+      media: "(prefers-color-scheme: light)",
+      color: " #bdcdcd",
+    },
+    {
+      media: "(prefers-color-scheme: dark)",
+      color: " #121a20",
+    },
+  ],
   width: "device-width",
   initialScale: 1,
   userScalable: false,
