@@ -61,12 +61,12 @@ export const Device = function Device() {
     }
   });
 
-  useEffect(() => {
-    console.log("mount devices");
-    return () => {
-      console.log("unmount devices");
-    };
-  }, []);
+  // useEffect(() => {
+  //   console.log("mount devices");
+  //   return () => {
+  //     console.log("unmount devices");
+  //   };
+  // }, []);
 
   const params = usePathname().split("/")[2];
   if (!params) return null;

@@ -25,7 +25,7 @@ export default async function Project({
             rel="noopener noreferrer"
             className=" pointer-events-auto flex flex-row items-center gap-1 text-sm underline underline-offset-8 transition-opacity hover:opacity-75"
           >
-            {url.includes("github") ? "Github" : "Project Link"}
+            {url.includes("github") ? "Github" : "Live Link"}
             <BsArrowUpRight className="h-3 w-3" />
           </a>
         ))}

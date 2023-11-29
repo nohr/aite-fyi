@@ -7,7 +7,6 @@ import { Scan } from "./Scan";
 import { Env } from "./Environment";
 import Camera from "./Camera";
 import { usePathname } from "next/navigation";
-import { r3f } from "@helpers/global";
 import { Device } from "./Device";
 
 function Scene() {

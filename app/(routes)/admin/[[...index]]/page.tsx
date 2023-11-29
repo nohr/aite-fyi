@@ -7,7 +7,7 @@ import config from "sanity.config";
 export default function AdminPage() {
   useLoading();
   return (
-    <section className="absolute -top-1 left-0 !z-[999] w-full [&>*]:!h-[calc(100dvh-7rem)]">
+    <section className="-top-1 left-0 !z-[1100] h-full w-full overflow-auto">
       <NextStudio config={config} />
     </section>
   );
