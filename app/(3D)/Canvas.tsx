@@ -7,7 +7,7 @@ import { Scan } from "./Scan";
 import { Env } from "./Environment";
 import Camera from "./Camera";
 import { usePathname } from "next/navigation";
-import { Device } from "./Device";
+import { Device } from "./(Device)";
 
 function Scene() {
   const { progress } = useProgress();
