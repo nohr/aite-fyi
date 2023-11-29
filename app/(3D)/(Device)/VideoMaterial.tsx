@@ -3,18 +3,18 @@ import { useVideoTexture, Html } from "@react-three/drei";
 import { usePathname } from "next/navigation";
 import { Suspense, useCallback, useEffect, useState } from "react";
 import { RiLoaderFill } from "react-icons/ri";
-import { getVideoObjects } from "sanity.utils";
+import { getVideoObject } from "sanity.utils";
 import { BackSide } from "three";
 import { VideoObject } from "types/Project";
 
 export function Texture({
-  videoObjects,
+  videoObject,
   ...props
 }: {
-  videoObjects: VideoObject;
+  videoObject: VideoObject;
   mobile: boolean | null;
 }) {
-  const texture = useVideoTexture(videoObjects.url, {
+  const texture = useVideoTexture(videoObject.url, {
     crossOrigin: "Anonymous",
     muted: true,
     loop: true,
@@ -27,6 +27,14 @@ export function Texture({
 
   texture.offset.y = props.mobile ? 0 : 0.006;
   texture.anisotropy = 16;
+
+  useLoading();
+
+  useEffect(() => {
+    return () => {
+      texture.dispose();
+    };
+  }, [texture]);
 
   return (
     <>
@@ -42,43 +50,37 @@ export function Texture({
   );
 }
 
-export function VideoMaterial({ ...props }: { mobile: boolean | null }) {
+export function VideoMaterial({ ...props }: { mobile: true | null }) {
   const params = usePathname().split("/")[2];
-  // console.log("rendered");
-  const [videoObjects, setVideoObjects] = useState<VideoObject | undefined>();
+  const [videoObject, setVideoObject] = useState<VideoObject | undefined>();
 
-  const getObjects = useCallback(async () => {
-    const { VideoObjects } = await getVideoObjects(params);
-    // console.log(VideoObjects);
-
-    // set a new variable to the array object that contains the matching mobile value
-    const videoObject = VideoObjects.find(
-      (videoObject: VideoObject) => videoObject?.mobile === props.mobile,
-    );
+  const getObject = useCallback(async () => {
+    const videoObject = await getVideoObject(params, props.mobile);
     // console.log(videoObject);
-
-    setVideoObjects(videoObject);
+    setVideoObject(videoObject);
 
     return () => {
-      setVideoObjects(undefined);
+      setVideoObject(undefined);
     };
   }, [props.mobile, params]);
 
   useEffect(() => {
-    getObjects();
-  }, [getObjects]);
-
-  // console.log(videoObjects);
-
-  useLoading();
+    getObject();
+  }, [getObject]);
 
   return (
     <Suspense fallback={null}>
-      {videoObjects?.url ? (
-        <Texture videoObjects={videoObjects} {...props} />
+      {videoObject?.url ? (
+        <Texture videoObject={videoObject} {...props} />
       ) : (
-        <Html transform as="div" center>
-          <RiLoaderFill className="animate-spin" />
+        <Html
+          as="div"
+          transform
+          rotation={props.mobile ? [Math.PI / 2, 0, 0] : [Math.PI / 2, 0, 0]}
+          scale={props.mobile ? [0.07, 0.07, 0.07] : [1.2, 1.2, 1.2]}
+          position={props.mobile ? [0, 0, 0.43] : [0, 0, -10]}
+        >
+          <RiLoaderFill className=" h-36 w-auto animate-spin" />
         </Html>
       )}
     </Suspense>

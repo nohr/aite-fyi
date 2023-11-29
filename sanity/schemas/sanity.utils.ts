@@ -2,7 +2,7 @@
 
 import { createClient, groq } from "next-sanity";
 import { Info } from "types/Info";
-import { Project, VideoObjects } from "types/Project";
+import { Project, VideoObject } from "types/Project";
 import { Song } from "types/Song";
 import clientConfig from "../config/client.config";
 
@@ -15,7 +15,7 @@ export async function getProjects(): Promise<Project[]> {
         name,
         "thumbnail": thumbnail.asset->url,
         "slug": slug.current,
-      } | order(date desc, name asc)`
+      } | order(date desc, name asc)`,
   );
 }
 
@@ -32,23 +32,23 @@ export async function getProject(slug: string): Promise<Project> {
             program,
             content
         }`,
-    { slug }
+    { slug },
   );
 }
 
-export async function getVideoObjects(
-  slug: string
-  // mobile?: boolean
-): Promise<{ VideoObjects: VideoObjects }> {
+export async function getVideoObject(
+  slug: string,
+  mobile?: boolean | null,
+): Promise<VideoObject> {
   return createClient(clientConfig).fetch(
-    groq`*[ _type == "project" && slug.current == $slug][0]{
-   VideoObjects[]{
-    alt,
-    mobile, 
-    "url": url.asset->url,
-   }
- }`,
-    { slug }
+    groq`*[_type == "project" && slug.current == $slug][0] {
+      VideoObjects[mobile == $mobile][0]{
+        alt,
+        mobile, 
+        "url": url.asset->url,
+      }
+    }["VideoObjects"]`,
+    { slug, mobile },
   );
 }
 
@@ -66,7 +66,7 @@ export async function getSongs(): Promise<Song[]> {
         "file": file.asset->url,
         "cover": cover.asset->url,
         links
-      } | order(date desc, name asc)`
+      } | order(date desc, name asc)`,
   );
 }
 
@@ -79,6 +79,6 @@ export async function getInfo(): Promise<Info> {
         bio,
         location,
         timeZone
-      }`
+      }`,
   );
 }

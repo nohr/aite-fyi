@@ -3,9 +3,8 @@ import { PortableTextBlock } from "sanity";
 export interface VideoObject {
   url: string;
   alt: string;
-  mobile: boolean;
+  mobile: true | null;
 }
-export type VideoObjects = VideoObject[];
 
 export type Project = {
   _id: string;
@@ -13,7 +12,7 @@ export type Project = {
   name: string;
   slug: string;
   date: Date;
-  VideoObject: VideoObjects;
+  VideoObject: VideoObject[];
   url: string[];
   program: string[];
   thumbnail: string;
