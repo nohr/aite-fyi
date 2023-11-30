@@ -6,7 +6,7 @@ import Loading from "loading";
 import { Suspense } from "react";
 
 export const metadata = {
-  title: "Aite, for your info...",
+  title: "Aite, for your info",
   description: "Personal website of Aite Aigbe",
 };
 

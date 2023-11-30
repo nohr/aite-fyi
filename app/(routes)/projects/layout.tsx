@@ -4,8 +4,14 @@ import { getProjects } from "sanity.utils";
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Aite, for your info...",
+  title: "Aite, for your info",
   description: "Personal website of Aite Aigbe",
+};
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  userScalable: false,
 };
 
 export default async function ProjectsLayout({
