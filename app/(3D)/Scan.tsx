@@ -49,18 +49,18 @@ export const Scan = memo(function Scan() {
 
   useFrame(({ pointer }) => {
     handleMouseMove(pointer);
-
+    // sway
     if (groupRef.current)
       groupRef.current.position.lerp(
         new Vector3(
-          -pointer.x * 2.5,
+          -pointer.x * 5.75,
           groupRef.current.position.y,
           groupRef.current.position.z,
         ),
         0.2,
       );
 
-    // animate breathing
+    // breathing
     if (groupRef.current)
       groupRef.current.position.y = Math.sin(Date.now() / 1000) / 10;
   });
@@ -70,10 +70,10 @@ export const Scan = memo(function Scan() {
   const { width: w, height: h } = useThree((state) => state.viewport);
 
   const params = usePathname().split("/")[2];
-  if (params) return null;
+  if (params && w < 768) return null;
 
   const mat = new PointsMaterial({
-    size: size.width > 768 ? 0.65 : size.width < 450 ? 0.2 : 0.75,
+    size: size.width >= 768 ? 0.65 : size.width < 450 ? 0.2 : 0.75,
     fog: false,
     color: color,
     toneMapped: false,
@@ -84,7 +84,7 @@ export const Scan = memo(function Scan() {
   return (
     <group
       ref={groupRef}
-      position={[0, size.width > 768 ? 70 : w / 2, -3.5]}
+      position={[0, size.width >= 768 ? 70 : w / 2, -3.5]}
       rotation={[0, Math.PI / 2, 0]}
       scale={0.25}
     >

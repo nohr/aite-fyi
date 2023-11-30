@@ -18,7 +18,7 @@ export default function useMargin() {
         return;
       }
 
-      if (window.innerWidth > 768)
+      if (window.innerWidth >= 768)
         setMargins([nav.clientHeight + footer.clientHeight, 0]);
       else setMargins([footer.clientHeight, nav.clientHeight]);
     }

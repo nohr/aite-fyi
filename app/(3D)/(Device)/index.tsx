@@ -55,7 +55,7 @@ export const Device = function Device() {
       pointer.y * mod * 0.2 - 1,
       -3,
     );
-    if (w > 768) groupRef.current.lookAt(target);
+    if (w >= 768) groupRef.current.lookAt(target);
     else {
       groupRef.current.lookAt(5, -1, -3);
     }
@@ -75,10 +75,10 @@ export const Device = function Device() {
     <Suspense fallback={null}>
       <group
         ref={groupRef}
-        scale={w > 768 ? 1 : w / 700}
+        scale={w >= 768 ? 1 : w / 700}
         position={[0, -4, -15]}
       >
-        <PresentationControls snap enabled={w <= 768}>
+        <PresentationControls snap enabled={true}>
           <spotLight intensity={1} penumbra={0.6} position={[0, 6, 0]} />
           <directionalLight
             ref={keyLight}

@@ -47,7 +47,9 @@ function useColor() {
     s = +(s * 100).toFixed(1);
     // s = 100;
 
-    l = +(l * 100).toFixed(1);
+    l = +(l * 100).toFixed(1) + 20;
+    console.log(h, s, l);
+
     // l = 90;
 
     return "hsl(" + h + "," + s + "%," + l + "%)";
@@ -67,7 +69,7 @@ function useColor() {
           .slice(0, -2)
           .toLocaleLowerCase() || "#a27777";
 
-      setColor(theme === "dark" ? dark : hexToHsl(light));
+      setColor(hexToHsl(theme === "dark" ? dark : light));
     }, 20);
   }, [theme]);
 
