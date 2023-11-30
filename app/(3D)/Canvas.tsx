@@ -16,7 +16,6 @@ function Scene() {
     <Suspense fallback={<Html center>{progress}%</Html>}>
       <Device />
       <Scan />
-      {/* <OrbitControls minDistance={30} maxDistance={200} /> */}
     </Suspense>
   );
 }

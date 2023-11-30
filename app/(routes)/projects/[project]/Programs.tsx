@@ -1,3 +1,5 @@
+"use client";
+
 import {
   SiAstro,
   SiNextdotjs,
@@ -7,43 +9,69 @@ import {
 } from "react-icons/si";
 import { GrReactjs } from "react-icons/gr";
 import { IoLogoFirebase } from "react-icons/io5";
+import { MouseEventHandler, createElement, useRef, useState } from "react";
+import { IconType } from "react-icons";
 
-export default function Programs({ program }: { program: string[] }) {
+export default function Programs({
+  program,
+  max,
+}: {
+  program: string[];
+  max?: number;
+}) {
+  const [visible, setVisible] = useState(false);
+  const tooltipRef = useRef<HTMLDivElement>(null!);
+  const handleTooltip: MouseEventHandler<HTMLDivElement> = (e) => {
+    if (e.type === "mouseleave") {
+      setVisible(false);
+      return;
+    }
+
+    const svg = e.currentTarget.querySelector("svg")!;
+
+    if (e.type === "mouseenter") {
+      tooltipRef.current.textContent = e.currentTarget.title;
+      setVisible(true);
+      tooltipRef.current.style.top = `${
+        svg.getBoundingClientRect().top + 10
+      }px`;
+      tooltipRef.current.style.left = `${svg.getBoundingClientRect().left}px`;
+    }
+  };
+
+  const pairing = {
+    astro: SiAstro,
+    react: GrReactjs,
+    firebase: IoLogoFirebase,
+    tailwind: SiTailwindcss,
+    nextjs: SiNextdotjs,
+    three: SiThreedotjs,
+    openai: SiOpenai,
+  } as { [key: string]: IconType };
+
   return (
-    <div className="light pointer-events-auto flex w-fit flex-row gap-x-1 !self-center [&>*]:h-6 [&>*]:w-auto">
-      {program.map((title: string): JSX.Element => {
-        let icon: JSX.Element = (
-          <p title={title} key={title}>
-            {title}
-          </p>
+    <div className="light pointer-events-none  flex w-fit flex-row gap-x-1 !self-center transition-opacity [&_svg]:h-5 [&_svg]:w-auto">
+      {program.map((title: string, index): JSX.Element => {
+        if (max && index >= max) return <></>;
+        return (
+          <div
+            key={title + " svg"}
+            className=" pointer-events-auto relative block opacity-50 hover:opacity-100"
+            onMouseEnter={handleTooltip}
+            onMouseLeave={handleTooltip}
+          >
+            {createElement(pairing[title], {
+              title,
+              key: title,
+            })}
+          </div>
         );
-        switch (title) {
-          case "astro":
-            icon = <SiAstro title={title} key={title} />;
-            break;
-          case "react":
-            icon = <GrReactjs title={title} key={title} />;
-            break;
-          case "firebase":
-            icon = <IoLogoFirebase title={title} key={title} />;
-            break;
-          case "tailwind":
-            icon = <SiTailwindcss title={title} key={title} />;
-            break;
-          case "nextjs":
-            icon = <SiNextdotjs title={title} key={title} />;
-            break;
-          case "three":
-            icon = <SiThreedotjs title={title} key={title} />;
-            break;
-          case "openai":
-            icon = <SiOpenai title={title} key={title} />;
-            break;
-          default:
-            break;
-        }
-        return icon;
       })}
+      <span
+        ref={tooltipRef}
+        style={{ opacity: visible ? 1 : 0 }}
+        className=" pointer-events-none fixed text-xs !font-normal lowercase"
+      ></span>
     </div>
   );
 }

@@ -23,9 +23,11 @@ export const Scan = memo(function Scan() {
   const groupRef = useRef<Group>(null);
   const [song, playing] = useAudioStore((s) => [s.song, s.playing]);
   const { color } = useColor();
+  const params = usePathname().split("/")[2];
+  const { width: w } = useThree((state) => state.viewport);
 
-  const getTarget = (mouse: Vector2) => {
-    const pos = new Vector3((mouse.x * mod * 2) / 1, mouse.y * mod, 3);
+  const handleMouseMove = (mouse: Vector2) => {
+    const tar = new Vector3((mouse.x * mod * 2) / 1, mouse.y * mod, 3);
     // head bobbing
     const bobDelta = () => {
       const audio = document.querySelector("audio") as HTMLAudioElement;
@@ -33,44 +35,42 @@ export const Scan = memo(function Scan() {
         return 0;
       if (song.name === "cemetery c" && audio.currentTime < 38) return 0;
 
-      return Math.sin(Date.now() / song.tempo) / 5;
+      return Math.sin(Date.now() / song.tempo) / 10;
     };
 
-    pos.y += bobDelta();
-
-    return pos;
-  };
-
-  const handleMouseMove = (mouse: Vector2) => {
-    const target = getTarget(mouse);
-    headRef.current?.lookAt(target.x, target.y - 1.5, target.z);
-    bodyRef.current?.lookAt(target.x * 0.25, target.y / 2, 4);
+    headRef.current?.lookAt(tar.x, (tar.y += bobDelta() - 1.5), tar.z);
+    bodyRef.current?.lookAt(tar.x * 0.25, tar.y / 2, 4);
   };
 
   useFrame(({ pointer }) => {
+    if (!groupRef.current) return;
+
+    if (params) {
+      setTimeout(() => {
+        if (groupRef.current) groupRef.current.visible = false;
+      }, 500);
+      return;
+    } else {
+      groupRef.current.visible = true;
+    }
+
     handleMouseMove(pointer);
-    // sway
-    if (groupRef.current)
-      groupRef.current.position.lerp(
-        new Vector3(
-          -pointer.x * 5.75,
-          groupRef.current.position.y,
-          groupRef.current.position.z,
-        ),
-        0.2,
-      );
+
+    // horizontal sway
+    groupRef.current.position.lerp(
+      new Vector3(
+        -pointer.x * 5.75,
+        groupRef.current.position.y,
+        groupRef.current.position.z,
+      ),
+      0.2,
+    );
 
     // breathing
-    if (groupRef.current)
-      groupRef.current.position.y = Math.sin(Date.now() / 1000) / 10;
+    groupRef.current.position.y = Math.sin(Date.now() / 1000) / 10;
   });
 
   useLoading();
-
-  const { width: w, height: h } = useThree((state) => state.viewport);
-
-  const params = usePathname().split("/")[2];
-  if (params && w < 768) return null;
 
   const mat = new PointsMaterial({
     size: size.width >= 768 ? 0.65 : size.width < 450 ? 0.2 : 0.75,
@@ -88,7 +88,6 @@ export const Scan = memo(function Scan() {
       rotation={[0, Math.PI / 2, 0]}
       scale={0.25}
     >
-      {/* <Point position={[0, 0, 0]} /> */}
       <points ref={headRef} geometry={head.geometry} material={mat} />
       <points ref={bodyRef} geometry={body.geometry} material={mat} />
     </group>

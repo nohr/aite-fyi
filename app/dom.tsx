@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import useDisablePinch from "@hooks/useDisablePinch";
 import useSpecific from "@hooks/useSpecific";
 import { Nav } from "(ui)";
+import useTheme from "@hooks/useTheme";
 
 const Comp = dynamic(() => import("(3D)/Canvas"), {
   ssr: false,
@@ -15,6 +16,7 @@ const Media = dynamic(() => import("(ui)/Media"));
 function Dom({ children }: { children: React.ReactNode }) {
   const ref = useRef<HTMLDivElement>(null!);
 
+  useTheme();
   useSpecific();
   useDisablePinch();
 

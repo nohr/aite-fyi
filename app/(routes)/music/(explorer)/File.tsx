@@ -30,11 +30,7 @@ export default function File({ song }: { song: Song }) {
         }
       }}
       className={`pointer-events-auto flex aspect-square flex-col items-center justify-center gap-1 rounded-sm border border-transparent p-1 transition-all
-          ${
-            confirm
-              ? " border-current bg-current bg-opacity-20 shadow-md [&_*]:mix-blend-plus-lighter [&_*]:dark:mix-blend-difference"
-              : ""
-          }`}
+          ${confirm ? " item" : ""}`}
     >
       <div className="pointer-events-auto relative aspect-square h-[50px] w-[50px] overflow-hidden rounded-sm border border-current">
         {song.cover ? (

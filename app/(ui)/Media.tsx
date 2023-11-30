@@ -34,6 +34,16 @@ export default function Media() {
     }
   }, [playing, playlist, song?.name]);
 
+  // set tempo var
+  useEffect(() => {
+    const r = document.querySelector(":root") as HTMLElement;
+    if (!song?.tempo) return;
+    const tempo = (60 / song?.tempo) * 2000;
+    // console.log(tempo);
+
+    r.style.setProperty("--tempo", `${tempo || 2000}ms`);
+  }, [song]);
+
   return (
     <>
       {song === null ? null : (

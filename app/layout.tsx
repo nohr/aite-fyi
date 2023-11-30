@@ -32,8 +32,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className=" font-medium antialiased ">
-      <body className="relative">
+    <html lang="en" className=" font-medium antialiased">
+      <body>
         <Loading />
         <Suspense fallback={null}>
           <Dom>{children}</Dom>

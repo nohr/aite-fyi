@@ -1,5 +1,6 @@
 import ListItem from "./ListItem";
 import { getProjects } from "sanity.utils";
+import Arrows from "./arrows";
 
 export const dynamic = "force-dynamic";
 
@@ -25,10 +26,11 @@ export default async function ProjectsLayout({
     <ul className="pointer-events-none relative flex h-full w-full justify-center self-center overflow-visible">
       <div className=" nowrap flex w-fit flex-col items-start justify-start gap-2 py-4 lg:flex-row lg:py-0">
         {projects.map((project) => (
-          <ListItem key={project._id} project={project} projects={projects}>
+          <ListItem key={project._id} project={project}>
             {children}
           </ListItem>
         ))}
+        <Arrows projects={projects} />
       </div>
     </ul>
   );

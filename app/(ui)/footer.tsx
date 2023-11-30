@@ -6,9 +6,18 @@ export default function Footer() {
   return (
     <footer
       className={
-        "absolute top-0 flex h-min w-screen -skew-x-[2deg] -skew-y-[0.3deg] flex-row items-center justify-around gap-x-2 text-xs md:-skew-x-[8deg] md:-skew-y-[2deg] md:items-start md:justify-start md:px-8 [&>a>*]:h-5 md:[&>a>*]:!h-4 [&>a>svg]:w-auto"
+        "absolute top-0 flex h-min w-screen -skew-x-[2deg] -skew-y-[0.3deg] flex-row items-center justify-around gap-x-2 text-xs tracking-tight md:-skew-x-[8deg] md:-skew-y-[2deg] md:items-start md:justify-start md:px-8 [&>a>*]:h-5 md:[&>a>*]:!h-4 [&>a>svg]:w-auto"
       }
     >
+      <a
+        href="https://www.github.com/nohr"
+        title="github"
+        target="_blank"
+        rel="noreferrer noopener"
+        className="pointer-events-auto inline-flex items-center gap-1 p-2 transition-opacity duration-200 hover:opacity-50"
+      >
+        <BsGithub /> @nohr
+      </a>
       <a
         href="https://www.linkedin.com/in/aite/"
         title="linkedin"
@@ -24,15 +33,6 @@ export default function Footer() {
         className="pointer-events-auto inline-flex items-center gap-1 p-2 transition-opacity duration-200 hover:opacity-50"
       >
         <FaEnvelope /> {`${email}`}
-      </a>
-      <a
-        href="https://www.github.com/nohr"
-        title="github"
-        target="_blank"
-        rel="noreferrer noopener"
-        className="pointer-events-auto inline-flex items-center gap-1 p-2 transition-opacity duration-200 hover:opacity-50"
-      >
-        <BsGithub /> @nohr
       </a>
     </footer>
   );

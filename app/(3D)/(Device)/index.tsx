@@ -25,8 +25,20 @@ export const Device = function Device() {
   const phone = useRef<Group>(null);
   const keyLight = useRef<DirectionalLight>(null);
 
-  // init animation
-  useFrame(() => {
+  const params = usePathname().split("/")[2];
+  const groupRef = useRef<Group>(null);
+
+  useFrame(({ pointer }) => {
+    if (groupRef.current) {
+      if (!params) {
+        groupRef.current.visible = false;
+        return;
+      } else {
+        groupRef.current.visible = true;
+      }
+    }
+
+    // init animation
     if (screen.current && body.current) {
       screen.current.rotation.x = Math.PI - (Math.PI / 2) * rsqw(0.5);
       body.current.rotation.y +=
@@ -44,31 +56,21 @@ export const Device = function Device() {
           ? 0
           : (0.5 - phone.current.rotation.y / 2) * 0.035;
     }
-  });
 
-  // mouse tracking
-  const groupRef = useRef<Group>(null);
-  useFrame(({ pointer }) => {
-    if (!groupRef.current) return;
-    const target = new Vector3(
-      pointer.x * mod * 2 * 0.1 + 5,
-      pointer.y * mod * 0.2 - 1,
-      -3,
-    );
-    if (w >= 768) groupRef.current.lookAt(target);
-    else {
-      groupRef.current.lookAt(5, -1, -3);
+    // mouse tracking
+    if (groupRef.current) {
+      const target = new Vector3(
+        pointer.x * mod * 2 * 0.1 + 5,
+        pointer.y * mod * 0.2 - 1,
+        -3,
+      );
+      if (w >= 768) groupRef.current.lookAt(target);
+      else {
+        groupRef.current.lookAt(5, -1, -3);
+      }
     }
   });
 
-  // useEffect(() => {
-  //   console.log("mount devices");
-  //   return () => {
-  //     console.log("unmount devices");
-  //   };
-  // }, []);
-
-  const params = usePathname().split("/")[2];
   if (!params) return null;
 
   return (

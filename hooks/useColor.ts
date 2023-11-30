@@ -48,7 +48,7 @@ function useColor() {
     // s = 100;
 
     l = +(l * 100).toFixed(1) + 20;
-    console.log(h, s, l);
+    // console.log(h, s, l);
 
     // l = 90;
 

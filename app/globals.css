@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --tempo: 2s;
+}
 * {
   box-sizing: border-box;
   padding: 0;
@@ -36,6 +39,10 @@ html {
   background-repeat: no-repeat;
 }
 
+body {
+  @apply relative selection:bg-[var(--arc-palette-focus,_#a27777)] selection:text-[var(--arc-palette-title,_#ece3e3ff)] dark:selection:bg-[var(--arc-palette-focus,_#405c6f)] dark:selection:text-[var(--arc-palette-title,_#060a0c)];
+}
+
 .nav-link:hover > *,
 .active > * {
   @apply mix-blend-plus-lighter dark:mix-blend-difference;
@@ -43,7 +50,11 @@ html {
 
 .nav-link:hover,
 .active {
-  @apply border-transparent bg-current;
+  @apply bg-current bg-opacity-20;
+}
+
+.item {
+  @apply border-current bg-current bg-opacity-20 shadow-md [&>div]:mix-blend-plus-lighter [&>div]:dark:mix-blend-difference;
 }
 
 a {
@@ -86,7 +97,7 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 .cemetery_c {
-  background-color: #060a0c !important;
+  --arc-palette-backgroundExtra: #060a0c !important;
   --arc-palette-cutoutColor: #ff4e4e !important;
   background: linear-gradient(180deg, #121a20 0%, #060a0c 15%) !important;
   color: #ff4e4e !important;

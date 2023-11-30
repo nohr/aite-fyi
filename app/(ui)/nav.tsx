@@ -9,7 +9,7 @@ import { useAudioStore } from "@hooks/useAudioStore";
 import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from "react-icons/bs";
 import { skew } from "../../utils/constants";
 import useSFX from "@hooks/useSFX";
-import { RiLoaderFill } from "react-icons/ri";
+import { motion } from "framer-motion";
 
 type Route = "home" | "proj." | "music";
 interface NavLinkProps {
@@ -22,12 +22,7 @@ interface NavLinkProps {
 
 const Nav = memo(function Nav() {
   const pathname = usePathname();
-  const [navLeft, setNavLeft, loading, setLoading] = useUIStore((s) => [
-    s.navLeft,
-    s.setNavLeft,
-    s.loading,
-    s.setLoading,
-  ]);
+  const [navLeft, setNavLeft] = useUIStore((s) => [s.navLeft, s.setNavLeft]);
   const [play] = useSFX("/sfx/click.mp3");
 
   const NavLink = ({
@@ -71,8 +66,11 @@ const Nav = memo(function Nav() {
   const navSkew = skew(navLeft, 12, 7);
   const navSkew2 = skew(!navLeft, 12, 7);
   return (
-    <nav
-      className={` pointer-events-none absolute bottom-0 z-[1000] flex w-screen -skew-x-[5deg] -skew-y-[0.3deg] flex-row justify-between p-2 pb-8 md:bottom-auto md:top-4 md:-skew-x-[8deg] md:-skew-y-[2deg] md:px-8 md:py-4 ${
+    <motion.nav
+      initial={{ opacity: 0.5, filter: "blur(7px)" }}
+      animate={{ opacity: 1, filter: "blur(0px)" }}
+      transition={{ duration: 0.3 }}
+      className={` pointer-events-none absolute bottom-0 z-[1000] flex w-screen -skew-x-[5deg] -skew-y-[0.3deg] flex-row justify-between p-2 pb-8 tracking-tight md:bottom-auto md:top-4 md:-skew-x-[8deg] md:-skew-y-[2deg] md:px-8 md:py-4 ${
         navLeft ? "" : "flex-row-reverse"
       }`}
     >
@@ -83,7 +81,7 @@ const Nav = memo(function Nav() {
           <GiHand />
         </NavLink>
         <NavLink active={pathname.includes("music")} to="music">
-          <GiMusicalNotes className={playing ? "animate-pulse" : ""} />
+          <GiMusicalNotes className={playing ? "animate-tempo" : ""} />
         </NavLink>
         <NavLink active={pathname.includes("projects")} to="proj.">
           <GiBombingRun />
@@ -95,7 +93,7 @@ const Nav = memo(function Nav() {
       >
         {navLeft ? <BsArrowRightCircleFill /> : <BsArrowLeftCircleFill />}
       </NavLink>
-    </nav>
+    </motion.nav>
   );
 });
 
