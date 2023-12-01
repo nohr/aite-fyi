@@ -26,7 +26,7 @@ export default function Explorer() {
   return (
     <div className="pointer-events-none flex h-full resize-x flex-col gap-2 p-3">
       {/* songs */}
-      <div className="pointer-events-auto grid h-fit w-full grid-cols-4 grid-rows-1 gap-8 overflow-visible md:grid-cols-5">
+      <div className="pointer-events-auto grid h-fit w-full grid-cols-4 grid-rows-1 gap-4 overflow-visible sm:gap-8 md:grid-cols-5">
         {playlist
           .filter((song: any) => {
             if (!query || query.length === 0) return true;

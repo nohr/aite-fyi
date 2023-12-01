@@ -23,13 +23,13 @@ body {
   font-family: "Delius", cursive;
   letter-spacing: 0.038em;
   width: 100%;
-  height: 100dvh;
+  height: 100dvh !important;
   overscroll-behavior: none;
   overflow: hidden;
 }
 
 html {
-  background-color: var(--arc-palette-title, #ece3e3ff);
+  background: var(--arc-palette-title, #ece3e3ff);
   background: linear-gradient(
     180deg,
     var(--arc-palette-hover, #d4bdbe) 0%,

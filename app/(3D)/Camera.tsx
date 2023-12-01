@@ -2,6 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import { usePathname } from "next/navigation";
 import { Vector3 } from "three";
+// import {
+//   Bloom,
+//   DepthOfField,
+//   Noise,
+//   Vignette,
+// } from "@react-three/postprocessing";
 
 // import { Vector3 } from "three";
 export default function Camera() {
@@ -52,5 +58,18 @@ export default function Camera() {
     );
   });
 
-  return <perspectiveCamera position={[0, 0, zoom]} far={80} near={0.1} />;
+  return (
+    <>
+      <perspectiveCamera position={[0, 0, zoom]} far={80} near={0.1} />
+      {/* <DepthOfField
+        focusDistance={0}
+        focalLength={0.02}
+        bokehScale={2}
+        height={480}
+      <Bloom luminanceThreshold={0} luminanceSmoothing={0.9} height={300} />
+      <Noise opacity={0.02} />
+      <Vignette eskil={false} offset={0.1} darkness={1.1} />
+      /> */}
+    </>
+  );
 }

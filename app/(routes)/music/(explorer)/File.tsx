@@ -32,13 +32,13 @@ export default function File({ song }: { song: Song }) {
       className={`pointer-events-auto flex aspect-square flex-col items-center justify-center gap-1 rounded-sm border border-transparent p-1 transition-all
           ${confirm ? " item" : ""}`}
     >
-      <div className="pointer-events-auto relative aspect-square h-[50px] w-[50px] overflow-hidden rounded-sm border border-current">
+      <div className="pointer-events-auto relative !aspect-square h-auto w-full overflow-hidden rounded-sm border border-current md:h-14 md:w-14">
         {song.cover ? (
           <Image
             src={song.cover}
             alt={song.name}
             fill
-            sizes="50px"
+            sizes="100px"
             className="pointer-events-auto absolute object-cover"
           />
         ) : (

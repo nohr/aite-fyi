@@ -7,17 +7,26 @@ import { getSongs } from "sanity.utils";
 import { useEffect } from "react";
 import { Song } from "types/Song";
 
-const Cover = ({ song }: { song: Song | null }) =>
-   song?.cover ? (
-    <Image
-      src={song.cover}
-      alt={song.name}
-      fill
-      priority
-      sizes="100%"
-      className="pointer-events-auto absolute object-cover"
+const Cover = ({
+  song,
+  className,
+}: {
+  song: Song | null;
+  className?: string;
+}) => (
+  <div className={className}>
+    {song?.cover ? (
+      <Image
+        src={song.cover}
+        alt={song.name}
+        fill
+        priority
+        sizes="100%"
+        className={"pointer-events-auto absolute object-cover"}
       />
-  ) : null;
+    ) : null}
+  </div>
+);
 
 export default function Player() {
   const [song, setSong, setPlaylist] = useAudioStore((s) => [
@@ -37,25 +46,29 @@ export default function Player() {
   }, [setPlaylist, setSong, song]);
 
   return (
-    <div className="items-between pointer-events-none flex h-full w-full flex-row justify-start gap-4 p-2">
-    <div className="relative !aspect-square h-fit w-1/4 overflow-hidden border-[0px] border-current shadow-lg">
-        <Cover song={song} />
-      </div>
-      <div className=" flex w-full flex-col justify-between gap-2">
-        {/* Song info */}
-        <div className=" h-max ">
-          {song ? (
-            <>
+    <div className="items-between pointer-events-none flex w-full flex-row justify-start gap-4 p-2">
+      <Cover
+        song={song}
+        className="relative hidden !aspect-square h-fit w-1/4 overflow-hidden border-[0px] border-current shadow-lg md:block"
+      />
+      <div className=" flex w-full flex-col justify-end gap-4 px-2">
+        {song ? (
+          <div className=" flex gap-4">
+            <Cover
+              song={song}
+              className="relative !aspect-square h-full w-auto overflow-hidden border-[0px] border-current shadow-lg md:hidden"
+            />
+            <div className=" flex w-fit flex-col justify-end gap-2">
               <div className=" pointer-events-auto font-serif text-base uppercase">
                 {song.name}
               </div>
-              <div className="flex flex-row gap-2">
+              <div className="flex h-fit flex-row gap-2 self-end">
                 <div className=" pointer-events-auto">{song.artist}</div> •
                 <div className=" pointer-events-auto">{song.album}</div>
               </div>
-            </>
-          ) : null}
-        </div>
+            </div>
+          </div>
+        ) : null}
         <Controls />
       </div>
     </div>

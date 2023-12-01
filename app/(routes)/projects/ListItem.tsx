@@ -3,11 +3,9 @@
 import { Project } from "types/Project";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion } from "framer-motion";
 import useSFX from "@hooks/useSFX";
 import Image from "next/image";
-import { GrNext, GrPrevious } from "react-icons/gr";
-import Programs from "./[project]/Programs";
+// import Programs from "./[project]/Programs";
 
 export default function ListItem({
   children,
@@ -30,7 +28,9 @@ export default function ListItem({
           className={`group flex flex-col gap-2  ${
             active
               ? " h-full w-full md:!w-[65ch] "
-              : " max-md:last-of-type:pb-28 "
+              : projects_page
+                ? " max-md:last-of-type:pb-28 "
+                : ""
           }`}
         >
           <Link

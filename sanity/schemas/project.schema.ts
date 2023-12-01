@@ -17,6 +17,12 @@ const project = {
       },
     },
     {
+      name: "medium",
+      title: "Medium",
+      type: "array",
+      of: [{ type: "string" }],
+    },
+    {
       name: "date",
       title: "Date",
       type: "datetime",
