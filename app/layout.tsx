@@ -1,8 +1,8 @@
 import "./globals.css";
 import "@fontsource/delius";
 import { Analytics } from "@vercel/analytics/react";
-import Dom from "dom";
-import Loading from "loading";
+import Dom from "./dom";
+import Loading from "./loading";
 import { Suspense } from "react";
 
 export const metadata = {
