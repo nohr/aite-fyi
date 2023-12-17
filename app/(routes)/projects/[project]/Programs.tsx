@@ -2,6 +2,7 @@
 
 import {
   SiAstro,
+  SiFramer,
   SiNextdotjs,
   SiOpenai,
   SiTailwindcss,
@@ -47,6 +48,7 @@ export default function Programs({
     nextjs: SiNextdotjs,
     three: SiThreedotjs,
     openai: SiOpenai,
+    framer: SiFramer,
   } as { [key: string]: IconType };
 
   return (
