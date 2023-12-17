@@ -16,7 +16,7 @@ export default function Camera() {
   const { scene } = useThree();
 
   useEffect(() => {
-    if (scene.children[1]) window.innerWidth < 768 ? setZoom(7) : setZoom(4);
+    if (scene.children[1]) window.innerWidth < 768 ? setZoom(7) : setZoom(2);
   }, [scene.children]);
 
   useFrame(({ camera }) => {
@@ -50,7 +50,7 @@ export default function Camera() {
     };
 
     if (params && zoom > -5) setZoom(-5);
-    if (!params && zoom < 4) setZoom(4);
+    if (!params && zoom < 2) setZoom(2);
 
     camera.position.lerp(
       new Vector3(camera.position.x, camera.position.y, zoom),
