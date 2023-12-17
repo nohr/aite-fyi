@@ -15,7 +15,7 @@ export type Project = {
   VideoObject: VideoObject[];
   url: string[];
   program: string[];
-  medium: string[];
+  medium: "website" | "interactive" | "design";
   thumbnail: string;
   content: PortableTextBlock[];
 };

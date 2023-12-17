@@ -1,6 +1,5 @@
-import ListItem from "./ListItem";
-import { getProjects } from "sanity.utils";
-import Arrows from "./arrows";
+import { getMediums, getProjects } from "sanity.utils";
+import Medium from "./(medium)/medium";
 
 export const dynamic = "force-dynamic";
 
@@ -21,17 +20,16 @@ export default async function ProjectsLayout({
   children: React.ReactNode;
 }) {
   const projects = await getProjects();
+  const mediums = [...new Set(await getMediums())];
+  // console.log(mediums);
 
   return (
     <ul className="pointer-events-none relative flex h-full w-full justify-center self-center overflow-visible">
-      <div className=" nowrap flex w-fit flex-col items-start justify-start gap-2 py-4 lg:flex-row lg:py-0">
-        {projects.map((project) => (
-          <ListItem key={project._id} project={project}>
-            {children}
-          </ListItem>
-        ))}
-        <Arrows projects={projects} />
-      </div>
+      {mediums.map((medium) => (
+        <Medium key={medium} medium={medium} projects={projects}>
+          {children}
+        </Medium>
+      ))}
     </ul>
   );
 }

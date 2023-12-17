@@ -18,9 +18,16 @@ const project = {
     },
     {
       name: "medium",
-      title: "Medium",
-      type: "array",
-      of: [{ type: "string" }],
+      title: "Item",
+      type: "string",
+      options: {
+        list: [
+          { title: "Website", value: "website" },
+          { title: "Interactive", value: "interactive" },
+          { title: "Design", value: "design" },
+        ],
+        layout: "radio",
+      },
     },
     {
       name: "date",

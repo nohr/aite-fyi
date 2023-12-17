@@ -5,9 +5,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import useSFX from "@hooks/useSFX";
 import Image from "next/image";
-// import Programs from "./[project]/Programs";
 
-export default function ListItem({
+export default function Item({
   children,
   project,
 }: {
@@ -18,13 +17,12 @@ export default function ListItem({
   const path = `/projects/${project?.slug}`;
   const active = path === pathname;
   const projects_page = pathname.includes("/projects/");
-
   const [play] = useSFX("/sfx/click.mp3");
 
   return (
     <>
       {project ? (
-        <li
+        <div
           className={`group flex flex-col gap-2  ${
             active
               ? " h-full w-full md:!w-[65ch] "
@@ -54,14 +52,11 @@ export default function ListItem({
               }`}
             >
               {project.name}
-              {/* {projects_page ? null : project ? (
-                <Programs program={project.program} max={3} />
-              ) : null} */}
             </h2>
             {active ? null : (
               <div
                 className={`${
-                  projects_page ? "h-10 w-10" : "h-48 w-48"
+                  projects_page ? "h-10 w-10" : "h-24 w-24 md:h-48 md:w-48"
                 } pointer-events-auto relative overflow-hidden rounded-sm shadow-md group-hover:animate-pulse`}
               >
                 <Image
@@ -75,10 +70,9 @@ export default function ListItem({
                 />
               </div>
             )}
-            {/* {path !== pathname && <Image src={project.thumbnail} className=" absolute object-cover -z-[5] opacity-90 blur-sm" alt={project.thumbnail} fill />} */}
           </Link>
           {active && children}
-        </li>
+        </div>
       ) : null}
     </>
   );

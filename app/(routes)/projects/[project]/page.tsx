@@ -15,7 +15,7 @@ export default async function Project({
 
   return (
     <>
-      <Drop className="pointer-events-auto max-w-prose pl-2">
+      <Drop className="pointer-events-auto max-w-prose pl-2 [&>a]:text-sm [&>a]:font-semibold [&>a]:underline [&>a]:underline-offset-8">
         <PortableText value={project?.content} />
       </Drop>
       <Drop className=" pointer-events-auto flex w-fit flex-row content-between gap-2 pl-2">
@@ -25,7 +25,7 @@ export default async function Project({
             href={url}
             target="_blank"
             rel="noopener noreferrer"
-            className=" pointer-events-auto flex flex-row items-center gap-1 text-sm underline underline-offset-8 transition-opacity hover:opacity-75"
+            className=" pointer-events-auto flex flex-row items-center gap-1 text-sm font-semibold underline underline-offset-8 transition-opacity hover:opacity-75"
           >
             {url.includes("github") ? "Github" : "Live Link"}
             <BsArrowUpRight className="h-3 w-3" />

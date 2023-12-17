@@ -20,6 +20,12 @@ export async function getProjects(): Promise<Project[]> {
   );
 }
 
+export async function getMediums(): Promise<Project["medium"][]> {
+  return createClient(clientConfig).fetch(
+    groq`*[_type == 'project'].medium | order(medium asc)`,
+  );
+}
+
 export async function getProject(slug: string): Promise<Project> {
   return createClient(clientConfig).fetch(
     groq`
