@@ -46,12 +46,12 @@ export default function Player() {
   }, [setPlaylist, setSong, song]);
 
   return (
-    <div className=" items-between pointer-events-none flex w-full flex-row justify-start gap-4 p-2 md:-order-1">
+    <div className=" items-between pointer-events-none flex w-full flex-row justify-start gap-4 divide-x divide-solid divide-current p-2 md:-order-1">
       <Cover
         song={song}
         className="relative hidden !aspect-square h-fit w-1/4 overflow-hidden border-[0px] border-current shadow-lg md:block"
       />
-      <div className=" flex w-full flex-col justify-end gap-4 px-2 md:px-0">
+      <div className=" flex w-full flex-col justify-end gap-4 px-2 md:px-0 md:pl-3">
         {song ? (
           <div className=" flex gap-4">
             <Cover

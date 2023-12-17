@@ -118,7 +118,7 @@ export default function Controls() {
       <input
         suppressHydrationWarning
         id="track"
-        className="track pointer-events-auto h-1 w-full cursor-pointer rounded-full bg-current bg-opacity-50 accent-current dark:bg-current dark:accent-current"
+        className="track pointer-events-auto w-full cursor-pointer rounded-full bg-current bg-opacity-50 accent-current dark:bg-current dark:accent-current [&::-webkit-slider-runnable-track]:h-[1px] [&::-webkit-slider-thumb]:w-4"
         type="range"
         value={time}
         min={0}
