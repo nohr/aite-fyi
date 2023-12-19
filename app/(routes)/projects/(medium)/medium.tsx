@@ -3,8 +3,8 @@
 import { Project } from "types/Project";
 import Item from "./item";
 import Arrows from "./arrows";
-import { TbWorldWww } from "react-icons/tb";
 import { usePathname } from "next/navigation";
+import { TbWorldWww } from "react-icons/tb";
 import { useUIStore } from "(ui)";
 import { useEffect } from "react";
 import { PiPaintBrushFill } from "react-icons/pi";
@@ -31,6 +31,10 @@ export default function Medium({
   useEffect(() => {
     if (!param) setState({ project: null });
   }, [param, setState]);
+
+  const active = current_project?.medium === medium;
+  // console.log(active);
+
   return (
     <>
       {(current_project?.medium === medium || !current_project) && (
@@ -38,9 +42,7 @@ export default function Medium({
           key={medium}
           className={
             "group/medium relative h-fit appearance-none overflow-visible rounded-sm px-0 transition-all duration-100 ease-in-out " +
-            (current_project?.medium === medium
-              ? "w-full"
-              : "w-full px-2 md:w-fit md:px-0")
+            (active ? "w-full" : "w-full px-2 md:w-fit md:px-0")
           }
         >
           {param ? null : (
@@ -66,7 +68,14 @@ export default function Medium({
                 )}
               </h2>
             )}
-            <div className=" nowrap grid w-full grid-cols-2  flex-row flex-wrap items-start justify-start gap-2 py-4 min-[420px]:grid-cols-3 sm:grid-cols-4 md:flex md:py-0">
+            <div
+              className={`nowrap w-full flex-row flex-wrap items-start justify-start gap-2 py-4 md:py-0 ${
+                active
+                  ? "flex"
+                  : "grid grid-cols-2 min-[420px]:grid-cols-3 sm:grid-cols-4 md:flex"
+              } 
+                  `}
+            >
               <AnimatePresence>
                 {medium_projects.map((project) => (
                   <Item key={project._id} project={project}>

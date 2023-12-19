@@ -71,7 +71,7 @@ export default function Controls() {
         song ? "pointer-events-auto" : "pointer-events-none opacity-50"
       }}`}
     >
-      <div className="absolute left-0 top-0 -z-10 h-full w-full bg-current opacity-80  backdrop-blur-md transition-all duration-150 ease-in-out [&_svg]:shadow-sm" />
+      <div className="absolute left-0 top-0 -z-10 h-full w-full bg-current opacity-90 backdrop-blur-md transition-all duration-150 ease-in-out [&_svg]:shadow-sm" />
       <button
         suppressHydrationWarning
         type="button"
