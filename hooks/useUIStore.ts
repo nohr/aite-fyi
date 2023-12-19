@@ -1,6 +1,8 @@
+import { Project } from "types/Project";
 import { create } from "zustand";
 // import { devtools } from "zustand/middleware";
 interface UIProps {
+  project: Project | null;
   AIControl: boolean;
   setAIControl: (AIControl?: boolean) => void;
   loading: boolean;
@@ -26,6 +28,7 @@ interface UIProps {
 export const useUIStore = create<UIProps>()(
   //   persist(
   (set, get) => ({
+    project: null,
     AIControl: false,
     setAIControl(AIControl = !get().AIControl) {
       set(() => ({ AIControl }));

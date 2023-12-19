@@ -74,14 +74,18 @@ export const M1 = memo(
           material-envMapIntensity={0.2}
         >
           <Decal
-            map={texture}
-            // // roughness={0.5}
-            // side={DoubleSide}
             // debug
-            position={[7, 0, -5]}
+            position={[7, -1, -5]}
             rotation={[Math.PI / 2, 0, Math.PI]}
-            scale={[10, 3, 7]}
-          />
+            scale={[10, 3, 1]}
+          >
+            <meshBasicMaterial
+              map={texture}
+              side={FrontSide}
+              polygonOffset
+              polygonOffsetFactor={-1}
+            />
+          </Decal>
         </mesh>
         <mesh
           geometry={nodes.body_2.geometry}

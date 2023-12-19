@@ -67,10 +67,11 @@ export default function Controls() {
 
   return (
     <div
-      className={`track flex h-10 w-full flex-row items-center justify-center rounded-full border border-current bg-[var(--arc-palette-title,#ece3e3aa)] bg-opacity-70 px-2 py-1 transition-all hover:bg-[var(--arc-palette-title,#ece3e3)] hover:bg-opacity-100 dark:bg-[var(--arc-palette-backgroundExtra,#060a0caa)] dark:bg-opacity-70 dark:hover:bg-[var(--arc-palette-backgroundExtra,#060a0c)] dark:hover:bg-opacity-100 ${
+      className={`track relative flex h-10 w-full flex-row items-center justify-center overflow-hidden rounded-full px-2 py-1 shadow-lg transition-all  ${
         song ? "pointer-events-auto" : "pointer-events-none opacity-50"
       }}`}
     >
+      <div className="absolute left-0 top-0 -z-10 h-full w-full bg-current opacity-80  backdrop-blur-md transition-all duration-150 ease-in-out [&_svg]:shadow-sm" />
       <button
         suppressHydrationWarning
         type="button"
@@ -79,7 +80,7 @@ export default function Controls() {
           play();
         }}
         title="rewind"
-        className=" pointer-events-auto"
+        className=" pointer-events-auto text-[var(--arc-palette-title,#e5e6e9ff)] dark:text-[var(--arc-palette-backgroundExtra,#060a0c)]"
       >
         <BsFillRewindBtnFill className=" w-8" />
       </button>
@@ -87,7 +88,7 @@ export default function Controls() {
         suppressHydrationWarning
         type="button"
         title="play"
-        className=" pointer-events-auto"
+        className=" pointer-events-auto text-[var(--arc-palette-title,#e5e6e9ff)] dark:text-[var(--arc-palette-backgroundExtra,#060a0c)]"
         disabled={!song}
         onClick={() => {
           if (song) setPlaying();
@@ -108,7 +109,7 @@ export default function Controls() {
           play();
         }}
         title="forward"
-        className=" pointer-events-auto"
+        className=" pointer-events-auto text-[var(--arc-palette-title,#e5e6e9ff)] dark:text-[var(--arc-palette-backgroundExtra,#060a0c)]"
       >
         <BsFastForwardBtnFill className=" w-8" />
       </button>
@@ -118,7 +119,7 @@ export default function Controls() {
       <input
         suppressHydrationWarning
         id="track"
-        className="track pointer-events-auto w-full cursor-pointer rounded-full bg-current bg-opacity-50 accent-current dark:bg-current dark:accent-current [&::-webkit-slider-runnable-track]:h-[1px] [&::-webkit-slider-thumb]:w-4"
+        className="track pointer-events-auto w-full cursor-pointer rounded-full bg-current bg-opacity-50 text-[var(--arc-palette-title,#e5e6e9ff)] accent-current dark:bg-current dark:text-[var(--arc-palette-backgroundExtra,#060a0c)] dark:accent-current [&::-webkit-slider-runnable-track]:h-[1px] [&::-webkit-slider-thumb]:w-4"
         type="range"
         value={time}
         min={0}
@@ -127,7 +128,7 @@ export default function Controls() {
         onInput={setTime}
       ></input>
       {song ? (
-        <p className=" whitespace-nowrap px-2 text-[0.5rem] font-bold">
+        <p className=" whitespace-nowrap px-2 text-[0.5rem] font-bold text-[var(--arc-palette-title,#e5e6e9ff)] dark:text-[var(--arc-palette-backgroundExtra,#060a0c)]">
           {playerTime}
         </p>
       ) : null}

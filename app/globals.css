@@ -23,24 +23,26 @@ body {
   font-family: "Delius", cursive;
   letter-spacing: 0.038em;
   width: 100%;
+  /* height: 100%; */
+  overflow-x: hidden;
   height: 100dvh !important;
   overscroll-behavior: none;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 html {
-  background: var(--arc-palette-title, #ece3e3ff);
+  background: var(--arc-palette-title, #e5e6e9ff);
   background: linear-gradient(
     180deg,
-    var(--arc-palette-hover, #d4bdbe) 0%,
-    var(--arc-palette-title, #ece3e3ff) 15%
+    var(--arc-palette-hover, #c4c4cd) 0%,
+    var(--arc-palette-title, #e5e6e9ff) 15%
   );
-  color: var(--arc-palette-focus, #a27777);
+  color: var(--arc-palette-focus, #76768b);
   background-repeat: no-repeat;
 }
 
 body {
-  @apply relative selection:bg-[var(--arc-palette-focus,_#a27777)] selection:text-[var(--arc-palette-title,_#ece3e3ff)] dark:selection:bg-[var(--arc-palette-focus,_#405c6f)] dark:selection:text-[var(--arc-palette-title,_#060a0c)];
+  @apply relative selection:bg-[var(--arc-palette-focus,_#a27777)] selection:text-[var(--arc-palette-title,_#e5e6e9ff)] dark:selection:bg-[var(--arc-palette-focus,_#405c6f)] dark:selection:text-[var(--arc-palette-title,_#060a0c)];
 }
 
 .nav-link:hover > *,
@@ -100,7 +102,7 @@ input[type="range"]::-webkit-slider-thumb {
   --arc-palette-backgroundExtra: #060a0c !important;
   --arc-palette-cutoutColor: #ff4e4e !important;
   background: linear-gradient(180deg, #121a20 0%, #060a0c 15%) !important;
-  color: #ff4e4e !important;
+  --arc-palette-focus: #ff4e4e !important;
 
   & .track {
     background-color: #060a0caa !important;

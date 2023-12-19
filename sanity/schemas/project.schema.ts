@@ -2,6 +2,16 @@ const project = {
   name: "project",
   title: "Project",
   type: "document",
+  groups: [
+    {
+      name: "text",
+      title: "Text",
+    },
+    {
+      name: "content",
+      title: "Content",
+    },
+  ],
   fields: [
     {
       name: "name",
@@ -22,9 +32,9 @@ const project = {
       type: "string",
       options: {
         list: [
-          { title: "Website", value: "website" },
+          { title: "Web Development", value: "website" },
           { title: "Interactive", value: "interactive" },
-          { title: "Design", value: "design" },
+          { title: "Graphic Design", value: "design" },
         ],
         layout: "radio",
       },
@@ -50,16 +60,45 @@ const project = {
       name: "thumbnail",
       title: "Thumbnail",
       type: "image",
+      group: "content",
     },
     {
       name: "content",
       title: "Content",
+      group: "text",
       type: "array",
       of: [{ type: "block" }],
     },
     {
-      name: "VideoObjects",
+      name: "images",
+      title: "Images",
       type: "array",
+      group: "content",
+      of: [
+        {
+          name: "ImageObject",
+          title: "Image",
+          type: "object",
+          fields: [
+            {
+              name: "url",
+              title: "url",
+              type: "file",
+            },
+            {
+              type: "string",
+              name: "alt",
+              title: "Alt text",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: "videos",
+      title: "Videos",
+      type: "array",
+      group: "content",
       of: [
         {
           name: "VideoObject",

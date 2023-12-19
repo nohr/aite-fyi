@@ -46,7 +46,7 @@ export default function Player() {
   }, [setPlaylist, setSong, song]);
 
   return (
-    <div className=" items-between pointer-events-none flex w-full flex-row justify-start gap-4 divide-x divide-solid divide-current p-2 md:-order-1">
+    <div className=" items-between pointer-events-none flex w-full flex-row justify-start gap-4 p-2 md:-order-1 md:divide-x md:divide-solid md:divide-current">
       <Cover
         song={song}
         className="relative hidden !aspect-square h-fit w-1/4 overflow-hidden border-[0px] border-current shadow-lg md:block"
@@ -59,12 +59,17 @@ export default function Player() {
               className="relative !aspect-square h-full w-auto overflow-hidden border-[0px] border-current shadow-lg md:hidden"
             />
             <div className=" flex w-fit flex-col justify-end gap-2">
-              <div className=" pointer-events-auto font-serif text-base uppercase">
+              <div className=" pointer-events-auto font-heritage text-6xl font-extralight uppercase tracking-tighter">
                 {song.name}
               </div>
-              <div className="flex h-fit flex-row gap-2 self-end">
-                <div className=" pointer-events-auto">{song.artist}</div> •
-                <div className=" pointer-events-auto">{song.album}</div>
+              <div className="flex h-fit flex-row gap-2 self-start">
+                <div className=" pointer-events-auto font-serif tracking-wider">
+                  {song.artist}
+                </div>{" "}
+                •
+                <div className=" pointer-events-auto font-serif tracking-wider">
+                  {song.album}
+                </div>
               </div>
             </div>
           </div>

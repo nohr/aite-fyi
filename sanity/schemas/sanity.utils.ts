@@ -13,20 +13,23 @@ export async function getProjects(): Promise<Project[]> {
         _id,
         _createdAt,
         name,
+            medium,
         "thumbnail": thumbnail.asset->url,
         "slug": slug.current,
         program,
-      } | order(date desc, name asc)`,
+        date
+      } | order(date desc)`,
   );
 }
 
 export async function getMediums(): Promise<Project["medium"][]> {
   return createClient(clientConfig).fetch(
-    groq`*[_type == 'project'].medium | order(medium asc)`,
+    groq`*[_type == "project"] | order(date desc).medium`,
   );
 }
 
-export async function getProject(slug: string): Promise<Project> {
+export async function getProject(slug: string): Promise<Project | undefined> {
+  if (!slug) return;
   return createClient(clientConfig).fetch(
     groq`
         *[ _type == "project" && slug.current == $slug ][0]{
@@ -36,8 +39,17 @@ export async function getProject(slug: string): Promise<Project> {
             "slug": slug.current,
             "date": date,
             url,
+            medium,
             program,
-            content
+            content,
+             videos[]{
+               alt, 
+               "url": url.asset->url,
+                },
+            images[]{
+              alt, 
+              "url": url.asset->url,
+            },
         }`,
     { slug },
   );
@@ -49,12 +61,12 @@ export async function getVideoObject(
 ): Promise<VideoObject> {
   return createClient(clientConfig).fetch(
     groq`*[_type == "project" && slug.current == $slug][0] {
-      VideoObjects[mobile == $mobile][0]{
+      videos[mobile == $mobile][0]{
         alt,
         mobile, 
         "url": url.asset->url,
       }
-    }["VideoObjects"]`,
+    }["videos"]`,
     { slug, mobile },
   );
 }

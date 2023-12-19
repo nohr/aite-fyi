@@ -10,6 +10,7 @@ export default function Loading() {
   const loaderRef = useRef<HTMLParagraphElement>(null!);
 
   useEffect(() => {
+    if (!loaderRef.current) return;
     if (!loading) {
       setTimeout(() => {
         loaderRef.current.style.opacity = "0";

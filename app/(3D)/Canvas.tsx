@@ -6,8 +6,8 @@ import { Suspense } from "react";
 import { Scan } from "./Scan";
 import { Env } from "./Environment";
 import Camera from "./Camera";
-import { usePathname } from "next/navigation";
 import { Device } from "./(Device)";
+import { EkoDigital } from "./EkoDigital";
 
 function Scene() {
   const { progress } = useProgress();
@@ -16,31 +16,25 @@ function Scene() {
     <Suspense fallback={<Html center>{progress}%</Html>}>
       <Device />
       <Scan />
+      <EkoDigital />
     </Suspense>
   );
 }
 
 const Comp = (props: Partial<CanvasProps>) => {
-  const pathname = usePathname().split("/");
-  const page = pathname[1];
-
   return (
-    <>
-      {page !== "admin" ? (
-        <Canvas {...props}>
-          <Preload all />
-          <Camera />
-          <Scene />
-          <Env />
-          {process.env.NODE_ENV === "development" ? (
+    <Canvas {...props} eventSource={document.body}>
+      <Preload all />
+      <Camera />
+      <Scene />
+      <Env />
+      {/* {process.env.NODE_ENV === "development" ? (
             <StatsGl
               className="!absolute !bottom-0 !left-auto !right-0 !top-auto
     h-[66px] w-[281px]"
             />
-          ) : null}
-        </Canvas>
-      ) : null}
-    </>
+          ) : null} */}
+    </Canvas>
   );
 };
 

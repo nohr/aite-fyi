@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { MutableRefObject, useEffect, useState } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import { usePathname } from "next/navigation";
 import { Vector3 } from "three";
-// import {
-//   Bloom,
-//   DepthOfField,
-//   Noise,
-//   Vignette,
-// } from "@react-three/postprocessing";
+import {
+  Bloom,
+  DepthOfField,
+  Noise,
+  Vignette,
+} from "@react-three/postprocessing";
 
 // import { Vector3 } from "three";
 export default function Camera() {
@@ -16,8 +16,26 @@ export default function Camera() {
   const { scene } = useThree();
 
   useEffect(() => {
-    if (scene.children[1]) window.innerWidth < 768 ? setZoom(7) : setZoom(2);
+    if (scene.children[1]) window.innerWidth < 768 ? setZoom(4) : setZoom(2);
   }, [scene.children]);
+
+  function updateZoom(delta: number) {
+    // !params &&
+    setZoom((prev) => Math.min(5, Math.max(-5, prev + delta)));
+  }
+
+  const handlePinchZoom = (e: TouchEvent) => {
+    if (e.touches.length > 1) {
+      e.preventDefault();
+      let previousDelta = 0;
+      const currentDelta = e.touches[1].clientY - e.touches[0].clientY;
+      console.log(currentDelta);
+
+      const deltaDifference = currentDelta - previousDelta;
+      updateZoom(deltaDifference / 200);
+      previousDelta = currentDelta;
+    }
+  };
 
   useFrame(({ camera }) => {
     // const vec = new Vector3();
@@ -37,39 +55,46 @@ export default function Camera() {
     // camera.position.x = x ?? 0;
     // };
 
-    // todo: zoom in on blur and quickly zoom out on focus
+    // document.ontouchmove = (e) => {
+    //   if (e.touches.length > 1) {
+    //   e.preventDefault();
+    //     // let previousDelta = 0;
+    //     // const currentDelta = e.touches[0].clientY - e.touches[1].clientY;
+    //     // console.log(currentDelta);
 
-    window.onwheel = (e) => {
-      !params &&
-        setZoom((prev) =>
-          Math.min(
-            10,
-            Math.max(1, prev + (e as globalThis.WheelEvent).deltaY / 10),
-          ),
-        );
+    //     // const deltaDifference = currentDelta - previousDelta;
+    //     // updateZoom(deltaDifference / 10);
+    //     // previousDelta = currentDelta;
+    //   }
+    // };
+
+    // document.addEventListener("touchmove", handlePinchZoom, {
+    //   passive: false,
+    // });
+
+    window.ontouchmove = (e) => {
+      handlePinchZoom(e);
     };
 
-    if (params && zoom > -5) setZoom(-5);
-    if (!params && zoom < 2) setZoom(2);
+    window.onwheel = (e) => {
+      updateZoom((e as globalThis.WheelEvent).deltaY / 10);
+    };
 
-    camera.position.lerp(
-      new Vector3(camera.position.x, camera.position.y, zoom),
-      0.075,
-    );
+    // if (zoom > -5) setZoom(-5);
+    if (!params && zoom < 2) setZoom(2);
+    if (camera.position.z === zoom) return;
+
+    const newtarget = new Vector3(camera.position.x, camera.position.y, zoom);
+
+    camera.position.lerp(newtarget, 0.075);
   });
 
   return (
     <>
       <perspectiveCamera position={[0, 0, zoom]} far={80} near={0.1} />
-      {/* <DepthOfField
-        focusDistance={0}
-        focalLength={0.02}
-        bokehScale={2}
-        height={480}
-      <Bloom luminanceThreshold={0} luminanceSmoothing={0.9} height={300} />
+      <Bloom luminanceThreshold={0.1} luminanceSmoothing={9} height={300} />
       <Noise opacity={0.02} />
       <Vignette eskil={false} offset={0.1} darkness={1.1} />
-      /> */}
     </>
   );
 }

@@ -45,7 +45,9 @@ export default function File({ song }: { song: Song }) {
           <RiLoaderFill className="pointer-events-auto animate-spin" />
         )}
       </div>
-      <div className="pointer-events-auto">{song.name}</div>
+      <div className="pointer-events-auto text-sm tracking-tighter">
+        {song.name}
+      </div>
     </button>
   );
 }
