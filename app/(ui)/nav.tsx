@@ -64,16 +64,17 @@ const Nav = memo(function Nav() {
   const playing = useAudioStore((s) => s.playing);
 
   const navSkew = skew(navLeft, 12, 7);
-  const navSkew2 = skew(!navLeft, 12, 7);
+  // const navSkew2 = skew(!navLeft, 12, 7);
   return (
     <motion.nav
       initial={{ opacity: 0.5, filter: "blur(7px)" }}
       animate={{ opacity: 1, filter: "blur(0px)" }}
       transition={{ duration: 0.3 }}
-      className={` pointer-events-none absolute bottom-0 z-[1000] flex w-screen -skew-x-[5deg] -skew-y-[0.3deg] flex-row justify-between p-2 pb-8 tracking-tight md:bottom-auto md:top-4 md:-skew-x-[8deg] md:-skew-y-[2deg] md:px-8 md:py-4 ${
+      className={` pointer-events-none fixed -bottom-0.5 z-[900] flex w-screen -skew-x-[5deg] -skew-y-[0.3deg] flex-row justify-between  p-2 pb-8 tracking-tight backdrop-blur-sm md:bottom-auto md:top-4 md:-skew-x-[8deg] md:-skew-y-[2deg] md:px-8 md:py-4  ${
         navLeft ? "" : "flex-row-reverse"
       }`}
     >
+      <div className="absolute left-0 top-0 -z-10 block h-full w-full bg-[var(--arc-palette-title,#e5e6e9ff)] opacity-60 transition-all  duration-150 ease-in-out dark:bg-[var(--arc-palette-backgroundExtra,#060a0c)] md:hidden " />
       <div
         className={`${navSkew} pointer-events-none flex w-fit flex-row justify-start gap-2 self-start border-transparent transition-all duration-100  md:border-b-[1px] `}
       >
@@ -87,12 +88,12 @@ const Nav = memo(function Nav() {
           <GiBombingRun />
         </NavLink>
       </div>
-      <NavLink
+      {/* <NavLink
         onClick={() => setNavLeft(!navLeft)}
         className={`${navSkew2} md:hidden`}
       >
         {navLeft ? <BsArrowRightCircleFill /> : <BsArrowLeftCircleFill />}
-      </NavLink>
+      </NavLink> */}
     </motion.nav>
   );
 });

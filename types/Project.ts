@@ -6,13 +6,19 @@ export interface VideoObject {
   mobile: true | null;
 }
 
+export interface imageObject {
+  url: string;
+  alt: string;
+}
+
 export type Project = {
   _id: string;
   _createdAt: Date;
   name: string;
   slug: string;
   date: Date;
-  VideoObject: VideoObject[];
+  videos: VideoObject[];
+  images: imageObject[];
   url: string[];
   program: string[];
   medium: "website" | "interactive" | "design";

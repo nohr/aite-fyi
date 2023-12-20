@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect } from "react";
 
 function useDisablePinch() {
   useEffect(() => {
@@ -6,21 +6,22 @@ function useDisablePinch() {
       if (e.touches.length > 1) {
         e.preventDefault();
       }
-    }
- 
-    const wheelHandler = (e: WheelEvent) => {
-        e.preventDefault()
-    }
-    
-    document.addEventListener("touchmove", preventPinchZoom, { passive: false });
-        window.addEventListener('wheel', wheelHandler, {passive: false})
-    
+    };
+
+    // const wheelHandler = (e: WheelEvent) => {
+    // e.preventDefault();
+    // };
+
+    document.addEventListener("touchmove", preventPinchZoom, {
+      passive: false,
+    });
+    // window.addEventListener("wheel", wheelHandler, { passive: false });
+
     return () => {
       document.removeEventListener("touchmove", preventPinchZoom);
-      window.removeEventListener('wheel', wheelHandler)
-       
-    }
+      // window.removeEventListener("wheel", wheelHandler);
+    };
   }, []);
 }
 
-export default useDisablePinch
+export default useDisablePinch;

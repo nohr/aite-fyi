@@ -1,3 +1,6 @@
+"use client";
+
+import useMargin from "@hooks/useMargin";
 import Explorer from "./(explorer)";
 import Player from "./(player)";
 
@@ -6,8 +9,12 @@ export default function MusicLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const margins = useMargin();
   return (
-    <div className="grid h-full w-full max-w-prose grid-cols-1 grid-rows-[3fr_0.5fr] items-start gap-1 md:grid-rows-[0.5fr_3fr] md:gap-4">
+    <div
+      // style={{ height: `calc(100% - ${margins[0] + margins[1]}px` }}
+      className="flex h-full w-full max-w-prose flex-col items-start justify-between gap-1 md:grid-rows-[0.5fr_3fr] md:gap-4"
+    >
       <Explorer />
       <Player />
       {children}

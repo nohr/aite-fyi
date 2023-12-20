@@ -19,7 +19,7 @@ export function Texture({
     muted: true,
     loop: true,
     start: true,
-    autoplay: true,
+    autoplay: false,
     playsInline: true,
     volume: 0,
   });

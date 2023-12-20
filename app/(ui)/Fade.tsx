@@ -41,6 +41,7 @@ export function Fade({
       <motion.main
         {...props}
         key={pathname}
+        style={{ zIndex: pathname.includes("admin") ? 1000 : 1 }}
         className={className}
         {...standard_pagination_animation}
       >

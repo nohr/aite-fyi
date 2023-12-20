@@ -6,11 +6,16 @@ import { usePathname } from "next/navigation";
 import { GrNext, GrPrevious } from "react-icons/gr";
 import { Project } from "types/Project";
 
-export default function Arrows({ projects }: { projects: Project[] }) {
+export default function Arrows({
+  projects,
+  children,
+}: {
+  projects: Project[];
+  children: React.ReactNode;
+}) {
   const [play] = useSFX("/sfx/click.mp3");
   const pathname = usePathname();
   const project = projects.find((p) => `/projects/${p.slug}` === pathname);
-
   const path = `/projects/${project?.slug}`;
 
   function handleDirection(n: number) {
@@ -26,31 +31,42 @@ export default function Arrows({ projects }: { projects: Project[] }) {
     if (nextSlug === undefined) return path;
     return nextSlug;
   }
+  const arrowClass =
+    "cursor-pointer fill-current hover:scale-90 active:scale-75 md:h-4 md:w-auto [&_*]:!stroke-current";
+
+  const Arrow = ({ direction }: { direction: number }) => (
+    <>
+      {projects.length > 1 ? (
+        <Link
+          // style={{ top: "50%", transform: "translateY(-50%)" }}
+          className={
+            " absolute top-2 z-50 hidden h-12 w-fit transform items-center hover:animate-pulse md:flex" +
+            (direction === -1 ? " -left-6" : " -right-6")
+          }
+          href={handleDirection(direction)}
+          onClick={() => play()}
+        >
+          {direction === -1 ? (
+            <GrPrevious className={arrowClass} />
+          ) : (
+            <GrNext className={arrowClass} />
+          )}
+        </Link>
+      ) : null}
+    </>
+  );
 
   return (
     <>
       {project ? (
         <>
-          {
-            <Link
-              className=" contents"
-              href={handleDirection(-1)}
-              onClick={() => play()}
-            >
-              <GrPrevious className="pointer-events-auto absolute right-1 top-2 z-50 h-8 w-8 rotate-90 transform cursor-pointer fill-current hover:scale-90 active:scale-75 md:h-4 md:w-4 lg:left-1 lg:right-auto lg:rotate-0 [&_*]:!stroke-current" />
-            </Link>
-          }
-          {
-            <Link
-              className=" contents"
-              href={handleDirection(1)}
-              onClick={() => play()}
-            >
-              <GrNext className="pointer-events-auto absolute bottom-2 right-1 z-50 h-8 w-8 rotate-90 transform cursor-pointer fill-current hover:scale-90 active:scale-75 md:h-4 md:w-4 lg:bottom-auto lg:top-2 lg:rotate-0 [&_*]:!stroke-current" />
-            </Link>
-          }
+          <Arrow direction={-1} />
+          {children}
+          <Arrow direction={1} />
         </>
-      ) : null}
+      ) : (
+        children
+      )}
     </>
   );
 }

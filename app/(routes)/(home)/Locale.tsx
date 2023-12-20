@@ -35,7 +35,7 @@ export default function Locale({ Info }: { Info: Info }) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.25, delay: 0, ease: "easeIn" }}
-      className="pointer-events-none flex flex-row items-center gap-x-1 whitespace-nowrap text-sm opacity-50"
+      className="pointer-events-none flex flex-row items-center gap-x-1 whitespace-nowrap font-serif text-sm font-semibold tracking-tight opacity-50"
     >
       <TbLocationFilled />
       <p>{`${location}`}</p>

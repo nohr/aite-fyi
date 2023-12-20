@@ -7,11 +7,18 @@ import {
   SiOpenai,
   SiTailwindcss,
   SiThreedotjs,
+  SiFontforge,
+  SiBlender,
+  SiUnrealengine,
+  SiAdobepremierepro,
+  SiCinema4D,
 } from "react-icons/si";
 import { GrReactjs } from "react-icons/gr";
 import { IoLogoFirebase } from "react-icons/io5";
 import { MouseEventHandler, createElement, useRef, useState } from "react";
 import { IconType } from "react-icons";
+import { DiIllustrator } from "react-icons/di";
+import { BsQuestionDiamondFill } from "react-icons/bs";
 
 export default function Programs({
   program,
@@ -49,6 +56,12 @@ export default function Programs({
     three: SiThreedotjs,
     openai: SiOpenai,
     framer: SiFramer,
+    illustrator: DiIllustrator,
+    fontforge: SiFontforge,
+    blender: SiBlender,
+    cinema4d: SiCinema4D,
+    unrealengine: SiUnrealengine,
+    premiere: SiAdobepremierepro,
   } as { [key: string]: IconType };
 
   return (
@@ -62,7 +75,7 @@ export default function Programs({
             onMouseEnter={handleTooltip}
             onMouseLeave={handleTooltip}
           >
-            {createElement(pairing[title], {
+            {createElement(pairing[title] ?? BsQuestionDiamondFill, {
               title,
               key: title,
             })}

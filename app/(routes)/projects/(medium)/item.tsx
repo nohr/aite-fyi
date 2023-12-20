@@ -2,9 +2,12 @@
 
 import { Project } from "types/Project";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import useSFX from "@hooks/useSFX";
 import Image from "next/image";
+import { useUIStore } from "(ui)";
+import { usePathname } from "next/navigation";
+import { useEffect } from "react";
+import { IoMdClose } from "react-icons/io";
 
 export default function Item({
   children,
@@ -13,22 +16,22 @@ export default function Item({
   children: React.ReactNode;
   project: Project;
 }) {
-  const pathname = usePathname();
   const path = `/projects/${project?.slug}`;
-  const active = path === pathname;
-  const projects_page = pathname.includes("/projects/");
   const [play] = useSFX("/sfx/click.mp3");
+  const { setState } = useUIStore;
+  const current_project = usePathname().split("/")[2];
+  const active = current_project && current_project === project?.slug;
+
+  useEffect(() => {
+    if (active) setState({ project });
+  }, [active, project, setState]);
 
   return (
     <>
       {project ? (
         <div
-          className={`group flex flex-col gap-2  ${
-            active
-              ? " h-full w-full md:!w-[65ch] "
-              : projects_page
-                ? " max-md:last-of-type:pb-28 "
-                : ""
+          className={`group/item flex flex-col gap-2  ${
+            active ? " h-fit w-full md:max-w-[65ch] " : ""
           }`}
         >
           <Link
@@ -36,28 +39,32 @@ export default function Item({
             onClick={() => play()}
             className={`${
               !active
-                ? ` pointer-events-auto relative w-fit flex-col-reverse gap-4 overflow-hidden p-2 hover:border-current hover:bg-current hover:shadow-md ${
-                    projects_page && "!flex-row-reverse"
+                ? ` pointer-events-auto relative w-fit flex-auto flex-col-reverse  overflow-hidden p-2 hover:border-current hover:shadow-md focus:border-current focus:shadow-md ${
+                    current_project && "!flex-row-reverse  "
                   }`
-                : "w-full flex-col md:pt-2"
-            }  flex h-fit items-start gap-2 rounded-sm border border-transparent no-underline transition-all duration-200 hover:bg-opacity-20 hover:mix-blend-plus-lighter hover:dark:mix-blend-difference`}
+                : "w-full flex-col px-2 md:pt-2"
+            }  flex h-fit items-start gap-2 rounded-sm border-transparent no-underline transition-all duration-100`}
           >
-            <h2
-              className={`pointer-events-auto flex select-none flex-row flex-nowrap justify-between gap-2 font-serif text-base font-semibold uppercase tracking-tight group-hover:mix-blend-plus-lighter dark:group-hover:mix-blend-difference ${
+            {!active && (
+              <div className="absolute left-0 top-0 -z-10  h-full w-full bg-current opacity-0 backdrop-blur-md transition-all duration-100 ease-in-out group-hover/item:opacity-90 group-hover/item:shadow-sm " />
+            )}
+            <h1
+              className={` text-md pointer-events-auto flex select-none flex-row flex-nowrap justify-between gap-2 lowercase tracking-tight  ${
                 active
-                  ? "w-full border-b border-current italic active:!border"
-                  : !projects_page
-                    ? "w-full justify-between"
-                    : "w-fit"
+                  ? " w-full border-b border-current font-serif text-4xl font-light italic md:text-5xl md:group-hover/item:animate-pulse "
+                  : " group-hover/item:text-[var(--arc-palette-title,#e5e6e9ff)] dark:group-hover/item:text-[var(--arc-palette-backgroundExtra,#060a0c)] "
               }`}
             >
               {project.name}
-            </h2>
+              {active ? <IoMdClose className="my-auto h-8 p-2" /> : null}
+            </h1>
             {active ? null : (
               <div
                 className={`${
-                  projects_page ? "h-10 w-10" : "h-24 w-24 md:h-48 md:w-48"
-                } pointer-events-auto relative overflow-hidden rounded-sm shadow-md group-hover:animate-pulse`}
+                  current_project
+                    ? "h-6 w-6 md:h-10 md:w-10"
+                    : "h-36 w-36 md:h-48 md:w-48"
+                } pointer-events-auto relative overflow-hidden rounded-sm shadow-md`}
               >
                 <Image
                   src={project.thumbnail}
@@ -65,7 +72,7 @@ export default function Item({
                   fill
                   sizes="400px"
                   priority
-                  className="pointer-events-none"
+                  className="pointer-events-none select-none"
                   style={{ position: "absolute", objectFit: "cover" }}
                 />
               </div>

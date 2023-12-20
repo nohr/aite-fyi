@@ -54,24 +54,35 @@ function useColor() {
 
     return "hsl(" + h + "," + s + "%," + l + "%)";
   };
+  const { setState } = useUIStore;
 
   useEffect(() => {
     setTimeout(() => {
-      const dark =
+      let dark =
         getComputedStyle(document.documentElement)
           .getPropertyValue("--arc-palette-cutoutColor")
           .slice(0, -2)
           .toLocaleLowerCase() || "#405C6F";
-
-      const light =
+      if (dark === "#000000" && theme === "dark") {
+        dark = "#ababab";
+        document.body.style.color = dark;
+      }
+      let light =
         getComputedStyle(document.documentElement)
           .getPropertyValue("--arc-palette-focus")
           .slice(0, -2)
-          .toLocaleLowerCase() || "#a27777";
+          .toLocaleLowerCase() || "#C4C4CD";
 
+      if (light === "#787878") {
+        light = "#505050";
+        document.body.style.color = light;
+      }
+
+      // setColor(theme === "dark" ? dark : light);
       setColor(hexToHsl(theme === "dark" ? dark : light));
+      setState({ color: theme === "dark" ? dark : light });
     }, 20);
-  }, [theme]);
+  }, [setState, theme]);
 
   return { color, setColor };
 }

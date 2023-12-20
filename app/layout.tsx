@@ -4,6 +4,20 @@ import { Analytics } from "@vercel/analytics/react";
 import Dom from "./dom";
 import Loading from "./loading";
 import { Suspense } from "react";
+import { Noto_Serif_Display } from "next/font/google";
+import localFont from "next/font/local";
+
+const Heritage = localFont({
+  src: "./Heritage-Display.otf",
+  variable: "--font-heritage",
+  display: "swap",
+});
+
+const Libre = Noto_Serif_Display({
+  display: "swap",
+  variable: "--font-serif",
+  preload: false,
+});
 
 export const metadata = {
   title: "Aite, for your info",
@@ -12,14 +26,8 @@ export const metadata = {
 
 export const viewport = {
   themeColor: [
-    {
-      media: "(prefers-color-scheme: light)",
-      color: " #D4BDBE",
-    },
-    {
-      media: "(prefers-color-scheme: dark)",
-      color: " #121a20",
-    },
+    { media: "(prefers-color-scheme: light)", color: "#C5C4CE" },
+    { media: "(prefers-color-scheme: dark)", color: "#121a20" },
   ],
   width: "device-width",
   initialScale: 1,
@@ -32,8 +40,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className=" font-medium antialiased">
-      <body>
+    <html
+      lang="en"
+      translate="no"
+      className={`notranslate font-medium antialiased ${Libre.variable} ${Heritage.variable}`}
+    >
+      <body className="flex flex-col">
         <Loading />
         <Suspense fallback={null}>
           <Dom>{children}</Dom>

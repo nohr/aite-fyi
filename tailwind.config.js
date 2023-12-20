@@ -9,7 +9,12 @@ module.exports = {
   theme: {
     extend: {
       animation: {
-        tempo: "pulse var(--tempo) cubic-bezier(0.4, 0, 0.6, 1) infinite",
+        tempo: "bounce var(--tempo) cubic-bezier(0.4, 0, 0.6, 1) infinite",
+      },
+
+      fontFamily: {
+        serif: ["var(--font-serif)"],
+        heritage: ["var(--font-heritage)"],
       },
       colors: {
         red: {

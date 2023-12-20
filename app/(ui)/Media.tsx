@@ -41,7 +41,7 @@ export default function Media() {
     const tempo = (60 / song?.tempo) * 2000;
     // console.log(tempo);
 
-    r.style.setProperty("--tempo", `${tempo || 2000}ms`);
+    r.style.setProperty("--tempo", `${tempo / 2 || 2000}ms`);
   }, [song]);
 
   return (

@@ -9,8 +9,8 @@ import { Points } from "three/src/objects/Points";
 import { mod } from "../../utils/constants";
 import { useAudioStore } from "@hooks/useAudioStore";
 import useColor from "@hooks/useColor";
-import { usePathname } from "next/navigation";
 import useLoading from "@hooks/useLoading";
+import { usePathname } from "next/navigation";
 
 export const Scan = memo(function Scan() {
   const { size } = useThree();
@@ -21,14 +21,16 @@ export const Scan = memo(function Scan() {
   const headRef = useRef<Points>(null);
   const bodyRef = useRef<Points>(null);
   const groupRef = useRef<Group>(null);
-  const [song, playing] = useAudioStore((s) => [s.song, s.playing]);
+  const [song, playing, time] = useAudioStore((s) => [
+    s.song,
+    s.playing,
+    s.time,
+  ]);
   const { color } = useColor();
-  const params = usePathname().split("/")[2];
-  const { width: w } = useThree((state) => state.viewport);
+  const project = usePathname().split("/")[2];
 
   const handleMouseMove = (mouse: Vector2) => {
     const tar = new Vector3((mouse.x * mod * 2) / 1, mouse.y * mod, 3);
-    // head bobbing
     const bobDelta = () => {
       const audio = document.querySelector("audio") as HTMLAudioElement;
       if (!audio || !song || !playing || !song.tempo || audio.currentTime === 0)
@@ -42,32 +44,60 @@ export const Scan = memo(function Scan() {
     bodyRef.current?.lookAt(tar.x * 0.25, tar.y / 2, 4);
   };
 
-  useFrame(({ pointer }) => {
-    if (!groupRef.current) return;
-
-    if (params) {
-      setTimeout(() => {
-        if (groupRef.current) groupRef.current.visible = false;
-      }, 500);
-      return;
-    } else {
-      groupRef.current.visible = true;
-    }
-
-    handleMouseMove(pointer);
-
-    // horizontal sway
-    groupRef.current.position.lerp(
+  const handleHorizontalSway = (pointer: Vector2) => {
+    groupRef.current?.position.lerp(
       new Vector3(
         -pointer.x * 5.75,
-        groupRef.current.position.y,
-        groupRef.current.position.z,
+        groupRef.current?.position.y,
+        groupRef.current?.position.z,
       ),
       0.2,
     );
+  };
 
-    // breathing
+  const handleBreath = () => {
+    if (!groupRef.current) return;
     groupRef.current.position.y = Math.sin(Date.now() / 1000) / 10;
+  };
+
+  useFrame(({ pointer }) => {
+    if (!groupRef.current) return;
+
+    if (project) {
+      groupRef.current.position.lerp(
+        new Vector3(
+          groupRef.current.position.x,
+          groupRef.current.position.y,
+          6,
+        ),
+        0.05,
+      );
+      setTimeout(() => {
+        if (groupRef.current) groupRef.current.visible = false;
+      }, 750);
+      return;
+    } else {
+      if (groupRef.current.position.z > -3.5) {
+        groupRef.current.position.lerp(
+          new Vector3(
+            groupRef.current.position.x,
+            groupRef.current.position.y,
+            -3.5,
+          ),
+          0.05,
+        );
+      }
+      groupRef.current.visible = true;
+    }
+
+    window.ontouchmove = (e) => {
+      if (e.touches.length == 2) return;
+    };
+
+    handleMouseMove(pointer);
+    handleHorizontalSway(pointer);
+
+    handleBreath();
   });
 
   useLoading();
@@ -76,7 +106,7 @@ export const Scan = memo(function Scan() {
     size: size.width >= 768 ? 0.65 : size.width < 450 ? 0.2 : 0.75,
     fog: false,
     color: color,
-    toneMapped: false,
+    toneMapped: true,
     opacity: 1,
     sizeAttenuation: false,
   });
@@ -84,8 +114,8 @@ export const Scan = memo(function Scan() {
   return (
     <group
       ref={groupRef}
-      position={[0, size.width >= 768 ? 70 : w / 2, -3.5]}
-      rotation={[0, Math.PI / 2, 0]}
+      position={[0, 70, -3.5]}
+      rotation={[0, 0, 0]}
       scale={0.25}
     >
       <points ref={headRef} geometry={head.geometry} material={mat} />
