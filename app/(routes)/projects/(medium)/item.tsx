@@ -51,7 +51,7 @@ export default function Item({
             <h1
               className={` text-md pointer-events-auto flex select-none flex-row flex-nowrap justify-between gap-2 lowercase tracking-tight  ${
                 active
-                  ? " w-full border-b border-current font-serif text-4xl font-light italic md:text-5xl md:group-hover/item:animate-pulse "
+                  ? " w-full border-b border-current font-serif text-4xl font-light italic md:text-5xl md:hover:animate-pulse "
                   : " group-hover/item:text-[var(--arc-palette-title,#e5e6e9ff)] dark:group-hover/item:text-[var(--arc-palette-backgroundExtra,#060a0c)] "
               }`}
             >
