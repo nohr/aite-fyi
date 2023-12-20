@@ -35,7 +35,7 @@ export const Scan = memo(function Scan() {
       const audio = document.querySelector("audio") as HTMLAudioElement;
       if (!audio || !song || !playing || !song.tempo || audio.currentTime === 0)
         return 0;
-      if (song.name === "cemetery c" && audio.currentTime < 38) return 0;
+      // if (song.name === "cemetery c" && audio.currentTime < 38) return 0;
 
       return Math.sin(Date.now() / song.tempo) / 10;
     };
