@@ -29,6 +29,8 @@ function Dom({ children }: { children: React.ReactNode }) {
         <>
           <Media />
           <Footer />
+          {/* blur missed spots on tablet */}
+          <div className="fixed -left-4 -top-6 z-[900]  hidden h-12 w-full -skew-x-[2deg] -skew-y-[0.3deg] bg-transparent backdrop-blur-sm md:block" />
           <Nav />
         </>
       )}
