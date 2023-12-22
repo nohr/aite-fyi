@@ -71,7 +71,7 @@ function useColor() {
         getComputedStyle(document.documentElement)
           .getPropertyValue("--arc-palette-focus")
           .slice(0, -2)
-          .toLocaleLowerCase() || "#C4C4CD";
+          .toLocaleLowerCase() || "#76768b";
 
       if (light === "#787878") {
         light = "#505050";
