@@ -57,7 +57,7 @@ export default function Data({ project }: { project: Project | undefined }) {
                   );
                 })}
               {document.getElementById("project-portal") &&
-                project.images?.map((image) =>
+                project.images.map((image) =>
                   createPortal(
                     <Image
                       src={urlFor(image).url()}
