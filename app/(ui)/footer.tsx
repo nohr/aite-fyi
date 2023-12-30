@@ -2,7 +2,7 @@ import { BsLinkedin, BsGithub } from "react-icons/bs";
 import { FaEnvelope } from "react-icons/fa";
 
 export default function Footer() {
-  const email = "aite@nyu.edu";
+  const email = "aiteaigbe@gmail.com";
   return (
     <footer
       className={

@@ -9,7 +9,7 @@ export default async function Home() {
   const Info = await getInfo();
 
   return (
-    <section className="flex max-w-prose flex-col items-start gap-2 p-3 md:p-0">
+    <section className="flex max-w-prose flex-col items-start gap-2 p-3 md:px-0">
       <Animate>
         <Locale Info={Info} />
         <Bio Info={Info} />
