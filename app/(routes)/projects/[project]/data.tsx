@@ -39,8 +39,9 @@ export default function Data({ project }: { project: Project | undefined }) {
           </Drop>
           {project.medium === "website" ? null : (
             <Drop className="pointer-events-auto flex flex-row flex-wrap gap-2 pl-2">
-              {document.getElementById("project-portal") &&
-                project.videos?.map((video) => {
+              {project.videos &&
+                document.getElementById("project-portal") &&
+                project.videos.map((video) => {
                   return video ? (
                     createPortal(
                       <video
@@ -56,7 +57,8 @@ export default function Data({ project }: { project: Project | undefined }) {
                     <RiLoaderFill className="m-2 h-4 w-4 animate-spin" />
                   );
                 })}
-              {document.getElementById("project-portal") &&
+              {project.images &&
+                document.getElementById("project-portal") &&
                 project.images.map((image: Project["images"][0]) =>
                   createPortal(
                     <Image

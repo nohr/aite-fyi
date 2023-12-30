@@ -52,7 +52,7 @@ body {
 
 .nav-link:hover,
 .active {
-  @apply bg-current bg-opacity-20;
+  @apply bg-current bg-opacity-20 font-extrabold;
 }
 
 .item {

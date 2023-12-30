@@ -23,7 +23,7 @@ export default async function ProjectsLayout({
         ))}
         <div
           id="project-portal"
-          className=" flex h-fit w-full flex-wrap gap-y-4 overflow-y-scroll px-1 py-6 md:px-32"
+          className=" flex h-fit w-full flex-wrap gap-y-4 overflow-y-scroll px-1 py-6 md:px-32 lg:px-48"
         />
       </ul>
     </>
