@@ -8,15 +8,20 @@ import { Env } from "./Environment";
 import Camera from "./Camera";
 import { Device } from "./(Device)";
 import { EkoDigital } from "./EkoDigital";
+import { usePathname } from "next/navigation";
+import { useUIStore } from "(ui)";
 
 function Scene() {
   const { progress } = useProgress();
+  const params = usePathname().split("/")[2];
+  const project = useUIStore((s) => s.project);
+  const hide_devices = project?.medium !== "website";
 
   return (
     <Suspense fallback={<Html center>{progress}%</Html>}>
-      <Device />
+      {hide_devices ? null : <Device />}
       <Scan />
-      <EkoDigital />
+      {params === "eko-digital" ? <EkoDigital /> : null}
     </Suspense>
   );
 }

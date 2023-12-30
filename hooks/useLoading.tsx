@@ -2,9 +2,9 @@ import { useEffect } from "react";
 import { useUIStore } from "./useUIStore";
 // import { usePathname } from "next/navigation";
 
-type Thing = boolean | object | string | number | undefined | null;
+// type Thing = boolean | object | string | number | undefined | null;
 
-const useLoading = (thing: Thing = "nothing") => {
+const useLoading = () => {
   const setLoading = useUIStore((s) => s.setLoading);
   // const pathname = usePathname();
 
@@ -13,7 +13,7 @@ const useLoading = (thing: Thing = "nothing") => {
     return () => {
       setLoading(true);
     };
-  }, [setLoading, thing]);
+  }, [setLoading]);
 };
 
 export default useLoading;

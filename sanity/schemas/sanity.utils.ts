@@ -5,6 +5,8 @@ import { Info } from "types/Info";
 import { Project, VideoObject } from "types/Project";
 import { Song } from "types/Song";
 import clientConfig from "../config/client.config";
+import imageUrlBuilder from "@sanity/image-url";
+import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
 export async function getProjects(): Promise<Project[]> {
   return createClient(clientConfig).fetch(
@@ -47,10 +49,11 @@ export async function getProject(slug: string): Promise<Project | undefined> {
                "url": url.asset->url,
                 },
             images[]{
-              alt, 
-              "url": url.asset->url,
-            },
-        }`,
+						    "height": asset->metadata.dimensions.height,
+                "width": asset->metadata.dimensions.width,
+						    ...,
+             },
+          }`,
     { slug },
   );
 }
@@ -100,4 +103,14 @@ export async function getInfo(): Promise<Info> {
         timeZone
       }`,
   );
+}
+
+// Get a pre-configured url-builder from your sanity client
+const builder = imageUrlBuilder(clientConfig);
+
+// Then we like to make a simple function like this that gives the
+// builder an image and returns the builder for you to specify additional
+// parameters:
+export function urlFor(source: SanityImageSource) {
+  return builder.image(source);
 }

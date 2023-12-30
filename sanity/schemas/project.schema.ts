@@ -76,21 +76,9 @@ const project = {
       group: "content",
       of: [
         {
-          name: "ImageObject",
+          name: "Image",
           title: "Image",
-          type: "object",
-          fields: [
-            {
-              name: "url",
-              title: "url",
-              type: "file",
-            },
-            {
-              type: "string",
-              name: "alt",
-              title: "Alt text",
-            },
-          ],
+          type: "image",
         },
       ],
     },

@@ -21,11 +21,7 @@ export const Scan = memo(function Scan() {
   const headRef = useRef<Points>(null);
   const bodyRef = useRef<Points>(null);
   const groupRef = useRef<Group>(null);
-  const [song, playing, time] = useAudioStore((s) => [
-    s.song,
-    s.playing,
-    s.time,
-  ]);
+  const [song, playing] = useAudioStore((s) => [s.song, s.playing]);
   const { color } = useColor();
   const project = usePathname().split("/")[2];
 

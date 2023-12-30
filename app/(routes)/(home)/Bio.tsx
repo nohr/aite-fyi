@@ -6,7 +6,7 @@ import { Info } from "types/Info";
 
 export default function Bio({ Info }: { Info: Info }) {
   const { bio } = Info;
-  useLoading(bio);
+  useLoading();
   return (
     <div
       key={Info._id + "bio"}

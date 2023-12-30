@@ -81,6 +81,7 @@ export default function Camera() {
     };
 
     // if (zoom > -5) setZoom(-5);
+    if (params === "eko-digital" && zoom < 2) setZoom(2);
     if (!params && zoom < 2) setZoom(2);
     if (camera.position.z === zoom) return;
 

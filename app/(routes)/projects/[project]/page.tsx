@@ -1,7 +1,9 @@
 import { getProject } from "sanity.utils";
-import Data from "./data";
+import dynamic from "next/dynamic";
 
-export const dynamic = "force-dynamic";
+const Data = dynamic(() => import("./data"), {
+  ssr: false,
+});
 
 export default async function Project({
   params,

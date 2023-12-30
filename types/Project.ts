@@ -1,14 +1,10 @@
 import { PortableTextBlock } from "sanity";
+import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
 export interface VideoObject {
   url: string;
   alt: string;
   mobile: true | null;
-}
-
-export interface imageObject {
-  url: string;
-  alt: string;
 }
 
 export type Project = {
@@ -18,7 +14,7 @@ export type Project = {
   slug: string;
   date: Date;
   videos: VideoObject[];
-  images: imageObject[];
+  images: SanityImageSource & { height: number; width: number; _key: string }[];
   url: string[];
   program: string[];
   medium: "website" | "interactive" | "design";

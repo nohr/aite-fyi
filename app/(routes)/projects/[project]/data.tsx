@@ -6,6 +6,9 @@ import Programs from "./Programs";
 import { Drop } from "(ui)";
 import { Project } from "types/Project";
 import Image from "next/image";
+import { createPortal } from "react-dom";
+import { urlFor } from "sanity.utils";
+import { RiLoaderFill } from "react-icons/ri";
 
 export default function Data({ project }: { project: Project | undefined }) {
   return (
@@ -34,29 +37,39 @@ export default function Data({ project }: { project: Project | undefined }) {
             ))}
             <Programs program={project.program} />
           </Drop>
-          {project.medium !== "design" ? null : (
+          {project.medium === "website" ? null : (
             <Drop className="pointer-events-auto flex flex-row flex-wrap gap-2 pl-2">
-              {project.videos?.map((video) => (
-                <video
-                  key={video.alt}
-                  src={video.url}
-                  controls
-                  className="pointer-events-auto h-auto w-full"
-                />
-              ))}
-              {project.images?.map((image) => (
-                <div
-                  key={image.alt}
-                  className="pointer-events-auto relative h-auto w-full"
-                >
-                  <Image
-                    src={image.url}
-                    alt={image.alt}
-                    fill
-                    className="pointer-events-none absolute select-none object-contain"
-                  />
-                </div>
-              ))}
+              {document.getElementById("project-portal") &&
+                project.videos?.map((video) => {
+                  return video ? (
+                    createPortal(
+                      <video
+                        preload="metadata"
+                        key={video.alt}
+                        src={video.url}
+                        controls
+                        className="pointer-events-auto !aspect-video h-auto w-full rounded-sm border border-current shadow-sm"
+                      />,
+                      document.getElementById("project-portal")!,
+                    )
+                  ) : (
+                    <RiLoaderFill className="m-2 h-4 w-4 animate-spin" />
+                  );
+                })}
+              {document.getElementById("project-portal") &&
+                project.images?.map((image) =>
+                  createPortal(
+                    <Image
+                      src={urlFor(image).url()}
+                      alt={project.name + " " + image._key}
+                      height={image.height}
+                      width={image.width}
+                      className="pointer-events-none h-auto w-full select-none object-contain"
+                    />,
+                    document.getElementById("project-portal")!,
+                    image._key,
+                  ),
+                )}
             </Drop>
           )}
         </>
