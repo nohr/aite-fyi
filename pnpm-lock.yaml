@@ -26,6 +26,9 @@ dependencies:
   '@react-three/postprocessing':
     specifier: ^2.15.11
     version: 2.15.11(@react-three/fiber@8.15.12)(@types/three@0.159.0)(react@18.2.0)(three@0.159.0)
+  '@sanity/image-url':
+    specifier: ^1.0.2
+    version: 1.0.2
   '@sanity/vision':
     specifier: ^3.22.1
     version: 3.22.1(@babel/runtime@7.23.6)(@codemirror/lint@6.4.2)(@codemirror/state@6.3.3)(@codemirror/theme-one-dark@6.1.2)(@lezer/common@1.1.2)(codemirror@6.0.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.11)
@@ -3070,6 +3073,7 @@ packages:
       loose-envify: 1.4.0
       object-assign: 4.1.1
     dev: false
+    bundledDependencies: false
 
   /crelt@1.0.6:
     resolution: {integrity: sha512-VQ2MBenTq1fWZUH9DJNGti7kKv6EeAuYr3cLwxUWhIu1baTaXh4Ib5W2CqHVqib4/MqbYGJqiL3Zb8GJZr3l4g==}
