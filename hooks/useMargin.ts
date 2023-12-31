@@ -8,19 +8,17 @@ export default function useMargin() {
   useEffect(() => {
     function handleMargin() {
       const nav = document.querySelector("nav");
-      const footer = document.querySelector("footer");
       const main = document.querySelector("main");
 
-      if (!nav || !footer || !main) return;
+      if (!nav || !main) return;
 
       if (page === "admin") {
         setMargins([0, 0]);
         return;
       }
 
-      if (window.innerWidth >= 768)
-        setMargins([nav.clientHeight + footer.clientHeight, 0]);
-      else setMargins([footer.clientHeight, nav.clientHeight]);
+      if (window.innerWidth >= 768) setMargins([nav.clientHeight, 0]);
+      else setMargins([0, nav.clientHeight]);
     }
 
     handleMargin();

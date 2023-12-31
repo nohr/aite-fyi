@@ -1,7 +1,6 @@
 import { getInfo } from "sanity.utils";
 import Animate from "./Animate";
 import Bio from "./Bio";
-import Locale from "./Locale";
 
 export const dynamic = "force-dynamic";
 
@@ -11,7 +10,6 @@ export default async function Home() {
   return (
     <section className="flex max-w-prose flex-col items-start gap-2 p-3 md:px-0">
       <Animate>
-        <Locale Info={Info} />
         <Bio Info={Info} />
       </Animate>
     </section>

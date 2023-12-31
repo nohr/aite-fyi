@@ -18,7 +18,7 @@ export default function useQueryParams<T = QueryParams>() {
     const search = urlSearchParams.toString();
 
     const query = search ? `?${search}` : "";
-    console.log(query);
+    // console.log(query);
 
     router.push(`${pathname}${query}`);
   }

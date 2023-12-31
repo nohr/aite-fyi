@@ -4,6 +4,7 @@
 
 :root {
   --tempo: 2s;
+  --font-mono: "Fira Code", monospace;
 }
 * {
   box-sizing: border-box;

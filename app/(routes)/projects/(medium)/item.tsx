@@ -31,7 +31,7 @@ export default function Item({
       {project ? (
         <div
           className={`group/item flex flex-col gap-2  ${
-            active ? " h-fit w-full md:max-w-[65ch] " : ""
+            active ? " h-fit w-full pb-4 md:max-w-[65ch] md:pb-0 " : ""
           }`}
         >
           <Link

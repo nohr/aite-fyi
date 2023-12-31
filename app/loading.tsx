@@ -25,7 +25,7 @@ export default function Loading() {
   return (
     <p
       ref={loaderRef}
-      className="absolute right-6 top-8 z-50 flex h-12 w-36 skew-x-[8deg] skew-y-[2deg] flex-row-reverse items-center text-sm tracking-tighter"
+      className="absolute right-6 top-0 z-50 flex h-12 w-36 skew-x-[8deg] skew-y-[2deg] flex-row-reverse items-center font-mono text-sm uppercase tracking-tighter md:!right-auto md:left-44 md:top-4 md:-skew-x-[7deg] md:-skew-y-[1.5deg]"
     >
       {loading ? (
         <>

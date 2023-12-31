@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { TbClockFilled, TbLocationFilled } from "react-icons/tb";
 import { motion } from "framer-motion";
 import { Info } from "types/Info";
+import { MdOutlineMyLocation } from "react-icons/md";
 
 export default function Locale({ Info }: { Info: Info }) {
   const { timeZone, location } = Info;
@@ -35,12 +35,11 @@ export default function Locale({ Info }: { Info: Info }) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.25, delay: 0, ease: "easeIn" }}
-      className="pointer-events-none flex flex-row items-center gap-x-1 whitespace-nowrap font-serif text-sm font-semibold tracking-tight opacity-50"
+      className="pointer-events-none flex flex-row items-center gap-x-1 whitespace-nowrap font-mono text-xs font-thin uppercase tracking-tighter opacity-50"
     >
-      <TbLocationFilled />
+      <MdOutlineMyLocation className="pb-0.5" />
       <p>{`${location}`}</p>
-      <p> {`\t•\t`}</p>
-      <TbClockFilled />
+      <p> {`\t-\t`}</p>
       <p>{`${time}`}</p>
     </motion.div>
   );

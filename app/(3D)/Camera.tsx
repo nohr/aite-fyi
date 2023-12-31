@@ -29,7 +29,7 @@ export default function Camera() {
       e.preventDefault();
       let previousDelta = 0;
       const currentDelta = e.touches[1].clientY - e.touches[0].clientY;
-      console.log(currentDelta);
+      // console.log(currentDelta);
 
       const deltaDifference = currentDelta - previousDelta;
       updateZoom(deltaDifference / 200);

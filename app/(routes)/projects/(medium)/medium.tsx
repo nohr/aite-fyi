@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 import { TbWorldWww } from "react-icons/tb";
 import { useUIStore } from "(ui)";
 import { useEffect } from "react";
-import { PiPaintBrushFill } from "react-icons/pi";
+import { HiPaintBrush } from "react-icons/hi2";
 import { AnimatePresence } from "framer-motion";
 import { FaHandSparkles } from "react-icons/fa";
 
@@ -51,20 +51,20 @@ export default function Medium({
       )}
       <Arrows projects={medium_projects}>
         {!current_project && (
-          <h2 className=" flex h-12 w-full select-none items-center justify-start gap-1 border-b border-current px-2 font-serif text-2xl font-light tracking-tighter [&_svg]:h-[1.75rem] [&_svg]:w-auto ">
+          <h2 className=" text-md flex h-12 w-full select-none items-center justify-start gap-1 border-b border-current px-2 font-mono font-thin uppercase tracking-tight [&_svg]:h-[1.2rem] [&_svg]:w-auto ">
             {medium === "website" ? (
               <>
-                <TbWorldWww className=" -right-[0.03rem] -top-[0.2rem] opacity-40" />
+                <TbWorldWww className="pb-0.5" />
                 Websites
               </>
             ) : medium === "interactive" ? (
               <>
-                <FaHandSparkles className=" -right-[0.03rem] -top-[0.2rem] opacity-40" />
+                <FaHandSparkles className="pb-0.5" />
                 Interactive
               </>
             ) : medium === "design" ? (
               <>
-                <PiPaintBrushFill className=" -right-[0.03rem] -top-[0.2rem] opacity-40" />
+                <HiPaintBrush className="pb-0.5" />
                 Graphics
               </>
             ) : (

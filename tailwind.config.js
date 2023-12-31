@@ -15,6 +15,7 @@ module.exports = {
       fontFamily: {
         serif: ["var(--font-serif)"],
         heritage: ["var(--font-heritage)"],
+        mono: ["var(--font-mono)"],
       },
       colors: {
         red: {

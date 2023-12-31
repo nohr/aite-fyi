@@ -62,14 +62,9 @@ export default function Player() {
               <div className=" pointer-events-auto font-heritage text-6xl font-extralight uppercase tracking-tighter">
                 {song.name}
               </div>
-              <div className="flex h-fit flex-row gap-2 self-start">
-                <div className=" pointer-events-auto font-serif tracking-wider">
-                  {song.artist}
-                </div>{" "}
-                •
-                <div className=" pointer-events-auto font-serif tracking-wider">
-                  {song.album}
-                </div>
+              <div className="flex h-fit flex-row gap-2 self-start font-mono text-xs font-thin uppercase tracking-tighter">
+                <div className=" pointer-events-auto ">{song.artist}</div> -
+                <div className=" pointer-events-auto ">{song.album}</div>
               </div>
             </div>
           </div>
