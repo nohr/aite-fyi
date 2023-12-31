@@ -35,7 +35,7 @@ function Dom({ children }: { children: React.ReactNode }) {
             dpr={[0.5, 2]}
             className="!fixed !top-0 -z-10 "
             gl={{ antialias: true, alpha: true }}
-            eventSource={document?.body}
+            eventSource={document?.documentElement}
             eventPrefix="client"
           >
             <Preload all />
