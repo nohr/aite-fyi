@@ -71,7 +71,7 @@ const Nav = memo(function Nav() {
       initial={{ opacity: 0.5, filter: "blur(7px)" }}
       animate={{ opacity: 1, filter: "blur(0px)" }}
       transition={{ duration: 0.3 }}
-      className={` pointer-events-none fixed -bottom-0.5 z-40 flex w-screen flex-row justify-between p-2 pb-8 tracking-tight backdrop-blur-sm md:-top-[0.5px] md:bottom-auto md:px-8 md:py-4  ${
+      className={` pointer-events-none fixed -bottom-0.5 z-50 flex w-screen flex-row justify-between p-2 pb-8 tracking-tight backdrop-blur-sm md:-top-[0.5px] md:bottom-auto md:px-8 md:py-4  ${
         navLeft ? "" : "flex-row-reverse"
       }`}
     >
@@ -80,7 +80,7 @@ const Nav = memo(function Nav() {
         className={`pointer-events-none flex w-fit -skew-x-[5deg] -skew-y-[0.3deg] flex-row justify-start gap-2 self-start border-transparent transition-all duration-100 md:-skew-x-[8deg] md:-skew-y-[2deg]  md:border-b-[1px] `}
       >
         <NavLink active={pathname === `/`} to="home">
-          <GiHand />
+          <GiHand className=" -scale-x-100" />
         </NavLink>
         <NavLink active={pathname.includes("music")} to="music">
           <GiMusicalNotes className={playing ? "animate-tempo" : ""} />

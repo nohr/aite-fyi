@@ -16,7 +16,7 @@ export default function Data({ project }: { project: Project | undefined }) {
     <>
       {project && (
         <>
-          <Drop className="pointer-events-auto max-w-prose pl-1 [&>a]:text-sm [&>a]:font-semibold [&>a]:underline [&>a]:underline-offset-8">
+          <Drop className="pointer-events-auto max-w-prose px-3 md:pl-4 md:pr-0 [&>a]:text-sm [&>a]:font-semibold [&>a]:underline [&>a]:underline-offset-8">
             <PortableText value={project.content} />
           </Drop>
           <Drop className=" pointer-events-auto  flex w-full flex-row justify-between gap-4 px-2">

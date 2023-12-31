@@ -42,7 +42,7 @@ export default function Item({
                 ? ` pointer-events-auto relative w-fit flex-auto flex-col-reverse  overflow-hidden p-2 hover:border-current hover:shadow-md focus:border-current focus:shadow-md ${
                     current_project && "!flex-row-reverse  "
                   }`
-                : "w-full flex-col px-2 md:pt-2"
+                : "w-full flex-col px-2 md:pr-0 md:pt-2"
             }  flex h-fit items-start gap-2 rounded-sm border-transparent no-underline transition-all duration-100`}
           >
             {!active && (

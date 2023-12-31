@@ -37,7 +37,7 @@ export default function Locale({ Info }: { Info: Info }) {
       transition={{ duration: 0.25, delay: 0, ease: "easeIn" }}
       className="pointer-events-none flex flex-row items-center gap-x-1 whitespace-nowrap font-mono text-xs font-thin uppercase tracking-tighter opacity-50"
     >
-      <MdOutlineMyLocation className="pb-0.5" />
+      <MdOutlineMyLocation className="pb-[0.116rem]" />
       <p>{`${location}`}</p>
       <p> {`\t-\t`}</p>
       <p>{`${time}`}</p>

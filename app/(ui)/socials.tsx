@@ -12,30 +12,30 @@ export default function Socials() {
     >
       <a
         href="https://www.github.com/nohr"
-        title="github"
+        title="@nohr"
         target="_blank"
         rel="noreferrer noopener"
-        className="`nav-link pointer-events-auto inline-flex items-center gap-1 rounded-full border border-current  p-2 shadow-md transition duration-75 ease-in-out"
+        className="nav-link pointer-events-auto flex select-none items-center gap-1 rounded-full border border-current  p-2 shadow-md transition duration-75 ease-in-out"
       >
-        <BsGithub />
+        <BsGithub className="pointer-events-none" />
         {/* @nohr */}
       </a>
       <a
         href="https://www.linkedin.com/in/aite/"
-        title="linkedin"
+        title="in/aite"
         target="_blank"
         rel="noreferrer noopener"
-        className="`nav-link pointer-events-auto inline-flex items-center gap-1 rounded-full border border-current  p-2 shadow-md transition duration-75 ease-in-out"
+        className="nav-link pointer-events-auto flex select-none items-center gap-1 rounded-full border border-current  p-2 shadow-md transition duration-75 ease-in-out"
       >
-        <FaLinkedinIn />
+        <FaLinkedinIn className="pointer-events-none" />
         {/* in/aite */}
       </a>
       <a
         href={`mailto:${email}`}
-        title="email"
-        className="`nav-link pointer-events-auto inline-flex items-center gap-1 rounded-full border border-current  p-2 shadow-md transition duration-75 ease-in-out"
+        title={email}
+        className="nav-link pointer-events-auto flex select-none items-center gap-1 rounded-full border border-current  p-2 shadow-md transition duration-75 ease-in-out"
       >
-        <MdAlternateEmail />
+        <MdAlternateEmail className="pointer-events-none" />
         {/* {`${email}`} */}
       </a>
     </div>
