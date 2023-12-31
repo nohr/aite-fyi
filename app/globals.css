@@ -72,7 +72,7 @@ a {
     var(--arc-palette-background, #121a20) 0%,
     var(--arc-palette-backgroundExtra, #060a0c) 15%
   ) !important;
-  color: var(--arc-palette-cutoutColor, #405c6f) !important;
+  color: var(--arc-palette-foregroundSecondary, #405c6f) !important;
 }
 
 @media (prefers-color-scheme: dark) {

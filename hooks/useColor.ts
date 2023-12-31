@@ -60,7 +60,7 @@ function useColor() {
     setTimeout(() => {
       let dark =
         getComputedStyle(document.documentElement)
-          .getPropertyValue("--arc-palette-cutoutColor")
+          .getPropertyValue("--arc-palette-foregroundSecondary")
           .slice(0, -2)
           .toLocaleLowerCase() || "#405C6F";
       if (dark === "#000000" && theme === "dark") {
@@ -79,7 +79,7 @@ function useColor() {
       }
 
       // setColor(theme === "dark" ? dark : light);
-      setColor(hexToHsl(theme === "dark" ? dark : light));
+      setColor(theme === "dark" ? dark : light);
       setState({ color: theme === "dark" ? dark : light });
     }, 20);
   }, [setState, theme]);

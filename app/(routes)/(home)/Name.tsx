@@ -10,13 +10,13 @@ const Name = function ({ pic }: { pic: string }): JSX.Element {
   return (
     <h1 className=" flex flex-row flex-nowrap items-center font-serif text-6xl font-light capitalize italic tracking-tight transition duration-150 ease-out [&>span]:px-2  ">
       <span
-        className="cursor-pointer drop-shadow hover:drop-shadow-xl active:text-[#060a0c] active:drop-shadow-xl md:hover:text-[var(--arc-palette-foregroundSecondary,#e5e6e9ff)] active:dark:text-[#e5e6e9ff] md:dark:hover:text-[var(--arc-palette-foregroundSecondary,#060a0c)] "
+        className="cursor-pointer drop-shadow hover:drop-shadow-xl active:text-[#060a0c] active:drop-shadow-xl md:hover:text-[var(--arc-palette-foregroundSecondary,#e5e6e9ff)] active:dark:text-[#e5e6e9ff] md:dark:hover:text-[var(--arc-palette-cutoutColor,#060a0c)] "
         onClick={() => aite()}
       >
         aite
       </span>
       <span
-        className="cursor-pointer drop-shadow hover:drop-shadow-xl active:text-[#060a0c] active:drop-shadow-xl md:hover:text-[var(--arc-palette-foregroundSecondary,#e5e6e9ff)] active:dark:text-[#e5e6e9ff] md:dark:hover:text-[var(--arc-palette-foregroundSecondary,#060a0c)] "
+        className="cursor-pointer drop-shadow hover:drop-shadow-xl active:text-[#060a0c] active:drop-shadow-xl md:hover:text-[var(--arc-palette-foregroundSecondary,#e5e6e9ff)] active:dark:text-[#e5e6e9ff] md:dark:hover:text-[var(--arc-palette-cutoutColor,#060a0c)] "
         onClick={() => aigbe()}
       >
         aigbe
