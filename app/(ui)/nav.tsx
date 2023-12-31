@@ -23,6 +23,7 @@ interface NavLinkProps {
 
 const Nav = memo(function Nav() {
   const pathname = usePathname();
+  const admin = pathname.split("/")[1] === "admin";
   const [navLeft, setNavLeft] = useUIStore((s) => [s.navLeft, s.setNavLeft]);
   const [play] = useSFX("/sfx/click.mp3");
 
@@ -64,14 +65,15 @@ const Nav = memo(function Nav() {
 
   const playing = useAudioStore((s) => s.playing);
 
-  const navSkew = skew(navLeft, 12, 7);
+  // const navSkew = skew(navLeft, 12, 7);
   // const navSkew2 = skew(!navLeft, 12, 7);
+  if (admin) return null;
   return (
     <motion.nav
       initial={{ opacity: 0.5, filter: "blur(7px)" }}
       animate={{ opacity: 1, filter: "blur(0px)" }}
       transition={{ duration: 0.3 }}
-      className={` pointer-events-none fixed -bottom-0.5 z-50 flex w-screen flex-row justify-between p-2 pb-8 tracking-tight backdrop-blur-sm md:-top-[0.5px] md:bottom-auto md:px-8 md:py-4  ${
+      className={` pointer-events-none fixed -bottom-0.5 z-50 flex w-screen flex-row justify-between p-2 pb-8 tracking-tight backdrop-blur-sm md:bottom-auto md:top-0 md:px-8 md:py-4  ${
         navLeft ? "" : "flex-row-reverse"
       }`}
     >

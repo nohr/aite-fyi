@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import { HiPaintBrush } from "react-icons/hi2";
 import { AnimatePresence } from "framer-motion";
 import { FaHandSparkles } from "react-icons/fa";
+import useLoading from "@hooks/useLoading";
 
 export default function Medium({
   children,
@@ -34,6 +35,8 @@ export default function Medium({
   }, [param, setState]);
 
   const active = current_project?.medium === medium;
+
+  useLoading();
 
   return (
     <li

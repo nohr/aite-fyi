@@ -62,7 +62,7 @@ function useColor() {
         getComputedStyle(document.documentElement)
           .getPropertyValue("--arc-palette-foregroundSecondary")
           .slice(0, -2)
-          .toLocaleLowerCase() || "#405C6F";
+          .toLocaleLowerCase() || "#465B6D";
       if (dark === "#000000" && theme === "dark") {
         dark = "#ababab";
         document.body.style.color = dark;
@@ -79,8 +79,8 @@ function useColor() {
       }
 
       // setColor(theme === "dark" ? dark : light);
-      setColor(theme === "dark" ? dark : light);
-      setState({ color: theme === "dark" ? dark : light });
+      setColor(hexToHsl(theme === "dark" ? dark : light));
+      setState({ color: hexToHsl(theme === "dark" ? dark : light) });
     }, 20);
   }, [setState, theme]);
 

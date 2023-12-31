@@ -114,3 +114,17 @@ const builder = imageUrlBuilder(clientConfig);
 export function urlFor(source: SanityImageSource) {
   return builder.image(source);
 }
+
+export async function getProjectNameBySlug(
+  slug: string,
+): Promise<string | undefined> {
+  if (!slug) return;
+  const project = await createClient(clientConfig).fetch(
+    groq`
+        *[ _type == "project" && slug.current == $slug ][0]{
+            name
+        }`,
+    { slug },
+  );
+  return project?.name;
+}

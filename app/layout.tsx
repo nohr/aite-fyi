@@ -1,11 +1,17 @@
 import "./globals.css";
 import "@fontsource/delius";
 import { Analytics } from "@vercel/analytics/react";
-import Dom from "./dom";
 import Loading from "./loading";
 import { Suspense } from "react";
 import { Noto_Serif_Display } from "next/font/google";
 import localFont from "next/font/local";
+import dynamic from "next/dynamic";
+import { Nav } from "(ui)";
+
+const Media = dynamic(() => import("(ui)/Media"));
+const Dom = dynamic(() => import("./dom"), {
+  ssr: false,
+});
 
 const Heritage = localFont({
   src: "./Heritage-Display.otf",
@@ -20,7 +26,10 @@ const Libre = Noto_Serif_Display({
 });
 
 export const metadata = {
-  title: "Aite, for your info",
+  title: {
+    template: "%s | aite.fyi",
+    default: "aite, for your info",
+  },
   description: "Personal website of Aite Aigbe",
 };
 
@@ -43,12 +52,14 @@ export default function RootLayout({
     <html
       lang="en"
       translate="no"
-      className={`notranslate font-medium antialiased ${Libre.variable} ${Heritage.variable}`}
+      className={`font-medium antialiased ${Libre.variable} ${Heritage.variable}`}
     >
       <body className="flex flex-col">
         <Loading />
         <Suspense fallback={null}>
+          <Nav />
           <Dom>{children}</Dom>
+          <Media />
         </Suspense>
         <Analytics debug={false} />
       </body>
