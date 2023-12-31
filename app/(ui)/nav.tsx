@@ -75,7 +75,7 @@ const Nav = memo(function Nav() {
         navLeft ? "" : "flex-row-reverse"
       }`}
     >
-      <div className="absolute left-0 top-0 -z-10 block h-full w-full bg-[var(--arc-palette-title,#e5e6e9ff)] opacity-60 transition-all  duration-150 ease-in-out md:hidden dark:bg-[var(--arc-palette-backgroundExtra,#060a0c)] " />
+      <div className="absolute left-0 top-0 -z-10 block h-full w-full bg-[var(--arc-palette-title,#e5e6e9ff)] opacity-60 transition-all duration-150  ease-in-out md:hidden dark:bg-[var(--arc-palette-backgroundExtra,#060a0c)] dark:opacity-25 " />
       <div
         className={`pointer-events-none flex w-fit -skew-x-[5deg] -skew-y-[0.3deg] flex-row justify-start gap-2 self-start border-transparent transition-all duration-100 md:-skew-x-[8deg] md:-skew-y-[2deg]  md:border-b-[1px] `}
       >
