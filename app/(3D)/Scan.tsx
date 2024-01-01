@@ -57,7 +57,7 @@ export const Scan = memo(function Scan() {
     groupRef.current.position.y = Math.sin(Date.now() / 1000) / 10;
   };
 
-  useFrame(({ pointer }) => {
+  useFrame(({ pointer, scene }) => {
     if (!groupRef.current) return;
 
     if (project) {
@@ -70,10 +70,14 @@ export const Scan = memo(function Scan() {
         0.05,
       );
       setTimeout(() => {
-        if (groupRef.current) groupRef.current.visible = false;
+        if (groupRef.current) {
+          groupRef.current.visible = false;
+          scene.remove(groupRef.current);
+        }
       }, 750);
       return;
     } else {
+      scene.add(groupRef.current);
       if (groupRef.current.position.z > -3.5) {
         groupRef.current.position.lerp(
           new Vector3(

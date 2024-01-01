@@ -1,21 +1,14 @@
-import React, { MutableRefObject, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import { usePathname } from "next/navigation";
 import { Vector3 } from "three";
-import {
-  Bloom,
-  DepthOfField,
-  Noise,
-  Vignette,
-} from "@react-three/postprocessing";
+import { Bloom, Noise, Vignette } from "@react-three/postprocessing";
 
 // import { Vector3 } from "three";
 export default function Camera() {
   const [zoom, setZoom] = useState(2);
   const params = usePathname().split("/")[2];
   const { scene } = useThree();
-
-  console.log(zoom);
 
   useEffect(() => {
     if (scene.children[1]) window.innerWidth < 768 ? setZoom(4) : setZoom(2);
@@ -39,7 +32,7 @@ export default function Camera() {
     }
   };
 
-  useFrame(({ camera }) => {
+  useFrame(({ camera, scene, frameloop }) => {
     // const vec = new Vector3();
     // const pos = new Vector3();
     // if (width < 768) return;
@@ -57,23 +50,6 @@ export default function Camera() {
     // camera.position.x = x ?? 0;
     // };
 
-    // document.ontouchmove = (e) => {
-    //   if (e.touches.length > 1) {
-    //   e.preventDefault();
-    //     // let previousDelta = 0;
-    //     // const currentDelta = e.touches[0].clientY - e.touches[1].clientY;
-    //     // console.log(currentDelta);
-
-    //     // const deltaDifference = currentDelta - previousDelta;
-    //     // updateZoom(deltaDifference / 10);
-    //     // previousDelta = currentDelta;
-    //   }
-    // };
-
-    // document.addEventListener("touchmove", handlePinchZoom, {
-    //   passive: false,
-    // });
-
     window.ontouchmove = (e) => {
       handlePinchZoom(e);
     };
@@ -90,6 +66,13 @@ export default function Camera() {
     const newtarget = new Vector3(camera.position.x, camera.position.y, zoom);
 
     camera.position.lerp(newtarget, 0.075);
+
+    // if scene is empty, freeze canvas
+    if (scene.children.length < 2) {
+      frameloop = "demand";
+    } else if (scene.children.length > 1) {
+      frameloop = "always";
+    }
   });
 
   return (
