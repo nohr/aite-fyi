@@ -53,28 +53,31 @@ export default function Medium({
         <div className="absolute left-0 top-12 -z-10 h-[calc(100%-48px)] w-full bg-[var(--arc-palette-title,#e5e6e9ff)] opacity-0 backdrop-blur-md transition-all duration-150 ease-in-out group-hover/medium:opacity-60 md:group-hover/medium:shadow-sm dark:bg-[var(--arc-palette-backgroundExtra,#060a0c)] " />
       )}
       <Arrows projects={medium_projects}>
-        {!current_project && (
-          <h2 className=" text-md flex h-12 w-full select-none items-center justify-start gap-1 border-b border-current px-2 font-mono font-thin uppercase tracking-tight [&_svg]:h-[1.2rem] [&_svg]:w-auto ">
-            {medium === "website" ? (
-              <>
-                <TbWorldWww className="pb-0.5" />
-                Websites
-              </>
-            ) : medium === "interactive" ? (
-              <>
-                <FaHandSparkles className="pb-0.5" />
-                Interactive
-              </>
-            ) : medium === "design" ? (
-              <>
-                <HiPaintBrush className="pb-0.5" />
-                Graphics
-              </>
-            ) : (
-              medium
-            )}
-          </h2>
-        )}
+        <h2
+          className={` text-md flex h-12 w-full select-none items-center justify-start gap-1 border-b border-current px-2 font-mono font-thin uppercase tracking-tight [&_svg]:h-[1.2rem] [&_svg]:w-auto ${
+            current_project ? "h-6 scale-y-95 opacity-15" : ""
+          } `}
+        >
+          {medium === "website" ? (
+            <>
+              <TbWorldWww className="pb-0.5" />
+              Websites
+            </>
+          ) : medium === "interactive" ? (
+            <>
+              <FaHandSparkles className="pb-0.5" />
+              Interactive
+            </>
+          ) : medium === "design" ? (
+            <>
+              <HiPaintBrush className="pb-0.5" />
+              Graphics
+            </>
+          ) : (
+            medium
+          )}
+        </h2>
+
         <div
           className={`nowrap w-full flex-row flex-wrap items-start justify-start gap-2 py-4 md:py-0 ${
             active

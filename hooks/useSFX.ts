@@ -1,4 +1,3 @@
-import React from "react";
 import useSound from "use-sound";
 
 function useSFX(src: string) {

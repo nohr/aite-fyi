@@ -10,15 +10,14 @@ import { useUIStore } from "(ui)";
 
 function Scene() {
   const { progress } = useProgress();
-  const page = usePathname().split("/")[1];
   const params = usePathname().split("/")[2];
   const project = useUIStore((s) => s.project);
   const show_devices = project?.medium === "website";
 
   return (
     <Suspense fallback={<Html center>{progress}%</Html>}>
+      <Scan />
       {show_devices ? <Device /> : null}
-      {page !== "projects" ? <Scan /> : null}
       {params === "eko-digital" ? <EkoDigital /> : null}
       {process.env.NODE_ENV === "development" ? (
         <StatsGl

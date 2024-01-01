@@ -32,7 +32,7 @@ export default function Data({ project }: { project: Project | undefined }) {
                   {url.includes("github") ? (
                     <>
                       Github
-                      <SiGithub className="h-3 w-3 underline" />
+                      <SiGithub className="h-3 w-3" />
                     </>
                   ) : url.includes("gumroad") ? (
                     <>
@@ -62,7 +62,7 @@ export default function Data({ project }: { project: Project | undefined }) {
                         key={video.alt}
                         src={video.url}
                         controls
-                        className="pointer-events-auto !aspect-video h-auto w-full rounded-sm border border-current shadow-sm"
+                        className="pointer-events-auto !aspect-video h-auto w-full rounded-sm border border-current shadow-sm md:max-w-prose"
                       />,
                       document.getElementById("project-portal")!,
                     )
@@ -79,7 +79,7 @@ export default function Data({ project }: { project: Project | undefined }) {
                       alt={project.name + " " + image._key}
                       height={image.height}
                       width={image.width}
-                      className="pointer-events-none h-auto w-full select-none object-contain"
+                      className="pointer-events-none h-auto w-full select-none object-contain md:max-w-prose"
                     />,
                     document.getElementById("project-portal")!,
                     image._key,

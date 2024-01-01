@@ -36,9 +36,9 @@ export default async function ProjectsLayout({
             {children}
           </Medium>
         ))}
-        <div
+        <li
           id="project-portal"
-          className=" flex h-fit w-full flex-wrap gap-y-4 overflow-y-scroll px-1 py-6 md:px-32 lg:px-48"
+          className=" flex h-fit w-full flex-wrap gap-4 overflow-y-scroll px-1 py-6"
         />
       </ul>
     </Suspense>

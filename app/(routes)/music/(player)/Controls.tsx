@@ -47,7 +47,7 @@ export default function Controls() {
       setSong(playlist[index + direction]);
     }
   };
-  const [play] = useSFX("/sfx/click.mp3");
+  const [play] = useSFX("/sfx/click2.mp3");
   const [playerTime, setPlayerTime] = useState(`0:00 / 0:00`);
 
   useEffect(() => {

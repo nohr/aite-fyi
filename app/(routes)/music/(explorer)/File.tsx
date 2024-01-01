@@ -11,7 +11,7 @@ export default function File({ song }: { song: Song }) {
   const [setSong, setPlaying] = useAudioStore((s) => [s.setSong, s.setPlaying]);
 
   // console.log(song);
-  const [play] = useSFX("/sfx/click.mp3");
+  const [play] = useSFX("/sfx/click2.mp3");
 
   const [confirm, setConfirm] = useState(false);
   return (

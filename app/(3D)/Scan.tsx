@@ -23,7 +23,8 @@ export const Scan = memo(function Scan() {
   const groupRef = useRef<Group>(null);
   const [song, playing] = useAudioStore((s) => [s.song, s.playing]);
   const { color } = useColor();
-  const project = usePathname().split("/")[2];
+  // const project = usePathname().split("/")[2];
+  const project = usePathname().split("/")[1] === "projects";
 
   const handleMouseMove = (mouse: Vector2) => {
     const tar = new Vector3((mouse.x * mod * 2) / 1, mouse.y * mod, 3);

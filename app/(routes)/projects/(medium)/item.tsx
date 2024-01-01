@@ -17,7 +17,7 @@ export default function Item({
   project: Project;
 }) {
   const path = `/projects/${project?.slug}`;
-  const [play] = useSFX("/sfx/click.mp3");
+  const [play] = useSFX("/sfx/click2.mp3");
   const { setState } = useUIStore;
   const current_project = usePathname().split("/")[2];
   const active = current_project && current_project === project?.slug;
