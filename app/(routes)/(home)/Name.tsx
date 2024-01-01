@@ -1,11 +1,11 @@
 "use client";
 
-import useSFX from "@hooks/useSFX";
 import Image from "next/image";
+import useSound from "use-sound";
 
 const Name = function ({ pic }: { pic: string }): JSX.Element {
-  const [aite] = useSFX("/sfx/aite.wav");
-  const [aigbe] = useSFX("/sfx/aigbe.wav");
+  const [aite] = useSound("/sfx/aite.wav", { volume: 0.35, interrupt: true });
+  const [aigbe] = useSound("/sfx/aigbe.wav", { volume: 0.35, interrupt: true });
 
   return (
     <h1 className=" flex flex-row flex-nowrap items-center font-serif text-6xl font-light capitalize italic tracking-tight transition duration-150 ease-out [&>span]:px-2  ">

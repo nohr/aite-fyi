@@ -1,7 +1,13 @@
 import useSound from "use-sound";
+import { useAudioStore } from "./useAudioStore";
 
 function useSFX(src: string) {
-  const [play] = useSound(src, { volume: 0.25, interrupt: true });
+  const muted = useAudioStore((s) => s.muted);
+  const [play] = useSound(src, {
+    volume: 0.25,
+    interrupt: true,
+    soundEnabled: !muted,
+  });
 
   return [play];
 }
