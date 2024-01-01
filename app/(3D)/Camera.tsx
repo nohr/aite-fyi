@@ -11,9 +11,11 @@ import {
 
 // import { Vector3 } from "three";
 export default function Camera() {
-  const [zoom, setZoom] = useState(8);
+  const [zoom, setZoom] = useState(2);
   const params = usePathname().split("/")[2];
   const { scene } = useThree();
+
+  console.log(zoom);
 
   useEffect(() => {
     if (scene.children[1]) window.innerWidth < 768 ? setZoom(4) : setZoom(2);
