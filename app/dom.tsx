@@ -3,7 +3,7 @@
 // import { useRef } from "react";
 import dynamic from "next/dynamic";
 import useDisablePinch from "@hooks/useDisablePinch";
-import useSpecific from "@hooks/useSpecific";
+// import useSpecific from "@hooks/useSpecific";
 import useTheme from "@hooks/useTheme";
 import { usePathname } from "next/navigation";
 import { Canvas } from "@react-three/fiber";
@@ -22,7 +22,7 @@ function Dom({ children }: { children: React.ReactNode }) {
   const admin = pathname.split("/")[1] === "admin";
 
   useTheme();
-  useSpecific();
+  // useSpecific();
   useDisablePinch();
 
   return (
