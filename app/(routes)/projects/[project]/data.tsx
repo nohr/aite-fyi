@@ -66,7 +66,7 @@ export default function Data({ project }: { project: Project | undefined }) {
                         key={video.alt}
                         src={video.url}
                         controls
-                        className="pointer-events-auto !aspect-video h-auto w-full rounded-sm border border-current shadow-sm md:max-w-prose"
+                        className="pointer-events-auto  h-auto w-full rounded-sm border border-current shadow-sm md:max-w-prose"
                       />,
                       document.getElementById("project-portal")!,
                     )
