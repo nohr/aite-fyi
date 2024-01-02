@@ -11,25 +11,11 @@ import useSFX from "@hooks/useSFX";
 import { useEffect, useState } from "react";
 
 export default function Controls() {
-  const [
-    song,
-    setSong,
-    playing,
-    setPlaying,
-    playlist,
-    time,
-    setTime,
-    updateTime,
-  ] = useAudioStore((s) => [
-    s.song,
-    s.setSong,
-    s.playing,
-    s.setPlaying,
-    s.playlist,
-    s.time,
-    s.setTime,
-    s.updateTime,
-  ]);
+  const [song, playing, setPlaying, playlist, time, setTime] = useAudioStore(
+    (s) => [s.song, s.playing, s.setPlaying, s.playlist, s.time, s.setTime],
+  );
+
+  const { setState } = useAudioStore;
 
   const changeSong = (direction: number) => {
     const index = playlist.findIndex((s) => s.name === song?.name);
@@ -38,13 +24,13 @@ export default function Controls() {
       if (audio.currentTime > 3) {
         setPlaying();
         audio.currentTime = 0;
-        updateTime(0);
+        setState({ time: 0 });
         setPlaying();
-      } else setSong(playlist[playlist.length - 1]);
+      } else setState({ song: playlist[playlist.length - 1] });
     } else if (index + direction === playlist.length) {
-      setSong(playlist[0]);
+      setState({ song: playlist[0] });
     } else {
-      setSong(playlist[index + direction]);
+      setState({ song: playlist[index + direction] });
     }
   };
   const [play] = useSFX("/sfx/click2.mp3");
@@ -56,14 +42,14 @@ export default function Controls() {
     if (!song || !audio) return;
     const minutes = Math.floor(audio.duration / 60);
     const seconds = Math.floor(audio.duration % 60);
-    const time = `${minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
+    const display_time = `${minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
     const current = `${Math.floor(audio.currentTime / 60)}:${
       Math.floor(audio.currentTime % 60) < 10
         ? "0" + Math.floor(audio.currentTime % 60)
         : Math.floor(audio.currentTime % 60)
     }`;
-    setPlayerTime(`${current} / ${time}`);
-  }, [time]);
+    setPlayerTime(`${current} / ${display_time}`);
+  }, [song, time]);
 
   return (
     <div

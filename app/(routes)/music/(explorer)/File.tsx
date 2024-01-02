@@ -8,11 +8,11 @@ import { RiLoaderFill } from "react-icons/ri";
 import { Song } from "types/Song";
 
 export default function File({ song }: { song: Song }) {
-  const [setSong, setPlaying] = useAudioStore((s) => [s.setSong, s.setPlaying]);
+  const [setPlaying] = useAudioStore((s) => [s.setPlaying]);
 
   // console.log(song);
   const [play] = useSFX("/sfx/click2.mp3");
-
+  const { setState } = useAudioStore;
   const [confirm, setConfirm] = useState(false);
   return (
     <button
@@ -22,7 +22,7 @@ export default function File({ song }: { song: Song }) {
       onClick={() => {
         if (confirm) {
           play();
-          setSong(song);
+          setState({ song });
           setPlaying(true);
         } else {
           setConfirm(true);

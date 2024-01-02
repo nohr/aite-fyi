@@ -29,21 +29,17 @@ const Cover = ({
 );
 
 export default function Player() {
-  const [song, setSong, setPlaylist] = useAudioStore((s) => [
-    s.song,
-    s.setSong,
-    s.setPlaylist,
-  ]);
-
+  const [song] = useAudioStore((s) => [s.song]);
+  const { setState } = useAudioStore;
   useEffect(() => {
     (async () => {
       const songs = await getSongs();
       if (songs.length > 0) {
-        if (!song) setSong(songs[0]);
-        setPlaylist(songs);
+        if (!song) setState({ song: songs[0] });
+        setState({ playlist: songs });
       }
     })();
-  }, [setPlaylist, setSong, song]);
+  }, [setState, song]);
 
   return (
     <div className=" items-between pointer-events-none flex w-full flex-row justify-start gap-4 p-2 md:-order-1 md:divide-x md:divide-solid md:divide-current">

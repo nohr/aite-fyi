@@ -4,29 +4,27 @@ import { useAudioStore } from "@hooks/useAudioStore";
 import { useEffect, useRef } from "react";
 
 export default function Media() {
-  const [song, playing, setSong, playlist, updateTime, setAudio] =
-    useAudioStore((s) => [
-      s.song,
-      s.playing,
-      s.setSong,
-      s.playlist,
-      s.updateTime,
-      s.setAudio,
-    ]);
+  const [song, playing, playlist] = useAudioStore((s) => [
+    s.song,
+    s.playing,
+    s.playlist,
+  ]);
+
+  const { setState } = useAudioStore;
 
   const audioRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
     if (audioRef.current) {
-      setAudio(audioRef.current);
+      setState({ audio: audioRef.current });
     }
-  }, [audioRef, setAudio]);
+  }, [audioRef, setState]);
 
   useEffect(() => {
     if (audioRef.current) {
       if (playing) {
         audioRef.current.play();
-        const index = playlist.findIndex((s) => s.name === song?.name);
+        // const index = playlist.findIndex((s) => s.name === song?.name);
         // playlist[index].duration = audioRef.current.duration;
       } else {
         audioRef.current.pause();
@@ -55,21 +53,20 @@ export default function Media() {
           onTimeUpdate={(e) => {
             const audio = e.currentTarget;
             if (!audio || Number.isNaN(audio.duration)) return;
-            updateTime((audio.currentTime / audio.duration) * 100);
+            setState({ time: (audio.currentTime / audio.duration) * 100 });
           }}
           onEnded={(e) => {
             if (e.currentTarget.loop) {
               e.currentTarget.play();
             } else if (playlist[playlist.length - 1] === song) {
-              setSong(playlist[0]);
+              setState({ song: playlist[0] });
             } else {
               const index = playlist.findIndex((s) => s.name === song?.name);
-              setSong(playlist[index + 1]);
+              setState({ song: playlist[index + 1] });
             }
           }}
 
           // volume={volume}
-          // onTimeUpdate={(e) => setTime(e.currentTarget.currentTime)}
         ></audio>
       )}
     </>
