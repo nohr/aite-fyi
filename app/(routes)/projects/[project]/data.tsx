@@ -58,6 +58,10 @@ export default function Data({ project }: { project: Project | undefined }) {
                   return video ? (
                     createPortal(
                       <video
+                        autoPlay={true}
+                        playsInline
+                        muted
+                        loop
                         preload="metadata"
                         key={video.alt}
                         src={video.url}
