@@ -61,7 +61,7 @@ export default function Medium({
           {medium === "website" ? (
             <>
               <TbWorldWww className="pb-0.5" />
-              Websites
+              Website
             </>
           ) : medium === "interactive" ? (
             <>

@@ -30,7 +30,7 @@ export default async function ProjectsLayout({
 
   return (
     <Suspense fallback={null}>
-      <ul className="flex h-fit w-full flex-wrap justify-start self-start overflow-visible pt-2 md:gap-4 md:pt-0">
+      <ul className="flex h-fit w-full flex-wrap justify-start self-start overflow-visible pt-2 md:gap-4">
         {mediums.map((medium) => (
           <Medium key={medium} medium={medium} projects={projects}>
             {children}
