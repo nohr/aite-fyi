@@ -7,7 +7,7 @@ import { memo } from "react";
 import { GiBombingRun, GiHand, GiMusicalNotes } from "react-icons/gi";
 import { useAudioStore } from "@hooks/useAudioStore";
 // import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from "react-icons/bs";
-import { skew } from "../../utils/constants";
+// import { skew } from "../../utils/constants";
 import useSFX from "@hooks/useSFX";
 import { motion } from "framer-motion";
 import Socials from "./socials";
@@ -84,11 +84,11 @@ const Nav = memo(function Nav() {
         <NavLink active={pathname === `/`} to="home">
           <GiHand className=" -scale-x-100" />
         </NavLink>
-        <NavLink active={pathname.includes("music")} to="music">
-          <GiMusicalNotes className={playing ? "animate-tempo" : ""} />
-        </NavLink>
         <NavLink active={pathname.includes("projects")} to="proj.">
           <GiBombingRun />
+        </NavLink>
+        <NavLink active={pathname.includes("music")} to="music">
+          <GiMusicalNotes className={playing ? "animate-tempo" : ""} />
         </NavLink>
       </div>
       {/* <NavLink
