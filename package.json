@@ -25,6 +25,7 @@
     "@vercel/analytics": "^1.1.1",
     "eslint-config-next": "^14.0.4",
     "framer-motion": "^10.16.16",
+    "lodash": "^4.17.21",
     "next": "^14.0.4",
     "next-sanity": "^7.0.4",
     "postprocessing": "^6.33.4",

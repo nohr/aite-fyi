@@ -1,13 +1,18 @@
 "use client";
 
-// import { useRef } from "react";
 import dynamic from "next/dynamic";
 import useDisablePinch from "@hooks/useDisablePinch";
-// import useSpecific from "@hooks/useSpecific";
 import useTheme from "@hooks/useTheme";
 import { usePathname } from "next/navigation";
 import { Canvas } from "@react-three/fiber";
-import { Preload, StatsGl } from "@react-three/drei";
+import {
+  AdaptiveDpr,
+  PerformanceMonitor,
+  Preload,
+  StatsGl,
+} from "@react-three/drei";
+import round from "lodash/round";
+import { useState } from "react";
 
 const Scene = dynamic(() => import("(3D)/Scene"), {
   ssr: false,
@@ -15,13 +20,13 @@ const Scene = dynamic(() => import("(3D)/Scene"), {
 const Camera = dynamic(() => import("(3D)/Camera"), {
   ssr: false,
 });
+
 function Dom({ children }: { children: React.ReactNode }) {
-  // const ref = useRef<HTMLDivElement>(null!);
   const pathname = usePathname();
   const admin = pathname.split("/")[1] === "admin";
 
+  const [dpr, setDpr] = useState(2);
   useTheme();
-  // useSpecific();
   useDisablePinch();
 
   return (
@@ -30,16 +35,21 @@ function Dom({ children }: { children: React.ReactNode }) {
       {!admin && (
         <>
           <Canvas
+            dpr={dpr}
             linear
-            dpr={[0.5, 2]}
             className="pointer-events-none !fixed !top-0"
             gl={{ antialias: false, alpha: true }}
             eventSource={document?.body}
             eventPrefix="client"
           >
-            <Preload all />
+            <PerformanceMonitor
+              factor={1}
+              onChange={({ factor }) => setDpr(round(0.5 + 1.5 * factor, 1))}
+            />
             <Camera />
             <Scene />
+            <Preload all />
+            <AdaptiveDpr pixelated />
             {process.env.NODE_ENV === "development" ? (
               <StatsGl
                 className="!absolute !bottom-0 !left-auto !right-0 !top-auto !hidden h-[66px]

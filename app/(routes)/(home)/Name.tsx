@@ -30,7 +30,7 @@ const Name = function ({ pic }: { pic: string }): JSX.Element {
         alt="me!"
         width={45}
         height={45}
-        className="pointer-events-none aspect-square !h-fit select-none pl-2"
+        className="pointer-events-none aspect-square !h-fit w-auto select-none pl-2"
       />
     </h1>
   );

@@ -36,7 +36,7 @@ export default function Camera() {
   //   }
   // };
 
-  useFrame(({ camera, scene }) => {
+  useFrame(({ camera }) => {
     // const vec = new Vector3();
     // const pos = new Vector3();
     // if (width < 768) return;

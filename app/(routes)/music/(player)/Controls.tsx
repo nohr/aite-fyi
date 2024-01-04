@@ -55,7 +55,7 @@ export default function Controls() {
 
   return (
     <div
-      className={`track relative flex h-10 w-full flex-row items-center justify-center overflow-hidden rounded-full border border-current px-2 py-1 text-[var(--arc-palette-title)] shadow-md transition-all dark:text-[var(--arc-palette-backgroundExtra)] ${
+      className={`track relative flex h-10 w-full flex-row items-center justify-center overflow-hidden rounded-full border border-current px-2 py-1 text-[var(--arc-palette-focus)] shadow-md transition-all dark:text-[var(--arc-palette-foregroundSecondary)] ${
         song ? "pointer-events-auto" : "pointer-events-none opacity-50"
       }}`}
     >
