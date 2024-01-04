@@ -14,7 +14,7 @@ export default function Camera() {
 
   useEffect(() => {
     if (scene.children[1])
-      window.innerWidth < 768 ? setState({ zoom: 4 }) : setState({ zoom: 2 });
+      window.innerWidth < 768 ? setState({ zoom: 5 }) : setState({ zoom: 2 });
   }, [scene.children, setState]);
 
   function updateZoom(delta: number) {

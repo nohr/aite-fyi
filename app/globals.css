@@ -33,23 +33,23 @@ body {
 
 html,
 body {
-  background: var(--arc-palette-title, #e5e6e9ff);
+  background: var(--arc-palette-title, #e0e0e0);
   background: linear-gradient(
     180deg,
-    var(--arc-palette-hover, #c4c4cd) 0%,
-    var(--arc-palette-title, #e5e6e9ff) 15%
+    var(--arc-palette-hover, #b7b7b7) 0%,
+    var(--arc-palette-title, #e0e0e0) 15%
   );
-  color: var(--arc-palette-focus, #76768b);
+  color: var(--arc-palette-focus, #000);
   background-repeat: no-repeat;
 }
 
 body {
-  @apply relative selection:bg-[var(--arc-palette-focus,_#a27777)] selection:text-[var(--arc-palette-title,_#e5e6e9ff)] dark:selection:bg-[var(--arc-palette-focus,_#405c6f)] dark:selection:text-[var(--arc-palette-title,_#060a0c)];
+  @apply relative selection:bg-[var(--arc-palette-focus,_#a27777)] selection:text-[var(--arc-palette-title,_#e0e0e0)] dark:selection:bg-[var(--arc-palette-focus,_#405c6f)] dark:selection:text-[var(--arc-palette-title,_#060a0c)];
 }
 
 .nav-link:hover > *,
 .active > * {
-  @apply mix-blend-plus-lighter dark:mix-blend-difference;
+  @apply text-[#e0e0e0] opacity-90 dark:text-black dark:opacity-90;
 }
 
 .nav-link:hover,
@@ -67,13 +67,13 @@ a {
 }
 
 .dark {
-  background-color: var(--arc-palette-backgroundExtra, #060a0c);
+  background-color: var(--arc-palette-backgroundExtra, #040404);
   background: linear-gradient(
     180deg,
-    var(--arc-palette-background, #121a20) 0%,
-    var(--arc-palette-backgroundExtra, #060a0c) 15%
+    var(--arc-palette-background, #1b1b1b) 0%,
+    var(--arc-palette-backgroundExtra, #040404) 15%
   ) !important;
-  color: var(--arc-palette-foregroundSecondary, #405c6f) !important;
+  color: var(--arc-palette-foregroundSecondary, #e2e2e2) !important;
 }
 
 @media (prefers-color-scheme: dark) {

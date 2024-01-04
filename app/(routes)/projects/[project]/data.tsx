@@ -92,8 +92,9 @@ export default function Data({ project }: { project: Project | undefined }) {
                 )}
             </Drop>
           )}
-          {project.medium === "website" &&
-          document.getElementById("zoom-portal")
+          {project.medium === "website" ||
+          (project.slug === "eko-digital" &&
+            document.getElementById("zoom-portal"))
             ? createPortal(<ZoomBar />, document.getElementById("zoom-portal")!)
             : null}
         </>

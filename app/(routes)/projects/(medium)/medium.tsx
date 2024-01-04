@@ -50,7 +50,7 @@ export default function Medium({
       }
     >
       {param ? null : (
-        <div className="absolute left-0 top-12 -z-10 h-[calc(100%-48px)] w-full bg-[var(--arc-palette-title,#e5e6e9ff)] opacity-0 backdrop-blur-md transition-all duration-150 ease-in-out group-hover/medium:opacity-60 md:group-hover/medium:shadow-sm dark:bg-[var(--arc-palette-backgroundExtra,#060a0c)] " />
+        <div className="absolute left-0 top-12 -z-10 h-[calc(100%-48px)] w-full bg-[var(--arc-palette-title,#e0e0e0)] opacity-0 backdrop-blur-md transition-all duration-150 ease-in-out group-hover/medium:opacity-60 md:group-hover/medium:shadow-sm dark:bg-[var(--arc-palette-backgroundExtra,#060a0c)] " />
       )}
       <Arrows projects={medium_projects}>
         <h2

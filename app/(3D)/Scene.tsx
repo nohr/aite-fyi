@@ -18,7 +18,10 @@ function Scene() {
 
   useFrame((state) => {
     if (state.scene.children.length < 2 && state.frameloop === "always") {
-      state.setFrameloop("demand");
+      // wait 500ms before switching to demand
+      setTimeout(() => {
+        state.setFrameloop("demand");
+      }, 500);
     } else if (
       state.scene.children.length > 1 &&
       state.frameloop === "demand"

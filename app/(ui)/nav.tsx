@@ -75,7 +75,7 @@ const Nav = memo(function Nav() {
         "" // navLeft ? "" : "flex-row-reverse"
       }`}
     >
-      <div className="absolute left-0 top-0 -z-10 block h-full w-full bg-[var(--arc-palette-title,#e5e6e9ff)] opacity-60 transition-all duration-150  ease-in-out md:hidden dark:bg-[var(--arc-palette-backgroundExtra,#060a0c)] dark:opacity-25 " />
+      <div className="absolute left-0 top-0 -z-10 block h-full w-full bg-[var(--arc-palette-title,#e0e0e0)] opacity-60 transition-all duration-150  ease-in-out md:hidden dark:bg-[var(--arc-palette-backgroundExtra,#060a0c)] dark:opacity-25 " />
       <li
         id="zoom-portal"
         className="flex h-fit w-full flex-wrap gap-4 overflow-y-scroll px-1 md:hidden"

@@ -50,7 +50,7 @@ export const Device = function Device() {
     // }
 
     // mouse tracking
-    const mod = w >= 768 ? 0.8 : 2;
+    const mod = w >= 768 ? 0.8 : 0.7;
     m1.current?.lookAt(new Vector3(pointer.x * 2 * 0.1 - 1, pointer.y, 10));
     phone.current?.lookAt(new Vector3(pointer.x + 5, pointer.y, 10));
 

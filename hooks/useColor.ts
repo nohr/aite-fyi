@@ -62,16 +62,16 @@ function useColor() {
         getComputedStyle(document.documentElement)
           .getPropertyValue("--arc-palette-foregroundSecondary")
           .slice(0, -2)
-          .toLocaleLowerCase() || "#465B6D";
+          .toLocaleLowerCase() || "#929292";
       if (dark === "#000000" && theme === "dark") {
-        dark = "#ababab";
+        dark = "#929292";
         document.body.style.color = dark;
       }
       let light =
         getComputedStyle(document.documentElement)
           .getPropertyValue("--arc-palette-focus")
           .slice(0, -2)
-          .toLocaleLowerCase() || "#76768b";
+          .toLocaleLowerCase() || "#000";
 
       if (light === "#787878") {
         light = "#505050";
