@@ -23,7 +23,7 @@ html,
 body {
   font-family: "Delius", cursive;
   letter-spacing: 0.038em;
-  width: 100%;
+  width: 100dvw;
   /* height: 100%; */
   overflow-x: hidden;
   height: 100dvh !important;
@@ -31,7 +31,8 @@ body {
   /* overflow: hidden; */
 }
 
-html {
+html,
+body {
   background: var(--arc-palette-title, #e5e6e9ff);
   background: linear-gradient(
     180deg,
@@ -76,7 +77,8 @@ a {
 }
 
 @media (prefers-color-scheme: dark) {
-  html {
+  html,
+  body {
     @apply dark;
   }
 }

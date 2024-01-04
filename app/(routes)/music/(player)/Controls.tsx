@@ -9,6 +9,7 @@ import {
 } from "react-icons/bs";
 import useSFX from "@hooks/useSFX";
 import { useEffect, useState } from "react";
+import Slider from "_components/slider";
 
 export default function Controls() {
   const [song, playing, setPlaying, playlist, time, setTime] = useAudioStore(
@@ -39,7 +40,8 @@ export default function Controls() {
   useEffect(() => {
     const audio = document.querySelector("audio") as HTMLAudioElement;
 
-    if (!song || !audio) return;
+    if (!song || !audio || Number.isNaN(audio.duration)) return;
+
     const minutes = Math.floor(audio.duration / 60);
     const seconds = Math.floor(audio.duration % 60);
     const display_time = `${minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
@@ -53,11 +55,11 @@ export default function Controls() {
 
   return (
     <div
-      className={`track relative flex h-10 w-full flex-row items-center justify-center overflow-hidden rounded-full px-2 py-1 shadow-lg transition-all  ${
+      className={`track relative flex h-10 w-full flex-row items-center justify-center overflow-hidden rounded-full border border-current px-2 py-1 text-[var(--arc-palette-title)] shadow-md transition-all dark:text-[var(--arc-palette-backgroundExtra)] ${
         song ? "pointer-events-auto" : "pointer-events-none opacity-50"
       }}`}
     >
-      <div className="absolute left-0 top-0 -z-10 h-full w-full bg-current opacity-90 backdrop-blur-md transition-all duration-150 ease-in-out [&_svg]:shadow-sm" />
+      <div className="absolute left-0 top-0 -z-10 h-full w-full  bg-transparent opacity-90 backdrop-blur-md transition-all duration-150 ease-in-out [&_svg]:shadow-sm" />
       <button
         suppressHydrationWarning
         type="button"
@@ -66,7 +68,7 @@ export default function Controls() {
           play();
         }}
         title="rewind"
-        className=" pointer-events-auto text-[var(--arc-palette-title,#e5e6e9ff)] dark:text-[var(--arc-palette-backgroundExtra,#060a0c)]"
+        className=" pointer-events-auto"
       >
         <BsFillRewindBtnFill className=" w-8" />
       </button>
@@ -74,7 +76,7 @@ export default function Controls() {
         suppressHydrationWarning
         type="button"
         title="play"
-        className=" pointer-events-auto text-[var(--arc-palette-title,#e5e6e9ff)] dark:text-[var(--arc-palette-backgroundExtra,#060a0c)]"
+        className=" pointer-events-auto"
         disabled={!song}
         onClick={() => {
           if (song) setPlaying();
@@ -95,26 +97,30 @@ export default function Controls() {
           play();
         }}
         title="forward"
-        className=" pointer-events-auto text-[var(--arc-palette-title,#e5e6e9ff)] dark:text-[var(--arc-palette-backgroundExtra,#060a0c)]"
+        className=" pointer-events-auto"
       >
         <BsFastForwardBtnFill className=" w-8" />
       </button>
       {/* <button type="button" title="repeat">
             <TbRepeatOff className=" w-8" />
           </button> */}
-      <input
+      {/* <input
         suppressHydrationWarning
         id="track"
-        className="track pointer-events-auto w-full cursor-pointer rounded-full bg-current bg-opacity-50 text-[var(--arc-palette-title,#e5e6e9ff)] accent-current dark:bg-current dark:text-[var(--arc-palette-backgroundExtra,#060a0c)] dark:accent-current [&::-webkit-slider-runnable-track]:h-[1px] [&::-webkit-slider-thumb]:w-4"
+        className="track pointer-events-auto w-full cursor-pointer bg-current accent-current [&::-webkit-slider-runnable-track]:h-[1px] [&::-webkit-slider-thumb]:!h-6 [&::-webkit-slider-thumb]:!w-4"
         type="range"
         value={time}
         min={0}
         max={100}
         step={1}
         onInput={setTime}
-      ></input>
+      ></input> */}
+      <Slider min={0} max={100} value={time} onChange={setTime} />
       {song ? (
-        <p className=" whitespace-nowrap px-2 text-[0.5rem] font-bold text-[var(--arc-palette-title,#e5e6e9ff)] dark:text-[var(--arc-palette-backgroundExtra,#060a0c)]">
+        <p
+          draggable={false}
+          className=" pointer-events-none w-24 select-none whitespace-nowrap  px-2 text-[0.5rem] font-bold"
+        >
           {playerTime}
         </p>
       ) : null}

@@ -5,15 +5,16 @@ import { useUIStore } from "./useUIStore";
 // type Thing = boolean | object | string | number | undefined | null;
 
 const useLoading = () => {
-  const setLoading = useUIStore((s) => s.setLoading);
+  const { setState } = useUIStore;
+
   // const pathname = usePathname();
 
   useEffect(() => {
-    setLoading(false);
+    setState({ loading: false });
     return () => {
-      setLoading(true);
+      setState({ loading: true });
     };
-  }, [setLoading]);
+  }, [setState]);
 };
 
 export default useLoading;

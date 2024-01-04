@@ -5,14 +5,13 @@ import { useUIStore } from "(ui)";
 import { useEffect } from "react";
 
 export default function useTheme() {
-  // const pathname = usePathname();
-  const [setTheme, theme] = useUIStore((s) => [s.setTheme, s.theme]);
+  const { setState } = useUIStore;
 
   useEffect(() => {
     const user_theme = window.matchMedia("(prefers-color-scheme: dark)").matches
       ? "dark"
       : "light";
-    setTheme(user_theme);
+    setState({ theme: user_theme });
 
     if (user_theme === "dark") document.documentElement.classList.add("dark");
 
@@ -20,8 +19,8 @@ export default function useTheme() {
     window
       .matchMedia("(prefers-color-scheme: dark)")
       .addEventListener("change", (e) => {
-        setTheme(e.matches ? "dark" : "light");
+        setState({ theme: e.matches ? "dark" : "light" });
         document.documentElement.classList.toggle("dark", e.matches);
       });
-  }, [setTheme]);
+  }, [setState]);
 }

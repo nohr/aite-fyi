@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { RiSpeakFill } from "react-icons/ri";
 import useSound from "use-sound";
 
 const Name = function ({ pic }: { pic: string }): JSX.Element {
@@ -8,17 +9,19 @@ const Name = function ({ pic }: { pic: string }): JSX.Element {
   const [aigbe] = useSound("/sfx/aigbe.wav", { volume: 0.35, interrupt: true });
 
   return (
-    <h1 className=" flex flex-row flex-nowrap items-center font-serif text-6xl font-light capitalize italic tracking-tight transition duration-150 ease-out [&>span]:px-2  ">
+    <h1 className=" flex flex-row flex-nowrap items-center overflow-visible pl-1 font-serif text-6xl font-light capitalize italic tracking-tight transition duration-150 ease-in-out [&>span]:overflow-visible [&>span]:px-1.5  ">
       <span
-        className="cursor-pointer drop-shadow hover:drop-shadow-xl active:text-[#060a0c] active:drop-shadow-xl md:hover:text-[var(--arc-palette-foregroundSecondary,#e5e6e9ff)] active:dark:text-[#e5e6e9ff] md:dark:hover:text-[var(--arc-palette-cutoutColor,#060a0c)] "
+        className="group/aite relative cursor-pointer drop-shadow active:text-[#060a0c] active:dark:text-[#e5e6e9ff]"
         onClick={() => aite()}
       >
+        <RiSpeakFill className="absolute top-2  hidden h-4 w-4 group-active/aite:block md:group-hover/aite:block" />
         aite
       </span>
       <span
-        className="cursor-pointer drop-shadow hover:drop-shadow-xl active:text-[#060a0c] active:drop-shadow-xl md:hover:text-[var(--arc-palette-foregroundSecondary,#e5e6e9ff)] active:dark:text-[#e5e6e9ff] md:dark:hover:text-[var(--arc-palette-cutoutColor,#060a0c)] "
+        className="group/aigbe relative cursor-pointer drop-shadow active:text-[#060a0c] active:dark:text-[#e5e6e9ff]"
         onClick={() => aigbe()}
       >
+        <RiSpeakFill className="absolute top-1  hidden h-4 w-4 group-active/aigbe:block md:group-hover/aigbe:block" />
         aigbe
       </span>
       <Image
@@ -27,8 +30,8 @@ const Name = function ({ pic }: { pic: string }): JSX.Element {
         alt="me!"
         width={45}
         height={45}
-        className=" pointer-events-none aspect-square !h-fit select-none"
-      />{" "}
+        className="pointer-events-none aspect-square !h-fit select-none pl-2"
+      />
     </h1>
   );
 };

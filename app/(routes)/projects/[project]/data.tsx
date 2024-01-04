@@ -10,6 +10,7 @@ import { createPortal } from "react-dom";
 import { urlFor } from "sanity.utils";
 import { RiLoaderFill } from "react-icons/ri";
 import { SiGithub } from "react-icons/si";
+import ZoomBar from "./zoom_bar";
 
 export default function Data({ project }: { project: Project | undefined }) {
   return (
@@ -91,6 +92,10 @@ export default function Data({ project }: { project: Project | undefined }) {
                 )}
             </Drop>
           )}
+          {project.medium === "website" &&
+          document.getElementById("zoom-portal")
+            ? createPortal(<ZoomBar />, document.getElementById("zoom-portal")!)
+            : null}
         </>
       )}
     </>

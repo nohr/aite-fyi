@@ -12,16 +12,16 @@ export default function Explorer() {
   const query = searchParams.get("query");
 
   // if all songs are in the playlist stop loading
-  const [setLoading] = useUIStore((s) => [s.setLoading]);
+  const { setState } = useUIStore;
 
   useEffect(() => {
     if (playlist.length > 0) {
-      setLoading(false);
+      setState({ loading: false });
     }
     return () => {
-      setLoading(true);
+      setState({ loading: true });
     };
-  }, [playlist.length, setLoading]);
+  }, [playlist.length, setState]);
 
   return (
     <div className=" pointer-events-none -order-1 flex h-full resize-x flex-col gap-2 p-3 md:-order-none">

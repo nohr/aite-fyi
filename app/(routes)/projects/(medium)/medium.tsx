@@ -54,8 +54,8 @@ export default function Medium({
       )}
       <Arrows projects={medium_projects}>
         <h2
-          className={` text-md flex h-12 w-full select-none items-center justify-start gap-1 border-b border-current px-2 font-mono font-thin uppercase tracking-tight [&_svg]:h-[1.2rem] [&_svg]:w-auto ${
-            current_project ? "h-6 scale-y-95 opacity-15" : ""
+          className={` text-md pointer-events-none flex h-12 w-full scale-y-95 select-none items-center justify-start gap-1 border-b border-current px-2 font-mono font-thin uppercase tracking-tight [&_svg]:h-[1.2rem] [&_svg]:w-auto ${
+            current_project ? "h-6  opacity-25" : ""
           } `}
         >
           {medium === "website" ? (

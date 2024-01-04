@@ -7,8 +7,7 @@ import useDisablePinch from "@hooks/useDisablePinch";
 import useTheme from "@hooks/useTheme";
 import { usePathname } from "next/navigation";
 import { Canvas } from "@react-three/fiber";
-import { Preload } from "@react-three/drei";
-import { Env } from "(3D)/Environment";
+import { Preload, StatsGl } from "@react-three/drei";
 
 const Scene = dynamic(() => import("(3D)/Scene"), {
   ssr: false,
@@ -33,15 +32,20 @@ function Dom({ children }: { children: React.ReactNode }) {
           <Canvas
             linear
             dpr={[0.5, 2]}
-            className="!fixed !top-0 -z-10 "
-            gl={{ antialias: true, alpha: true }}
-            eventSource={document?.documentElement}
+            className="pointer-events-none !fixed !top-0"
+            gl={{ antialias: false, alpha: true }}
+            eventSource={document?.body}
             eventPrefix="client"
           >
             <Preload all />
             <Camera />
             <Scene />
-            <Env />
+            {process.env.NODE_ENV === "development" ? (
+              <StatsGl
+                className="!absolute !bottom-0 !left-auto !right-0 !top-auto !hidden h-[66px]
+    w-[281px] md:!block"
+              />
+            ) : null}
           </Canvas>
         </>
       )}

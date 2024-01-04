@@ -5,23 +5,19 @@ import { create } from "zustand";
 interface AudioProps {
   audio: HTMLAudioElement | null;
   volume: number;
-  setVolume: ChangeEventHandler<HTMLInputElement>;
   muted: boolean;
-  setMuted: (muted?: boolean) => void;
   song: Song | null;
   playing: boolean;
   setPlaying: (playing?: boolean) => void;
   playlist: Song[];
   time: number;
-  setTime: FormEventHandler<HTMLInputElement>;
+  setTime: (value: number) => void;
 }
 
 export const useAudioStore = create<AudioProps>()((set, get) => ({
   audio: null,
   volume: 50,
-  setVolume: (e) => set({ volume: Number(e.target.value) }),
   muted: false,
-  setMuted: (muted = !get().muted) => set({ muted }),
   song: null,
   playing: false,
   setPlaying: (playing = !get().playing) => {
@@ -34,11 +30,11 @@ export const useAudioStore = create<AudioProps>()((set, get) => ({
   },
   playlist: [],
   time: 0,
-  setTime: (e) => {
+  setTime: (time) => {
     const audio = document.querySelector("audio");
     if (!audio) return;
     if (get().playing) get().setPlaying(false);
-    const time = parseInt(e.currentTarget.value);
+
     if (time && !Number.isNaN(audio.duration)) {
       const currentTime = (time / 100) * audio.duration;
       audio.currentTime = currentTime;

@@ -1,12 +1,13 @@
 "use client";
 
-import { Html, StatsGl, useProgress } from "@react-three/drei";
+import { Html, useProgress } from "@react-three/drei";
 import { Suspense } from "react";
 import { Scan } from "./Scan";
 import { Device } from "./(Device)";
 import { EkoDigital } from "./EkoDigital";
 import { usePathname } from "next/navigation";
 import { useUIStore } from "(ui)";
+import { Env } from "./Environment";
 
 function Scene() {
   const { progress } = useProgress();
@@ -15,16 +16,11 @@ function Scene() {
   const show_devices = project?.medium === "website";
 
   return (
-    <Suspense fallback={<Html center>{progress}%</Html>}>
+    <Suspense fallback={<Html center>{progress.toFixed(0)}%</Html>}>
       <Scan />
       {show_devices ? <Device /> : null}
       {params === "eko-digital" ? <EkoDigital /> : null}
-      {process.env.NODE_ENV === "development" ? (
-        <StatsGl
-          className="!absolute !bottom-0 !left-auto !right-0 !top-auto
-    h-[66px] w-[281px]"
-        />
-      ) : null}
+      {params && <Env />}
     </Suspense>
   );
 }
