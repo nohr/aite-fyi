@@ -7,8 +7,10 @@ import { Song } from "types/Song";
 import clientConfig from "../config/client.config";
 import imageUrlBuilder from "@sanity/image-url";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import { unstable_noStore } from "next/cache";
 
 export async function getProjects(): Promise<Project[]> {
+  unstable_noStore();
   return createClient(clientConfig).fetch(
     groq`
       *[ _type == "project" ]{
@@ -25,6 +27,7 @@ export async function getProjects(): Promise<Project[]> {
 }
 
 export async function getMediums(): Promise<Project["medium"][]> {
+  unstable_noStore();
   return createClient(clientConfig).fetch(
     groq`*[_type == "project"] | order(date desc).medium`,
   );
@@ -32,6 +35,7 @@ export async function getMediums(): Promise<Project["medium"][]> {
 
 export async function getProject(slug: string): Promise<Project | undefined> {
   if (!slug) return;
+  unstable_noStore();
   return createClient(clientConfig).fetch(
     groq`
         *[ _type == "project" && slug.current == $slug ][0]{
