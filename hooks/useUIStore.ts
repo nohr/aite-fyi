@@ -6,6 +6,7 @@ interface UIProps {
   loading: boolean;
   zoom: number;
   color: string | undefined;
+  navHeight: number;
   theme: "light" | "dark" | undefined;
   setTheme: (theme: "light" | "dark") => void;
 }
@@ -16,6 +17,7 @@ export const useUIStore = create<UIProps>()(
     loading: true,
     zoom: 2,
     color: undefined,
+    navHeight: 0,
     theme: undefined,
     setTheme(theme: "light" | "dark") {
       set(() => ({ theme }));

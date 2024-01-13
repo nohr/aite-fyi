@@ -3,7 +3,6 @@
 import { useAudioStore } from "@hooks/useAudioStore";
 import Image from "next/image";
 import Controls from "./Controls";
-import { getSongs } from "sanity.utils";
 import { useEffect } from "react";
 import { Song } from "types/Song";
 
@@ -28,18 +27,16 @@ const Cover = ({
   </div>
 );
 
-export default function Player() {
+export default function Player({ songs }: { songs: Song[] }) {
   const [song] = useAudioStore((s) => [s.song]);
   const { setState } = useAudioStore;
+
   useEffect(() => {
-    (async () => {
-      const songs = await getSongs();
-      if (songs.length > 0) {
-        if (!song) setState({ song: songs[0] });
-        setState({ playlist: songs });
-      }
-    })();
-  }, [setState, song]);
+    if (songs.length > 0) {
+      if (!song) setState({ song: songs[0] });
+      setState({ playlist: songs });
+    }
+  }, [setState, song, songs]);
 
   return (
     <div className="items-between pointer-events-none flex w-full flex-row justify-start gap-4 p-2 md:-order-1 md:divide-x md:divide-solid md:divide-current">

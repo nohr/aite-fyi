@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import { usePathname } from "next/navigation";
 import { Vector3 } from "three";
-import { useUIStore } from "(ui)";
+import { useUIStore } from "@hooks/useUIStore";
 
 // import { Vector3 } from "three";
 export default function Camera() {

@@ -21,7 +21,7 @@ const Camera = dynamic(() => import("(3D)/Camera"), {
   ssr: false,
 });
 
-function Dom({ children }: { children: React.ReactNode }) {
+function Dom() {
   const pathname = usePathname();
   const admin = pathname.split("/")[1] === "admin";
 
@@ -31,7 +31,6 @@ function Dom({ children }: { children: React.ReactNode }) {
 
   return (
     <>
-      {children}
       {!admin && (
         <>
           <Canvas

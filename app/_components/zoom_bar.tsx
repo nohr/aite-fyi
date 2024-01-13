@@ -1,4 +1,4 @@
-import { useUIStore } from "(ui)";
+import { useUIStore } from "@hooks/useUIStore";
 import Slider from "_components/slider";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 

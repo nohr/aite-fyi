@@ -4,7 +4,7 @@ import File from "./File";
 import { useSearchParams } from "next/navigation";
 import { useAudioStore } from "@hooks/useAudioStore";
 import { useEffect } from "react";
-import { useUIStore } from "(ui)";
+import { useUIStore } from "@hooks/useUIStore";
 
 export default function Explorer() {
   const searchParams = useSearchParams();
@@ -26,7 +26,7 @@ export default function Explorer() {
   return (
     <div className=" pointer-events-none -order-1 flex h-full resize-x flex-col gap-2 p-3 md:-order-none">
       {/* songs */}
-      <div className="pointer-events-auto grid h-fit w-full grid-cols-4 grid-rows-1 gap-4 overflow-visible sm:gap-8 md:grid-cols-5">
+      <div className="pointer-events-auto grid h-fit w-full grid-cols-5 grid-rows-1 gap-4 overflow-visible sm:gap-8 md:grid-cols-5">
         {playlist
           .filter((song: any) => {
             if (!query || query.length === 0) return true;

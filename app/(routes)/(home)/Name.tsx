@@ -15,14 +15,14 @@ const Name = function ({ pic }: { pic: string }): JSX.Element {
         onClick={() => aite()}
       >
         <RiSpeakFill className="absolute top-2  hidden h-4 w-4 group-active/aite:block md:group-hover/aite:block" />
-        aite
+        aitẹ
       </span>
       <span
         className="group/aigbe relative cursor-pointer drop-shadow active:text-[#060a0c] active:dark:text-[#e0e0e0]"
         onClick={() => aigbe()}
       >
         <RiSpeakFill className="absolute top-1  hidden h-4 w-4 group-active/aigbe:block md:group-hover/aigbe:block" />
-        aigbe
+        aigbẹ
       </span>
       <Image
         suppressHydrationWarning

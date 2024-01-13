@@ -1,20 +1,19 @@
 "use client";
 
 import { motion } from "framer-motion";
-import React from "react";
 
-export default function Drop({
+export default function Fade({
   children,
-  className,
+  className = "",
   key = null,
 }: {
   children: React.ReactNode;
-  className: string;
+  className?: string;
   key?: string | null;
 }) {
   const mot = {
-    initial: { y: -20, opacity: 0.4, rotateX: -90 },
-    animate: { y: 0, opacity: 1, rotateX: 0 },
+    initial: { opacity: 0.4, filter: "blur(7px)" },
+    animate: { opacity: 1, filter: "blur(0px)" },
     transition: { ease: "linear", bounce: 0, duration: 0.2 },
   };
 

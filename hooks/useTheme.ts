@@ -1,6 +1,6 @@
 "use client";
 
-import { useUIStore } from "(ui)";
+import { useUIStore } from "@hooks/useUIStore";
 // import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 

@@ -2,6 +2,79 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  :root {
+    --background: var(--arc-palette-title, #e0e0e0);
+    --foreground: var(--arc-palette-backgroundExtra, #040404);
+
+    --card: var(--arc-palette-title, #e0e0e0);
+    --card-foreground: var(--arc-palette-backgroundExtra, #040404);
+
+    --popover: var(--arc-palette-title, #e0e0e0);
+    --popover-foreground: var(--arc-palette-backgroundExtra, #040404);
+
+    --primary: 0 0% 9%;
+    --primary-foreground: var(--arc-palette-foregroundSecondary, #e2e2e2);
+
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: var(--arc-palette-foregroundSecondary, #e2e2e2);
+
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: var(--arc-palette-backgroundExtra, #040404);
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: var(--arc-palette-backgroundExtra, #040404);
+    --foreground: var(--arc-palette-foregroundSecondary, #e2e2e2);
+
+    --card: var(--arc-palette-backgroundExtra, #040404);
+    --card-foreground: var(--arc-palette-foregroundSecondary, #e2e2e2);
+
+    --popover: var(--arc-palette-backgroundExtra, #040404);
+    --popover-foreground: var(--arc-palette-foregroundSecondary, #e2e2e2);
+
+    --primary: var(--arc-palette-foregroundSecondary, #e2e2e2);
+    --primary-foreground: 0 0% 9%;
+
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: var(--arc-palette-foregroundSecondary, #e2e2e2);
+
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+
+    --accent: 0 0% 14.9%;
+    --accent-foreground: var(--arc-palette-foregroundSecondary, #e2e2e2);
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: var(--arc-palette-foregroundSecondary, #e2e2e2);
+
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
 :root {
   --tempo: 2s;
   --font-mono: "Fira Code", monospace;
@@ -44,7 +117,7 @@ body {
 }
 
 body {
-  @apply relative selection:bg-[var(--arc-palette-focus,_#a27777)] selection:text-[var(--arc-palette-title,_#e0e0e0)] dark:selection:bg-[var(--arc-palette-focus,_#405c6f)] dark:selection:text-[var(--arc-palette-title,_#060a0c)];
+  @apply relative selection:bg-[var(--arc-palette-focus,_#000)] selection:text-[var(--arc-palette-title,_#e0e0e0)] dark:selection:bg-[var(--arc-palette-focus,_#e2e2e2)] dark:selection:text-[var(--arc-palette-title,_#040404)];
 }
 
 .nav-link:hover > *,
@@ -101,18 +174,26 @@ input[type="range"]::-webkit-slider-thumb {
   width: 0.25rem;
 }
 
-.cemetery_c {
-  --arc-palette-backgroundExtra: #060a0c !important;
-  --arc-palette-cutoutColor: #ff4e4e !important;
-  background: linear-gradient(180deg, #121a20 0%, #060a0c 15%) !important;
-  --arc-palette-focus: #ff4e4e !important;
+.loading::after {
+  display: inline-block;
+  animation: dotty steps(1, end) 1s infinite;
+  content: "";
+}
 
-  & .track {
-    background-color: #060a0caa !important;
-    color: #ff4e4e !important;
-
-    &:hover {
-      background-color: #060a0c !important;
-    }
+@keyframes dotty {
+  0% {
+    content: "";
+  }
+  25% {
+    content: ".";
+  }
+  50% {
+    content: "..";
+  }
+  75% {
+    content: "...";
+  }
+  100% {
+    content: "";
   }
 }

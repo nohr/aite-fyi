@@ -6,9 +6,9 @@ import { Suspense } from "react";
 import { Noto_Serif_Display } from "next/font/google";
 import localFont from "next/font/local";
 import dynamic from "next/dynamic";
-import { Nav } from "(ui)";
+import Nav from "_components/nav";
 
-const Media = dynamic(() => import("(ui)/Media"));
+const Media = dynamic(() => import("./(routes)/music/Media"));
 const Dom = dynamic(() => import("./dom"), {
   ssr: false,
 });
@@ -58,7 +58,8 @@ export default function RootLayout({
         <Loading />
         <Suspense fallback={null}>
           <Nav />
-          <Dom>{children}</Dom>
+          {children}
+          <Dom />
           <Media />
         </Suspense>
         <Analytics debug={false} />

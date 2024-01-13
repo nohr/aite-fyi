@@ -1,23 +1,24 @@
 "use client";
 
-import { useUIStore } from "(ui)";
+import { useUIStore } from "@hooks/useUIStore";
 import { RiLoaderFill } from "react-icons/ri";
 import { AiFillUnlock } from "react-icons/ai";
 import { useEffect, useRef } from "react";
 
-export default function Loading() {
+export function Loader() {
   const [loading] = useUIStore((s) => [s.loading]);
   const loaderRef = useRef<HTMLParagraphElement>(null!);
 
   useEffect(() => {
-    if (!loaderRef.current) return;
     if (!loading) {
       setTimeout(() => {
-        loaderRef.current.style.opacity = "0";
-        loaderRef.current.style.transition = "opacity 1s ease-out";
-        setTimeout(() => {
-          loaderRef.current.remove();
-        }, 2000);
+        if (loaderRef.current) {
+          loaderRef.current.style.opacity = "0";
+          loaderRef.current.style.transition = "opacity 1s ease-out";
+          setTimeout(() => {
+            loaderRef.current.remove();
+          }, 2000);
+        }
       }, 750);
     }
   }, [loading]);
@@ -25,19 +26,25 @@ export default function Loading() {
   return (
     <p
       ref={loaderRef}
-      className="absolute -top-0.5 right-6 z-[100] flex h-12 w-36 skew-x-[8deg] skew-y-[2deg] flex-row-reverse items-center font-mono text-sm uppercase tracking-tighter md:!right-auto md:left-44 md:top-4 md:-skew-x-[7deg] md:-skew-y-[1.5deg]"
+      className={`absolute -top-0.5 right-28 z-[100] flex h-12 w-36 skew-x-[8deg] skew-y-[2deg] flex-row items-center font-mono text-sm uppercase tracking-tighter md:!right-auto md:left-44 md:top-4 md:-skew-x-[7deg] md:-skew-y-[1.5deg] ${
+        loading ? "loading" : ""
+      }`}
     >
       {loading ? (
         <>
-          {`breaching...`}
           <RiLoaderFill className="m-2 h-4 w-4 animate-spin" />
+          {`breaching`}
         </>
       ) : (
         <>
-          {`breached!`}
           <AiFillUnlock className="m-2 h-4 w-4 animate-bounce" />
+          {`breached!`}
         </>
       )}
     </p>
   );
+}
+
+export default function Loading() {
+  return <Loader />;
 }

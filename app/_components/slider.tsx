@@ -16,7 +16,7 @@ const Slider = ({ min, max, value, onChange }: SliderProps) => {
 
   const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
     e.preventDefault?.();
-    console.log(e);
+    // console.log(e);
 
     const target = e.target as HTMLDivElement;
     const rect = target.getBoundingClientRect();

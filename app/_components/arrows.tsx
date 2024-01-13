@@ -13,7 +13,7 @@ export default function Arrows({
   projects: Project[];
   children: React.ReactNode;
 }) {
-  const [play] = useSFX("/sfx/click.mp3");
+  const [play] = useSFX("/sfx/click2.mp3");
   const pathname = usePathname();
   const project = projects.find((p) => `/projects/${p.slug}` === pathname);
   const path = `/projects/${project?.slug}`;
@@ -32,7 +32,7 @@ export default function Arrows({
     return nextSlug;
   }
   const arrowClass =
-    "cursor-pointer fill-current hover:scale-90 active:scale-75 md:h-4 md:w-auto [&_*]:!stroke-current";
+    "cursor-pointer opacity-25 hover:opacity-75 fill-current hover:scale-90 active:scale-75 md:h-4 md:w-auto [&_*]:!stroke-current";
 
   const Arrow = ({ direction }: { direction: number }) => (
     <>

@@ -6,7 +6,6 @@ import { Group, Vector2, Vector3 } from "three";
 import { PCDLoader } from "three/examples/jsm/loaders/PCDLoader";
 import { PointsMaterial } from "three/src/materials/PointsMaterial";
 import { Points } from "three/src/objects/Points";
-import { mod } from "../../utils/constants";
 // import { useAudioStore } from "@hooks/useAudioStore";
 import useColor from "@hooks/useColor";
 import useLoading from "@hooks/useLoading";
@@ -25,7 +24,8 @@ export const Scan = memo(function Scan() {
   const { color } = useColor();
   // const project = usePathname().split("/")[2];
   const project = usePathname().split("/")[1];
-
+  const mod = 3.2;
+  
   const handleMouseMove = (mouse: Vector2) => {
     const tar = new Vector3((mouse.x * mod * 2) / 1, mouse.y * mod, 3);
     // const bobDelta = () => {

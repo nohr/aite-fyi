@@ -2,12 +2,17 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { Info } from "types/Info";
 import { MdOutlineMyLocation } from "react-icons/md";
 
-export default function Locale({ Info }: { Info: Info }) {
-  const { timeZone, location } = Info;
-
+export default function Locale({
+  timeZone,
+  location,
+  _id,
+}: {
+  timeZone: string;
+  location: string;
+  _id: string;
+}) {
   const config: Intl.DateTimeFormatOptions = useMemo(
     () => ({
       timeZone: timeZone,
@@ -31,7 +36,7 @@ export default function Locale({ Info }: { Info: Info }) {
 
   return (
     <motion.div
-      key={Info._id + "locale"}
+      key={_id + "locale"}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.25, delay: 0, ease: "easeIn" }}
