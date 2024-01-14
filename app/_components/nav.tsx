@@ -32,7 +32,7 @@ function Nav() {
       initial={{ opacity: 0.5, filter: "blur(7px)" }}
       animate={{ opacity: 1, filter: "blur(0px)" }}
       transition={{ duration: 0.3 }}
-      className={` fixed bottom-0 z-50 flex w-screen flex-col justify-between p-2 pb-5 tracking-tight backdrop-blur-sm md:pointer-events-none md:bottom-auto md:top-0 md:gap-0 md:px-8 md:py-4 md:pb-8 ${
+      className={` fixed bottom-0 z-50 flex w-screen flex-col justify-between p-2 pb-5 tracking-tight backdrop-blur-sm md:pointer-events-none md:bottom-auto md:top-0 md:gap-0 md:px-8 md:py-4 ${
         pathname.includes("craft") ? "gap-y-4" : ""
       }`}
     >
@@ -58,7 +58,7 @@ function Nav() {
         <Socials />
       </div>
 
-      <div className="pointer-events-none absolute left-0 top-0 -z-10 block h-full w-full bg-[#e0e0e0] opacity-75 md:hidden dark:bg-[#040404] dark:opacity-25" />
+      <div className="pointer-events-none absolute left-0 top-0 -z-10 block h-full w-full bg-[#e0e0e0] opacity-50 md:hidden dark:bg-[#040404] dark:opacity-50" />
     </motion.nav>
   );
 }

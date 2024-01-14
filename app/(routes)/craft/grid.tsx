@@ -11,7 +11,7 @@ export default function Grid({ projects }: { projects: Project[] }) {
 
   return (
     <div
-      className={`flex w-full flex-row flex-wrap items-start justify-start p-4 md:py-0`}
+      className={`flex w-full flex-row flex-wrap items-start justify-start  md:px-4`}
     >
       <AnimatePresence mode="popLayout">
         {projects.map((project, index) => {
