@@ -15,7 +15,7 @@ export default function Grid({ projects }: { projects: Project[] }) {
     <div
       className={`flex w-full flex-row flex-wrap items-start justify-start gap-y-1 md:px-1 `}
     >
-      <div className="w-1/ h-0.5 bg-border"></div>
+      {/* <div className="w-1/ h-0.5 bg-border"></div> */}
       <AnimatePresence mode="popLayout">
         {projects.map((project, index) => {
           if (medium && !project.medium.includes(medium)) return null;

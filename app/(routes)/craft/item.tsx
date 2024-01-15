@@ -26,7 +26,11 @@ export default function Item({
   // const showVideo = !path.includes("sci-fi-previs") && video;
   return (
     <motion.div
-      whileHover={{ scale: 1.05, zIndex: 1 }}
+      // whileHover={{
+      //   scale: 1.05,
+      //   zIndex: 1,
+      //   transition: { duration: 0.2, ease: `easeInOut` },
+      // }}
       {...delayed_pagination_animation(index)}
       className={`group/item flex h-64 w-full flex-col gap-0 overflow-hidden rounded-3xl border border-border shadow-lg sm:w-1/2 md:h-72  lg:w-1/3`}
     >
@@ -36,15 +40,18 @@ export default function Item({
         className={`pointer-events-auto relative flex h-full w-full flex-col overflow-hidden rounded-3xl no-underline duration-100 hover:border-current hover:shadow-md focus:border-current focus:shadow-md group-active/item:scale-90`}
       >
         <div
-          className={`pointer-events-auto absolute -bottom-0.5 z-20 flex h-4/6 w-full select-none flex-row flex-nowrap items-end justify-center gap-2 bg-gradient-to-t from-[#000000a1] to-transparent to-65% p-4 text-lg lowercase tracking-tight text-[#cecece] duration-200 md:justify-between`}
+          className={`pointer-events-auto absolute -bottom-0.5 z-20 flex h-4/6 w-full select-none flex-row flex-nowrap items-end justify-center gap-2 bg-gradient-to-t from-[#000000c3] to-transparent to-70% p-4 text-lg lowercase tracking-tight text-[#cecece] duration-200 md:justify-between`}
         >
-          <span className="flex items-center gap-1 shadow-foreground group-hover/item:drop-shadow-md">
+          <span className="flex items-center gap-1">
             {name}
-            <GoChevronRight className="group-hover/item:animate-shake-left h-4 w-4 opacity-0 group-hover/item:opacity-100" />
+            <GoChevronRight className="h-4 w-4 opacity-0 group-hover/item:animate-shake-left group-hover/item:opacity-100" />
           </span>
 
           {program && (
-            <Programs program={program} className="hidden !items-end md:flex" />
+            <Programs
+              program={program}
+              className="hidden !items-end opacity-0 group-hover/item:opacity-100 md:flex"
+            />
           )}
         </div>
 

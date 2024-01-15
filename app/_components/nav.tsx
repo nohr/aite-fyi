@@ -4,11 +4,11 @@ import { usePathname } from "next/navigation";
 import { GiBombingRun, GiHand, GiMusicalNotes } from "react-icons/gi";
 import { useAudioStore } from "@hooks/useAudioStore";
 import useSFX from "@hooks/useSFX";
-import { useUIStore } from "@hooks/useUIStore";
+// import { useUIStore } from "@hooks/useUIStore";
 import { motion } from "framer-motion";
 import Socials from "./socials";
 import NavLink from "./nav.link";
-import { useEffect, useRef } from "react";
+// import { useEffect, useRef } from "react";
 import { Portal } from "./nav.portal";
 
 function Nav() {
@@ -18,20 +18,19 @@ function Nav() {
 
   const playing = useAudioStore((s) => s.playing);
 
-  const { setState } = useUIStore;
-  const nav = useRef<HTMLElement>(null!);
+  // const { setState } = useUIStore;
 
-  useEffect(() => {
-    console.log(nav.current.clientHeight);
+  // todo get new nav height on every render for mobile or hardcode padding on searchparams change
+  // useEffect(() => {
+  //   console.log(nav.current.clientHeight);
 
-    setState({ navHeight: nav.current.clientHeight });
-  }, [setState, pathname]);
+  //   setState({ navHeight: nav.current?.clientHeight });
+  // }, [setState]);
 
   if (admin) return null;
   return (
     <motion.nav
       onChange={() => console.log("change")}
-      ref={nav}
       initial={{ opacity: 0.5, filter: "blur(7px)" }}
       animate={{ opacity: 1, filter: "blur(0px)" }}
       transition={{ duration: 0.3 }}
