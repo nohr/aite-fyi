@@ -1,66 +1,78 @@
-"use client";
-
-import { Project } from "types/Project";
 import Link from "next/link";
-import useSFX from "@hooks/useSFX";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { delayed_pagination_animation } from "_components/animate/route";
+import Programs from "./[project]/programs";
+import { GoChevronRight } from "react-icons/go";
 
 export default function Item({
-  project,
+  name,
   index,
+  play,
+  path,
+  thumbnail,
+  video,
+  program,
 }: {
-  project: Project;
+  name: string;
   index: number;
+  play: () => void;
+  path: string;
+  thumbnail: string;
+  video?: string;
+  program?: string[];
 }) {
-  const path = `/craft/${project?.slug}`;
-  const [play] = useSFX("/sfx/open.mp3");
-
+  const showVideo = video;
+  // const showVideo = !path.includes("sci-fi-previs") && video;
   return (
     <motion.div
+      whileHover={{ scale: 1.05, zIndex: 1 }}
       {...delayed_pagination_animation(index)}
-      className={`group/item flex h-60 w-1/2 flex-col gap-0 p-1 md:w-1/3`}
+      className={`group/item flex h-64 w-full flex-col gap-0 overflow-hidden rounded-3xl border border-border shadow-lg sm:w-1/2 md:h-72  lg:w-1/3`}
     >
       <Link
         href={path}
         onClick={() => play()}
-        className={`pointer-events-auto relative flex h-full w-full flex-col overflow-hidden no-underline hover:border-current hover:shadow-md focus:border-current focus:shadow-md`}
+        className={`pointer-events-auto relative flex h-full w-full flex-col overflow-hidden rounded-3xl no-underline duration-100 hover:border-current hover:shadow-md focus:border-current focus:shadow-md group-active/item:scale-90`}
       >
-        <div className="absolute left-0 top-0 -z-10 h-full w-full bg-current opacity-0 backdrop-blur-md transition-all duration-100 ease-in-out group-hover/item:opacity-90 group-hover/item:shadow-sm " />
-        {/* {project.videos?.[9] ? (
+        <div
+          className={`pointer-events-auto absolute -bottom-0.5 z-20 flex h-4/6 w-full select-none flex-row flex-nowrap items-end justify-center gap-2 bg-gradient-to-t from-[#000000a1] to-transparent to-65% p-4 text-lg lowercase tracking-tight text-[#cecece] duration-200 md:justify-between`}
+        >
+          <span className="flex items-center gap-1 shadow-foreground group-hover/item:drop-shadow-md">
+            {name}
+            <GoChevronRight className="group-hover/item:animate-shake-left h-4 w-4 opacity-0 group-hover/item:opacity-100" />
+          </span>
+
+          {program && (
+            <Programs program={program} className="hidden !items-end md:flex" />
+          )}
+        </div>
+
+        {showVideo ? (
           <video
             autoPlay={true}
             playsInline
+            disablePictureInPicture
             muted
             loop
             preload="metadata"
-            key={project.videos[0]._key}
-            src={project.videos[0].url}
+            src={`${video}#t=0.01`}
             controls={false}
-            className={`pointer-events-none absolute w-full object-cover shadow-lg`}
+            className={`pointer-events-none absolute z-10 h-full w-full overflow-clip rounded-3xl object-cover`}
           />
-        ) : ( */}
-        <div
-          className={`pointer-events-none relative h-3/4 w-full overflow-hidden shadow-lg`}
-        >
-          <Image
-            src={project.thumbnail}
-            alt={project.thumbnail}
-            fill
-            sizes="400px"
-            priority
-            className="pointer-events-none select-none"
-            style={{ position: "absolute", objectFit: "cover" }}
-          />
-        </div>
-        {/* )} */}
+        ) : null}
 
-        <p
-          className={`text-md pointer-events-auto flex h-1/4 select-none flex-row flex-nowrap items-center justify-center gap-2 lowercase tracking-tight group-hover/item:text-[var(--arc-palette-title,#e0e0e0)] dark:group-hover/item:text-[var(--arc-palette-backgroundExtra,#060a0c)]`}
-        >
-          {project.name}
-        </p>
+        <Image
+          src={thumbnail}
+          alt={name}
+          fill
+          sizes="400px"
+          priority
+          className={`pointer-events-none select-none rounded-3xl ${
+            showVideo ? "blur-2xl" : ""
+          }}`}
+          style={{ position: "absolute", objectFit: "cover" }}
+        />
       </Link>
     </motion.div>
   );

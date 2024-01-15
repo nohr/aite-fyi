@@ -7,7 +7,7 @@ export default async function Craft() {
 
   return (
     <>
-      <MediumTabs className="w-fit max-w-[400px] self-center font-mono !text-xs md:text-base [&_*]:uppercase" />
+      <MediumTabs className="w-fit max-w-[400px] self-center font-mono !text-xs md:text-base [&_*]:lowercase" />
       <Grid projects={projects} />
     </>
   );

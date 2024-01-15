@@ -54,7 +54,7 @@ export default function RootLayout({
       translate="no"
       className={`font-medium antialiased ${Libre.variable} ${Heritage.variable}`}
     >
-      <body className="flex flex-col">
+      <body>
         <Loading />
         <Suspense fallback={null}>
           <Nav />

@@ -21,9 +21,11 @@ import { BsQuestionDiamondFill } from "react-icons/bs";
 export default function Programs({
   program,
   max,
+  className = "!self-center",
 }: {
   program: string[];
   max?: number;
+  className?: string;
 }) {
   const pairing = {
     astro: SiAstro,
@@ -44,21 +46,28 @@ export default function Programs({
   } as { [key: string]: IconType };
 
   return (
-    <div className="light pointer-events-none  flex w-fit flex-row gap-x-1 !self-center transition-opacity [&_svg]:h-6 [&_svg]:w-auto md:[&_svg]:h-5">
-      {program.map((title: string, index): JSX.Element => {
-        if (max && index >= max) return <></>;
-        return (
-          <div
-            key={title + " svg"}
-            className=" pointer-events-auto relative block opacity-50 hover:opacity-100"
-          >
-            {createElement(pairing[title] ?? BsQuestionDiamondFill, {
-              title,
-              key: title,
-            })}
-          </div>
-        );
-      })}
+    <div
+      className={
+        className +
+        " light pointer-events-none  flex w-fit flex-row gap-x-1 transition-opacity [&_svg]:h-6 [&_svg]:w-auto md:[&_svg]:h-5"
+      }
+    >
+      {program
+        .sort((a, b) => a.localeCompare(b))
+        .map((title: string, index): JSX.Element => {
+          if (max && index >= max) return <></>;
+          return (
+            <div
+              key={title + " svg"}
+              className=" pointer-events-auto relative block opacity-50 hover:opacity-100"
+            >
+              {createElement(pairing[title] ?? BsQuestionDiamondFill, {
+                title,
+                key: title,
+              })}
+            </div>
+          );
+        })}
     </div>
   );
 }

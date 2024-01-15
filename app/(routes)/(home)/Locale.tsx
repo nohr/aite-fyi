@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { MdOutlineMyLocation } from "react-icons/md";
+import { delayed_pagination_animation } from "_components/animate/route";
 
 export default function Locale({
   timeZone,
@@ -37,10 +38,8 @@ export default function Locale({
   return (
     <motion.div
       key={_id + "locale"}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.25, delay: 0, ease: "easeIn" }}
-      className="pointer-events-none flex flex-row items-center gap-x-1 whitespace-nowrap font-mono text-xs font-thin uppercase tracking-[-0.085em] opacity-50"
+      {...delayed_pagination_animation(1)}
+      className="pointer-events-none flex flex-row items-center gap-x-1 whitespace-nowrap pl-1 font-mono text-xs font-thin uppercase tracking-[-0.085em] opacity-50 md:px-8"
     >
       <MdOutlineMyLocation className="pb-[0.116rem]" />
       <p>{`${location}`}</p>

@@ -19,7 +19,7 @@ export default function NavPortal({ children }: { children: React.ReactNode }) {
           <AnimatePresence initial={true} mode="popLayout">
             <motion.span
               {...standard_pagination_animation}
-              className=" flex w-full items-center justify-center md:absolute md:px-4"
+              className=" flex w-full items-center justify-center md:absolute md:px-8"
             >
               {children}
             </motion.span>

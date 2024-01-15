@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from "framer-motion";
+// import { AnimatePresence, motion } from "framer-motion";
 
 export default function Route({
   children,
@@ -10,26 +10,23 @@ export default function Route({
   pathname: string;
 }) {
   return (
-    <AnimatePresence initial={true} mode="popLayout">
-      <motion.main
-        key={pathname}
-        style={{ zIndex: pathname.includes("admin") ? 1000 : 1 }}
-        className={`flex h-full flex-col items-center overflow-y-scroll hyphens-auto px-0`}
-        {...standard_pagination_animation}
-      >
-        <span
-          style={{ paddingTop: `${margin}px` }}
-          className=" hidden md:block"
-        />
+    // <AnimatePresence initial={true} mode="popLayout">
+    <main
+      // key={pathname}
+      style={{ zIndex: pathname.includes("admin") ? 1000 : 1 }}
+      className={`flex h-full flex-col items-start overflow-y-scroll hyphens-auto px-0 `}
+      // {...standard_pagination_animation}
+    >
+      <span
+        style={{ paddingTop: `${margin}px` }}
+        className=" hidden md:block"
+      />
 
-        {children}
+      {children}
 
-        <span
-          style={{ paddingTop: `${margin}px` }}
-          className="pt-4  md:hidden"
-        />
-      </motion.main>
-    </AnimatePresence>
+      <span style={{ paddingTop: `${margin}px` }} className="pt-4  md:hidden" />
+    </main>
+    // </AnimatePresence>
   );
 }
 

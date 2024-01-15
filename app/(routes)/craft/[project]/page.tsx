@@ -32,11 +32,11 @@ export default async function Project({
   return (
     <>
       <Title name={name}>
-        <Fade className="w-full max-w-prose p-1 pb-0 pt-2 md:pr-0 [&>a]:text-sm [&>a]:font-semibold [&>a]:underline [&>a]:underline-offset-8">
+        <Fade className="mx-auto w-full max-w-prose p-1 pb-0 pt-2 md:pr-0 [&>a]:text-sm [&>a]:font-semibold [&>a]:underline [&>a]:underline-offset-8">
           {project?.content && <PortableText value={project.content} />}
         </Fade>
 
-        <Fade className="flex w-full max-w-prose flex-row justify-between p-1 ">
+        <Fade className="mx-auto flex w-full max-w-prose flex-row justify-between p-1 ">
           <div className=" flex flex-row gap-2">
             {project?.url?.map((url) => (
               <a
@@ -70,7 +70,7 @@ export default async function Project({
         </Fade>
       </Title>
 
-      <div className=" flex h-fit w-full flex-wrap justify-center gap-2  py-6">
+      <div className="flex h-fit w-full flex-wrap justify-center gap-2  py-6">
         {project?.videos &&
           project.videos.map((video) => {
             return video.url ? (

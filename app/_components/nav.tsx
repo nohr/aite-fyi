@@ -22,12 +22,15 @@ function Nav() {
   const nav = useRef<HTMLElement>(null!);
 
   useEffect(() => {
+    console.log(nav.current.clientHeight);
+
     setState({ navHeight: nav.current.clientHeight });
-  }, [setState]);
+  }, [setState, pathname]);
 
   if (admin) return null;
   return (
     <motion.nav
+      onChange={() => console.log("change")}
       ref={nav}
       initial={{ opacity: 0.5, filter: "blur(7px)" }}
       animate={{ opacity: 1, filter: "blur(0px)" }}

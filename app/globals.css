@@ -28,7 +28,7 @@
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: var(--arc-palette-foregroundSecondary, #e2e2e2);
 
-    --border: 0 0% 89.8%;
+    --border: var(--arc-palette-hover, #b7b7b7);
     --input: 0 0% 89.8%;
     --ring: var(--arc-palette-backgroundExtra, #040404);
 
@@ -48,20 +48,20 @@
     --primary: var(--arc-palette-foregroundSecondary, #e2e2e2);
     --primary-foreground: 0 0% 9%;
 
-    --secondary: 0 0% 14.9%;
+    --secondary: var(--arc-palette-background, #1b1b1b);
     --secondary-foreground: var(--arc-palette-foregroundSecondary, #e2e2e2);
 
-    --muted: 0 0% 14.9%;
+    --muted: var(--arc-palette-background, #1b1b1b);
     --muted-foreground: 0 0% 63.9%;
 
-    --accent: 0 0% 14.9%;
+    --accent: var(--arc-palette-background, #1b1b1b);
     --accent-foreground: var(--arc-palette-foregroundSecondary, #e2e2e2);
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: var(--arc-palette-foregroundSecondary, #e2e2e2);
 
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
+    --border: var(--arc-palette-background, #1b1b1b);
+    --input: var(--arc-palette-background, #1b1b1b);
     --ring: 0 0% 83.1%;
   }
 }
@@ -76,7 +76,7 @@
 }
 
 :root {
-  --tempo: 2s;
+  --tempo: 645.1612903225806ms;
   --font-mono: "Fira Code", monospace;
 }
 * {
