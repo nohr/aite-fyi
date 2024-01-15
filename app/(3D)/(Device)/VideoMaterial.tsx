@@ -1,4 +1,4 @@
-// import { useUIStore } from "(ui)";
+// import { useUIStore } from "@hooks/useUIStore"
 // import useLoading from "@hooks/useLoading";
 import { useVideoTexture, Html } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";

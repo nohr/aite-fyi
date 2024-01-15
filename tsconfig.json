@@ -30,6 +30,7 @@
       "(routes)": ["./(routes)/."],
       "(ui)": ["./(ui)/."],
       "(3D)": ["./(3D)/."],
+      "utils": ["../lib/utils"],
       "sanity.config": ["../sanity.config.ts"],
       "sanity.utils": ["../sanity/schemas/sanity.utils.ts"]
     }

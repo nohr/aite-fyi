@@ -5,6 +5,7 @@ export interface VideoObject {
   url: string;
   alt: string;
   mobile: true | null;
+  _key: string;
 }
 
 export type Project = {

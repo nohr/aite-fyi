@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
 import useLoading from "@hooks/useLoading";
-import { useUIStore } from "(ui)";
+import { useUIStore } from "@hooks/useUIStore";
 import { Group, MeshPhysicalMaterial, Vector3 } from "three";
 import { useFrame, useThree } from "@react-three/fiber";
 

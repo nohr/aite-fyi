@@ -1,17 +1,20 @@
 import { getInfo } from "sanity.utils";
-import Animate from "./Animate";
-import Bio from "./Bio";
-
-export const dynamic = "force-dynamic";
+import Name from "./Name";
+import Locale from "./Locale";
+import { PortableText } from "@portabletext/react";
+import Section from "./section";
 
 export default async function Home() {
-  const Info = await getInfo();
+  const { bio, _id, timeZone, location } = await getInfo();
 
   return (
-    <section className="flex max-w-prose flex-col items-start gap-2 p-3 md:px-0">
-      <Animate>
-        <Bio Info={Info} />
-      </Animate>
-    </section>
+    <>
+      <Name pic={`/selfies/pic${Math.floor(Math.random() * 3) + 1}.png`} />
+      <Locale _id={_id} timeZone={timeZone} location={location} />
+      <br />
+      <Section index={2}>
+        <PortableText value={bio} />
+      </Section>
+    </>
   );
 }

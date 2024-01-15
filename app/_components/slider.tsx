@@ -6,9 +6,16 @@ interface SliderProps {
   max: number;
   value: number;
   onChange: (value: number) => void;
+  className?: string;
 }
 
-const Slider = ({ min, max, value, onChange }: SliderProps) => {
+const Slider = ({
+  min,
+  max,
+  value,
+  onChange,
+  className = "h-4 md:h-3.5",
+}: SliderProps) => {
   // make a fill slider with divs
   const range = max - min;
   const percentage = ((value - min) / range) * 100;
@@ -16,7 +23,7 @@ const Slider = ({ min, max, value, onChange }: SliderProps) => {
 
   const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
     e.preventDefault?.();
-    console.log(e);
+    // console.log(e);
 
     const target = e.target as HTMLDivElement;
     const rect = target.getBoundingClientRect();
@@ -45,7 +52,10 @@ const Slider = ({ min, max, value, onChange }: SliderProps) => {
       onTouchEnd={() => setMouseDown(false)}
       //   @ts-expect-error todo handle touch events as well as mouse events
       onTouchMove={(e) => mouseDown && handleMouseMove(e.touches[0])}
-      className="group/track !pointer-events-auto flex h-4 w-full  cursor-pointer select-none items-center overflow-hidden rounded-full border border-current bg-transparent md:h-3.5"
+      className={
+        className +
+        " group/track !pointer-events-auto flex w-full cursor-pointer select-none items-center overflow-hidden rounded-full border border-current bg-transparent"
+      }
     >
       <div
         className="pointer-events-none h-full bg-current group-active/track:opacity-50 md:group-hover/track:opacity-50"

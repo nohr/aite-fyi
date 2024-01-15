@@ -2,12 +2,18 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { Info } from "types/Info";
 import { MdOutlineMyLocation } from "react-icons/md";
+import { delayed_pagination_animation } from "_components/animate/route";
 
-export default function Locale({ Info }: { Info: Info }) {
-  const { timeZone, location } = Info;
-
+export default function Locale({
+  timeZone,
+  location,
+  _id,
+}: {
+  timeZone: string;
+  location: string;
+  _id: string;
+}) {
   const config: Intl.DateTimeFormatOptions = useMemo(
     () => ({
       timeZone: timeZone,
@@ -31,11 +37,9 @@ export default function Locale({ Info }: { Info: Info }) {
 
   return (
     <motion.div
-      key={Info._id + "locale"}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.25, delay: 0, ease: "easeIn" }}
-      className="pointer-events-none flex flex-row items-center gap-x-1 whitespace-nowrap font-mono text-xs font-thin uppercase tracking-[-0.085em] opacity-50"
+      key={_id + "locale"}
+      {...delayed_pagination_animation(1)}
+      className="pointer-events-none flex flex-row items-center gap-x-1 whitespace-nowrap pl-1 font-mono text-xs font-thin uppercase tracking-[-0.085em] opacity-50 md:px-8"
     >
       <MdOutlineMyLocation className="pb-[0.116rem]" />
       <p>{`${location}`}</p>

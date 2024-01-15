@@ -10,7 +10,7 @@ import { Group } from "three/src/objects/Group";
 import { M1 } from "./M1";
 import { Phone } from "./Phone";
 import { VideoMaterial } from "./VideoMaterial";
-import { useUIStore } from "(ui)";
+import { useUIStore } from "@hooks/useUIStore";
 import { usePathname } from "next/navigation";
 
 // const rsqw = (t: number, delta = 0.02, a = 1, f = 1 / (2 * Math.PI)) =>
