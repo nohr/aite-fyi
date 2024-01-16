@@ -25,7 +25,7 @@ export const Scan = memo(function Scan() {
   // const project = usePathname().split("/")[2];
   const project = usePathname().split("/")[1];
   const mod = 3.2;
-  
+
   const handleMouseMove = (mouse: Vector2) => {
     const tar = new Vector3((mouse.x * mod * 2) / 1, mouse.y * mod, 3);
     // const bobDelta = () => {
@@ -45,7 +45,7 @@ export const Scan = memo(function Scan() {
   const handleHorizontalSway = (pointer: Vector2) => {
     groupRef.current?.position.lerp(
       new Vector3(
-        -pointer.x * 5.75,
+        pointer.x > 0 ? 0 : -pointer.x * 5.75,
         groupRef.current?.position.y,
         groupRef.current?.position.z,
       ),
@@ -97,7 +97,7 @@ export const Scan = memo(function Scan() {
     };
 
     handleMouseMove(pointer);
-    handleHorizontalSway(pointer);
+    //  handleHorizontalSway(pointer);
 
     handleBreath();
   });
@@ -116,7 +116,7 @@ export const Scan = memo(function Scan() {
   return (
     <group
       ref={groupRef}
-      position={[0, 70, -3.5]}
+      position={[size.width >= 768 ? 6 : 4, 70, -3.5]}
       rotation={[0, 0, 0]}
       scale={0.25}
     >
