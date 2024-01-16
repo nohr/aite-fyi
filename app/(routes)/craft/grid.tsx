@@ -22,13 +22,9 @@ export default function Grid({ projects }: { projects: Project[] }) {
           return (
             <Item
               key={project._id}
-              name={project.name}
+              project={project}
               index={index}
               play={play}
-              path={`/craft/${project.slug}`}
-              video={project.videos?.[0].url}
-              thumbnail={project.thumbnail}
-              program={project.program}
             />
           );
         })}
