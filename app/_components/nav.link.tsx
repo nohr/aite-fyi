@@ -25,7 +25,7 @@ const NavLink = ({
           onClick={() => play()}
           title={to}
           href={`/${to === "home" ? "" : to}`}
-          className={`nav-link pointer-events-auto flex h-12 w-12 select-none flex-col items-center justify-center rounded-full border border-current no-underline shadow-lg transition hover:shadow-xl active:scale-90
+          className={`nav-link pointer-events-auto flex h-12 w-12 select-none flex-row items-center justify-center rounded-full border border-current no-underline shadow-lg transition hover:shadow-xl active:scale-90
          ${active ? "active" : ""}`}
         >
           {children} <p className="text-xs">{to}</p>
