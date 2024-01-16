@@ -11,6 +11,14 @@ export default function Socials() {
       }
     >
       <a
+        href={`mailto:${email}`}
+        title={email}
+        className="nav-link pointer-events-auto flex select-none items-center gap-1 rounded-full border border-current  p-2 shadow-md transition duration-75 ease-in-out"
+      >
+        <MdAlternateEmail className="pointer-events-none" />
+        {/* {`${email}`} */}
+      </a>
+      <a
         href="https://www.github.com/nohr"
         title="@nohr"
         target="_blank"
@@ -29,14 +37,6 @@ export default function Socials() {
       >
         <FaLinkedinIn className="pointer-events-none" />
         {/* in/aite */}
-      </a>
-      <a
-        href={`mailto:${email}`}
-        title={email}
-        className="nav-link pointer-events-auto flex select-none items-center gap-1 rounded-full border border-current  p-2 shadow-md transition duration-75 ease-in-out"
-      >
-        <MdAlternateEmail className="pointer-events-none" />
-        {/* {`${email}`} */}
       </a>
     </div>
   );
