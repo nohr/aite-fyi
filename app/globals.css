@@ -156,9 +156,9 @@ a {
   }
 }
 
-*::-webkit-scrollbar {
+/* *::-webkit-scrollbar {
   display: none;
-}
+} */
 
 input[type="range"] {
   -webkit-appearance: none !important;
