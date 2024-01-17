@@ -6,13 +6,17 @@ import { FaHandSparkles } from "react-icons/fa";
 import { Tabs, TabsList, TabsTrigger } from "_components/ui/tabs";
 import dynamic from "next/dynamic";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useCallback } from "react";
+import { memo, useCallback } from "react";
 import useSFX from "@hooks/useSFX";
 const NavPortal = dynamic(() => import("_components/nav.portal"), {
   ssr: false,
 });
 
-const MediumTabs = ({ className }: { className?: string }) => {
+const MediumTabs = memo(function MediumTabs({
+  className,
+}: {
+  className?: string;
+}) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -107,6 +111,6 @@ const MediumTabs = ({ className }: { className?: string }) => {
       </Tabs>
     </NavPortal>
   );
-};
+});
 
 export default MediumTabs;

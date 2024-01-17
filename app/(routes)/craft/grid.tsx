@@ -5,20 +5,66 @@ import { useSearchParams } from "next/navigation";
 import { Project } from "types/Project";
 import Item from "./item";
 import useSFX from "@hooks/useSFX";
+import useDimensions from "@hooks/useDimensions";
+import { memo, useEffect, useMemo, useState } from "react";
 
 export default function Grid({ projects }: { projects: Project[] }) {
   const searchParams = useSearchParams();
   const medium = searchParams.get("medium");
   const [play] = useSFX("/sfx/open.mp3");
+  const { width } = useDimensions();
+  const [columns, setColumns] = useState(1);
+
+  useEffect(() => {
+    setColumns(width > 1024 ? 3 : width > 640 ? 2 : 1);
+  }, [width]);
+
+  const props = useMemo(() => {
+    return {
+      medium,
+      projects,
+      play,
+      className: `${
+        width > 1024 ? "max-w-[33%]" : width > 640 ? "max-w-[49.66%]" : ""
+      }`,
+      columns,
+    };
+  }, [medium, projects, play, width, columns]);
 
   return (
-    <div
-      className={`flex w-full flex-row flex-wrap items-start justify-start gap-y-1 md:px-1 `}
-    >
-      {/* <div className="w-1/ h-0.5 bg-border"></div> */}
-      <AnimatePresence mode="popLayout">
-        {projects.map((project, index) => {
-          if (medium && !project.medium.includes(medium)) return null;
+    <AnimatePresence mode="popLayout">
+      <div
+        className={`flex w-full flex-row flex-wrap items-start justify-start gap-x-1 gap-y-1 md:px-1 `}
+      >
+        <Column number={columns > 1 ? 0 : null} {...props} />
+        {columns > 1 && <Column number={1} {...props} />}
+        {columns > 2 && <Column number={2} {...props} />}
+      </div>
+    </AnimatePresence>
+  );
+}
+
+const Column = memo(function Column({
+  medium,
+  projects,
+  play,
+  number,
+  columns,
+  className = "",
+}: {
+  medium: string | null;
+  projects: Project[];
+  play: () => void;
+  number: number | null;
+  columns: number;
+  className?: string;
+}) {
+  return (
+    <div className={`flex w-full flex-col gap-y-1 ${className}`}>
+      {projects
+        .filter((project) => !medium || project.medium.includes(medium))
+        .map((project, index) => {
+          if (number !== null && index % columns !== number) return null;
           return (
             <Item
               key={project._id}
@@ -28,7 +74,6 @@ export default function Grid({ projects }: { projects: Project[] }) {
             />
           );
         })}
-      </AnimatePresence>
     </div>
   );
-}
+});

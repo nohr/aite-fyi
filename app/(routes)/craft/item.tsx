@@ -5,8 +5,9 @@ import { delayed_pagination_animation } from "_components/animate/route";
 import Programs from "./[project]/programs";
 import { GoChevronRight } from "react-icons/go";
 import { Project } from "types/Project";
+import { memo } from "react";
 
-export default function Item({
+const Item = memo(function Item({
   project,
   play,
   index,
@@ -28,7 +29,7 @@ export default function Item({
       //   transition: { duration: 0.2, ease: `easeInOut` },
       // }}
       {...delayed_pagination_animation(index)}
-      className={`group/item flex h-64 w-full flex-col gap-0 overflow-hidden rounded-2xl border border-border shadow-lg sm:w-1/2 md:h-72  lg:w-1/3`}
+      className={`group/item flex h-64 w-full flex-col gap-0 overflow-hidden rounded-2xl border border-border shadow-lg md:h-72`}
     >
       <Link
         href={path}
@@ -79,4 +80,6 @@ export default function Item({
       </Link>
     </motion.div>
   );
-}
+});
+
+export default Item;
