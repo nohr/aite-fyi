@@ -27,6 +27,11 @@ const project = {
       },
     },
     {
+      name: "rank",
+      title: "Rank",
+      type: "number",
+    },
+    {
       name: "medium",
       title: "Item",
       type: "string",

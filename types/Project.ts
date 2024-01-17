@@ -21,4 +21,5 @@ export type Project = {
   medium: "website" | "interactive" | "design";
   thumbnail: string;
   content: PortableTextBlock[];
+  rank: 0 | 1 | 2;
 };

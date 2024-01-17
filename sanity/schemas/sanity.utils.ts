@@ -17,7 +17,8 @@ export async function getProjects(): Promise<Project[]> {
         _id,
         _createdAt,
         name,
-            medium,
+        medium,
+        rank,
         "thumbnail": thumbnail.asset->url,
         videos[]{
           alt, 
