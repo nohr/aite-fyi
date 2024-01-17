@@ -7,7 +7,7 @@ export default function Socials() {
   return (
     <div
       className={
-        " flex h-min w-fit skew-x-[8deg] skew-y-[2deg] flex-row items-center justify-start gap-x-2  pt-2 text-xs tracking-tight md:items-start md:justify-start [&>a>*]:h-5 md:[&>a>*]:!h-4 [&>a>svg]:w-auto"
+        "group/nav pointer-events-none flex h-min w-fit skew-x-[8deg] skew-y-[2deg] flex-row items-center justify-start gap-x-2  pt-2 text-xs tracking-tight md:items-start md:justify-start [&>a>*]:h-5 md:[&>a>*]:!h-4 [&>a>svg]:w-auto"
       }
     >
       <a

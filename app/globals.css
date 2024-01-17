@@ -5,13 +5,13 @@
 @layer base {
   :root {
     --background: var(--arc-palette-title, #e0e0e0);
-    --foreground: var(--arc-palette-backgroundExtra, #040404);
+    --foreground: var(--arc-palette-backgroundExtra, #131313);
 
     --card: var(--arc-palette-title, #e0e0e0);
-    --card-foreground: var(--arc-palette-backgroundExtra, #040404);
+    --card-foreground: var(--arc-palette-backgroundExtra, #131313);
 
     --popover: var(--arc-palette-title, #e0e0e0);
-    --popover-foreground: var(--arc-palette-backgroundExtra, #040404);
+    --popover-foreground: var(--arc-palette-backgroundExtra, #131313);
 
     --primary: 0 0% 9%;
     --primary-foreground: var(--arc-palette-foregroundSecondary, #e2e2e2);
@@ -28,40 +28,40 @@
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: var(--arc-palette-foregroundSecondary, #e2e2e2);
 
-    --border: var(--arc-palette-hover, #b7b7b7);
+    --border: var(--arc-palette-hover, #878787);
     --input: 0 0% 89.8%;
-    --ring: var(--arc-palette-backgroundExtra, #040404);
+    --ring: var(--arc-palette-backgroundExtra, #131313);
 
     --radius: 0.5rem;
   }
 
   .dark {
-    --background: var(--arc-palette-backgroundExtra, #040404);
+    --background: var(--arc-palette-backgroundExtra, #131313);
     --foreground: var(--arc-palette-foregroundSecondary, #e2e2e2);
 
-    --card: var(--arc-palette-backgroundExtra, #040404);
+    --card: var(--arc-palette-backgroundExtra, #131313);
     --card-foreground: var(--arc-palette-foregroundSecondary, #e2e2e2);
 
-    --popover: var(--arc-palette-backgroundExtra, #040404);
+    --popover: var(--arc-palette-backgroundExtra, #131313);
     --popover-foreground: var(--arc-palette-foregroundSecondary, #e2e2e2);
 
     --primary: var(--arc-palette-foregroundSecondary, #e2e2e2);
     --primary-foreground: 0 0% 9%;
 
-    --secondary: var(--arc-palette-background, #1b1b1b);
+    --secondary: var(--arc-palette-background, #000000);
     --secondary-foreground: var(--arc-palette-foregroundSecondary, #e2e2e2);
 
-    --muted: var(--arc-palette-background, #1b1b1b);
+    --muted: var(--arc-palette-background, #000000);
     --muted-foreground: 0 0% 63.9%;
 
-    --accent: var(--arc-palette-background, #1b1b1b);
+    --accent: var(--arc-palette-background, #000000);
     --accent-foreground: var(--arc-palette-foregroundSecondary, #e2e2e2);
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: var(--arc-palette-foregroundSecondary, #e2e2e2);
 
-    --border: var(--arc-palette-background, #1b1b1b);
-    --input: var(--arc-palette-background, #1b1b1b);
+    --border: var(--arc-palette-background, #464646);
+    --input: var(--arc-palette-background, #000000);
     --ring: 0 0% 83.1%;
   }
 }
@@ -117,7 +117,7 @@ body {
 }
 
 body {
-  @apply relative selection:bg-[var(--arc-palette-focus,_#000)] selection:text-[var(--arc-palette-title,_#e0e0e0)] dark:selection:bg-[var(--arc-palette-focus,_#e2e2e2)] dark:selection:text-[var(--arc-palette-title,_#040404)];
+  @apply relative selection:bg-[var(--arc-palette-focus,_#000)] selection:text-[var(--arc-palette-title,_#e0e0e0)] dark:selection:bg-[var(--arc-palette-focus,_#e2e2e2)] dark:selection:text-[var(--arc-palette-title,_#131313)];
 }
 
 .nav-link:hover > *,
@@ -140,11 +140,11 @@ a {
 }
 
 .dark {
-  background-color: var(--arc-palette-backgroundExtra, #040404);
+  background-color: var(--arc-palette-backgroundExtra, #131313);
   background: linear-gradient(
     180deg,
-    var(--arc-palette-background, #1b1b1b) 0%,
-    var(--arc-palette-backgroundExtra, #040404) 15%
+    var(--arc-palette-background, #000000) 0%,
+    var(--arc-palette-backgroundExtra, #131313) 15%
   ) !important;
   color: var(--arc-palette-foregroundSecondary, #e2e2e2) !important;
 }

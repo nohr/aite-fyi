@@ -6,18 +6,20 @@ import { Project } from "types/Project";
 import Item from "./item";
 import useSFX from "@hooks/useSFX";
 import useDimensions from "@hooks/useDimensions";
-import { memo, useEffect, useMemo, useState } from "react";
+import { memo, useEffect, useMemo } from "react";
+import { useUIStore } from "@hooks/useUIStore";
 
 export default function Grid({ projects }: { projects: Project[] }) {
   const searchParams = useSearchParams();
   const medium = searchParams.get("medium");
   const [play] = useSFX("/sfx/open.mp3");
   const { width } = useDimensions();
-  const [columns, setColumns] = useState(1);
+  const columns = useUIStore((s) => s.columns);
+  const { setState } = useUIStore;
 
   useEffect(() => {
-    setColumns(width > 1024 ? 3 : width > 640 ? 2 : 1);
-  }, [width]);
+    setState({ columns: width > 1024 ? 3 : width > 640 ? 2 : 1 });
+  }, [setState, width]);
 
   const props = useMemo(() => {
     return {
@@ -34,7 +36,7 @@ export default function Grid({ projects }: { projects: Project[] }) {
   return (
     <AnimatePresence mode="popLayout">
       <div
-        className={`flex w-full flex-row flex-wrap items-start justify-start gap-x-1 gap-y-1 px-1 `}
+        className={`flex w-full flex-row flex-wrap items-start justify-start gap-x-1 gap-y-1 px-1 pb-12 md:pb-1 `}
       >
         <Column number={columns > 1 ? 0 : null} {...props} />
         {columns > 1 && <Column number={1} {...props} />}

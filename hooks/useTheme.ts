@@ -14,6 +14,9 @@ export default function useTheme() {
     setState({ theme: user_theme });
 
     if (user_theme === "dark") document.documentElement.classList.add("dark");
+    if (user_theme === "dark")
+      document.documentElement.setAttribute("data-theme", "dark");
+    else document.documentElement.setAttribute("data-theme", "light");
 
     // listen for changes
     window
