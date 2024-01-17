@@ -21,6 +21,12 @@ const Item = memo(function Item({
   const video = videos?.[0]?.url;
   const showVideo = video;
   // const showVideo = !path.includes("sci-fi-previs") && video;
+  const sizing =
+    project.rank === 1
+      ? "h-64 md:h-72"
+      : project.rank === 2
+        ? "h-72 md:h-96"
+        : "h-44 md:h-50";
   return (
     <motion.div
       // whileHover={{
@@ -29,7 +35,7 @@ const Item = memo(function Item({
       //   transition: { duration: 0.2, ease: `easeInOut` },
       // }}
       {...delayed_pagination_animation(index)}
-      className={`group/item flex h-64 w-full flex-col gap-0 overflow-hidden rounded-2xl border border-border shadow-lg md:h-72`}
+      className={`group/item flex w-full flex-col gap-0 overflow-hidden rounded-2xl border border-border shadow-lg ${sizing}`}
     >
       <Link
         href={path}
@@ -37,7 +43,7 @@ const Item = memo(function Item({
         className={`pointer-events-auto relative flex h-full w-full flex-col overflow-hidden rounded-2xl no-underline duration-100 hover:border-current hover:shadow-md focus:border-current focus:shadow-md group-active/item:scale-90`}
       >
         <div
-          className={`pointer-events-auto absolute -bottom-0.5 z-20 flex h-4/6 w-full select-none flex-row flex-nowrap items-end justify-center gap-2 bg-gradient-to-t from-[#000000c3] to-transparent to-70% p-4 text-lg lowercase tracking-tight text-[#cecece] duration-200 md:justify-between`}
+          className={`pointer-events-auto absolute -bottom-0.5 z-20 flex h-4/6 w-full select-none flex-row flex-nowrap items-end justify-center gap-2 bg-gradient-to-t from-[#000000f2] to-transparent to-70% p-4 text-lg lowercase tracking-tight text-[#cecece] duration-200 md:justify-between`}
         >
           <span className="flex items-center gap-1">
             {name}

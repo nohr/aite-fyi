@@ -34,7 +34,7 @@ export default function Grid({ projects }: { projects: Project[] }) {
   return (
     <AnimatePresence mode="popLayout">
       <div
-        className={`flex w-full flex-row flex-wrap items-start justify-start gap-x-1 gap-y-1 md:px-1 `}
+        className={`flex w-full flex-row flex-wrap items-start justify-start gap-x-1 gap-y-1 px-1 `}
       >
         <Column number={columns > 1 ? 0 : null} {...props} />
         {columns > 1 && <Column number={1} {...props} />}
