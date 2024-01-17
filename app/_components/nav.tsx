@@ -57,7 +57,7 @@ function Nav() {
       </div>
 
       <div
-        className={`pointer-events-none absolute left-0 top-0 -z-10 block h-full w-full bg-[#e0e0e0] opacity-50 transition duration-200 md:opacity-0 md:group-hover/nav:opacity-50 dark:bg-[#000000] dark:opacity-75 md:dark:opacity-0`}
+        className={`pointer-events-none absolute left-0 top-0 -z-10 block h-full w-full bg-[#e0e0e0] opacity-50 transition duration-200 md:opacity-0 md:group-hover/nav:opacity-50 dark:bg-[#131313] dark:opacity-75 md:dark:opacity-0`}
       />
     </motion.nav>
   );
