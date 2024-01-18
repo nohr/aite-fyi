@@ -26,7 +26,7 @@ export function Loader() {
   return (
     <p
       ref={loaderRef}
-      className={`absolute bottom-20 left-2 z-[100] flex h-12 w-36 skew-x-[8deg] skew-y-[2deg] flex-row items-center font-mono text-sm uppercase tracking-tighter md:!right-auto md:left-[13rem] md:top-4 md:-skew-x-[7deg] md:-skew-y-[1.5deg] ${
+      className={`absolute bottom-20 left-2 z-[100] flex h-12 w-36 skew-x-[8deg] skew-y-[2deg] flex-row items-center bg-background font-mono text-sm uppercase tracking-tighter md:!right-auto md:left-[13rem] md:top-4 md:-skew-x-[7deg] md:-skew-y-[1.5deg] ${
         loading ? "loading" : ""
       }`}
     >

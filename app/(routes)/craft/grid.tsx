@@ -36,11 +36,11 @@ export default function Grid({ projects }: { projects: Project[] }) {
   return (
     <AnimatePresence mode="popLayout">
       <div
-        className={`flex w-full flex-row flex-wrap items-start justify-start gap-x-1 gap-y-1 px-1 pb-12 md:pb-1 `}
+        className={`pointer-events-none flex w-full flex-row flex-nowrap items-start justify-start gap-x-1 gap-y-1 px-1 pb-12 md:pb-1 `}
       >
         <Column number={columns > 1 ? 0 : null} {...props} />
-        {columns > 1 && <Column number={1} {...props} />}
-        {columns > 2 && <Column number={2} {...props} />}
+        <Column number={1} {...props} />
+        <Column number={2} {...props} />
       </div>
     </AnimatePresence>
   );
@@ -61,6 +61,7 @@ const Column = memo(function Column({
   columns: number;
   className?: string;
 }) {
+  if (number && columns < number + 1) return null;
   return (
     <div className={`flex w-full flex-col gap-y-1 ${className}`}>
       {projects

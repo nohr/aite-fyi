@@ -8,8 +8,9 @@ import { motion } from "framer-motion";
 import Socials from "./socials";
 import NavLink from "./nav.link";
 import { Portal } from "./nav.portal";
+import { memo } from "react";
 
-function Nav() {
+const Nav = memo(function Nav() {
   const pathname = usePathname();
   const admin = pathname.split("/")[1] === "admin";
   const [play] = useSFX("/sfx/click.mp3");
@@ -61,6 +62,6 @@ function Nav() {
       />
     </motion.nav>
   );
-}
+});
 
 export default Nav;

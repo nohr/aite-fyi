@@ -6,6 +6,7 @@ import Programs from "./[project]/programs";
 import { GoChevronRight } from "react-icons/go";
 import { Project } from "types/Project";
 import { memo } from "react";
+import { useRouter } from "next/navigation";
 
 const Item = memo(function Item({
   project,
@@ -16,49 +17,26 @@ const Item = memo(function Item({
   play: () => void;
   index: number;
 }) {
-  const { name, thumbnail, videos, program } = project;
-  const path = `/craft/${project.slug}`;
-  const video = videos?.[0]?.url;
-  const showVideo = video;
-  // const showVideo = !path.includes("sci-fi-previs") && video;
+  const { name, thumbnail, videos, program, rank, slug } = project;
+  const router = useRouter();
   const sizing =
-    project.rank === 1
-      ? "h-64 md:h-72"
-      : project.rank === 2
-        ? "h-72 md:h-96"
-        : "h-44 md:h-50";
+    rank === 1 ? "h-64 md:h-72" : rank === 2 ? "h-72 md:h-96" : "h-56 md:h-60";
+
   return (
     <motion.div
-      // whileHover={{
-      //   scale: 1.05,
-      //   zIndex: 1,
-      //   transition: { duration: 0.2, ease: `easeInOut` },
-      // }}
+      tabIndex={0}
+      onClick={() => {
+        if (rank <= 0) return;
+        play();
+        router.push(`/craft/${slug}`);
+      }}
       {...delayed_pagination_animation(index)}
-      className={`group/item flex w-full flex-col gap-0 overflow-hidden rounded-2xl border border-border shadow-lg ${sizing}`}
+      className={` group/item pointer-events-auto flex w-full flex-col gap-0  rounded-2xl border border-border shadow-lg active:scale-90 ${sizing} ${
+        rank > 0 ? "cursor-pointer" : ""
+      }`}
     >
-      <Link
-        href={path}
-        onClick={() => play()}
-        className={`pointer-events-auto relative flex h-full w-full flex-col overflow-hidden rounded-2xl no-underline duration-100 hover:border-current hover:shadow-md focus:border-current focus:shadow-md group-active/item:scale-90`}
-      >
-        <div
-          className={`pointer-events-auto absolute -bottom-0.5 z-20 flex h-4/6 w-full select-none flex-row flex-nowrap items-end justify-center gap-2 bg-gradient-to-t from-[#000000f2] to-transparent to-70% p-4 text-lg lowercase tracking-tight text-[#cecece] duration-200 md:justify-between`}
-        >
-          <span className="flex items-center gap-1">
-            {name}
-            <GoChevronRight className="h-4 w-4 opacity-0 group-hover/item:animate-shake-left group-hover/item:opacity-100" />
-          </span>
-
-          {program && (
-            <Programs
-              program={program}
-              className="hidden !items-end opacity-0 group-hover/item:opacity-100 md:flex"
-            />
-          )}
-        </div>
-
-        {showVideo ? (
+      <div className="relative h-full overflow-hidden rounded-2xl">
+        {videos?.[0]?.url ? (
           <video
             autoPlay={true}
             playsInline
@@ -66,9 +44,9 @@ const Item = memo(function Item({
             muted
             loop
             preload="metadata"
-            src={`${video}#t=0.01`}
+            src={`${videos[0].url}#t=0.01`}
             controls={false}
-            className={`pointer-events-none absolute z-10 h-full w-full overflow-clip rounded-2xl object-cover`}
+            className={`pointer-events-none absolute z-10 h-full w-full overflow-clip object-cover`}
           />
         ) : null}
 
@@ -78,12 +56,33 @@ const Item = memo(function Item({
           fill
           sizes="400px"
           priority
-          className={`pointer-events-none select-none rounded-2xl ${
-            showVideo ? "blur-2xl" : ""
+          className={`pointer-events-none absolute select-none object-cover ${
+            videos?.[0]?.url ? "blur-2xl" : ""
           }}`}
-          style={{ position: "absolute", objectFit: "cover" }}
         />
-      </Link>
+      </div>
+
+      <div
+        className={`  -bottom-0.5 z-20 flex  w-full select-none flex-row flex-nowrap items-end justify-center gap-2 p-4 text-lg lowercase tracking-tight text-[#cecece] duration-200 md:justify-between ${
+          rank > 0
+            ? "absolute h-4/6 bg-gradient-to-t from-[#000000f2] to-transparent to-70%"
+            : ""
+        }`}
+      >
+        <span className="flex items-center gap-1">
+          {name}
+          {rank > 0 && (
+            <GoChevronRight className="h-4 w-4 group-hover/item:animate-shake-left" />
+          )}
+        </span>
+
+        {program && (
+          <Programs
+            program={program}
+            className="hidden !items-end opacity-0 group-hover/item:opacity-100 md:flex"
+          />
+        )}
+      </div>
     </motion.div>
   );
 });
