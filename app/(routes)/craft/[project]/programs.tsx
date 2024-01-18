@@ -55,7 +55,7 @@ export default function Programs({
     <div
       className={
         className +
-        " light pointer-events-none  flex w-fit flex-row gap-x-1 transition-opacity [&_svg]:h-6 [&_svg]:w-auto md:[&_svg]:h-5"
+        " light pointer-events-none flex w-fit flex-row gap-x-1 transition-opacity [&_svg]:h-6 [&_svg]:w-auto md:[&_svg]:h-5"
       }
     >
       <TooltipProvider>
@@ -66,7 +66,7 @@ export default function Programs({
             return (
               <div
                 key={title + " svg"}
-                className=" pointer-events-auto relative block opacity-50 hover:opacity-100"
+                className=" pointer-events-auto relative flex opacity-50 hover:opacity-100"
               >
                 <Tooltip>
                   <TooltipTrigger>

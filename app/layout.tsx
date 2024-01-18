@@ -28,9 +28,9 @@ const Libre = Noto_Serif_Display({
 export const metadata = {
   title: {
     template: "%s | aite.fyi",
-    default: "aite, for your info",
+    default: "aitẹ, for your info",
   },
-  description: "Personal website of Aite Aigbe",
+  description: "Personal website of Aitẹ Aigbe",
 };
 
 export const viewport = {
