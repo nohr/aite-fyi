@@ -5,13 +5,13 @@
 @layer base {
   :root {
     --background: var(--arc-palette-title, #e0e0e0);
-    --foreground: var(--arc-palette-backgroundExtra, #131313);
+    --foreground: var(--arc-palette-cutoutColor, #131313);
 
     --card: var(--arc-palette-title, #e0e0e0);
-    --card-foreground: var(--arc-palette-backgroundExtra, #131313);
+    --card-foreground: var(--arc-palette-cutoutColor, #131313);
 
     --popover: var(--arc-palette-title, #e0e0e0);
-    --popover-foreground: var(--arc-palette-backgroundExtra, #131313);
+    --popover-foreground: var(--arc-palette-cutoutColor, #131313);
 
     --primary: 0 0% 9%;
     --primary-foreground: var(--arc-palette-foregroundSecondary, #e2e2e2);
@@ -30,7 +30,7 @@
 
     --border: var(--arc-palette-hover, #878787);
     --input: 0 0% 89.8%;
-    --ring: var(--arc-palette-backgroundExtra, #131313);
+    --ring: var(--arc-palette-cutoutColor, #131313);
 
     --radius: 0.5rem;
   }
