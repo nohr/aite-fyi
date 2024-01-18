@@ -20,7 +20,7 @@ const Item = memo(function Item({
   const { name, thumbnail, videos, program, rank, slug } = project;
   const router = useRouter();
   const sizing =
-    rank === 1 ? "h-64 md:h-72" : rank === 2 ? "h-72 md:h-96" : "h-56 md:h-60";
+    rank > 0 ? "h-64 md:h-72" : rank > 1 ? "h-72 md:h-96" : "h-56 md:h-60";
 
   return (
     <motion.div
@@ -31,11 +31,11 @@ const Item = memo(function Item({
         router.push(`/craft/${slug}`);
       }}
       {...delayed_pagination_animation(index)}
-      className={` group/item pointer-events-auto flex w-full flex-col gap-0  rounded-2xl border border-border shadow-lg active:scale-90 ${sizing} ${
-        rank > 0 ? "cursor-pointer" : ""
+      className={` group/item pointer-events-auto relative flex w-full flex-col gap-0 overflow-hidden rounded-2xl border border-border shadow-lg active:scale-90 ${sizing} ${
+        rank > 0 ? "cursor-pointer " : "gap-2 p-2"
       }`}
     >
-      <div className="relative h-full overflow-hidden rounded-2xl">
+      <div className={`relative h-full overflow-hidden rounded-xl shadow-lg `}>
         {videos?.[0]?.url ? (
           <video
             autoPlay={true}
@@ -63,13 +63,14 @@ const Item = memo(function Item({
       </div>
 
       <div
-        className={`  -bottom-0.5 z-20 flex  w-full select-none flex-row flex-nowrap items-end justify-center gap-2 p-4 text-lg lowercase tracking-tight text-[#cecece] duration-200 md:justify-between ${
+        className={` -bottom-0.5 z-20 flex w-full select-none flex-row flex-nowrap items-end justify-between gap-2 rounded-2xl text-lg lowercase tracking-tight 
+        duration-200 ${
           rank > 0
-            ? "absolute h-4/6 bg-gradient-to-t from-[#000000f2] to-transparent to-70%"
-            : ""
+            ? "absolute h-4/6 bg-gradient-to-t from-[#000000f2] to-transparent to-70% p-4 text-[#cecece]"
+            : " py-2 text-current"
         }`}
       >
-        <span className="flex items-center gap-1">
+        <span className="flex items-center gap-1  italic">
           {name}
           {rank > 0 && (
             <GoChevronRight className="h-4 w-4 group-hover/item:animate-shake-left" />

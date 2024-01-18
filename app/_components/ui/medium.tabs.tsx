@@ -69,7 +69,7 @@ const MediumTabs = memo(function MediumTabs({
         defaultValue={searchParams.get("medium") || "all"}
         className={className + " [&_*]!select-none"}
       >
-        <TabsList>
+        <TabsList className="w-full justify-between">
           <TabsTrigger
             onClick={() => {
               play();
