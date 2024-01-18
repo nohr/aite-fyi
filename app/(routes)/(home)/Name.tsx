@@ -27,7 +27,7 @@ const Name = function ({ pic }: { pic: string }): JSX.Element {
         onClick={() => aigbe()}
       >
         <RiSpeakFill className="absolute top-1  hidden h-4 w-4 group-active/aigbe:block md:group-hover/aigbe:block" />
-        aigbẹ
+        aigbe
       </span>
       <Image
         suppressHydrationWarning

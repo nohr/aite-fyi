@@ -134,7 +134,7 @@ body {
 }
 
 .item {
-  @apply border-current bg-current bg-opacity-20 shadow-md [&>div]:mix-blend-plus-lighter [&>div]:dark:mix-blend-difference;
+  @apply border-foreground bg-foreground bg-opacity-20 text-background shadow-md [&>div]:mix-blend-difference;
 }
 
 a {

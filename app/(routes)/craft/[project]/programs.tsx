@@ -17,6 +17,12 @@ import { createElement } from "react";
 import { IconType } from "react-icons";
 import { DiIllustrator } from "react-icons/di";
 import { BsQuestionDiamondFill } from "react-icons/bs";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "_components/ui/tooltip";
 
 export default function Programs({
   program,
@@ -52,27 +58,33 @@ export default function Programs({
         " light pointer-events-none  flex w-fit flex-row gap-x-1 transition-opacity [&_svg]:h-6 [&_svg]:w-auto md:[&_svg]:h-5"
       }
     >
-      {program
-        .sort((a, b) => a.localeCompare(b))
-        .map((title: string, index): JSX.Element => {
-          if (max && index >= max) return <></>;
-          return (
-            <div
-              key={title + " svg"}
-              className=" pointer-events-auto relative block opacity-50 hover:opacity-100"
-            >
-              {createElement(pairing[title] ?? BsQuestionDiamondFill, {
-                title,
-                key: title,
-              })}
-            </div>
-          );
-        })}
+      <TooltipProvider>
+        {program
+          .sort((a, b) => a.localeCompare(b))
+          .map((title: string, index): JSX.Element => {
+            if (max && index >= max) return <></>;
+            return (
+              <div
+                key={title + " svg"}
+                className=" pointer-events-auto relative block opacity-50 hover:opacity-100"
+              >
+                <Tooltip>
+                  <TooltipTrigger>
+                    {createElement(pairing[title] ?? BsQuestionDiamondFill, {
+                      key: title,
+                    })}
+                  </TooltipTrigger>
+                  <TooltipContent>{title}</TooltipContent>
+                </Tooltip>
+              </div>
+            );
+          })}
+      </TooltipProvider>
     </div>
   );
 }
 
-const mediapipe = (props: any) => (
+const mediapipe = () => (
   <svg
     x="0px"
     y="0px"
@@ -85,7 +97,6 @@ const mediapipe = (props: any) => (
     height="1em"
     width="1em"
   >
-    <title>{props.title}</title>
     <g>
       <path
         d="M175.84,120.04c0-23.79-0.11-47.58,0.05-71.37c0.08-12.14,11.2-19.91,21.97-15.52c6.68,2.72,10.07,8,10.16,15.19
