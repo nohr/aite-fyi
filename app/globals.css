@@ -107,14 +107,17 @@ body {
 html,
 body {
   background: var(--arc-palette-title, #e0e0e0);
+  color: var(--arc-palette-focus, #000);
+}
+
+/* .gradient {
+  background-repeat: no-repeat;
   background: linear-gradient(
     180deg,
     var(--arc-palette-hover, #b7b7b7) 0%,
     var(--arc-palette-title, #e0e0e0) 15%
   );
-  color: var(--arc-palette-focus, #000);
-  background-repeat: no-repeat;
-}
+} */
 
 body {
   @apply relative selection:bg-[var(--arc-palette-focus,_#000)] selection:text-[var(--arc-palette-title,_#e0e0e0)] dark:selection:bg-[var(--arc-palette-focus,_#e2e2e2)] dark:selection:text-[var(--arc-palette-title,_#131313)];
@@ -141,12 +144,15 @@ a {
 
 .dark {
   background-color: var(--arc-palette-backgroundExtra, #131313);
-  background: linear-gradient(
-    180deg,
-    var(--arc-palette-background, #000000) 0%,
-    var(--arc-palette-backgroundExtra, #131313) 15%
-  ) !important;
   color: var(--arc-palette-foregroundSecondary, #e2e2e2) !important;
+
+  /* .gradient {
+    background: linear-gradient(
+      180deg,
+      var(--arc-palette-background, #000000) 0%,
+      var(--arc-palette-backgroundExtra, #131313) 15%
+    ) !important;
+  } */
 }
 
 @media (prefers-color-scheme: dark) {
