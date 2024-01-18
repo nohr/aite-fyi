@@ -18,6 +18,7 @@ export async function getProjects(): Promise<Project[]> {
         name,
         medium,
         rank,
+        content,
         "thumbnail": thumbnail.asset->url,
         videos[]{
           alt, 
@@ -54,17 +55,17 @@ export async function getProject(slug: string): Promise<Project | undefined> {
             medium,
             program,
             content,
-             videos[]{
+            videos[]{
                alt, 
                _key,
                 mobile,
                "url": url.asset->url,
-                },
+            },
             images[]{
 						    "height": asset->metadata.dimensions.height,
                 "width": asset->metadata.dimensions.width,
 						    ...,
-             },
+            },
           }`,
     { slug },
   );

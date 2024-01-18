@@ -1,4 +1,4 @@
-import Link from "next/link";
+// import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { delayed_pagination_animation } from "_components/animate/route";
@@ -7,6 +7,7 @@ import { GoChevronRight } from "react-icons/go";
 import { Project } from "types/Project";
 import { memo } from "react";
 import { useRouter } from "next/navigation";
+import { PortableText } from "@portabletext/react";
 
 const Item = memo(function Item({
   project,
@@ -17,7 +18,7 @@ const Item = memo(function Item({
   play: () => void;
   index: number;
 }) {
-  const { name, thumbnail, videos, program, rank, slug } = project;
+  const { name, thumbnail, videos, program, rank, slug, content } = project;
   const router = useRouter();
   const sizing =
     rank > 0 ? "h-64 md:h-72" : rank > 1 ? "h-72 md:h-96" : "h-56 md:h-60";
@@ -77,10 +78,16 @@ const Item = memo(function Item({
           )}
         </span>
 
+        {rank < 1 && (
+          <p className=" absolute right-4 hidden text-sm opacity-50 group-hover/item:opacity-0 md:block">
+            <PortableText value={content} />
+          </p>
+        )}
+
         {program && (
           <Programs
             program={program}
-            className="hidden !items-end opacity-0 group-hover/item:opacity-100 md:flex"
+            className=" hidden !items-end opacity-0 group-hover/item:opacity-100 md:flex"
           />
         )}
       </div>
