@@ -14,7 +14,7 @@ interface UIProps {
 }
 
 export const useUIStore = create<UIProps>()(
-  devtools((set, get) => ({
+  devtools((set) => ({
     project: null,
     loading: true,
     zoom: 5,

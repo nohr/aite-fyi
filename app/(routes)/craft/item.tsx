@@ -71,7 +71,7 @@ const Item = memo(function Item({
             : " py-2 text-current"
         }`}
       >
-        <span className="flex items-center gap-1  italic">
+        <span className="flex items-center gap-1 italic">
           {name}
           {rank > 0 && (
             <GoChevronRight className="h-4 w-4 group-hover/item:animate-shake-left" />
@@ -79,7 +79,7 @@ const Item = memo(function Item({
         </span>
 
         {rank < 1 && (
-          <p className=" absolute right-4 hidden text-sm opacity-50 group-hover/item:opacity-0 md:block">
+          <p className="absolute right-4 text-sm opacity-50 group-hover/item:opacity-0 ">
             <PortableText value={content} />
           </p>
         )}
@@ -87,7 +87,7 @@ const Item = memo(function Item({
         {program && (
           <Programs
             program={program}
-            className=" hidden !items-end opacity-0 group-hover/item:opacity-100 md:flex"
+            className=" !items-end opacity-0 group-hover/item:opacity-100"
           />
         )}
       </div>
