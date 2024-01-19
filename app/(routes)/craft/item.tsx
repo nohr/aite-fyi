@@ -79,9 +79,9 @@ const Item = memo(function Item({
         </span>
 
         {rank < 1 && (
-          <p className="absolute right-4 text-sm opacity-50 group-hover/item:opacity-0 ">
+          <div className="absolute right-4 text-sm opacity-50 group-hover/item:opacity-0 ">
             <PortableText value={content} />
-          </p>
+          </div>
         )}
 
         {program && (
