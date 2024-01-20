@@ -68,7 +68,7 @@ const Item = memo(function Item({
         duration-200 ${
           rank > 0
             ? "absolute h-4/6 bg-gradient-to-t from-[#000000f2] to-transparent to-70% p-4 text-[#cecece]"
-            : " py-2 text-current"
+            : " px-2 py-2 text-current"
         }`}
       >
         <span className="flex items-center gap-1 italic">
