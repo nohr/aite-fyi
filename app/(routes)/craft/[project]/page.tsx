@@ -74,19 +74,21 @@ export default async function Project({
         {project?.videos &&
           project.videos.map((video) => {
             return video.url ? (
-              <video
-                autoPlay={true}
-                playsInline
-                muted
-                loop
-                preload="metadata"
-                key={video._key}
-                src={video.url}
-                controls={project.medium !== "website"}
-                className={`pointer-events-auto  h-96 w-fit shadow-lg ${
-                  video.mobile ? "mx-auto md:mx-0" : "md:max-w-prose"
-                }`}
-              />
+              <div className="flex flex-col gap-2" key={video._key}>
+                <video
+                  autoPlay={true}
+                  playsInline
+                  muted
+                  loop
+                  preload="metadata"
+                  src={video.url}
+                  controls={project.medium !== "website"}
+                  className={`pointer-events-auto  h-96 w-fit shadow-lg ${
+                    video.mobile ? "mx-auto md:mx-0" : "md:max-w-prose"
+                  }`}
+                />
+                <p className="text-center">{video.alt}</p>
+              </div>
             ) : (
               <RiLoaderFill className="m-2 h-4 w-4 animate-spin" />
             );
@@ -94,14 +96,16 @@ export default async function Project({
 
         {project?.images &&
           project.images.map((image: Project["images"][0]) => (
-            <Image
-              key={image._key}
-              src={urlFor(image).url()}
-              alt={project.name + " " + image._key}
-              height={image.height}
-              width={image.width}
-              className="pointer-events-none h-96 w-fit select-none object-contain md:max-w-prose"
-            />
+            <div key={image._key}>
+              <Image
+                src={urlFor(image).url()}
+                alt={project.name + " " + image._key}
+                height={image.height}
+                width={image.width}
+                className="pointer-events-none h-96 w-fit select-none object-contain md:max-w-prose"
+              />
+              {/* <p className="text-center">{image.}</p> */}
+            </div>
           ))}
       </div>
     </>
