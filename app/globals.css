@@ -4,7 +4,8 @@
 
 @layer base {
   :root {
-    --background: var(--arc-palette-title, #e0e0e0);
+    /* --background: var(--arc-palette-title, #e0e0e0); */
+    --background: #e0e0e0;
     --foreground: var(--arc-palette-cutoutColor, #131313);
 
     --card: var(--arc-palette-title, #e0e0e0);
@@ -36,7 +37,8 @@
   }
 
   .dark {
-    --background: var(--arc-palette-backgroundExtra, #131313);
+    /* --background: var(--arc-palette-backgroundExtra, #131313); */
+    --background: #131313;
     --foreground: var(--arc-palette-foregroundSecondary, #e2e2e2);
 
     --card: var(--arc-palette-backgroundExtra, #131313);
@@ -106,7 +108,7 @@ body {
 
 html,
 body {
-  background: var(--arc-palette-title, #e0e0e0);
+  background: var(--background);
   color: var(--arc-palette-focus, #000);
 }
 
@@ -143,7 +145,7 @@ a {
 }
 
 .dark {
-  background-color: var(--arc-palette-backgroundExtra, #131313);
+  background: var(--background);
   color: var(--arc-palette-foregroundSecondary, #e2e2e2) !important;
 
   /* .gradient {
