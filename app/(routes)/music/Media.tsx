@@ -48,7 +48,6 @@ export default function Media() {
         <audio
           ref={audioRef}
           src={`${song?.file}?dl=` + song?.name + ".mp3"}
-          autoPlay={playing}
           playsInline
           onTimeUpdate={(e) => {
             const audio = e.currentTarget;

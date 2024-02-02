@@ -17,6 +17,7 @@ const Heritage = localFont({
   src: "./Heritage-Display.otf",
   variable: "--font-heritage",
   display: "swap",
+  preload: true,
 });
 
 const Libre = Noto_Serif_Display({
