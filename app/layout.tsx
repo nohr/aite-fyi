@@ -52,7 +52,6 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      translate="no"
       className={`font-medium antialiased ${Libre.variable} ${Heritage.variable}`}
     >
       <body>

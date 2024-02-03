@@ -64,13 +64,17 @@ const Item = memo(function Item({
       </div>
 
       <div
+        translate="no"
         className={` -bottom-0.5 z-20 flex w-full select-none flex-row flex-nowrap items-end justify-between gap-2 rounded-2xl text-lg tracking-tight  duration-200 dark:!text-[#cecece] ${
           rank > 0
             ? "absolute h-4/6 bg-gradient-to-t from-[#000000f2] to-transparent to-70% p-4 text-[#cecece] "
             : " px-2 py-2 !text-[#131313] text-current"
         }`}
       >
-        <span className="flex items-center gap-1 lowercase italic">
+        <span
+          translate="no"
+          className="flex items-center gap-1 lowercase italic"
+        >
           {name}
           {rank > 0 && (
             <GoChevronRight className="h-4 w-4 group-hover/item:animate-shake-left" />
