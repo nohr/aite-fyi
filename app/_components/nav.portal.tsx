@@ -1,11 +1,16 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { standard_pagination_animation } from "./animate/route";
 
-export default function NavPortal({ children }: { children: React.ReactNode }) {
+export default memo(function NavPortal({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  // todo optimize this to only run once
   const [portals, setPortals] = useState<HTMLElement[] | undefined>();
 
   useEffect(() => {
@@ -16,22 +21,25 @@ export default function NavPortal({ children }: { children: React.ReactNode }) {
     <>
       {portals?.map((p, i) =>
         createPortal(
-          <AnimatePresence initial={true} mode="popLayout">
-            <motion.span
-              {...standard_pagination_animation}
-              className=" flex w-full items-center justify-center md:absolute md:px-8"
-            >
-              {children}
-            </motion.span>
-          </AnimatePresence>,
+          <motion.span
+            key={i}
+            {...standard_pagination_animation}
+            className=" flex w-full items-center justify-center md:absolute md:px-8"
+          >
+            {children}
+          </motion.span>,
           p,
           i.toString(),
         ),
       )}
     </>
   );
-}
+});
 
 export function Portal({ className }: { className?: string }) {
-  return <div id="nav-portal" className={className + " relative"}></div>;
+  return (
+    <AnimatePresence initial={true} mode="sync">
+      <div id="nav-portal" className={className + " relative"}></div>
+    </AnimatePresence>
+  );
 }

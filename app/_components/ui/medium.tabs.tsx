@@ -5,24 +5,51 @@ import { HiPaintBrush } from "react-icons/hi2";
 import { FaHandSparkles } from "react-icons/fa";
 import { Tabs, TabsList, TabsTrigger } from "_components/ui/tabs";
 import dynamic from "next/dynamic";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { memo, useCallback } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { memo, useCallback, useMemo } from "react";
 import useSFX from "@hooks/useSFX";
 const NavPortal = dynamic(() => import("_components/nav.portal"), {
   ssr: false,
 });
 
-const MediumTabs = memo(function MediumTabs({
-  className,
-}: {
-  className?: string;
-}) {
+const MediumTabs = memo(function MediumTabs() {
   const router = useRouter();
-  const pathname = usePathname();
   const searchParams = useSearchParams();
   const [play] = useSFX("/sfx/click2.mp3");
-  // Get a new searchParams string by merging the current
-  // searchParams with a provided key/value pair
+
+  const mediums = useMemo(
+    () => [
+      {
+        title: (
+          <>
+            <TbWorldWww className="pb-0.5 " />
+            Website
+          </>
+        ),
+        value: "website",
+      },
+      {
+        title: (
+          <>
+            <FaHandSparkles className="pb-0.5" />
+            Interactive
+          </>
+        ),
+        value: "interactive",
+      },
+      {
+        title: (
+          <>
+            <HiPaintBrush className="pb-0.5" />
+            Graphics
+          </>
+        ),
+        value: "design",
+      },
+    ],
+    [],
+  );
+
   const createQueryString = useCallback(
     (name: string, value: string) => {
       const params = new URLSearchParams(searchParams.toString());
@@ -33,67 +60,36 @@ const MediumTabs = memo(function MediumTabs({
     [searchParams],
   );
 
-  const mediums = [
-    {
-      title: (
-        <>
-          <TbWorldWww className="pb-0.5 " />
-          Website
-        </>
-      ),
-      value: "website",
+  const route = useCallback(
+    (value?: string) => {
+      play();
+      router.replace(
+        value === undefined
+          ? "/craft"
+          : "/craft" + "?" + createQueryString("medium", value),
+      );
     },
-    {
-      title: (
-        <>
-          <FaHandSparkles className="pb-0.5" />
-          Interactive
-        </>
-      ),
-      value: "interactive",
-    },
-    {
-      title: (
-        <>
-          <HiPaintBrush className="pb-0.5" />
-          Graphics
-        </>
-      ),
-      value: "design",
-    },
-  ];
+    [createQueryString, play, router],
+  );
 
   return (
     <NavPortal>
       <Tabs
         defaultValue={searchParams.get("medium") || "all"}
-        className={className + " [&_*]!select-none"}
+        className={
+          "[&_*]!select-none w-full max-w-[400px] self-center font-mono !text-xs md:text-base [&_*]:lowercase"
+        }
       >
         <TabsList className="w-full justify-between">
-          <TabsTrigger
-            onClick={() => {
-              play();
-              router.push(pathname);
-            }}
-            value="all"
-          >
+          <TabsTrigger onClick={() => route()} value="all">
             all
           </TabsTrigger>
 
           {mediums.map(({ title, value }) => {
-            const active = searchParams.get("medium") === value;
-
             return (
               <TabsTrigger
                 key={value}
-                onClick={() => {
-                  play();
-                  router.push(
-                    active
-                      ? pathname
-                      : pathname + "?" + createQueryString("medium", value),
-                  );
-                }}
+                onClick={() => route(value)}
                 value={value}
               >
                 {title}
