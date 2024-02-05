@@ -40,7 +40,8 @@ export default function Camera() {
 
   useFrame(({ camera }) => {
     window.onwheel = (e) => {
-      if (!scene.children[1]) return;
+      if (!scene.children[1] || scene.children[1].name === "scan") return;
+
       updateZoom((e as globalThis.WheelEvent).deltaY / 10);
     };
 

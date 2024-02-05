@@ -42,16 +42,16 @@ export const Scan = memo(function Scan() {
     bodyRef.current?.lookAt(tar.x * 0.25, tar.y / 2, 4);
   };
 
-  const handleHorizontalSway = (pointer: Vector2) => {
-    groupRef.current?.position.lerp(
-      new Vector3(
-        pointer.x > 0 ? 0 : -pointer.x * 5.75,
-        groupRef.current?.position.y,
-        groupRef.current?.position.z,
-      ),
-      0.2,
-    );
-  };
+  // const handleHorizontalSway = (pointer: Vector2) => {
+  //   groupRef.current?.position.lerp(
+  //     new Vector3(
+  //       pointer.x > 0 ? 0 : -pointer.x * 5.75,
+  //       groupRef.current?.position.y,
+  //       groupRef.current?.position.z,
+  //     ),
+  //     0.2,
+  //   );
+  // };
 
   const handleBreath = () => {
     if (!groupRef.current) return;
@@ -119,6 +119,7 @@ export const Scan = memo(function Scan() {
       position={[size.width >= 768 ? 6 : 4, 70, -3.5]}
       rotation={[0, 0, 0]}
       scale={0.25}
+      name="scan"
     >
       <points ref={headRef} geometry={head.geometry} material={mat} />
       <points ref={bodyRef} geometry={body.geometry} material={mat} />
