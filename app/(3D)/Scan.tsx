@@ -55,7 +55,7 @@ export const Scan = memo(function Scan() {
 
   const handleBreath = () => {
     if (!groupRef.current) return;
-    groupRef.current.position.y = Math.sin(Date.now() / 1000) / 10;
+    groupRef.current.position.y = Math.sin(Date.now() / 1500) / 10;
   };
 
   useFrame(({ pointer, scene }) => {
