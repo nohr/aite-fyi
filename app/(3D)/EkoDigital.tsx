@@ -70,8 +70,8 @@ export function EkoDigital(props: JSX.IntrinsicElements["group"]) {
     clearcoat: 1,
     clearcoatRoughness: 0.15,
     toneMapped: true,
-    opacity: 0.5,
-    transparent: true,
+    opacity: 1,
+    transparent: false,
     reflectivity: 0.4,
   });
   const {

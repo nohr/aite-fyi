@@ -32,7 +32,7 @@ export default async function Project({
   return (
     <>
       <Title name={name}>
-        <Fade className="mx-auto w-full max-w-prose p-1 pb-0 pt-2 md:pr-0 [&>a]:text-sm [&>a]:font-semibold [&>a]:underline [&>a]:underline-offset-8">
+        <Fade className="mx-auto w-full max-w-prose p-1 px-2 pb-0 pt-2 md:pr-0 [&>a]:text-sm [&>a]:font-semibold [&>a]:underline [&>a]:underline-offset-8">
           {project?.content && <PortableText value={project.content} />}
         </Fade>
 

@@ -3,26 +3,24 @@ import Link from "next/link";
 type Route = "home" | "craft" | "music";
 interface NavLinkProps {
   children: React.ReactNode;
-  play: () => void;
+  onClick: () => void;
   active?: boolean;
   className?: string;
   to?: Route;
-  onClick?: () => void;
 }
 
 const NavLink = ({
   children,
-  play,
   active = false,
+  onClick = () => {},
   className = "",
   to = undefined,
-  onClick = () => {},
 }: NavLinkProps) => {
   return (
     <>
       {to ? (
         <Link
-          onClick={() => play()}
+          onClick={onClick}
           title={to}
           href={`/${to === "home" ? "" : to}`}
           className={`nav-link pointer-events-auto flex h-12 w-12 select-none flex-row items-center justify-center rounded-full border border-current no-underline shadow-lg transition hover:shadow-xl active:scale-90

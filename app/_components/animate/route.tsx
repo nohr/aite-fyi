@@ -14,7 +14,7 @@ export default function Route({
     <main
       // key={pathname}
       style={{ zIndex: pathname.includes("admin") ? 1000 : 1 }}
-      className={`relative flex h-full flex-col items-start overflow-y-scroll hyphens-auto px-0 `}
+      className={`relative flex h-full flex-col items-start overflow-y-scroll px-0 `}
       // {...standard_pagination_animation}
     >
       <span

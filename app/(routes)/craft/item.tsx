@@ -31,9 +31,9 @@ const Item = memo(function Item({
         play();
         router.push(`/craft/${slug}`);
       }}
-      {...delayed_pagination_animation(index)}
-      className={` group/item pointer-events-auto relative flex w-full flex-col gap-0 overflow-hidden rounded-2xl border border-border shadow-lg active:scale-90 ${sizing} ${
-        rank > 0 ? "cursor-pointer " : "gap-2 p-2"
+      // {...delayed_pagination_animation(index)}
+      className={` group/item pointer-events-auto relative flex w-full flex-col gap-0 overflow-hidden rounded-2xl border border-border shadow-lg  ${sizing} ${
+        rank > 0 ? "cursor-pointer active:scale-90" : "gap-2 p-2"
       }`}
     >
       <div className={`relative h-full overflow-hidden rounded-xl shadow-lg `}>
@@ -57,9 +57,7 @@ const Item = memo(function Item({
           fill
           sizes="400px"
           priority
-          className={`pointer-events-none absolute select-none object-cover ${
-            videos?.[0]?.url ? "blur-2xl" : ""
-          }}`}
+          className={`pointer-events-none absolute select-none object-cover`}
         />
       </div>
 

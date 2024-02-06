@@ -5,14 +5,10 @@ import useDisablePinch from "@hooks/useDisablePinch";
 import useTheme from "@hooks/useTheme";
 import { usePathname } from "next/navigation";
 import { Canvas } from "@react-three/fiber";
-import {
-  AdaptiveDpr,
-  PerformanceMonitor,
-  Preload,
-  StatsGl,
-} from "@react-three/drei";
+import { AdaptiveDpr, PerformanceMonitor, Preload } from "@react-three/drei";
 import round from "lodash/round";
 import { useState } from "react";
+import { Perf } from "r3f-perf";
 
 const Scene = dynamic(() => import("(3D)/Scene"), {
   ssr: false,
@@ -37,7 +33,6 @@ function Dom() {
             dpr={dpr}
             linear
             className="pointer-events-none !fixed !top-0"
-            gl={{ antialias: false, alpha: true }}
             eventSource={document?.body}
             eventPrefix="client"
           >
@@ -50,10 +45,7 @@ function Dom() {
             <Preload all />
             <AdaptiveDpr pixelated />
             {process.env.NODE_ENV === "development" ? (
-              <StatsGl
-                className="!absolute !bottom-0 !left-auto !right-0 !top-auto !hidden h-[66px]
-    w-[281px] md:!block"
-              />
+              <Perf className="!absolute !bottom-2 !left-auto !right-2 !top-auto z-[99] !hidden  md:!block" />
             ) : null}
           </Canvas>
         </>

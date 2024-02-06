@@ -41,13 +41,21 @@ const Nav = memo(function Nav() {
         className={`pointer-events-none flex w-full flex-row justify-between self-start duration-100 first-line:transition-all  `}
       >
         <div className="group/nav flex -skew-x-[5deg] -skew-y-[0.3deg] flex-row gap-2 md:-skew-x-[8deg] md:-skew-y-[2deg]">
-          <NavLink active={pathname === `/`} to="home" play={play}>
+          <NavLink active={pathname === `/`} to="home" onClick={() => play()}>
             <GiHand className=" -scale-x-100" />
           </NavLink>
-          <NavLink active={pathname.includes("craft")} to="craft" play={play}>
+          <NavLink
+            active={pathname.includes("craft")}
+            to="craft"
+            onClick={() => play()}
+          >
             <GiBombingRun />
           </NavLink>
-          <NavLink active={pathname.includes("music")} to="music" play={play}>
+          <NavLink
+            active={pathname.includes("music")}
+            to="music"
+            onClick={() => play()}
+          >
             <GiMusicalNotes className={playing ? "animate-tempo" : ""} />
           </NavLink>
         </div>
