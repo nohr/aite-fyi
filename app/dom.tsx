@@ -8,7 +8,6 @@ import { Canvas } from "@react-three/fiber";
 import { AdaptiveDpr, PerformanceMonitor, Preload } from "@react-three/drei";
 import round from "lodash/round";
 import { useState } from "react";
-import { Perf } from "r3f-perf";
 
 const Scene = dynamic(() => import("(3D)/Scene"), {
   ssr: false,
@@ -44,9 +43,6 @@ function Dom() {
             <Scene />
             <Preload all />
             <AdaptiveDpr pixelated />
-            {process.env.NODE_ENV === "development" ? (
-              <Perf className="!absolute !bottom-2 !left-auto !right-2 !top-auto z-[99] !hidden  md:!block" />
-            ) : null}
           </Canvas>
         </>
       )}

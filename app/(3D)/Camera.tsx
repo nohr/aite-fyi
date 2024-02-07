@@ -1,15 +1,14 @@
 import React from "react";
-import { useFrame, useThree } from "@react-three/fiber";
-// import { usePathname } from "next/navigation";
+import { useFrame } from "@react-three/fiber";
+import { usePathname } from "next/navigation";
 import { Vector3 } from "three";
 import { useUIStore } from "@hooks/useUIStore";
 
-// import { Vector3 } from "three";
 export default function Camera() {
   // const [zoom, setZoom] = useState(2);
   const [zoom, camera] = useUIStore((s) => [s.zoom, s.camera]);
-  // const params = usePathname().split("/")[2];
-  const { scene } = useThree();
+  const page = usePathname().split("/")[1];
+  const params = usePathname().split("/")[2];
   const { setState } = useUIStore;
 
   // useEffect(() => {
@@ -25,32 +24,22 @@ export default function Camera() {
     }));
   }
 
-  // const handlePinchZoom = (e: TouchEvent) => {
-  //   if (e.touches.length > 1) {
-  //     e.preventDefault();
-  //     let previousDelta = 0;
-  //     const currentDelta = e.touches[1].clientY - e.touches[0].clientY;
-  //     // console.log(currentDelta);
-
-  //     const deltaDifference = currentDelta - previousDelta;
-  //     updateZoom(deltaDifference / 200);
-  //     previousDelta = currentDelta;
-  //   }
-  // };
-
   useFrame(({ camera }) => {
+    // todo: fix scroll zoom
     window.onwheel = (e) => {
-      if (!scene.children[1] || scene.children[1].name === "scan") return;
-
+      if (params !== "eko-digital") return;
       updateZoom((e as globalThis.WheelEvent).deltaY / 10);
     };
 
-    // if (zoom > -5) setZoom(-5);
+    if (page === "" && camera.position.z !== 5) {
+      setState({ zoom: 5 });
+    }
     if (camera.position.z === zoom) return;
 
-    const newtarget = new Vector3(camera.position.x, camera.position.y, zoom);
-
-    camera.position.lerp(newtarget, 0.075);
+    camera.position.lerp(
+      new Vector3(camera.position.x, camera.position.y, zoom),
+      0.075,
+    );
   });
 
   return (

@@ -82,7 +82,13 @@ export function EkoDigital(props: JSX.IntrinsicElements["group"]) {
       <ambientLight intensity={1.5} />
       <directionalLight intensity={1} position={[0, 1, 8]} color="#ffffff" />
       <directionalLight intensity={1} position={[1, -1, 4]} color="#ffffff" />
-      <group ref={ref} {...props} dispose={null} scale={w >= 768 ? 0.7 : 1.1}>
+      <group
+        name="eko-digital"
+        ref={ref}
+        {...props}
+        dispose={null}
+        scale={w >= 768 ? 0.7 : 1.1}
+      >
         <mesh
           castShadow
           receiveShadow

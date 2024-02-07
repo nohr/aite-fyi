@@ -5,6 +5,7 @@ import { EkoDigital } from "./EkoDigital";
 import { usePathname } from "next/navigation";
 import { Env } from "./Environment";
 import { useFrame } from "@react-three/fiber";
+import { Perf } from "r3f-perf";
 
 function Scene() {
   const { progress } = useProgress();
@@ -27,8 +28,16 @@ function Scene() {
   return (
     <Suspense fallback={<Html center>{progress.toFixed(0)}%</Html>}>
       <Scan />
-      {params === "eko-digital" ? <EkoDigital /> : null}
-      {params && <Env />}
+      {params === "eko-digital" ? (
+        <>
+          <EkoDigital />
+          <Env />
+        </>
+      ) : null}
+
+      {/* {process.env.NODE_ENV === "development" ? (
+        <Perf className="!absolute !bottom-2 !left-auto !right-2 !top-auto z-[99] !hidden  md:!block" />
+      ) : null} */}
     </Suspense>
   );
 }

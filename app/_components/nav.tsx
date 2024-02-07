@@ -31,8 +31,10 @@ const Nav = memo(function Nav() {
       initial={{ opacity: 0.5, filter: "blur(7px)" }}
       animate={{ opacity: 1, filter: "blur(0px)" }}
       transition={{ duration: 0.3 }}
-      className={`group/nav fixed bottom-0 z-50 flex w-screen flex-col justify-between p-2 pb-5 tracking-tight backdrop-blur-sm md:bottom-auto md:top-0 md:gap-0 md:px-8 md:py-4 ${
-        pathname.includes("craft") ? "gap-y-4" : ""
+      className={`group/nav fixed bottom-0 z-50 flex w-screen flex-col justify-between p-2 pb-5 tracking-tight backdrop-blur-sm md:bottom-auto md:top-0 md:gap-0  md:px-8 md:py-4 ${
+        pathname.includes("craft")
+          ? "gap-y-4 md:border-b md:border-b-border"
+          : ""
       }`}
     >
       <Portal className="pointer-events-auto flex h-fit w-full justify-center md:hidden md:pt-4" />
