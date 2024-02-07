@@ -1,7 +1,7 @@
 // import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { delayed_pagination_animation } from "_components/animate/route";
+// import { delayed_pagination_animation } from "_components/animate/route";
 import Programs from "./[project]/programs";
 import { GoChevronRight } from "react-icons/go";
 import { Project } from "types/Project";
@@ -24,14 +24,13 @@ const Item = memo(function Item({
     rank > 0 ? "h-64 md:h-72" : rank > 1 ? "h-72 md:h-96" : "h-56 md:h-60";
 
   return (
-    <motion.div
+    <div
       tabIndex={0}
       onClick={() => {
         if (rank <= 0) return;
         play();
         router.push(`/craft/${slug}`);
       }}
-      // {...delayed_pagination_animation(index)}
       className={` group/item pointer-events-auto relative flex w-full flex-col gap-0 overflow-hidden rounded-2xl border border-border shadow-lg  ${sizing} ${
         rank > 0 ? "cursor-pointer active:scale-90" : "gap-2 p-2"
       }`}
@@ -63,7 +62,7 @@ const Item = memo(function Item({
 
       <div
         translate="no"
-        className={` -bottom-0.5 z-20 flex w-full select-none flex-row flex-nowrap items-end justify-between gap-2 rounded-2xl text-lg tracking-tight  duration-200 dark:!text-[#cecece] ${
+        className={` -bottom-0.5 z-20 flex w-full select-none flex-row flex-nowrap items-end justify-between gap-2 rounded-2xl text-lg tracking-tight duration-200 dark:!text-[#cecece] ${
           rank > 0
             ? "absolute h-4/6 bg-gradient-to-t from-[#000000f2] to-transparent to-70% p-4 text-[#cecece] "
             : " px-2 py-2 !text-[#131313] text-current"
@@ -71,7 +70,7 @@ const Item = memo(function Item({
       >
         <span
           translate="no"
-          className="flex items-center gap-1 lowercase italic"
+          className="flex items-center gap-1 text-sm lowercase italic"
         >
           {name}
           {rank > 0 && (
@@ -80,7 +79,7 @@ const Item = memo(function Item({
         </span>
 
         {rank < 1 && (
-          <div className="absolute right-4 text-sm opacity-50 group-hover/item:opacity-0 ">
+          <div className="absolute right-4 text-sm lowercase group-hover/item:opacity-0">
             <PortableText value={content} />
           </div>
         )}
@@ -92,7 +91,7 @@ const Item = memo(function Item({
           />
         )}
       </div>
-    </motion.div>
+    </div>
   );
 });
 
