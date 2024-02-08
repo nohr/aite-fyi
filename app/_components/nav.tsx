@@ -16,14 +16,6 @@ const Nav = memo(function Nav() {
   const [play] = useSFX("/sfx/click.mp3");
   const playing = useAudioStore((s) => s.playing);
 
-  // const { setState } = useUIStore;
-
-  // todo get new nav height on every render for mobile or hardcode padding on searchparams change
-  // useEffect(() => {
-  //   console.log(nav.current.clientHeight);
-
-  //   setState({ navHeight: nav.current?.clientHeight });
-  // }, [setState]);
   if (admin) return null;
   return (
     <motion.nav
@@ -68,7 +60,7 @@ const Nav = memo(function Nav() {
       </div>
 
       <div
-        className={`pointer-events-none absolute left-0 top-0 -z-10 block h-full w-full bg-background opacity-50 transition duration-200 md:opacity-0 md:group-hover/nav:opacity-80 dark:bg-background dark:opacity-75 md:dark:opacity-0`}
+        className={`pointer-events-none absolute left-0 top-0 -z-10 block h-full w-full bg-background opacity-50 transition duration-200 dark:bg-background dark:opacity-75 md:opacity-0 md:group-hover/nav:opacity-80 md:dark:opacity-0`}
       />
     </motion.nav>
   );

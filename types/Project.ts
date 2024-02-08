@@ -19,7 +19,10 @@ export type Project = {
   url: string[];
   program: string[];
   medium: "website" | "interactive" | "design";
-  thumbnail: string;
+  thumbnail: {
+    video: string;
+    blurhash: string;
+  };
   content: PortableTextBlock[];
   rank: 0 | 1 | 2;
 };

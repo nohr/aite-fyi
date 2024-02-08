@@ -16,7 +16,6 @@ export default function Socials() {
         className="nav-link pointer-events-auto flex select-none items-center gap-1 rounded-full border border-current  p-2 shadow-md transition duration-75 ease-in-out"
       >
         <MdAlternateEmail className="pointer-events-none" />
-        {/* {`${email}`} */}
       </a>
       <a
         href="https://www.github.com/nohr"
@@ -26,7 +25,6 @@ export default function Socials() {
         className="nav-link pointer-events-auto flex select-none items-center gap-1 rounded-full border border-current  p-2 shadow-md transition duration-75 ease-in-out"
       >
         <BsGithub className="pointer-events-none" />
-        {/* @nohr */}
       </a>
       <a
         href="https://www.linkedin.com/in/aite/"
@@ -36,7 +34,6 @@ export default function Socials() {
         className="nav-link pointer-events-auto flex select-none items-center gap-1 rounded-full border border-current  p-2 shadow-md transition duration-75 ease-in-out"
       >
         <FaLinkedinIn className="pointer-events-none" />
-        {/* in/aite */}
       </a>
     </div>
   );

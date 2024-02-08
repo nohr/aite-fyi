@@ -68,14 +68,7 @@ const Column = memo(function Column({
         .filter((project) => !medium || project.medium.includes(medium))
         .map((project, index) => {
           if (number !== null && index % columns !== number) return null;
-          return (
-            <Item
-              key={project._id}
-              project={project}
-              index={index}
-              play={play}
-            />
-          );
+          return <Item key={project._id} project={project} play={play} />;
         })}
     </div>
   );

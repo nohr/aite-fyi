@@ -64,7 +64,11 @@ const project = {
     {
       name: "thumbnail",
       title: "Thumbnail",
-      type: "image",
+      type: "object",
+      fields: [
+        { name: "video", type: "file", title: "Video" },
+        { name: "blurhash", type: "image", title: "Blurhash" },
+      ],
       group: "content",
     },
     {

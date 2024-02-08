@@ -1,7 +1,5 @@
 // import Link from "next/link";
 import Image from "next/image";
-import { motion } from "framer-motion";
-// import { delayed_pagination_animation } from "_components/animate/route";
 import Programs from "./[project]/programs";
 import { GoChevronRight } from "react-icons/go";
 import { Project } from "types/Project";
@@ -12,13 +10,11 @@ import { PortableText } from "@portabletext/react";
 const Item = memo(function Item({
   project,
   play,
-  index,
 }: {
   project: Project;
   play: () => void;
-  index: number;
 }) {
-  const { name, thumbnail, videos, program, rank, slug, content } = project;
+  const { name, thumbnail, program, rank, slug, content } = project;
   const router = useRouter();
   const sizing =
     rank > 0 ? "h-64 md:h-72" : rank > 1 ? "h-72 md:h-96" : "h-56 md:h-60";
@@ -27,16 +23,18 @@ const Item = memo(function Item({
     <div
       tabIndex={0}
       onClick={() => {
-        if (rank <= 0) return;
-        play();
+        if (rank === 0) return;
         router.push(`/craft/${slug}`);
+        play();
       }}
       className={` group/item pointer-events-auto relative flex w-full flex-col gap-0 overflow-hidden rounded-2xl border border-border shadow-lg  ${sizing} ${
         rank > 0 ? "cursor-pointer active:scale-90" : "gap-2 p-2"
       }`}
     >
-      <div className={`relative h-full overflow-hidden rounded-xl shadow-lg `}>
-        {videos?.[0]?.url ? (
+      <div
+        className={`pointer-events-none relative h-full overflow-hidden rounded-xl shadow-lg `}
+      >
+        {thumbnail?.video ? (
           <video
             autoPlay={true}
             playsInline
@@ -44,20 +42,22 @@ const Item = memo(function Item({
             muted
             loop
             preload="metadata"
-            src={`${videos[0].url}#t=0.01`}
+            src={`${thumbnail?.video}#t=0.01`}
             controls={false}
             className={`pointer-events-none absolute z-10 h-full w-full overflow-clip object-cover`}
           />
         ) : null}
 
-        <Image
-          src={thumbnail}
-          alt={name}
-          fill
-          sizes="400px"
-          priority
-          className={`pointer-events-none absolute select-none object-cover`}
-        />
+        {thumbnail?.blurhash ? (
+          <Image
+            src={thumbnail?.blurhash}
+            alt={name}
+            fill
+            sizes="400px"
+            priority
+            className={`pointer-events-none absolute select-none object-cover`}
+          />
+        ) : null}
       </div>
 
       <div

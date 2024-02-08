@@ -19,13 +19,10 @@ export async function getProjects(): Promise<Project[]> {
         medium,
         rank,
         content,
-        "thumbnail": thumbnail.asset->url,
-        videos[]{
-          alt, 
-          _key,
-           mobile,
-          "url": url.asset->url,
-        },
+        thumbnail{ 
+          "video": video.asset->url,
+          "blurhash": blurhash.asset->url,
+          },
         "slug": slug.current,
         program,
         date
