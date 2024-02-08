@@ -74,12 +74,12 @@ const Item = memo(function Item({
         >
           {name}
           {rank > 0 && (
-            <GoChevronRight className="h-4 w-4 group-hover/item:animate-shake-left" />
+            <GoChevronRight className="h-4 w-4 md:group-hover/item:animate-shake-left" />
           )}
         </span>
 
         {rank < 1 && (
-          <div className="absolute right-4 text-sm lowercase group-hover/item:opacity-0">
+          <div className="absolute right-4 text-sm lowercase md:group-hover/item:opacity-0">
             <PortableText value={content} />
           </div>
         )}
@@ -87,7 +87,7 @@ const Item = memo(function Item({
         {program && (
           <Programs
             program={program}
-            className=" !items-end opacity-0 group-hover/item:opacity-100"
+            className=" !items-end opacity-0 md:group-hover/item:opacity-100"
           />
         )}
       </div>
