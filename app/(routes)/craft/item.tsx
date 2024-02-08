@@ -17,7 +17,11 @@ const Item = memo(function Item({
   const { name, thumbnail, program, rank, slug, content } = project;
   const router = useRouter();
   const sizing =
-    rank > 0 ? "h-64 md:h-72" : rank > 1 ? "h-72 md:h-96" : "h-56 md:h-60";
+    rank === 1
+      ? "aspect-[9/4]"
+      : rank === 2
+        ? "aspect-[16/10]"
+        : "aspect-[8/4]";
 
   return (
     <div
@@ -27,7 +31,7 @@ const Item = memo(function Item({
         router.push(`/craft/${slug}`);
         play();
       }}
-      className={` group/item pointer-events-auto relative flex w-full flex-col gap-0 overflow-hidden rounded-2xl border border-border shadow-lg  ${sizing} ${
+      className={` group/item pointer-events-auto relative flex w-full flex-col gap-0 overflow-hidden rounded-2xl border border-border shadow-lg ${sizing} ${
         rank > 0 ? "cursor-pointer active:scale-90" : "gap-2 p-2"
       }`}
     >
@@ -44,7 +48,7 @@ const Item = memo(function Item({
             preload="metadata"
             src={`${thumbnail?.video}#t=0.01`}
             controls={false}
-            className={`pointer-events-none absolute z-10 h-full w-full overflow-clip object-cover`}
+            className={`pointer-events-none absolute z-10 h-full w-full scale-105 overflow-clip object-cover`}
           />
         ) : null}
 
