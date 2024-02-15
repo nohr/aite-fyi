@@ -23,7 +23,7 @@ const Heritage = localFont({
 const Libre = Noto_Serif_Display({
   display: "swap",
   variable: "--font-serif",
-  preload: false,
+  preload: true,
 });
 
 export const metadata = {
