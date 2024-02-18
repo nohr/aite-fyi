@@ -17,7 +17,7 @@ export default function Title({
   name: Project["name"] | undefined;
   children?: React.ReactNode;
 }) {
-  const [play] = useSFX("/sfx/close.mp3");
+  const [play] = useSFX("/sfx/close.mp3", 0.75);
 
   return (
     <>

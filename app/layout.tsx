@@ -3,7 +3,7 @@ import "@fontsource/delius";
 import { Analytics } from "@vercel/analytics/react";
 import Loading from "./loading";
 import { Suspense } from "react";
-import { Cormorant_Garamond, Noto_Serif_Display } from "next/font/google";
+import { Cormorant_Garamond } from "next/font/google";
 import localFont from "next/font/local";
 import dynamic from "next/dynamic";
 import Nav from "_components/nav";
@@ -23,6 +23,7 @@ const Heritage = localFont({
 const Libre = Cormorant_Garamond({
   weight: "400",
   display: "swap",
+  subsets: ["latin", "latin-ext"],
   variable: "--font-serif",
 });
 
