@@ -13,20 +13,20 @@ const Name = function ({ pic }: { pic: string }): JSX.Element {
   return (
     <motion.h1
       {...standard_pagination_animation}
-      className="flex flex-row flex-nowrap items-center overflow-visible px-3 pb-1 pl-1 font-serif text-6xl font-light capitalize italic tracking-tight transition duration-150 ease-in-out md:px-8 [&>span]:overflow-visible [&>span]:px-1.5  "
+      className="flex flex-row flex-nowrap items-center overflow-visible px-3 pb-1 pl-1 font-serif text-6xl font-light capitalize tracking-tight transition duration-150 ease-in-out md:px-8 [&>span]:overflow-visible [&>span]:px-1.5  "
     >
       <span
         className="group/aite relative cursor-pointer drop-shadow active:text-[#060a0c] active:dark:text-[#e0e0e0]"
         onClick={() => aite()}
       >
-        <RiSpeakFill className="absolute top-2  hidden h-4 w-4 group-active/aite:block md:group-hover/aite:block" />
+        <RiSpeakFill className="absolute -left-1 top-2 hidden h-4 w-4 group-active/aite:block md:group-hover/aite:block" />
         aitẹ
       </span>
       <span
         className="group/aigbe relative cursor-pointer drop-shadow active:text-[#060a0c] active:dark:text-[#e0e0e0]"
         onClick={() => aigbe()}
       >
-        <RiSpeakFill className="absolute top-1  hidden h-4 w-4 group-active/aigbe:block md:group-hover/aigbe:block" />
+        <RiSpeakFill className="absolute -left-1 top-2 hidden h-4 w-4 group-active/aigbe:block md:group-hover/aigbe:block" />
         aigbe
       </span>
       <Image

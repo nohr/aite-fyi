@@ -12,7 +12,7 @@ import { useUIStore } from "@hooks/useUIStore";
 export default function Grid({ projects }: { projects: Project[] }) {
   const searchParams = useSearchParams();
   const medium = searchParams.get("medium");
-  const [play] = useSFX("/sfx/open.mp3");
+  const [play] = useSFX("/sfx/open.mp3", 0.75);
   const { width } = useDimensions();
   const columns = useUIStore((s) => s.columns);
   const { setState } = useUIStore;
