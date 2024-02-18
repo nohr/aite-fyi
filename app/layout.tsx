@@ -3,7 +3,7 @@ import "@fontsource/delius";
 import { Analytics } from "@vercel/analytics/react";
 import Loading from "./loading";
 import { Suspense } from "react";
-import { Noto_Serif_Display } from "next/font/google";
+import { Cormorant_Garamond, Noto_Serif_Display } from "next/font/google";
 import localFont from "next/font/local";
 import dynamic from "next/dynamic";
 import Nav from "_components/nav";
@@ -20,10 +20,10 @@ const Heritage = localFont({
   preload: true,
 });
 
-const Libre = Noto_Serif_Display({
+const Libre = Cormorant_Garamond({
+  weight: "400",
   display: "swap",
   variable: "--font-serif",
-  preload: false,
 });
 
 export const metadata = {

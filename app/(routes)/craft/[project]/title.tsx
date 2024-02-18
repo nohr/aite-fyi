@@ -28,7 +28,7 @@ export default function Title({
             border-current px-2 no-underline transition duration-100 md:max-w-prose md:px-0 md:pt-2 md:hover:animate-pulse`}
       >
         <h1
-          className={`text-md w-full select-none font-serif text-4xl font-light lowercase italic tracking-tight md:text-5xl `}
+          className={`text-md w-full select-none font-serif text-4xl font-light lowercase tracking-tight md:text-5xl `}
         >
           {name}
         </h1>
