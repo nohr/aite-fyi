@@ -3,7 +3,6 @@ import "@fontsource/delius";
 import { Analytics } from "@vercel/analytics/react";
 import Loading from "./loading";
 import { Suspense } from "react";
-import { Cormorant_Garamond } from "next/font/google";
 import localFont from "next/font/local";
 import dynamic from "next/dynamic";
 import Nav from "_components/nav";
@@ -20,10 +19,10 @@ const Heritage = localFont({
   preload: true,
 });
 
-const Libre = Cormorant_Garamond({
+const Garamond = localFont({
+  src: "./CormorantGaramond-Regular.ttf",
   weight: "400",
   display: "swap",
-  subsets: ["latin", "latin-ext"],
   variable: "--font-serif",
 });
 
@@ -53,7 +52,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`font-medium antialiased ${Libre.variable} ${Heritage.variable}`}
+      className={`font-medium antialiased ${Garamond.variable} ${Heritage.variable}`}
     >
       <body>
         <Loading />
