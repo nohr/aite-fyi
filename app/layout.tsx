@@ -8,9 +8,6 @@ import dynamic from "next/dynamic";
 import Nav from "_components/nav";
 
 const Media = dynamic(() => import("./(routes)/music/Media"));
-const Dom = dynamic(() => import("./dom"), {
-  ssr: false,
-});
 
 const Heritage = localFont({
   src: "./Heritage-Display.otf",
@@ -59,7 +56,6 @@ export default function RootLayout({
         <Suspense fallback={null}>
           <Nav />
           {children}
-          <Dom />
           <Media />
         </Suspense>
         <Analytics debug={false} />
