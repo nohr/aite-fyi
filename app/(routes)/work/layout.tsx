@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "craft",
+  title: "work",
 };
 
 export const viewport = {
@@ -12,7 +12,7 @@ export const viewport = {
   userScalable: false,
 };
 
-export default async function CraftLayout({
+export default async function workLayout({
   children,
 }: {
   children: React.ReactNode;

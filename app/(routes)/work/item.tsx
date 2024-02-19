@@ -28,7 +28,7 @@ const Item = memo(function Item({
       tabIndex={0}
       onClick={() => {
         if (rank === 0) return;
-        router.push(`/craft/${slug}`);
+        router.push(`/work/${slug}`);
         play();
       }}
       className={` group/item pointer-events-auto relative flex w-full flex-col gap-0 overflow-hidden rounded-2xl border border-border shadow-lg ${sizing} ${

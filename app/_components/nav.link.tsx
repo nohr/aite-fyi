@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-type Route = "home" | "craft" | "music";
+type Route = "home" | "work" | "music";
 interface NavLinkProps {
   children: React.ReactNode;
   onClick: () => void;
