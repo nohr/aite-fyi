@@ -105,7 +105,7 @@ export const Scan = memo(function Scan() {
   useLoading();
 
   const mat = new PointsMaterial({
-    size: size.width >= 768 ? 1.65 : size.width < 450 ? 0.2 : 0.75,
+    size: size.width >= 768 ? 0.65 : size.width < 450 ? 0.2 : 0.75,
     fog: false,
     color: color,
     toneMapped: false,

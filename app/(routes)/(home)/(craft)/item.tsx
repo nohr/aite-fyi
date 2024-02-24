@@ -28,7 +28,7 @@ const Item = memo(function Item({
       tabIndex={0}
       onClick={() => {
         if (rank === 0) return;
-        router.push(`/craft/${slug}`);
+        router.push(`/${slug}`);
         play();
       }}
       className={` group/item pointer-events-auto relative flex w-full flex-col gap-0 overflow-hidden rounded-2xl border border-border shadow-lg ${sizing} ${
@@ -48,7 +48,7 @@ const Item = memo(function Item({
             preload="metadata"
             src={`${thumbnail?.video}#t=0.01`}
             controls={false}
-            className={`pointer-events-none absolute z-10 h-full w-full scale-105 overflow-clip object-cover`}
+            className={`pointer-events-none absolute h-full w-full scale-105 overflow-clip object-cover`}
           />
         ) : null}
 
@@ -59,7 +59,7 @@ const Item = memo(function Item({
             fill
             sizes="400px"
             priority
-            className={`pointer-events-none absolute select-none object-cover`}
+            className={`pointer-events-none absolute -z-[1] select-none object-cover`}
           />
         ) : null}
       </div>

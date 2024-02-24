@@ -32,7 +32,7 @@ function Dom() {
             dpr={dpr}
             linear
             className="pointer-events-none !fixed !top-0"
-            eventSource={document?.body}
+            eventSource={document?.querySelector("main") as HTMLElement}
             eventPrefix="client"
           >
             <PerformanceMonitor

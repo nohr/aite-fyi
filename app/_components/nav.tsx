@@ -38,13 +38,13 @@ const Nav = memo(function Nav() {
           <NavLink active={pathname === `/`} to="home" onClick={() => play()}>
             <GiHand className=" -scale-x-100" />
           </NavLink>
-          <NavLink
+          {/* <NavLink
             active={pathname.includes("craft")}
             to="craft"
             onClick={() => play()}
           >
             <GiBombingRun />
-          </NavLink>
+          </NavLink> */}
           <NavLink
             active={pathname.includes("music")}
             to="music"

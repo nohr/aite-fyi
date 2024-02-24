@@ -9,7 +9,8 @@ import { Perf } from "r3f-perf";
 
 function Scene() {
   const { progress } = useProgress();
-  const params = usePathname().split("/")[2];
+  const params = usePathname();
+  console.log(params);
 
   useFrame((state) => {
     if (state.scene.children.length < 2 && state.frameloop === "always") {
@@ -28,7 +29,7 @@ function Scene() {
   return (
     <Suspense fallback={<Html center>{progress.toFixed(0)}%</Html>}>
       <Scan />
-      {params === "eko-digital" ? (
+      {params === "/eko-digital" ? (
         <>
           <EkoDigital />
           <Env />

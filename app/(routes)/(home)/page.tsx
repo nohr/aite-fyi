@@ -19,16 +19,25 @@ export default async function Home() {
   return (
     <>
       <Name pic={`/selfies/pic${Math.floor(Math.random() * 3) + 1}.png`} />
+
       <Locale _id={_id} timeZone={timeZone} location={location} />
+
       <br />
+
       <Section index={2}>
         <PortableText value={bio} />
+        <br />
       </Section>
 
-      <Dom />
-      <section className="w-full pt-[75%]">
+      <div className="px-2 pt-[50vh] md:ml-8 md:pl-1 md:pr-0 md:pt-[65vh]">
+        Check out my work below.
+      </div>
+
+      <section className="w-full">
         <Grid projects={projects} />
       </section>
+
+      <Dom />
     </>
   );
 }

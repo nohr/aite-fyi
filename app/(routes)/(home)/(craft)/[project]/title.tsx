@@ -22,7 +22,7 @@ export default function Title({
   return (
     <>
       <Link
-        href="/craft"
+        href="/"
         onClick={() => play()}
         className={`mx-auto flex h-fit w-full flex-row items-start gap-2 border-b
             border-current px-2 no-underline transition duration-100 md:max-w-prose md:px-0 md:pt-2 md:hover:animate-pulse`}
