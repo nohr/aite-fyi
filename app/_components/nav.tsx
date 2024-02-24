@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { GiBombingRun, GiHand, GiMusicalNotes } from "react-icons/gi";
+import { GiHand, GiMusicalNotes } from "react-icons/gi";
 import { useAudioStore } from "@hooks/useAudioStore";
 import useSFX from "@hooks/useSFX";
 import { motion } from "framer-motion";

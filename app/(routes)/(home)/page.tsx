@@ -5,6 +5,7 @@ import { PortableText } from "@portabletext/react";
 import Section from "./section";
 import { unstable_noStore } from "next/cache";
 import Grid from "./(craft)/grid";
+import MediumTabs from "_components/ui/medium.tabs";
 
 export default async function Home() {
   unstable_noStore();
@@ -31,6 +32,8 @@ export default async function Home() {
       <section className="w-full">
         <Grid projects={projects} />
       </section>
+
+      <MediumTabs />
     </>
   );
 }
