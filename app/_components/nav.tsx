@@ -24,7 +24,7 @@ const Nav = memo(function Nav() {
       animate={{ opacity: 1, filter: "blur(0px)" }}
       transition={{ duration: 0.3 }}
       className={`group/nav fixed bottom-0 z-50 flex w-screen flex-col justify-between p-2 pb-5 tracking-tight backdrop-blur-sm md:bottom-auto md:top-0 md:gap-0  md:px-8 md:py-4 ${
-        pathname.includes("craft")
+        pathname.includes("work")
           ? "gap-y-4 md:border-b md:border-b-border"
           : ""
       }`}
@@ -38,13 +38,6 @@ const Nav = memo(function Nav() {
           <NavLink active={pathname === `/`} to="home" onClick={() => play()}>
             <GiHand className=" -scale-x-100" />
           </NavLink>
-          {/* <NavLink
-            active={pathname.includes("craft")}
-            to="craft"
-            onClick={() => play()}
-          >
-            <GiBombingRun />
-          </NavLink> */}
           <NavLink
             active={pathname.includes("music")}
             to="music"
