@@ -1,10 +1,10 @@
 "use client";
 
-import { standard_pagination_animation } from "_components/animate/route";
 import Image from "next/image";
 import { RiSpeakFill } from "react-icons/ri";
 import useSound from "use-sound";
 import { motion } from "framer-motion";
+import { standard_pagination_animation } from "_components/animate/constants";
 
 const Name = function ({ pic }: { pic: string }): JSX.Element {
   const [aite] = useSound("/sfx/aite.wav", { volume: 0.35, interrupt: true });
