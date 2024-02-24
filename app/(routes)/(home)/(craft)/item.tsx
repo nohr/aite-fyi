@@ -31,8 +31,8 @@ const Item = memo(function Item({
         router.push(`/${slug}`);
         play();
       }}
-      className={` group/item pointer-events-auto relative flex w-full flex-col gap-0 overflow-hidden rounded-2xl border border-border shadow-lg ${sizing} ${
-        rank > 0 ? "cursor-pointer active:scale-90" : "gap-2 p-2"
+      className={` group/item pointer-events-auto relative z-10 flex w-full flex-col gap-0 overflow-hidden rounded-2xl border border-border shadow-lg ${sizing} ${
+        rank > 0 ? "cursor-pointer active:scale-90" : "gap-2 bg-background p-2"
       }`}
     >
       <div
@@ -83,7 +83,7 @@ const Item = memo(function Item({
         </span>
 
         {rank < 1 && (
-          <div className="absolute right-4 text-sm lowercase md:group-hover/item:opacity-0">
+          <div className="absolute right-4 z-10 text-sm lowercase md:group-hover/item:opacity-0">
             <PortableText value={content} />
           </div>
         )}
