@@ -5,12 +5,12 @@ import { EkoDigital } from "./EkoDigital";
 import { usePathname } from "next/navigation";
 import { Env } from "./Environment";
 import { useFrame } from "@react-three/fiber";
-import { Perf } from "r3f-perf";
+// import { Perf } from "r3f-perf";
 
 function Scene() {
   const { progress } = useProgress();
-  const params = usePathname();
-  console.log(params);
+  const pathname = usePathname();
+  // console.log(pathname);
 
   useFrame((state) => {
     if (state.scene.children.length < 2 && state.frameloop === "always") {
@@ -29,7 +29,7 @@ function Scene() {
   return (
     <Suspense fallback={<Html center>{progress.toFixed(0)}%</Html>}>
       <Scan />
-      {params === "/eko-digital" ? (
+      {pathname === "/eko-digital" ? (
         <>
           <EkoDigital />
           <Env />

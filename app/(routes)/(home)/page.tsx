@@ -5,11 +5,6 @@ import { PortableText } from "@portabletext/react";
 import Section from "./section";
 import { unstable_noStore } from "next/cache";
 import Grid from "./(craft)/grid";
-import dynamic from "next/dynamic";
-
-const Dom = dynamic(() => import("../../dom"), {
-  ssr: false,
-});
 
 export default async function Home() {
   unstable_noStore();
@@ -36,8 +31,6 @@ export default async function Home() {
       <section className="w-full">
         <Grid projects={projects} />
       </section>
-
-      <Dom />
     </>
   );
 }

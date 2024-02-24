@@ -7,6 +7,9 @@ import localFont from "next/font/local";
 import dynamic from "next/dynamic";
 import Nav from "_components/nav";
 
+const Dom = dynamic(() => import("./dom"), {
+  ssr: false,
+});
 const Media = dynamic(() => import("./(routes)/music/Media"));
 
 const Heritage = localFont({
@@ -56,6 +59,7 @@ export default function RootLayout({
         <Suspense fallback={null}>
           <Nav />
           {children}
+          <Dom />
           <Media />
         </Suspense>
         <Analytics debug={false} />

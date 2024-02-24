@@ -48,7 +48,7 @@ const Item = memo(function Item({
             preload="metadata"
             src={`${thumbnail?.video}#t=0.01`}
             controls={false}
-            className={`pointer-events-none absolute h-full w-full scale-105 overflow-clip object-cover`}
+            className={`pointer-events-none absolute z-[1] h-full w-full scale-105 overflow-clip object-cover`}
           />
         ) : null}
 
@@ -59,7 +59,7 @@ const Item = memo(function Item({
             fill
             sizes="400px"
             priority
-            className={`pointer-events-none absolute -z-[1] select-none object-cover`}
+            className={`pointer-events-none absolute select-none object-cover`}
           />
         ) : null}
       </div>
