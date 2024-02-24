@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { MdOutlineMyLocation } from "react-icons/md";
-import { delayed_pagination_animation } from "_components/animate/route";
+import { delayed_pagination_animation } from "_components/animate/constants";
 
 export default function Locale({
   timeZone,

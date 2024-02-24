@@ -3,7 +3,7 @@
 import { memo, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import { standard_pagination_animation } from "./animate/route";
+import { standard_pagination_animation } from "./animate/constants";
 
 export default memo(function NavPortal({
   children,

@@ -7,10 +7,10 @@ import localFont from "next/font/local";
 import dynamic from "next/dynamic";
 import Nav from "_components/nav";
 
-const Media = dynamic(() => import("./(routes)/music/Media"));
 const Dom = dynamic(() => import("./dom"), {
   ssr: false,
 });
+const Media = dynamic(() => import("./(routes)/music/Media"));
 
 const Heritage = localFont({
   src: "./Heritage-Display.otf",

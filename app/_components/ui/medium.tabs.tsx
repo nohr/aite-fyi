@@ -65,8 +65,9 @@ const MediumTabs = memo(function MediumTabs() {
       play();
       router.replace(
         value === undefined
-          ? "/work"
-          : "/work" + "?" + createQueryString("medium", value),
+          ? "/"
+          : "/" + "?" + createQueryString("medium", value),
+        { scroll: false },
       );
     },
     [createQueryString, play, router],

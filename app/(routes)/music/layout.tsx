@@ -10,7 +10,7 @@ export default async function MusicLayout({
 }) {
   const songs = await getSongs();
   return (
-    <div className="mx-auto flex h-full w-full max-w-prose flex-col items-start justify-between gap-1 md:grid-rows-[0.5fr_3fr] md:gap-4 md:px-8">
+    <div className="mx-auto flex h-[calc(100%-80px)] w-full max-w-prose flex-col items-start justify-between gap-1 md:grid-rows-[0.5fr_3fr] md:gap-4 md:px-8">
       <Explorer />
       <Settings />
       <Player songs={songs} />

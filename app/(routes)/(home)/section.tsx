@@ -1,6 +1,6 @@
 "use client";
 
-import { delayed_pagination_animation } from "_components/animate/route";
+import { delayed_pagination_animation } from "_components/animate/constants";
 import { motion } from "framer-motion";
 
 export default function Section({

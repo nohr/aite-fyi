@@ -6,7 +6,6 @@ import { Group, Vector2, Vector3 } from "three";
 import { PCDLoader } from "three/examples/jsm/loaders/PCDLoader";
 import { PointsMaterial } from "three/src/materials/PointsMaterial";
 import { Points } from "three/src/objects/Points";
-// import { useAudioStore } from "@hooks/useAudioStore";
 import useColor from "@hooks/useColor";
 import useLoading from "@hooks/useLoading";
 import { usePathname } from "next/navigation";
@@ -20,38 +19,16 @@ export const Scan = memo(function Scan() {
   const headRef = useRef<Points>(null);
   const bodyRef = useRef<Points>(null);
   const groupRef = useRef<Group>(null);
-  // const [song, playing] = useAudioStore((s) => [s.song, s.playing]);
   const { color } = useColor();
-  // const project = usePathname().split("/")[2];
-  const project = usePathname().split("/")[1];
+  const pathname = usePathname();
   const mod = 3.2;
 
   const handleMouseMove = (mouse: Vector2) => {
     const tar = new Vector3((mouse.x * mod * 2) / 1, mouse.y * mod, 3);
-    // const bobDelta = () => {
-    //   const audio = document.querySelector("audio") as HTMLAudioElement;
-    //   if (!audio || !song || !playing || !song.tempo || audio.currentTime === 0)
-    //     return 0;
-    //   // if (song.name === "cemetery c" && audio.currentTime < 38) return 0;
-    //   const del = Math.abs(Math.sin(audio.currentTime * (500 / song.tempo)));
-    //   // console.log(del);
-    //   return del;
-    // };
 
     headRef.current?.lookAt(tar.x, tar.y - 1.5, tar.z);
     bodyRef.current?.lookAt(tar.x * 0.25, tar.y / 2, 4);
   };
-
-  // const handleHorizontalSway = (pointer: Vector2) => {
-  //   groupRef.current?.position.lerp(
-  //     new Vector3(
-  //       pointer.x > 0 ? 0 : -pointer.x * 5.75,
-  //       groupRef.current?.position.y,
-  //       groupRef.current?.position.z,
-  //     ),
-  //     0.2,
-  //   );
-  // };
 
   const handleBreath = () => {
     if (!groupRef.current) return;
@@ -61,7 +38,7 @@ export const Scan = memo(function Scan() {
   useFrame(({ pointer, scene }) => {
     if (!groupRef.current) return;
 
-    if (project) {
+    if (pathname !== "/") {
       groupRef.current.position.lerp(
         new Vector3(
           groupRef.current.position.x,
@@ -97,7 +74,6 @@ export const Scan = memo(function Scan() {
     };
 
     handleMouseMove(pointer);
-    //  handleHorizontalSway(pointer);
 
     handleBreath();
   });

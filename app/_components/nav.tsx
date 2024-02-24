@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { GiBombingRun, GiHand, GiMusicalNotes } from "react-icons/gi";
+import { GiHand, GiMusicalNotes } from "react-icons/gi";
 import { useAudioStore } from "@hooks/useAudioStore";
 import useSFX from "@hooks/useSFX";
 import { motion } from "framer-motion";
@@ -37,13 +37,6 @@ const Nav = memo(function Nav() {
         <div className="group/nav flex -skew-x-[5deg] -skew-y-[0.3deg] flex-row gap-2 md:-skew-x-[8deg] md:-skew-y-[2deg]">
           <NavLink active={pathname === `/`} to="home" onClick={() => play()}>
             <GiHand className=" -scale-x-100" />
-          </NavLink>
-          <NavLink
-            active={pathname.includes("work")}
-            to="work"
-            onClick={() => play()}
-          >
-            <GiBombingRun />
           </NavLink>
           <NavLink
             active={pathname.includes("music")}

@@ -39,6 +39,7 @@ export default function File({ song }: { song: Song }) {
             alt={song.name}
             fill
             sizes="100px"
+            quality={50}
             className="pointer-events-auto absolute object-cover"
           />
         ) : (

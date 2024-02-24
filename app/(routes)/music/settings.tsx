@@ -7,7 +7,7 @@ const Settings = () => {
   const [muted] = useAudioStore((s) => [s.muted]);
   const { setState } = useAudioStore;
   return (
-    <div className=" flex w-full flex-row justify-end p-4 font-mono font-light tracking-wide md:order-3 md:justify-start ">
+    <div className=" flex w-full flex-row justify-end p-4 font-mono font-light tracking-wide md:order-2 md:justify-start ">
       {/* <h2>Settings</h2> */}
       {/* <label>
         Volume:
