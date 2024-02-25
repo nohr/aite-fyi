@@ -53,7 +53,7 @@ const Nav = memo(function Nav() {
       </div>
 
       <div
-        className={`pointer-events-none absolute left-0 top-0 -z-10 block h-full w-full bg-background opacity-50 transition duration-200 dark:bg-background dark:opacity-75 md:opacity-0 md:group-hover/nav:opacity-80 md:dark:opacity-0`}
+        className={`pointer-events-none absolute left-0 top-0 -z-10 block h-full w-full bg-background opacity-50 transition duration-200 dark:bg-background dark:opacity-75 md:group-hover/nav:opacity-80 `}
       />
     </motion.nav>
   );

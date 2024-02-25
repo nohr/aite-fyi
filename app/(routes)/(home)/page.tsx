@@ -6,6 +6,7 @@ import Section from "./section";
 import { unstable_noStore } from "next/cache";
 import Grid from "./(craft)/grid";
 import MediumTabs from "_components/ui/medium.tabs";
+import { FaArrowCircleDown } from "react-icons/fa";
 
 export default async function Home() {
   unstable_noStore();
@@ -25,11 +26,14 @@ export default async function Home() {
         <br />
       </Section>
 
-      <div className="px-2 pt-[50vh] md:ml-8 md:pl-1 md:pr-0 md:pt-[65vh]">
-        Check out my work below.
-      </div>
+      <Section index={3} className="pb-[60vh] md:pb-[65vh]">
+        <a href="#grid" className=" relative flex underline-offset-2">
+          Check out my work below
+          <FaArrowCircleDown className=" mt-2" />
+        </a>
+      </Section>
 
-      <section className="w-full">
+      <section className="min-h-svh w-full">
         <Grid projects={projects} />
       </section>
 

@@ -55,7 +55,7 @@ const MediumTabs = memo(function MediumTabs() {
       const params = new URLSearchParams(searchParams.toString());
       params.set(name, value);
 
-      return params.toString();
+      return "?" + params.toString();
     },
     [searchParams],
   );
@@ -64,9 +64,7 @@ const MediumTabs = memo(function MediumTabs() {
     (value?: string) => {
       play();
       router.replace(
-        value === undefined
-          ? "/"
-          : "/" + "?" + createQueryString("medium", value),
+        value === undefined ? "/" : createQueryString("medium", value),
         { scroll: false },
       );
     },
@@ -98,13 +96,6 @@ const MediumTabs = memo(function MediumTabs() {
             );
           })}
         </TabsList>
-
-        {/* <TabsContent value="Website">
-          Make changes to your account here.
-        </TabsContent>
-        <TabsContent value="Interactive">
-          Change your password here.
-        </TabsContent> */}
       </Tabs>
     </NavPortal>
   );

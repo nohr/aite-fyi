@@ -6,6 +6,8 @@ import { IoMdClose } from "react-icons/io";
 import { Project } from "types/Project";
 import ZoomBar from "_components/zoom_bar";
 import dynamic from "next/dynamic";
+import { useSearchParams } from "next/navigation";
+import { useCallback } from "react";
 const NavPortal = dynamic(() => import("_components/nav.portal"), {
   ssr: false,
 });
@@ -18,11 +20,23 @@ export default function Title({
   children?: React.ReactNode;
 }) {
   const [play] = useSFX("/sfx/close.mp3", 0.75);
+  const searchParams = useSearchParams();
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set(name, value);
+
+      return "?" + params.toString();
+    },
+    [searchParams],
+  );
+
+  const medium = searchParams.get("medium");
 
   return (
     <>
       <Link
-        href="/"
+        href={`/${medium ? createQueryString("medium", medium) : ""}`}
         onClick={() => play()}
         className={`mx-auto flex h-fit w-full flex-row items-start gap-2 border-b
             border-current px-2 no-underline transition duration-100 md:max-w-prose md:px-0 md:pt-2 md:hover:animate-pulse`}

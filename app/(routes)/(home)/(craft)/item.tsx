@@ -1,11 +1,11 @@
-// import Link from "next/link";
 import Image from "next/image";
 import Programs from "./[project]/programs";
 import { GoChevronRight } from "react-icons/go";
 import { Project } from "types/Project";
-import { memo } from "react";
-import { useRouter } from "next/navigation";
+import { memo, useCallback, useEffect, useRef } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { PortableText } from "@portabletext/react";
+import { useInView } from "framer-motion";
 
 const Item = memo(function Item({
   project,
@@ -16,6 +16,7 @@ const Item = memo(function Item({
 }) {
   const { name, thumbnail, program, rank, slug, content } = project;
   const router = useRouter();
+  const searchParams = useSearchParams();
   const sizing =
     rank === 1
       ? "aspect-[9/4]"
@@ -23,12 +24,36 @@ const Item = memo(function Item({
         ? "aspect-[16/10]"
         : "aspect-[8/4]";
 
+  const ref = useRef<HTMLVideoElement>(null!);
+  const isInView = useInView(ref);
+
+  useEffect(() => {
+    if (ref.current === null) return;
+
+    if (isInView.valueOf()) ref.current.play();
+    else ref.current.pause();
+  }, [isInView]);
+
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set(name, value);
+
+      return "?" + params.toString();
+    },
+    [searchParams],
+  );
+
+  const medium = searchParams.get("medium");
+
   return (
     <div
       tabIndex={0}
       onClick={() => {
         if (rank === 0) return;
-        router.push(`/${slug}`);
+        router.push(
+          `/${slug}${medium ? createQueryString("medium", medium) : ""}`,
+        );
         play();
       }}
       className={` group/item pointer-events-auto relative z-10 flex w-full flex-col gap-0 overflow-hidden rounded-2xl border border-border shadow-lg ${sizing} ${
@@ -40,12 +65,14 @@ const Item = memo(function Item({
       >
         {thumbnail?.video ? (
           <video
-            autoPlay={true}
+            ref={ref}
+            autoPlay={false}
             playsInline
             disablePictureInPicture
             muted
             loop
             preload="metadata"
+            poster={thumbnail?.blurhash}
             src={`${thumbnail?.video}#t=0.01`}
             controls={false}
             className={`pointer-events-none absolute z-[1] h-full w-full scale-105 overflow-clip object-cover`}
@@ -91,7 +118,7 @@ const Item = memo(function Item({
         {program && (
           <Programs
             program={program}
-            className=" !items-end opacity-0 md:group-hover/item:opacity-100"
+            className=" z-20 !items-end opacity-0 md:group-hover/item:opacity-100"
           />
         )}
       </div>
