@@ -55,12 +55,12 @@ const Item = memo(function Item({
         );
         play();
       }}
-      className={`group/item pointer-events-auto relative z-10 flex w-full flex-col gap-0 overflow-hidden rounded-2xl border border-border shadow-lg ${sizing} ${
+      className={`group/item pointer-events-auto relative  flex w-full flex-col gap-0 overflow-hidden rounded-2xl border border-border shadow-lg ${sizing} ${
         slug ? "cursor-pointer active:scale-90" : "gap-1 bg-background"
       }`}
     >
       <div
-        className={`pointer-events-none relative h-full overflow-hidden rounded-xl shadow-lg `}
+        className={`pointer-events-none relative isolate h-full overflow-hidden rounded-xl shadow-lg`}
       >
         {thumbnail?.video ? (
           <video
@@ -105,7 +105,7 @@ const Item = memo(function Item({
           )}
         </span>
 
-        {rank < 1 && (
+        {!slug && (
           <div className="absolute right-4 z-10 text-sm lowercase md:group-hover/item:opacity-0">
             <PortableText value={content} />
           </div>
