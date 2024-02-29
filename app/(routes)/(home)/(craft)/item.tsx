@@ -23,7 +23,6 @@ const Item = memo(function Item({
       : rank === 2
         ? "aspect-[16/10]"
         : "aspect-[8/4]";
-
   const ref = useRef<HTMLVideoElement>(null!);
   const isInView = useInView(ref);
 

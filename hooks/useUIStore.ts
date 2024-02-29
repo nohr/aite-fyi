@@ -4,6 +4,7 @@ import { devtools } from "zustand/middleware";
 interface UIProps {
   project: Project | null;
   loading: boolean;
+  showTabs: boolean;
   zoom: number;
   camera: { min: number; max: number };
   columns: number;
@@ -17,6 +18,7 @@ export const useUIStore = create<UIProps>()(
   devtools((set) => ({
     project: null,
     loading: true,
+    showTabs: false,
     zoom: 5,
     camera: { min: 2, max: 12 },
     columns: 1,

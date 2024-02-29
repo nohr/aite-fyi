@@ -8,6 +8,7 @@ import dynamic from "next/dynamic";
 import { useRouter, useSearchParams } from "next/navigation";
 import { memo, useCallback, useMemo } from "react";
 import useSFX from "@hooks/useSFX";
+import { useUIStore } from "@hooks/useUIStore";
 const NavPortal = dynamic(() => import("_components/nav.portal"), {
   ssr: false,
 });
@@ -16,6 +17,7 @@ const MediumTabs = memo(function MediumTabs() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [play] = useSFX("/sfx/click2.mp3");
+  const showTabs = useUIStore((s) => s.showTabs);
 
   const mediums = useMemo(
     () => [
@@ -72,32 +74,36 @@ const MediumTabs = memo(function MediumTabs() {
   );
 
   return (
-    <NavPortal>
-      <Tabs
-        defaultValue={searchParams.get("medium") || "all"}
-        className={
-          "[&_*]!select-none w-full max-w-[400px] self-center font-mono !text-xs md:text-base [&_*]:lowercase"
-        }
-      >
-        <TabsList className="w-full justify-between">
-          <TabsTrigger onClick={() => route()} value="all">
-            all
-          </TabsTrigger>
-
-          {mediums.map(({ title, value }) => {
-            return (
-              <TabsTrigger
-                key={value}
-                onClick={() => route(value)}
-                value={value}
-              >
-                {title}
+    <>
+      {showTabs ? (
+        <NavPortal>
+          <Tabs
+            defaultValue={searchParams.get("medium") || "all"}
+            className={
+              "[&_*]!select-none w-full max-w-[400px] self-center font-mono !text-xs md:text-base [&_*]:lowercase"
+            }
+          >
+            <TabsList className="w-full justify-between">
+              <TabsTrigger onClick={() => route()} value="all">
+                all
               </TabsTrigger>
-            );
-          })}
-        </TabsList>
-      </Tabs>
-    </NavPortal>
+
+              {mediums.map(({ title, value }) => {
+                return (
+                  <TabsTrigger
+                    key={value}
+                    onClick={() => route(value)}
+                    value={value}
+                  >
+                    {title}
+                  </TabsTrigger>
+                );
+              })}
+            </TabsList>
+          </Tabs>
+        </NavPortal>
+      ) : null}
+    </>
   );
 });
 

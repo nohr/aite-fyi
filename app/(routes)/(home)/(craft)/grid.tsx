@@ -1,12 +1,12 @@
 "use client";
 
-import { AnimatePresence } from "framer-motion";
+import { useInView } from "framer-motion";
 import { useSearchParams } from "next/navigation";
 import { Project } from "types/Project";
 import Item from "./item";
 import useSFX from "@hooks/useSFX";
 import useDimensions from "@hooks/useDimensions";
-import { memo, useEffect, useMemo } from "react";
+import { memo, useEffect, useMemo, useRef } from "react";
 import { useUIStore } from "@hooks/useUIStore";
 
 export default function Grid({ projects }: { projects: Project[] }) {
@@ -16,10 +16,17 @@ export default function Grid({ projects }: { projects: Project[] }) {
   const { width } = useDimensions();
   const columns = useUIStore((s) => s.columns);
   const { setState } = useUIStore;
+  const grid = useRef<HTMLDivElement>(null!);
+  const isInView = useInView(grid, { margin: "0px 0px -50% 0px" });
 
   useEffect(() => {
     setState({ columns: width > 1024 ? 3 : width > 640 ? 2 : 1 });
   }, [setState, width]);
+
+  useEffect(() => {
+    if (isInView.valueOf()) setState({ showTabs: true });
+    else setState({ showTabs: false });
+  }, [isInView, setState]);
 
   const props = useMemo(() => {
     return {
@@ -34,16 +41,15 @@ export default function Grid({ projects }: { projects: Project[] }) {
   }, [medium, projects, play, width, columns]);
 
   return (
-    <AnimatePresence mode="popLayout">
-      <div
-        id="grid"
-        className={`pointer-events-none flex w-full flex-row flex-nowrap items-start justify-start gap-x-1 gap-y-1 p-1 pb-14 md:pb-1 md:pl-2 md:pt-[80px] `}
-      >
-        <Column number={columns > 1 ? 0 : null} {...props} />
-        <Column number={1} {...props} />
-        <Column number={2} {...props} />
-      </div>
-    </AnimatePresence>
+    <div
+      ref={grid}
+      id="grid"
+      className={`pointer-events-none flex w-full flex-row flex-nowrap items-start justify-start gap-x-1 gap-y-1 p-1 pb-14 md:pb-1 md:pl-2 md:pt-[80px] `}
+    >
+      <Column number={columns > 1 ? 0 : null} {...props} />
+      <Column number={1} {...props} />
+      <Column number={2} {...props} />
+    </div>
   );
 }
 
