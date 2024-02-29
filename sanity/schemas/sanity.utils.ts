@@ -10,6 +10,7 @@ import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { unstable_noStore } from "next/cache";
 
 export async function getProjects(): Promise<Project[]> {
+  unstable_noStore();
   return createClient(clientConfig).fetch(
     groq`
       *[ _type == "project" ]{

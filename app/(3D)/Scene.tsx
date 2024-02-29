@@ -10,7 +10,6 @@ import { useFrame } from "@react-three/fiber";
 function Scene() {
   const { progress } = useProgress();
   const pathname = usePathname();
-  // console.log(pathname);
 
   useFrame((state) => {
     if (state.scene.children.length < 2 && state.frameloop === "always") {
