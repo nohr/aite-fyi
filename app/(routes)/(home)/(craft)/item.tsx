@@ -92,7 +92,7 @@ const Item = memo(function Item({
 
       <div
         translate="no"
-        className={` -bottom-0.5 z-20 flex w-full select-none flex-row flex-nowrap items-end justify-between gap-2 rounded-2xl text-lg font-semibold tracking-tight duration-200 dark:!text-[#cecece] ${
+        className={` -bottom-0.5 z-20 flex w-full select-none flex-row flex-nowrap items-end justify-between gap-2 rounded-2xl text-lg font-medium tracking-tight duration-200 dark:!text-[#cecece] ${
           slug
             ? "absolute h-4/6 bg-gradient-to-t from-[#000000f2] to-transparent to-70% p-4 text-[#cecece] "
             : " px-2 py-2 !text-[#131313] text-current"

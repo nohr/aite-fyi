@@ -17,7 +17,7 @@ export default function Grid({ projects }: { projects: Project[] }) {
   const columns = useUIStore((s) => s.columns);
   const { setState } = useUIStore;
   const grid = useRef<HTMLDivElement>(null!);
-  const isInView = useInView(grid, { margin: "0px 0px -50% 0px" });
+  const isInView = useInView(grid, { margin: "0px 0px -30% 0px" });
 
   useEffect(() => {
     setState({ columns: width > 1024 ? 3 : width > 640 ? 2 : 1 });
@@ -44,7 +44,7 @@ export default function Grid({ projects }: { projects: Project[] }) {
     <div
       ref={grid}
       id="grid"
-      className={`pointer-events-none flex w-full flex-row flex-nowrap items-start justify-start gap-x-1 gap-y-1 p-1 pb-14 md:pb-1 md:pl-2 md:pt-[80px] `}
+      className={`pointer-events-none flex w-full flex-row flex-nowrap items-start justify-start gap-x-1 gap-y-1 p-1 pb-14 md:pb-1 md:pl-2 `}
     >
       <Column number={columns > 1 ? 0 : null} {...props} />
       <Column number={1} {...props} />

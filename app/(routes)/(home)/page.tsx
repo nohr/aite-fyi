@@ -7,6 +7,13 @@ import { unstable_noStore } from "next/cache";
 import Grid from "./(craft)/grid";
 import MediumTabs from "_components/ui/medium.tabs";
 import { FaArrowCircleDown } from "react-icons/fa";
+import Link from "next/link";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "_components/ui/tooltip";
 
 export default async function Home() {
   unstable_noStore();
@@ -26,14 +33,32 @@ export default async function Home() {
         <br />
       </Section>
 
-      <Section index={3} className="pb-[60vh] md:pb-[65vh]">
-        <a href="#grid" className=" relative flex underline-offset-2">
-          Check out my work below
-          <FaArrowCircleDown className=" mt-2" />
-        </a>
+      <Section
+        index={3}
+        className="!ml-0 flex !max-w-full justify-center pb-20 pt-[60vh] md:pt-[65vh]"
+      >
+        <Link
+          scroll={true}
+          href="/#grid"
+          className=" relative flex font-mono text-6xl font-light underline-offset-2"
+        >
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger>
+                <FaArrowCircleDown className="mt-2 animate-bounce md:hover:opacity-50" />
+                <TooltipContent
+                  sideOffset={20}
+                  className="text-[#131313] dark:text-[#e0e0e0]"
+                >
+                  Scroll down to see my work!
+                </TooltipContent>
+              </TooltipTrigger>
+            </Tooltip>
+          </TooltipProvider>
+        </Link>
       </Section>
 
-      <section className="min-h-svh w-full">
+      <section className="min-h-svh w-full scroll-pt-20">
         <Grid projects={projects} />
       </section>
 

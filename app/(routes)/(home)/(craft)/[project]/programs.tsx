@@ -56,7 +56,7 @@ export default function Programs({
                       key: title,
                     })}
                   </TooltipTrigger>
-                  <TooltipContent className="text-[#131313] dark:text-[#e0e0e0]">
+                  <TooltipContent className="font-mono font-light text-[#131313] dark:text-[#e0e0e0]">
                     {getName(title)}
                   </TooltipContent>
                 </Tooltip>

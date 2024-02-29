@@ -54,7 +54,7 @@ export default function RootLayout({
       lang="en"
       className={`font-medium antialiased ${Garamond.variable} ${Heritage.variable}`}
     >
-      <body>
+      <body className="scroll-pt-20">
         <Loading />
         <Suspense fallback={null}>
           <Nav />
