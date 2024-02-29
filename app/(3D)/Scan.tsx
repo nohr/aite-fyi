@@ -9,6 +9,7 @@ import { Points } from "three/src/objects/Points";
 import useColor from "@hooks/useColor";
 import useLoading from "@hooks/useLoading";
 import { usePathname } from "next/navigation";
+import { useUIStore } from "@hooks/useUIStore";
 
 export const Scan = memo(function Scan() {
   const { size } = useThree();
@@ -22,6 +23,7 @@ export const Scan = memo(function Scan() {
   const { color } = useColor();
   const pathname = usePathname();
   const mod = 3.2;
+  const showTabs = useUIStore((s) => s.showTabs);
 
   const handleMouseMove = (mouse: Vector2) => {
     const tar = new Vector3((mouse.x * mod * 2) / 1, mouse.y * mod, 3);
@@ -38,7 +40,7 @@ export const Scan = memo(function Scan() {
   useFrame(({ pointer, scene }) => {
     if (!groupRef.current) return;
 
-    if (pathname !== "/") {
+    if (pathname !== "/" || showTabs) {
       groupRef.current.position.lerp(
         new Vector3(
           groupRef.current.position.x,

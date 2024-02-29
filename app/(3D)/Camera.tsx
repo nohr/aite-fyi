@@ -11,14 +11,7 @@ export default function Camera() {
   const params = usePathname().split("/")[2];
   const { setState } = useUIStore;
 
-  // useEffect(() => {
-  //   if (scene.children[1])
-  //     window.innerWidth < 768 ? setState({ zoom: 2 }) : setState({ zoom: 2 });
-  // }, [scene.children, setState]);
-
   function updateZoom(delta: number) {
-    // !params &&
-    // setZoom((prev) => Math.min(5, Math.max(-5, prev + delta)));
     setState((s) => ({
       zoom: Math.min(camera.max, Math.max(camera.min, s.zoom + delta)),
     }));

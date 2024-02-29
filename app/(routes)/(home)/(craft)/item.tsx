@@ -60,7 +60,7 @@ const Item = memo(function Item({
       }`}
     >
       <div
-        className={`pointer-events-none relative isolate h-full overflow-hidden rounded-xl shadow-lg`}
+        className={`pointer-events-none relative  h-full overflow-hidden rounded-xl shadow-lg`}
       >
         {thumbnail?.video ? (
           <video
