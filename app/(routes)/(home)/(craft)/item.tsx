@@ -49,14 +49,14 @@ const Item = memo(function Item({
     <div
       tabIndex={0}
       onClick={() => {
-        if (rank === 0) return;
+        if (!slug) return;
         router.push(
           `/${slug}${medium ? createQueryString("medium", medium) : ""}`,
         );
         play();
       }}
-      className={` group/item pointer-events-auto relative z-10 flex w-full flex-col gap-0 overflow-hidden rounded-2xl border border-border shadow-lg ${sizing} ${
-        rank > 0 ? "cursor-pointer active:scale-90" : "gap-2 bg-background p-2"
+      className={`group/item pointer-events-auto relative z-10 flex w-full flex-col gap-0 overflow-hidden rounded-2xl border border-border shadow-lg ${sizing} ${
+        slug ? "cursor-pointer active:scale-90" : "gap-1 bg-background"
       }`}
     >
       <div
@@ -92,18 +92,15 @@ const Item = memo(function Item({
 
       <div
         translate="no"
-        className={` -bottom-0.5 z-20 flex w-full select-none flex-row flex-nowrap items-end justify-between gap-2 rounded-2xl text-lg tracking-tight duration-200 dark:!text-[#cecece] ${
-          rank > 0
+        className={` -bottom-0.5 z-20 flex w-full select-none flex-row flex-nowrap items-end justify-between gap-2 rounded-2xl text-lg font-semibold tracking-tight duration-200 dark:!text-[#cecece] ${
+          slug
             ? "absolute h-4/6 bg-gradient-to-t from-[#000000f2] to-transparent to-70% p-4 text-[#cecece] "
             : " px-2 py-2 !text-[#131313] text-current"
         }`}
       >
-        <span
-          translate="no"
-          className="flex items-center gap-1 text-sm lowercase italic"
-        >
+        <span translate="no" className="flex items-center text-sm lowercase">
           {name}
-          {rank > 0 && (
+          {slug && (
             <GoChevronRight className="h-4 w-4 md:group-hover/item:animate-shake-left" />
           )}
         </span>
@@ -117,7 +114,7 @@ const Item = memo(function Item({
         {program && (
           <Programs
             program={program}
-            className=" z-20 !items-end opacity-0 md:group-hover/item:opacity-100"
+            className={`z-20 !items-end ${content && `opacity-0`} md:group-hover/item:opacity-100`}
           />
         )}
       </div>
