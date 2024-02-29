@@ -159,11 +159,9 @@ body {
   font-family: "Delius", serif;
   letter-spacing: 0.038em;
   width: 100dvw;
-  /* height: 100%; */
   overflow-x: hidden;
   height: 100dvh !important;
   overscroll-behavior: none;
-  /* overflow: hidden; */
 }
 
 body {

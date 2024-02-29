@@ -3,7 +3,7 @@ import Name from "./Name";
 import Locale from "./Locale";
 import { PortableText } from "@portabletext/react";
 import Section from "./section";
-import Grid from "./(craft)/grid";
+import Grid from "./(projects)/grid";
 import MediumTabs from "_components/ui/medium.tabs";
 import Cta from "_components/ui/cta";
 
