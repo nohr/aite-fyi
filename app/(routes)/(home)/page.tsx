@@ -26,7 +26,7 @@ export default async function Home() {
 
       <Section
         index={3}
-        className="!ml-0 flex !max-w-full justify-center pb-20 pt-[60vh] md:pt-[65vh]"
+        className="!ml-0 flex !max-w-full justify-center pb-20 pt-[45vh] md:pt-[65vh]"
       >
         <Cta />
       </Section>
