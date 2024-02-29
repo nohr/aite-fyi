@@ -9,13 +9,16 @@ import {
   TooltipTrigger,
 } from "_components/ui/tooltip";
 import { useUIStore } from "@hooks/useUIStore";
+import useSFX from "@hooks/useSFX";
 
 export default function Cta() {
   const showTabs = useUIStore((s) => s.showTabs);
+  const [play] = useSFX("/sfx/select.mp3");
   return (
     <>
       {!showTabs && (
         <Link
+          onClick={() => play()}
           scroll={true}
           href="/#grid"
           className=" relative flex font-mono text-6xl font-light underline-offset-2"
